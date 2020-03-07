@@ -43,7 +43,12 @@ public class Authenticator {
 
 	public void ReadData() throws IOException {
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir")+ "\\Login.txt"));
+			//For Windows
+			//BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir")+ "\\Login.txt"));
+			
+			//For Unix based systems only
+			BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir")+ "//Login.txt"));
+			
 			String s = "";
 			System.out.println("Current Users Passwords Types:");
 			while ((s = br.readLine()) != null) {
