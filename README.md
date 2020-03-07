@@ -5,7 +5,7 @@ Journal Submission System.
 ## How to Run
 1. Clone the project
 ```bash
-git clone https://github.com/Salim21/JournalSystem/tree/master
+git clone https://github.com/Salim21/JournalSystem
 ```
 2. Import as a Maven Project in your IDE
     - For Eclipse:
@@ -17,7 +17,7 @@ git clone https://github.com/Salim21/JournalSystem/tree/master
 Note: Never develop against master branch
 + Clone the project
 ```bash
-git clone https://github.com/Salim21/JournalSystem/tree/master
+git clone https://github.com/Salim21/JournalSystem
 ```
 + Create a feature branch (branch name cannot have spaces)
 ```bash
