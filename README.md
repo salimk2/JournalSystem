@@ -1,6 +1,6 @@
 # Journal System
 
-Journal Submission System
+Journal Submission System.
 
 ## How to Run
 1. Clone the project
