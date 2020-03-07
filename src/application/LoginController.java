@@ -33,6 +33,8 @@ public class LoginController implements Initializable {
 	public TextField Username;
 	@FXML
 	public TextField Password;
+	@FXML
+	public Label infoLabel;
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -71,6 +73,8 @@ public class LoginController implements Initializable {
 			
 			openNewWindow(event, fxmlFileName);
 			
+		} else {
+			infoLabel.setText("Invalid Login");
 		}
 		
 		

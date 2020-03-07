@@ -64,7 +64,7 @@ public class Authenticator {
 				System.out.printf("Display page for %s%n", accounts.get(username).accountTypetoString());
 				return accounts.get(username);
 			} else {
-				System.out.println("Invalid Passowrd.");
+				System.out.println("Invalid Password.");
 				return null;
 			}
 		} else {
