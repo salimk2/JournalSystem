@@ -17,7 +17,7 @@ git clone https://github.com/dlnet/bank.git
 Note: Never develop against master branch
 + Clone the project
 ```bash
-git clone https://github.com/dlnet/bank.git
+git clone https://github.com/Salim21/JournalSystem/tree/master
 ```
 + Create a feature branch (branch name cannot have spaces)
 ```bash
