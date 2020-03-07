@@ -1,4 +1,4 @@
-package application;
+package application.controllers;
 
 import java.io.IOException;
 
@@ -10,10 +10,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
-public class EditorController {
+public class ReviewerController {
 	
 	public void goBack (ActionEvent event) throws IOException{
-		openNewWindow(event, "Login.fxml");
+		openNewWindow(event, "/application/Login.fxml");
 	}
 	
 	public void openNewWindow(ActionEvent event, String pageName) throws IOException  {

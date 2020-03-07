@@ -2,6 +2,7 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -13,11 +14,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.LoginController">
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.LoginController">
    <center>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="parent" stylesheets="@../../src/application/application.css" BorderPane.alignment="CENTER">
          <children>
-            <VBox alignment="CENTER" centerShape="false" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" styleClass="sideBar" stylesheets="@../../src/application/application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <VBox alignment="CENTER" centerShape="false" disable="true" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" styleClass="sideBar" stylesheets="@../../src/application/application.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                <children>
                   <ImageView fitHeight="200.0" fitWidth="250.0" pickOnBounds="true" smooth="false" VBox.vgrow="NEVER">
                      <image>
@@ -38,16 +39,24 @@
                         <Font name="Arial Bold" size="19.0" />
                      </font>
                   </Label>
-                  <Label layoutX="226.0" layoutY="400.0" styleClass="forgotPassword" stylesheets="@../../src/application/application.css" text="Forgot Password?" />
+                  <Label layoutX="235.0" layoutY="396.0" styleClass="forgotPassword" stylesheets="@../../src/application/application.css" text="Forgot Password?" />
                   <Button layoutX="84.0" layoutY="446.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#buttonAction" prefHeight="46.0" prefWidth="230.0" styleClass="loginBtn" stylesheets="@../../src/application/application.css" text="Login" />
-                  <TextField fx:id="Username" layoutX="85.0" layoutY="295.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="250.0" promptText="e.g. john">
+                  <TextField fx:id="username" layoutX="85.0" layoutY="295.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#hideErrorMsg" prefHeight="30.0" prefWidth="250.0" promptText="e.g. john">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor></TextField>
                   <Label layoutX="84.0" layoutY="340.0" text="Password" />
                   <Label layoutX="85.0" layoutY="278.0" text="Username" />
-                  <PasswordField fx:id="Password" layoutX="84.0" layoutY="357.0" prefHeight="30.0" prefWidth="250.0" promptText="***********" />
-                  <Label fx:id="infoLabel" layoutX="93.0" layoutY="400.0" text=" " textAlignment="CENTER" />
+                  <PasswordField fx:id="password" layoutX="84.0" layoutY="357.0" onKeyPressed="#hideErrorMsg" prefHeight="30.0" prefWidth="250.0" promptText="***********">
+                     <font>
+                        <Font size="9.0" />
+                     </font></PasswordField>
+                  <Label fx:id="infoLabel" alignment="CENTER" layoutX="1.0" layoutY="216.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="infoLabel" stylesheets="@application.css" text="Error message" textAlignment="CENTER" />
+                  <CheckBox fx:id="showPassword" layoutX="85.0" layoutY="398.0" mnemonicParsing="false" onAction="#togglevisiblePassword" prefHeight="3.0" text="Show password">
+                     <font>
+                        <Font size="10.0" />
+                     </font></CheckBox>
+                  <TextField fx:id="passwordText" layoutX="84.0" layoutY="357.0" onKeyPressed="#hideErrorMsg" prefHeight="30.0" prefWidth="250.0" promptText="***********" visible="false" />
                </children>
             </Pane>
          </children>
