@@ -5,7 +5,7 @@ Journal Submission System
 ## How to Run
 1. Clone the project
 ```bash
-git clone https://github.com/dlnet/bank.git
+git clone https://github.com/Salim21/JournalSystem/tree/master
 ```
 2. Import as a Maven Project in your IDE
     - For Eclipse:
