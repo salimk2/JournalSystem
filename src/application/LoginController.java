@@ -5,19 +5,13 @@ package application;
 
 import java.io.IOException;
 import java.net.URL;
-import java.rmi.server.ExportException;
 import java.util.ResourceBundle;
-
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -39,19 +33,10 @@ public class LoginController implements Initializable {
 	public TextField Username;
 	@FXML
 	public TextField Password;
-	@FXML
-	public ComboBox<String> users;
-	ObservableList<String> list = FXCollections.observableArrayList("Admin","Editor","Researcher","Reviewer");
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		users.setItems(list);
 		
-	}
-	
-	public void userChanged (ActionEvent event) {
-		users.getItems().addAll("1","2","3");
-		//myLabel.setText(users.getValue());
 	}
 
 	public void buttonAction (ActionEvent event) throws IOException  {
