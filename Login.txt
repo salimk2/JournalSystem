@@ -2,3 +2,6 @@ test0 pass 0
 test1 4321 1
 test2 1234 2
 test3 PAss 3
+jorgedev Ab123456 0
+researcher 123456Ab 1
+Editor 123456Ab 2

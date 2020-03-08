@@ -4,21 +4,29 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
+
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
+
 import application.Account;
 import application.Main;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
+
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class LoginController implements Initializable {
@@ -33,6 +41,10 @@ public class LoginController implements Initializable {
 	@FXML
 	public TextField username;
 	public TextField passwordText;
+	public JFXTextField username2 = new JFXTextField();
+	public JFXPasswordField password2 = new JFXPasswordField();
+	public JFXTextField passwordText2 = new JFXTextField();
+	public Pane content = new Pane();
 	@FXML
 	public PasswordField password;
 	@FXML
@@ -44,14 +56,22 @@ public class LoginController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		infoLabel.setVisible(false);
 		this.togglevisiblePassword(null);
-		
-		
 
 	}
 	
 	@FXML
+	public void onEnter(ActionEvent pressed) throws IOException{
+	   
+	   buttonAction(pressed);
+	}
+	
+	
+	
+	@FXML
 	  private void hideErrorMsg(){
 	    infoLabel.setVisible(false);
+	   
+	
 	  }
 
 	
@@ -59,21 +79,30 @@ public class LoginController implements Initializable {
 	
 	public void togglevisiblePassword(ActionEvent event) {
 		if (showPassword.isSelected()) {
-			passwordText.setText(password.getText());
-			passwordText.setVisible(true);
-			password.setVisible(false);
+			passwordText2.setText(password2.getText());
+			passwordText2.setVisible(true);
+			password2.setVisible(false);
 			return;
 		} else {
-			password.setText(passwordText.getText());
-			password.setVisible(true);
-			passwordText.setVisible(false);
+			password2.setText(passwordText2.getText());
+			password2.setVisible(true);
+			passwordText2.setVisible(false);
 		}
 	}
+	
+	
+	public void openRegistration(MouseEvent event) throws IOException {
+		Parent fxmlRegParentParent = FXMLLoader.load(getClass().getResource("/application/Registration.fxml"));
+		content.getChildren().removeAll();
+		content.getChildren().setAll(fxmlRegParentParent);
+		
+	}
+	
 
 	public void buttonAction(ActionEvent event) throws IOException {
 
-		String user = username.getText();
-		String pass = password.getText();
+		String user = username2.getText();
+		String pass = password2.getText();
 		Account acc = Main.AuthSys.login(user, pass);
 
 		if (acc != null) {

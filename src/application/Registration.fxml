@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" styleClass="parent" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.RegistrationController">
+   <children>
+      <FontAwesomeIcon glyphName="ARROW_LEFT" layoutX="6.0" layoutY="21.0" onMouseClicked="#backToLogin" size="1.5em" stroke="WHITE" styleClass="goBack">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </FontAwesomeIcon>
+      <Label alignment="CENTER" layoutY="54.0" prefHeight="34.0" prefWidth="400.0" text="Registration Form">
+         <font>
+            <Font name="Impact" size="28.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutY="113.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="400.0" text="Fill the fom to register">
+         <font>
+            <Font name="Arial Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="accountError" alignment="CENTER" contentDisplay="TOP" layoutX="2.0" layoutY="135.0" prefHeight="91.0" prefWidth="400.0" styleClass="infoLabel" stylesheets="@application.css" text="Account Error" textAlignment="CENTER" wrapText="true" />
+      <JFXComboBox fx:id="users" layoutX="75.0" layoutY="221.0" onAction="#getUserType" prefWidth="250.0" promptText="Select User" />
+      <CheckBox fx:id="showPassword" layoutX="74.0" layoutY="438.0" mnemonicParsing="false" onAction="#togglevisiblePassword" text="Show passwords">
+         <font>
+            <Font size="9.0" />
+         </font>
+      </CheckBox>
+      <JFXTextField fx:id="username" labelFloat="true" layoutX="75.0" layoutY="275.0" onAction="#onEnter" onKeyPressed="#hideErrorMsg" prefWidth="250.0" promptText="Username">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <tooltip>
+            <Tooltip text="Enter Username: e.g. john" />
+         </tooltip>
+      </JFXTextField>
+      <JFXPasswordField fx:id="password" labelFloat="true" layoutX="75.0" layoutY="334.0" onAction="#onEnter" onKeyPressed="#hideErrorMsg" prefWidth="250.0" promptText="Password">
+         <tooltip>
+            <Tooltip text="Enter Password" />
+         </tooltip>
+      </JFXPasswordField>
+      <JFXPasswordField fx:id="confirmPassword" labelFloat="true" layoutX="75.0" layoutY="393.0" onAction="#onEnter" onKeyPressed="#hideErrorMsg" prefWidth="250.0" promptText="Confirm Password">
+         <tooltip>
+            <Tooltip text="Enter Password" />
+         </tooltip>
+      </JFXPasswordField>
+      <JFXTextField fx:id="confirmPasswordText" labelFloat="true" layoutX="75.0" layoutY="393.0" onAction="#onEnter" onKeyPressed="#hideErrorMsg" prefWidth="250.0" promptText="Password" visible="false">
+         <tooltip>
+            <Tooltip text="Enter Password" />
+         </tooltip>
+      </JFXTextField>
+      <JFXTextField fx:id="passwordText" labelFloat="true" layoutX="75.0" layoutY="334.0" onAction="#onEnter" onKeyPressed="#hideErrorMsg" prefWidth="250.0" promptText="Password" visible="false">
+         <tooltip>
+            <Tooltip text="Enter Password" />
+         </tooltip>
+      </JFXTextField>
+      <Button layoutX="75.0" layoutY="492.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#register" prefHeight="46.0" prefWidth="250.0" styleClass="loginBtn" stylesheets="@application.css" text="Register" />
+      <Label fx:id="pwdMatchError" contentDisplay="CENTER" layoutX="77.0" layoutY="418.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="250.0" styleClass="pwdMatch" stylesheets="@application.css" text="Password Error Message" />
+      <Label fx:id="userNameError" contentDisplay="CENTER" layoutX="77.0" layoutY="301.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="250.0" styleClass="pwdMatch" stylesheets="@application.css" text="Blank Username Error" />
+      <Label fx:id="userTypeError" contentDisplay="CENTER" layoutX="75.0" layoutY="250.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="20.0" prefWidth="250.0" styleClass="pwdMatch" stylesheets="@application.css" text="UserTypeError" />
+   </children>
+</AnchorPane>

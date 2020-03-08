@@ -10,35 +10,36 @@ public class Authenticator {
 
 	}
 
-	public String register(String username, String password, int type) {
+	public short register(String username, String password, int type) {
 		boolean correctUser = Account.usernameRequirement(username);
 		boolean correctPass = Account.passwordRequirement(password);
 		boolean notSameUser = !accounts.containsKey(username);
-
+		System.out.println("not same user:" + notSameUser);
 		if (correctUser && correctPass && notSameUser) {
 			accounts.put(username, new Account(username, password, type));
 			try {
-				BufferedWriter bw = new BufferedWriter(new FileWriter(System.getProperty("user.dir")+ "Login.txt"));
-				bw.write(username + " " + password + " " + type + "%n");
+				BufferedWriter bw = new BufferedWriter(new FileWriter(System.getProperty("user.dir")+ "//Login.txt",true));
+				bw.write(username + " " + password + " " + type + System.getProperty("line.separator"));
 				bw.close();
 			} catch (IOException e) {
 				System.out.println("Error Saving DataBase.");
 				e.printStackTrace();
 			}
-			return "works";
+			return 0;
 
 		}
 
 		if (!correctUser) {
-			return "Invalid Username.";
+			return -1;//"Invalid Username.";
 		}
-		if (!correctPass) {
-			return "Invalid password.";
+		else if (!correctPass) {
+			return -2;//"Invalid password.";
 		}
-		if (!notSameUser) {
-			return "Username taken.";
+		else if (!notSameUser) {
+			return -3;//"Username taken.";
 		}
-		return "unknown issue";
+		
+		else return -4;//"unknown issue";
 	}
 
 	public void ReadData() throws IOException {

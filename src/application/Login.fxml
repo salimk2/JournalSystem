@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -27,36 +29,55 @@
                   </ImageView>
                </children>
             </VBox>
-            <Pane layoutX="400.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="401.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
+            <Pane fx:id="content" layoutX="400.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="401.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label layoutX="28.0" layoutY="75.0" text="Journal Submission System">
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="54.0" prefHeight="34.0" prefWidth="401.0" text="Sign in Form">
                      <font>
-                        <Font name="Book Antiqua Bold" size="28.0" />
+                        <Font name="Impact" size="28.0" />
                      </font>
                   </Label>
-                  <Label layoutX="111.0" layoutY="180.0" text="Sign in to continue">
+                  <Label alignment="CENTER" layoutY="129.0" prefHeight="22.0" prefWidth="400.0" text="Sign in to continue">
                      <font>
                         <Font name="Arial Bold" size="19.0" />
                      </font>
                   </Label>
-                  <Label layoutX="235.0" layoutY="396.0" styleClass="forgotPassword" stylesheets="@../../src/application/application.css" text="Forgot Password?" />
-                  <Button layoutX="84.0" layoutY="446.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#buttonAction" prefHeight="46.0" prefWidth="230.0" styleClass="loginBtn" stylesheets="@../../src/application/application.css" text="Login" />
-                  <TextField fx:id="username" layoutX="85.0" layoutY="295.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#hideErrorMsg" prefHeight="30.0" prefWidth="250.0" promptText="e.g. john">
-                     <cursor>
-                        <Cursor fx:constant="HAND" />
-                     </cursor></TextField>
-                  <Label layoutX="84.0" layoutY="340.0" text="Password" />
-                  <Label layoutX="85.0" layoutY="278.0" text="Username" />
-                  <PasswordField fx:id="password" layoutX="84.0" layoutY="357.0" onKeyPressed="#hideErrorMsg" prefHeight="30.0" prefWidth="250.0" promptText="***********">
-                     <font>
-                        <Font size="9.0" />
-                     </font></PasswordField>
-                  <Label fx:id="infoLabel" alignment="CENTER" layoutX="1.0" layoutY="216.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="infoLabel" stylesheets="@application.css" text="Error message" textAlignment="CENTER" />
-                  <CheckBox fx:id="showPassword" layoutX="85.0" layoutY="398.0" mnemonicParsing="false" onAction="#togglevisiblePassword" prefHeight="3.0" text="Show password">
+                  <Label layoutX="258.0" layoutY="345.0" styleClass="forgotPassword" stylesheets="@../../src/application/application.css" text="Forgot Password?">
                      <font>
                         <Font size="10.0" />
+                     </font></Label>
+                  <Button layoutX="84.0" layoutY="395.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#buttonAction" prefHeight="46.0" prefWidth="250.0" styleClass="loginBtn" stylesheets="@../../src/application/application.css" text="Login" />
+                  <Label fx:id="infoLabel" alignment="CENTER" layoutX="1.0" layoutY="165.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="infoLabel" stylesheets="@application.css" text="Error message" textAlignment="CENTER" />
+                  <CheckBox fx:id="showPassword" layoutX="84.0" layoutY="342.0" mnemonicParsing="false" onAction="#togglevisiblePassword" text="Show password">
+                     <font>
+                        <Font size="9.0" />
                      </font></CheckBox>
-                  <TextField fx:id="passwordText" layoutX="84.0" layoutY="357.0" onKeyPressed="#hideErrorMsg" prefHeight="30.0" prefWidth="250.0" promptText="***********" visible="false" />
+                  <JFXTextField fx:id="username2" labelFloat="true" layoutX="84.0" layoutY="249.0" onAction="#onEnter" onKeyPressed="#hideErrorMsg" prefWidth="250.0" promptText="Username">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                     <tooltip>
+                        <Tooltip text="Enter Username: e.g. john" />
+                     </tooltip>
+                  </JFXTextField>
+                  <JFXPasswordField fx:id="password2" labelFloat="true" layoutX="84.0" layoutY="308.0" onAction="#onEnter" onKeyPressed="#hideErrorMsg" prefWidth="250.0" promptText="Password">
+                     <tooltip>
+                        <Tooltip text="Enter Password" />
+                     </tooltip>
+                  </JFXPasswordField>
+                  <JFXTextField fx:id="passwordText2" labelFloat="true" layoutX="84.0" layoutY="308.0" onAction="#onEnter" onKeyPressed="#hideErrorMsg" prefWidth="250.0" promptText="Password" visible="false">
+                     <tooltip>
+                        <Tooltip text="Enter Password" />
+                     </tooltip>
+                  </JFXTextField>
+                  <Label layoutX="104.0" layoutY="456.0" text="Dont have an account?" />
+                  <Label layoutX="243.0" layoutY="456.0" onMouseClicked="#openRegistration" styleClass="signup" stylesheets="@application.css" text="Signup here">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </Label>
                </children>
             </Pane>
          </children>

@@ -19,6 +19,13 @@
 	
 }
 
+.signup:hover {
+	-fx-text-fill:#6747CD;
+	-fx-underline: true;
+	-fx-font-weight:bold;
+	
+}
+
  .loginBtn {
  	-fx-background-color:#3747CD;
  	-fx-text-fill:#fff;
@@ -38,6 +45,19 @@
  	
  }
  
- .infoLabel{
+ .infoLabel {
  	-fx-text-fill:red;
+ }
+ 
+ .pwdMatch{
+ 	-fx-text-fill:red;
+ 	-fx-font-size:10;
+ }
+ 
+ .goBack{
+ 	-fx-fill:#545454
+ }
+ 
+ .goBack:hover{
+ 	-fx-fill:#DA2129;
  }

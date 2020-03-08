@@ -46,7 +46,7 @@ public class Account {
 	  }
 
 	  public static Boolean passwordRequirement(String password){
-		    if(password.length() >= 6 && !password.contains(" ")){
+		    if(password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$")) {//password.length() >= 6 && !password.contains(" ")){
 		      return true;
 		    } else{
 		      return false;
