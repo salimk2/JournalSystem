@@ -1,3 +1,5 @@
+//Code obtained from http://www.appsdeveloperblog.com/encrypt-user-password-example-java/
+
 package application;
 
 import java.security.NoSuchAlgorithmException;

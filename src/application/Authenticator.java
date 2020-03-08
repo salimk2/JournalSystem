@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class Authenticator {
 
+	
 	private HashMap<String, Account> accounts = new HashMap<String, Account>();
 
 	public Authenticator() {
@@ -16,10 +17,14 @@ public class Authenticator {
 		boolean notSameUser = !accounts.containsKey(username);
 		System.out.println("not same user:" + notSameUser);
 		if (correctUser && correctPass && notSameUser) {
-			accounts.put(username, new Account(username, password, type));
+			
+			//hashing function
+			String salt = PasswordHashing.getSalt(30);
+			String hashedPwd = PasswordHashing.generateSecurePassword(password, salt);
+			accounts.put(username, new Account(username, hashedPwd, type,salt));
 			try {
 				BufferedWriter bw = new BufferedWriter(new FileWriter(System.getProperty("user.dir")+ "//Login.txt",true));
-				bw.write(username + " " + password + " " + type + System.getProperty("line.separator"));
+				bw.write(username + " " + hashedPwd + " " + type + " "+salt +System.getProperty("line.separator"));
 				bw.close();
 			} catch (IOException e) {
 				System.out.println("Error Saving DataBase.");
@@ -32,10 +37,10 @@ public class Authenticator {
 		if (!correctUser) {
 			return -1;//"Invalid Username.";
 		}
-		else if (!correctPass) {
+		else if (!notSameUser) {
 			return -2;//"Invalid password.";
 		}
-		else if (!notSameUser) {
+		else if (!correctPass) {
 			return -3;//"Username taken.";
 		}
 		
@@ -51,10 +56,11 @@ public class Authenticator {
 			BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir")+ "//Login.txt"));
 			
 			String s = "";
+			String[] info = new String[10000];
 			System.out.println("Current Users Passwords Types:");
 			while ((s = br.readLine()) != null) {
-				String[] info = s.split(" ");
-				accounts.put(info[0], new Account(info[0], info[1], Integer.parseInt(info[2])));
+				 info = s.split(" ");
+				accounts.put(info[0], new Account(info[0], info[1], Integer.parseInt(info[2]),info[3]));
 				System.out.println(info[0] + " " + info[1] + " " + info[2]);
 			}
 			br.close();
@@ -66,7 +72,12 @@ public class Authenticator {
 	
 	public Account login(String username, String password) {
 		if (accounts.containsKey(username)) {
-			if (accounts.get(username).getPassword().equals(password)) {
+			//compare password against hashed password
+			
+			
+			boolean pwdHashMatch =PasswordHashing.verifyUserPassword(password,accounts.get(username).getPassword(), accounts.get(username).getSalt());
+			System.out.println("this is the hashed pwd: " +accounts.get(username).getPassword() +"math: " + pwdHashMatch);
+			if (pwdHashMatch) {
 				System.out.printf("Display page for %s%n", accounts.get(username).accountTypetoString());
 				return accounts.get(username);
 			} else {
@@ -78,4 +89,6 @@ public class Authenticator {
 			return null;
 		} 
 	}
+
+	
 }
