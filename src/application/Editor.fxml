@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.EditorController">
    <top>
       <VBox BorderPane.alignment="CENTER">
          <children>
@@ -46,7 +46,7 @@
    <bottom>
       <Button mnemonicParsing="false" onAction="#goBack" text="Button" BorderPane.alignment="CENTER">
          <BorderPane.margin>
-            <Insets bottom="50.0" />
+            <Insets bottom="40.0" />
          </BorderPane.margin>
       </Button>
    </bottom>

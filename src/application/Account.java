@@ -4,13 +4,22 @@ public class Account {
 	  private String username;
 	  private String password;
 	  private int accountType;
+	  private String salt;
 
-	  public Account(String username, String password, int type) {
+	  public Account(String username, String password, int type, String salt) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.accountType = type;
+		this.salt =salt;
 	}
+//	  public Account(String username, String password, int type) {
+//			super();
+//			this.username = username;
+//			this.password = password;
+//			this.accountType = type;
+//			
+//		}
 
 	protected String getUsername(){
 	    return this.username;
@@ -21,7 +30,11 @@ public class Account {
 	  }
 
 
-	  public void setUsername(String user){
+	  public String getSalt() {
+		return salt;
+	}
+
+	public void setUsername(String user){
 	    if(usernameRequirement(user)){
 	      this.username = user;
 	    }
@@ -46,7 +59,7 @@ public class Account {
 	  }
 
 	  public static Boolean passwordRequirement(String password){
-		    if(password.length() >= 6 && !password.contains(" ")){
+		    if(password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$")) {//password.length() >= 6 && !password.contains(" ")){
 		      return true;
 		    } else{
 		      return false;

@@ -4,51 +4,63 @@ import java.util.HashMap;
 
 public class Authenticator {
 
+	
 	private HashMap<String, Account> accounts = new HashMap<String, Account>();
 
 	public Authenticator() {
 
 	}
 
-	public String register(String username, String password, int type) {
+	public short register(String username, String password, int type) {
 		boolean correctUser = Account.usernameRequirement(username);
 		boolean correctPass = Account.passwordRequirement(password);
 		boolean notSameUser = !accounts.containsKey(username);
-
+		System.out.println("not same user:" + notSameUser);
 		if (correctUser && correctPass && notSameUser) {
-			accounts.put(username, new Account(username, password, type));
+			
+			//hashing function
+			String salt = PasswordHashing.getSalt(30);
+			String hashedPwd = PasswordHashing.generateSecurePassword(password, salt);
+			accounts.put(username, new Account(username, hashedPwd, type,salt));
 			try {
-				BufferedWriter bw = new BufferedWriter(new FileWriter(System.getProperty("user.dir")+ "Login.txt"));
-				bw.write(username + " " + password + " " + type + "%n");
+				BufferedWriter bw = new BufferedWriter(new FileWriter(System.getProperty("user.dir")+ "//Login.txt",true));
+				bw.write(username + " " + hashedPwd + " " + type + " "+salt +System.getProperty("line.separator"));
 				bw.close();
 			} catch (IOException e) {
 				System.out.println("Error Saving DataBase.");
 				e.printStackTrace();
 			}
-			return "works";
+			return 0;
 
 		}
 
 		if (!correctUser) {
-			return "Invalid Username.";
+			return -1;//"Invalid Username.";
 		}
-		if (!correctPass) {
-			return "Invalid password.";
+		else if (!notSameUser) {
+			return -2;//"Invalid password.";
 		}
-		if (!notSameUser) {
-			return "Username taken.";
+		else if (!correctPass) {
+			return -3;//"Username taken.";
 		}
-		return "unknown issue";
+		
+		else return -4;//"unknown issue";
 	}
 
 	public void ReadData() throws IOException {
 		try {
-			BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir")+ "\\Login.txt"));
+			//For Windows
+			//BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir")+ "\\Login.txt"));
+			
+			//For Unix based systems only
+			BufferedReader br = new BufferedReader(new FileReader(System.getProperty("user.dir")+ "//Login.txt"));
+			
 			String s = "";
+			String[] info = new String[10000];
 			System.out.println("Current Users Passwords Types:");
 			while ((s = br.readLine()) != null) {
-				String[] info = s.split(" ");
-				accounts.put(info[0], new Account(info[0], info[1], Integer.parseInt(info[2])));
+				 info = s.split(" ");
+				accounts.put(info[0], new Account(info[0], info[1], Integer.parseInt(info[2]),info[3]));
 				System.out.println(info[0] + " " + info[1] + " " + info[2]);
 			}
 			br.close();
@@ -60,7 +72,12 @@ public class Authenticator {
 	
 	public Account login(String username, String password) {
 		if (accounts.containsKey(username)) {
-			if (accounts.get(username).getPassword().equals(password)) {
+			//compare password against hashed password
+			
+			
+			boolean pwdHashMatch =PasswordHashing.verifyUserPassword(password,accounts.get(username).getPassword(), accounts.get(username).getSalt());
+			System.out.println("this is the hashed pwd: " +accounts.get(username).getPassword() +"math: " + pwdHashMatch);
+			if (pwdHashMatch) {
 				System.out.printf("Display page for %s%n", accounts.get(username).accountTypetoString());
 				return accounts.get(username);
 			} else {
@@ -72,4 +89,6 @@ public class Authenticator {
 			return null;
 		} 
 	}
+
+	
 }
