@@ -136,7 +136,9 @@ public class RegistrationController implements Initializable {
 		String pwd = null;
 		short numErrors = 0;
 		String tempPwdString = password.getText();
-		String tempConfPwdString = confirmPassword.getText();	
+		String tempConfPwdString = confirmPassword.getText();
+		String tempTextPwdString = passwordText.getText();
+		String tempTextConfPwdString = confirmPasswordText.getText();
 		
 		
 		//check for valid userType
@@ -156,7 +158,7 @@ public class RegistrationController implements Initializable {
 		}
 		
 		//check for matching passwords
-		if (!tempPwdString.equals(tempConfPwdString)) {
+		if ((!tempPwdString.equals(tempConfPwdString)) && (!tempTextPwdString.equals(tempTextConfPwdString))) {
 			pwdMatchError.setVisible(true);
 			pwdMatchError.setText("'Password' and 'Confirm Pasword' dont match!");
 			numErrors++;
