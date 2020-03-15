@@ -138,7 +138,9 @@ public class RegistrationController implements Initializable {
 		String tempPwdString = password.getText();
 		String tempConfPwdString = confirmPassword.getText();
 		String tempTextPwdString = passwordText.getText();
+		System.out.println(tempTextPwdString);
 		String tempTextConfPwdString = confirmPasswordText.getText();
+		System.out.println(tempTextConfPwdString);
 		
 		
 		//check for valid userType
@@ -163,12 +165,17 @@ public class RegistrationController implements Initializable {
 			pwdMatchError.setText("'Password' and 'Confirm Pasword' dont match!");
 			numErrors++;
 		} else {
-			pwd=password.getText();
+			if(showPassword.isSelected())
+				pwd=passwordText.getText();
+			else {
+				pwd=password.getText();
+			}
 					
 		}
 		
 		if(numErrors == 0){
 			//System.out.println(UserTypeName + " " + UsertypeCode + " "+ pwd +" "+ userName);
+			
 			short creatAccount = Main.AuthSys.register(userName, pwd, UsertypeCode);
 			
 			switch (creatAccount) {
