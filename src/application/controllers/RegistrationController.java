@@ -192,8 +192,7 @@ public class RegistrationController implements Initializable {
 				accountError.setVisible(true);
 				accountError.setText("Invalid Password!"+ System.getProperty("line.separator") + "Please make sure password follows the following requirements:" + System.getProperty("line.separator")
 										+"-Minimum eight characters."+ System.getProperty("line.separator") +
-										"-At least one uppercase letter. "+ System.getProperty("line.separator") +
-										"-One lowercase letter and one number");
+										"-Contain at least one digit . "+ System.getProperty("line.separator") );
 				break;
 				
 			default:
