@@ -37,9 +37,9 @@
       </VBox>
    </top>
    <center>
-      <Label alignment="CENTER" prefWidth="800.0" text="Welcome Researcher" textAlignment="CENTER" BorderPane.alignment="CENTER">
+      <Label alignment="CENTER" prefWidth="800.0" text="Welcome Researcher" textAlignment="CENTER" BorderPane.alignment="TOP_CENTER">
          <font>
-            <Font name="System Bold" size="41.0" />
+            <Font name="System Bold" size="20.0" />
          </font>
       </Label>
    </center>
