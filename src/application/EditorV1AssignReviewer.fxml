@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.EditorV1AssignReviewerController">
    <children>
       <Label layoutX="303.0" layoutY="14.0" prefHeight="36.0" prefWidth="194.0" text="Assign Reviewer">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Button layoutX="14.0" layoutY="17.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="97.0" text="&lt;- Go Back" />
+      <Button fx:id="btnGoBack" layoutX="14.0" layoutY="17.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="97.0" text="&lt;- Go Back" />
       <Label layoutX="121.0" layoutY="118.0" text="Select Submission:">
          <font>
             <Font name="System Bold" size="20.0" />
@@ -41,15 +40,20 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <JFXDatePicker layoutX="446.0" layoutY="202.0" />
-      <JFXDatePicker layoutX="446.0" layoutY="250.0" />
-      <JFXDatePicker layoutX="446.0" layoutY="295.0" />
-      <Button layoutX="335.0" layoutY="428.0" mnemonicParsing="false" text="Add Reviewer">
+      <JFXDatePicker fx:id="dpMinorRev" editable="false" layoutX="446.0" layoutY="202.0" />
+      <JFXDatePicker fx:id="dpRev1" editable="false" layoutX="446.0" layoutY="250.0" />
+      <JFXDatePicker fx:id="dpRev2" editable="false" layoutX="446.0" layoutY="295.0" />
+      <Button fx:id="btnAddRev" layoutX="335.0" layoutY="428.0" mnemonicParsing="false" onAction="#btnAddRevAction" text="Add Reviewer">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <ChoiceBox layoutX="446.0" layoutY="161.0" prefHeight="31.0" prefWidth="205.0" />
-      <ChoiceBox layoutX="446.0" layoutY="118.0" prefHeight="31.0" prefWidth="205.0" />
+      <JFXComboBox fx:id="cbSubmissions" layoutX="446.0" layoutY="118.0" prefHeight="31.0" prefWidth="205.0" />
+      <JFXComboBox fx:id="cbReviewers" layoutX="446.0" layoutY="161.0" prefHeight="31.0" prefWidth="205.0" />
+      <Label fx:id="lblTest1" layoutX="36.0" layoutY="338.0" prefHeight="36.0" prefWidth="116.0" text="label 1" />
+      <Label fx:id="lblTest2" layoutX="36.0" layoutY="374.0" prefHeight="36.0" prefWidth="116.0" text="label 2" />
+      <Label fx:id="lblTest3" layoutX="36.0" layoutY="410.0" prefHeight="36.0" prefWidth="116.0" text="label 3" />
+      <Label fx:id="lblTest4" layoutX="36.0" layoutY="446.0" prefHeight="36.0" prefWidth="116.0" text="label 4" />
+      <Label fx:id="lblTest5" layoutX="36.0" layoutY="482.0" prefHeight="36.0" prefWidth="116.0" text="label 5" />
    </children>
 </AnchorPane>
