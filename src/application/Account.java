@@ -59,8 +59,9 @@ public class Account {
 	  }
 
 	  public static Boolean passwordRequirement(String password){
-		    if(password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$")) {//password.length() >= 6 && !password.contains(" ")){
-		      return true;
+		    //if(password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$")  ) {//password.length() >= 6 && !password.contains(" ")){
+		  if(password.matches("^(?=.*\\d).{8,60}$")  ) {//Password expression. Password must be between 4 and 8 digits long and include at least one numeric digit.
+		  return true;
 		    } else{
 		      return false;
 		    }

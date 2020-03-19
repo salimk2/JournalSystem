@@ -102,7 +102,13 @@ public class LoginController implements Initializable {
 	public void buttonAction(ActionEvent event) throws IOException {
 
 		String user = username2.getText();
-		String pass = password2.getText();
+		String pass;
+		if(showPassword.isSelected()) {
+			pass = passwordText2.getText();
+		}
+		else {
+			pass = password2.getText();
+		}
 		Account acc = Main.AuthSys.login(user, pass);
 
 		if (acc != null) {
