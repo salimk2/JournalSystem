@@ -58,7 +58,7 @@
             <Tooltip text="Enter Password" />
          </tooltip>
       </JFXTextField>
-      <JFXTextField fx:id="passwordText" labelFloat="true" layoutX="75.0" layoutY="334.0" onAction="#onEnter" onKeyPressed="#hideErrorMsg" prefWidth="250.0" promptText="Password" visible="false">
+      <JFXTextField fx:id="passwordText" labelFloat="true" layoutX="75.0" layoutY="334.0" onAction="#onEnter" onKeyPressed="#hideErrorMsg" prefWidth="250.0" promptText="Confirm Password" visible="false">
          <tooltip>
             <Tooltip text="Enter Password" />
          </tooltip>
