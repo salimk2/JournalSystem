@@ -136,7 +136,11 @@ public class RegistrationController implements Initializable {
 		String pwd = null;
 		short numErrors = 0;
 		String tempPwdString = password.getText();
-		String tempConfPwdString = confirmPassword.getText();	
+		String tempConfPwdString = confirmPassword.getText();
+		String tempTextPwdString = passwordText.getText();
+		System.out.println(tempTextPwdString);
+		String tempTextConfPwdString = confirmPasswordText.getText();
+		System.out.println(tempTextConfPwdString);
 		
 		
 		//check for valid userType
@@ -156,17 +160,22 @@ public class RegistrationController implements Initializable {
 		}
 		
 		//check for matching passwords
-		if (!tempPwdString.equals(tempConfPwdString)) {
+		if ((!tempPwdString.equals(tempConfPwdString)) && (!tempTextPwdString.equals(tempTextConfPwdString))) {
 			pwdMatchError.setVisible(true);
 			pwdMatchError.setText("'Password' and 'Confirm Pasword' dont match!");
 			numErrors++;
 		} else {
-			pwd=password.getText();
+			if(showPassword.isSelected())
+				pwd=passwordText.getText();
+			else {
+				pwd=password.getText();
+			}
 					
 		}
 		
 		if(numErrors == 0){
 			//System.out.println(UserTypeName + " " + UsertypeCode + " "+ pwd +" "+ userName);
+			
 			short creatAccount = Main.AuthSys.register(userName, pwd, UsertypeCode);
 			
 			switch (creatAccount) {
@@ -192,8 +201,7 @@ public class RegistrationController implements Initializable {
 				accountError.setVisible(true);
 				accountError.setText("Invalid Password!"+ System.getProperty("line.separator") + "Please make sure password follows the following requirements:" + System.getProperty("line.separator")
 										+"-Minimum eight characters."+ System.getProperty("line.separator") +
-										"-At least one uppercase letter. "+ System.getProperty("line.separator") +
-										"-One lowercase letter and one number");
+										"-Contain at least one digit . "+ System.getProperty("line.separator") );
 				break;
 				
 			default:
