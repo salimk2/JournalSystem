@@ -15,7 +15,7 @@ public class Main extends Application {
 	public static Authenticator AuthSys = new Authenticator();
 	
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws Exception{
 		
 		try {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("Login.fxml"));

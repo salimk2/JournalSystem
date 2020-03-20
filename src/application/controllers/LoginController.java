@@ -4,15 +4,13 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
-
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import application.Account;
 import application.Main;
-import javafx.event.ActionEvent;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,8 +21,8 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -56,27 +54,18 @@ public class LoginController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		infoLabel.setVisible(false);
 		this.togglevisiblePassword(null);
-
 	}
 	
 	@FXML
 	public void onEnter(ActionEvent pressed) throws IOException{
-	   
 	   buttonAction(pressed);
 	}
 	
-	
-	
 	@FXML
-	  private void hideErrorMsg(){
-	    infoLabel.setVisible(false);
-	   
-	
-	  }
+	private void hideErrorMsg(){
+		infoLabel.setVisible(false);
+	}
 
-	
-	
-	
 	public void togglevisiblePassword(ActionEvent event) {
 		if (showPassword.isSelected()) {
 			passwordText2.setText(password2.getText());
@@ -90,7 +79,6 @@ public class LoginController implements Initializable {
 		}
 	}
 	
-	
 	public void openRegistration(MouseEvent event) throws IOException {
 		Parent fxmlRegParentParent = FXMLLoader.load(getClass().getResource("/application/Registration.fxml"));
 		content.getChildren().removeAll();
@@ -98,9 +86,8 @@ public class LoginController implements Initializable {
 		
 	}
 	
-
 	public void buttonAction(ActionEvent event) throws IOException {
-
+		
 		String user = username2.getText();
 		String pass;
 		if(showPassword.isSelected()) {
@@ -127,14 +114,15 @@ public class LoginController implements Initializable {
 				fxmlFileName = applicationAddr + usertype + ".fxml";
 				break;
 			case EDITOR:
-				fxmlFileName = applicationAddr + usertype + ".fxml";
+				fxmlFileName = applicationAddr + usertype + ".fxml";  //usertype + ".fxml";
 				break;
 			default:
 				fxmlFileName = "/application/controllers/Login.fxml";
 				break;
 			}
 
-			openNewWindow(event, fxmlFileName);
+			//openNewWindow(event, fxmlFileName);
+			openNewAnchorPaneWindow(event, fxmlFileName);
 
 		} else {
 			infoLabel.setVisible(true);
@@ -146,6 +134,7 @@ public class LoginController implements Initializable {
 
 	}
 
+	// Switch Window (BorderPane)
 	public void openNewWindow(ActionEvent event, String pageName) throws IOException {
 		BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource(pageName));
 		Scene scene = new Scene(root);
@@ -156,6 +145,15 @@ public class LoginController implements Initializable {
 		window.setScene(scene);
 		window.show();
 
+	}
+	
+	// Switch Window (AnchorPane)
+	public void openNewAnchorPaneWindow(ActionEvent event, String newWindow) throws IOException {
+		AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource(newWindow));
+		Scene scene = new Scene(root);
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+		window.setScene(scene);
+		window.show();
 	}
 
 }
