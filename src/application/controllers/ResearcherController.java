@@ -3,7 +3,6 @@ package application.controllers;
 import java.io.IOException;
 
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -12,20 +11,18 @@ import javafx.stage.Stage;
 
 public class ResearcherController {
 	
-	public void goBack (ActionEvent event) throws IOException{
-		openNewWindow(event, "/application/Login.fxml");
-	}
+	// Logout
+	public void logout (ActionEvent event) throws IOException{
+		openNewBorderPaneWindow(event, "/application/Login.fxml");
+	}	
 	
-	public void openNewWindow(ActionEvent event, String pageName) throws IOException  {
-		BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource(pageName));
+	// Switch Windows (BorderPane)
+	public void openNewBorderPaneWindow(ActionEvent event, String newWindow) throws IOException {
+		BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource(newWindow));
 		Scene scene = new Scene(root);
-		
-		//This line gets the stage info
 		Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();	
-		
 		window.setScene(scene);
 		window.show();
-	
-	}
+	}	
 
 }

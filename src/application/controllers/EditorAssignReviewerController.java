@@ -21,7 +21,7 @@ import javafx.scene.control.Label;
  * implements and interface called Initializable 
  * when code is run, the class runs the initialize() method
  */
-public class EditorV1AssignReviewerController implements Initializable {
+public class EditorAssignReviewerController implements Initializable {
 	
 	// define FXML components
 	@FXML public ComboBox<String> cbSubmissions, cbReviewers;  // ComboBox<DataType> behaves like a list
