@@ -114,7 +114,7 @@ public class LoginController implements Initializable {
 				fxmlFileName = applicationAddr + usertype + ".fxml";
 				break;
 			case EDITOR:
-				fxmlFileName = applicationAddr + usertype + ".fxml";  //usertype + ".fxml";
+				fxmlFileName = applicationAddr + usertype + ".fxml";  
 				break;
 			default:
 				fxmlFileName = "/application/controllers/Login.fxml";
