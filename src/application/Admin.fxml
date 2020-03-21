@@ -1,53 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.AdminController">
-   <top>
-      <VBox BorderPane.alignment="CENTER">
-         <children>
-            <MenuBar>
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-         </children>
-      </VBox>
-   </top>
-   <center>
-      <Label alignment="CENTER" prefWidth="800.0" text="Welcome Admin" textAlignment="CENTER" BorderPane.alignment="CENTER">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.AdminController">
+   <children>
+      <Button layoutX="718.0" layoutY="17.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+      <Label layoutX="301.0" layoutY="14.0" prefHeight="36.0" prefWidth="199.0" text="Welcome Admin">
          <font>
-            <Font name="System Bold" size="41.0" />
+            <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-   </center>
-   <bottom>
-      <Button mnemonicParsing="false" onAction="#goBack" text="Button" BorderPane.alignment="CENTER">
-         <BorderPane.margin>
-            <Insets bottom="40.0" />
-         </BorderPane.margin>
-      </Button>
-   </bottom>
-</BorderPane>
+      <TableView fx:id="tableView" layoutX="25.0" layoutY="73.0" onMouseClicked="#columnSelected" prefHeight="393.0" prefWidth="750.0">
+         <columns>
+            <TableColumn fx:id="submissionColumn" prefWidth="150.0" text="Submissions" />
+            <TableColumn fx:id="reviewerColumn" prefWidth="150.0" text="Reviewer" />
+            <TableColumn fx:id="minorRevisionColumn" prefWidth="150.0" text="Minor Revision" />
+            <TableColumn fx:id="revision1Column" prefWidth="150.0" text="Revision 1" />
+            <TableColumn fx:id="revision2Column" prefWidth="150.0" text="Revision 2" />
+         </columns>
+      </TableView>
+      <Label fx:id="lblTest1" layoutX="83.0" layoutY="488.0" text="label" />
+      <Label fx:id="lblTest2" layoutX="83.0" layoutY="509.0" text="label" />
+      <JFXComboBox fx:id="cbJournals" layoutX="25.0" layoutY="17.0" onAction="#journalSelected" prefHeight="31.0" prefWidth="154.0" />
+   </children>
+</AnchorPane>
