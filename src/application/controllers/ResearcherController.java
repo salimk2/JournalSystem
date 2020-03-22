@@ -7,15 +7,20 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class ResearcherController implements Initializable {
@@ -29,7 +34,7 @@ public class ResearcherController implements Initializable {
 	@FXML private Label lblRev1, lblRev2, lblRevMinor;					 // revisions
 	@FXML private Button btnRev1, btnRev2, btnRevMinor;
 	@FXML private Label lblComment1, lblComment2, lblCommentMinor; 	 	// comments
-	@FXML private Button btnUpload, btnWithdraw;						// upload/download
+	@FXML private JFXButton btnUpload, btnWithdraw;						// upload/download
 	@FXML private Label lblNextSub, lblWithdrawPending;
 	
 	
@@ -188,6 +193,32 @@ public class ResearcherController implements Initializable {
 	 */
 	public void btnUploadAction(ActionEvent event) throws IOException{
 		// TODO implement the method
+		// Creating pop up window
+		
+			Stage stage;
+			Parent root;
+			
+			
+			
+		
+
+			if (event.getSource() == btnUpload) {
+				stage = new Stage();
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(getClass().getResource("/application/ResearcherUploadDocument.fxml"));
+				// reference editor page
+				root = loader.load();
+				ResearcherUploadDocumentController controller =loader.getController();
+				controller.setUser(username,type);
+				
+				
+				stage.setScene(new Scene(root));
+				stage.initModality(Modality.APPLICATION_MODAL);
+				stage.initOwner(btnUpload.getScene().getWindow());
+				stage.showAndWait();
+			}
+
+		
 		System.out.println("Upload Clicked");
 	}	
 	

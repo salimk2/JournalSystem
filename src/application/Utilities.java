@@ -48,7 +48,7 @@ public class Utilities {
 	}
 
 	//creates a user directory 
-	public boolean createUserDir(String username, int type) {
+	public boolean createUserDir(String username, int type, String chosenJournal) {
 
 		boolean error;
 
@@ -56,25 +56,27 @@ public class Utilities {
 
 		case 1:
 			// Researcher
-			if ((new File(System.getProperty("user.dir") + File.separator + "researcher" + File.separator + username))
+			if ((new File(System.getProperty("user.dir") + File.separator + "projectDB"
+					+ File.separator + "editor" + File.separator + "journals" + File.separator + chosenJournal + File.separator +"researchers" + File.separator + username))
 					.mkdirs()) {
 				message = "Directory for researcher was created succesfully";
 				error = false;
 
 			} else {
-				message = "Reseacher directory was not created";
+				message = "Reseacher directory was not created "+System.getProperty("line.separator")+"or a folder with that name already exists";
 				error = true;
 			}
 			break;
 		case 3:
 			// Reviewer
-			if ((new File(System.getProperty("user.dir") + File.separator + "reviewer" + File.separator + username))
+			if ((new File(System.getProperty("user.dir") + File.separator + "projectDB"
+					+ File.separator + "editor" + File.separator + "journals" + File.separator + chosenJournal + File.separator +"reviewers" + File.separator + username))
 					.mkdirs()) {
 				message = "Directory for researcher was created succesfully";
 				error = false;
 
 			} else {
-				message = "Reviewer directory was not created";
+				message = "Reviewer directory was not created "+System.getProperty("line.separator")+"or a folder with that name already exists";
 				error = true;
 			}
 			break;
@@ -89,6 +91,7 @@ public class Utilities {
 
 	}
 	
+	// only used to write to journalList.txt
 	public void writeJournalToFile(String journalName){
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
 				+ File.separator + "editor" + File.separator + "journals" + File.separator + "journalList.txt");
@@ -102,8 +105,10 @@ public class Utilities {
 		}
 	}
 	
+	// only used to read from journalList.txt
 	public String readJournalList() throws IOException {
 		String journalList="";
+		
 		File readFromFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
 				+ File.separator + "editor" + File.separator + "journals" + File.separator + "journalList.txt");
 		try {
@@ -115,12 +120,13 @@ public class Utilities {
 			System.out.println("Journals:");
 			while ((line = br.readLine()) != null) {
 				journalList +=line + " ";
+				
 			}
 			br.close();
 			if(journalList.isEmpty()) {
 				System.out.println("There are no journals yet");
 			}
-			System.out.println(journalList);
+			System.out.println("Inside Utilities the journals are: "+journalList);
 
 			
 		} catch (FileNotFoundException e) {
@@ -132,7 +138,7 @@ public class Utilities {
 	
 	
 
-	// will be used when creating journals inside the editor page
+	// only used to create journal folders
 	public boolean createJournalDir(String journalName) {
 		boolean error;
 		if (!journalName.isEmpty()) {
@@ -163,8 +169,7 @@ public void upload(File fileDestinPath) throws IOException {
 		File source ;
 		//Add filters for files extensions
 		upload.getExtensionFilters().addAll(new ExtensionFilter("PDF File (.pdf)", "*.pdf"),
-				new ExtensionFilter("Word Document (.dox):", "*.docx"),
-				new ExtensionFilter("Plain Text (.txt):", "*.txt"));
+				new ExtensionFilter("Word Document (.dox):", "*.docx"));
 		File selectedFile = upload.showOpenDialog(null);
 
 		if (selectedFile != null) {
