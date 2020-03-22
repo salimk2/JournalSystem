@@ -27,32 +27,32 @@
             <Font name="System Bold" size="20.0" />
          </font>
       </Label>
-      <Button fx:id="btnSub1" layoutX="169.0" layoutY="147.0" mnemonicParsing="false" text="Download" />
-      <Button fx:id="btnUpload" layoutX="124.0" layoutY="460.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="226.0" text="Upload Submission">
+      <Button fx:id="btnSub1" layoutX="169.0" layoutY="147.0" mnemonicParsing="false" onAction="#btnSub1Action" text="Download" />
+      <Button fx:id="btnUpload" layoutX="124.0" layoutY="460.0" mnemonicParsing="false" onAction="#btnUploadAction" prefHeight="44.0" prefWidth="226.0" text="Upload Submission">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <Button fx:id="btnWithdraw" layoutX="465.0" layoutY="460.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="226.0" text="Withdraw Submission">
+      <Button fx:id="btnWithdraw" layoutX="465.0" layoutY="460.0" mnemonicParsing="false" onAction="#btnWithdrawAction" prefHeight="44.0" prefWidth="226.0" text="Withdraw Submission">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
       <Label fx:id="lblWithdrawPending" layoutX="465.0" layoutY="512.0" prefHeight="21.0" prefWidth="149.0" text="Withdraw pending..." textFill="#c31c1c" />
       <Label fx:id="lblSub1" layoutX="155.0" layoutY="123.0" text="Submmition1.pdf" />
-      <Button fx:id="btnRev1" layoutX="358.0" layoutY="131.0" mnemonicParsing="false" text="Download" />
+      <Button fx:id="btnRev1" layoutX="358.0" layoutY="131.0" mnemonicParsing="false" onAction="#btnRev1Action" text="Download" />
       <Label fx:id="lblRev1" layoutX="354.0" layoutY="107.0" text="revision_1.pdf" />
-      <Button fx:id="btnRev2" layoutX="358.0" layoutY="207.0" mnemonicParsing="false" text="Download" />
+      <Button fx:id="btnRev2" layoutX="358.0" layoutY="207.0" mnemonicParsing="false" onAction="#btnRev2Action" text="Download" />
       <Label fx:id="lblRev2" layoutX="354.0" layoutY="183.0" text="revision_2.pdf" />
-      <Button fx:id="btnRevMinor" layoutX="359.0" layoutY="285.0" mnemonicParsing="false" text="Download" />
+      <Button fx:id="btnRevMinor" layoutX="360.0" layoutY="285.0" mnemonicParsing="false" onAction="#btnRevMinorAction" text="Download" />
       <Label fx:id="lblRevMinor" layoutX="342.0" layoutY="263.0" text="revision_minor.pdf" />
       <Label fx:id="lblComment1" alignment="TOP_LEFT" layoutX="534.0" layoutY="102.0" prefHeight="58.0" prefWidth="235.0" text="rev 1 comments" wrapText="true" />
       <Button layoutX="718.0" layoutY="17.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
-      <Button fx:id="btnSub2" layoutX="170.0" layoutY="223.0" mnemonicParsing="false" text="Download" />
+      <Button fx:id="btnSub2" layoutX="170.0" layoutY="223.0" mnemonicParsing="false" onAction="#btnSub2Action" text="Download" />
       <Label fx:id="lblSub2" layoutX="156.0" layoutY="199.0" text="Submmition2.pdf" />
-      <Button fx:id="btnSub3" layoutX="171.0" layoutY="303.0" mnemonicParsing="false" text="Download" />
+      <Button fx:id="btnSub3" layoutX="171.0" layoutY="303.0" mnemonicParsing="false" onAction="#btnSub3Action" text="Download" />
       <Label fx:id="lblSub3" layoutX="157.0" layoutY="279.0" text="Submmition3.pdf" />
-      <Button fx:id="btnSubFinal" layoutX="169.0" layoutY="377.0" mnemonicParsing="false" text="Download" />
+      <Button fx:id="btnSubFinal" layoutX="169.0" layoutY="377.0" mnemonicParsing="false" onAction="#btnSubFinalAction" text="Download" />
       <Label fx:id="lblSubFinal" layoutX="155.0" layoutY="353.0" prefHeight="21.0" prefWidth="143.0" text="SubmmitionFinal.pdf" />
       <Label fx:id="lblComment2" alignment="TOP_LEFT" layoutX="534.0" layoutY="190.0" prefHeight="65.0" prefWidth="235.0" text="rev 2 comments" wrapText="true" />
       <Label fx:id="lblCommentMinor" alignment="TOP_LEFT" layoutX="534.0" layoutY="270.0" prefHeight="65.0" prefWidth="235.0" text="rev minor comments" wrapText="true" />

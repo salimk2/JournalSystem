@@ -26,7 +26,7 @@ public class ResearcherController implements Initializable {
 	@FXML private Label lblRev1, lblRev2, lblRevMinor;					 // revisions
 	@FXML private Button btnRev1, btnRev2, btnRevMinor;
 	@FXML private Label lblComment1, lblComment2, lblCommentMinor; 	 	// comments
-	@FXML private Button btnUpload, btnDownload;						// upload/download
+	@FXML private Button btnUpload, btnWithdraw;						// upload/download
 	@FXML private Label lblNextSub, lblWithdrawPending;
 	
 	/**
@@ -39,37 +39,60 @@ public class ResearcherController implements Initializable {
 		
 		// get submissions
 		ArrayList<String> submissions = myAuth.getSubmissions("research_1");
-		
 		// disable view
 		if (!submissions.contains("subFinal")) {
-			lblSubFinal.setVisible(false);
-			btnSubFinal.setVisible(false);
+			lblSubFinal.setDisable(true);
+			btnSubFinal.setDisable(true);
 			lblNextSub.setText("Next Submission: Final Submission");
 			if (!submissions.contains("sub3")) {
-				lblSub3.setVisible(false);
-				btnSub3.setVisible(false);
+				lblSub3.setDisable(true);
+				btnSub3.setDisable(true);
 				lblNextSub.setText("Next Submission: Post Revision 1");
 				if (!submissions.contains("sub2")) {
-					lblSub2.setVisible(false);
-					btnSub2.setVisible(false);
+					lblSub2.setDisable(true);
+					btnSub2.setDisable(true);
 					lblNextSub.setText("Next Submission: Post Revision 2");
 					if (!submissions.contains("sub1")) {
-						lblSub1.setVisible(false);
-						btnSub1.setVisible(false);
+						lblSub1.setDisable(true);
+						btnSub1.setDisable(true);
 						lblNextSub.setText("Next Submission: Post Minor Revision (Final Submission)");
 					}
 				}
 			}
 		} 
 		
-		// get reviews
-		// disable view
+		// get reviews & disable view	
+		ArrayList<String> reviews = myAuth.getReviews("research_1", "sub_1");	
+		if (!reviews.contains("revMinor")) {			
+			lblRevMinor.setDisable(true);
+			btnRevMinor.setDisable(true);
+			if (!reviews.contains("rev2")) {
+				lblRev2.setDisable(true);
+				btnRev2.setDisable(true);
+				if (!reviews.contains("rev1")) {
+					lblRev1.setDisable(true);
+					btnRev2.setDisable(true);
+				}
+			}
+		}			
 		
-		// get comments
-		// disable view	
+		// get comments & disable view
+		ArrayList<String> comments = myAuth.getComments("research_1", "rev_1");
+		if (!comments.contains("commentMinor")) {			
+			lblCommentMinor.setDisable(true);
+			if (!comments.contains("comment2")) {
+				lblComment2.setDisable(true);
+				if (!comments.contains("comment1")) {
+					lblComment1.setDisable(true);
+				}
+			}
+		} 	
 		
 		// get withdraw status
-		lblWithdrawPending.setVisible(false);
+		boolean withdrawStatus = myAuth.getWithdrawStatus("research_1", "sub_1");
+		if (!withdrawStatus) {								 
+			lblWithdrawPending.setDisable(true);
+		}	
 		
 	}
 	
@@ -80,6 +103,78 @@ public class ResearcherController implements Initializable {
 	 */
 	public void logout (ActionEvent event) throws IOException{
 		openNewBorderPaneWindow(event, "/application/Login.fxml");
+	}	
+	
+	/**
+	 * btnSub1
+	 */
+	public void btnSub1Action(ActionEvent event) throws IOException{
+		// TODO implement the method
+		System.out.println("Downlaod Sub1 Clicked");
+	}	
+
+	/**
+	 * btnSub2
+	 */
+	public void btnSub2Action(ActionEvent event) throws IOException{
+		// TODO implement the method
+		System.out.println("Downlaod Sub2 Clicked");
+	}	
+
+	/**
+	 * btnSUb3
+	 */
+	public void btnSub3Action(ActionEvent event) throws IOException{
+		// TODO implement the method
+		System.out.println("Download Sub3 Clicked");
+	}	
+	
+	/**
+	 * btnSubFinal
+	 */
+	public void btnSubFinalAction(ActionEvent event) throws IOException{
+		// TODO implement the method
+		System.out.println("Download SubFinal Clicked");
+	}
+	
+	/**
+	 * btnRev1
+	 */
+	public void btnRev1Action(ActionEvent event) throws IOException{
+		// TODO implement the method
+		System.out.println("Download Rev1 Clicked");
+	}	
+	
+	/**
+	 * btnRev2
+	 */
+	public void btnRev2Action(ActionEvent event) throws IOException{
+		// TODO implement the method
+		System.out.println("Download Rev2 Clicked");
+	}	
+	
+	/**
+	 * btnRevMinor
+	 */
+	public void btnRevMinorAction(ActionEvent event) throws IOException{
+		// TODO implement the method
+		System.out.println("Download RevMinor Clicked");
+	}	
+	
+	/**
+	 * btnUpload
+	 */
+	public void btnUploadAction(ActionEvent event) throws IOException{
+		// TODO implement the method
+		System.out.println("Upload Clicked");
+	}	
+	
+	/**
+	 * btnWithdraw
+	 */
+	public void btnWithdrawAction(ActionEvent event) throws IOException{
+		// TODO implement the method
+		System.out.println("Withdraw Clicked");
 	}	
 	
 	/**

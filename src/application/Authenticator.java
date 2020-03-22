@@ -117,13 +117,57 @@ public class Authenticator {
 		// create arrayList
 		ArrayList<String> submissions = new ArrayList<String>();
 		
-		// add user submissions
+		// add user submissions		(these are fake submissions)
 		submissions.add("sub1");
 		submissions.add("sub2");
-		//submissions.add("sub3");
-		//submissions.add("subFinal");
+		submissions.add("sub3");
+		submissions.add("subFinal");
 		
 		return submissions;
+	}
+	
+	/**
+	 * getReviews
+	 * @param userId, subID
+	 * @return ArrayList<String>
+	 */
+	public ArrayList<String> getReviews(String userId, String subID) {
+		// create arrayList
+		ArrayList<String> reviews = new ArrayList<String>();
+		
+		// add user reviews				(fake reviews:)
+		reviews.add("rev1");
+		reviews.add("rev2");
+		reviews.add("revMinor");
+		
+		return reviews;
+	}	
+	
+	/**
+	 * getComments
+	 * @param userId, revID
+	 * @return ArrayList<String>
+	 */
+	public ArrayList<String> getComments(String userId, String revID) {
+		// create arrayList
+		ArrayList<String> comments = new ArrayList<String>();
+		
+		// add user reviews				
+		comments.add("comment1");
+		comments.add("comment2");
+		//reviews.add("commentMinor");
+		
+		return comments;
+	}	
+	
+	/**
+	 * getWithdrawStatus
+	 * returns status of the withdraw, true = Pending
+	 * @param userId, subID
+	 * @return boolean
+	 */
+	public boolean getWithdrawStatus(String userId, String subID) {
+		return false;
 	}
 	
 }
