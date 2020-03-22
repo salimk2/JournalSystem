@@ -15,19 +15,24 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
  * Controller class for EditorV1.fxml
  */
 public class EditorController implements Initializable {
-	
+	private Pane content= new Pane();
 	// configure table
 	@FXML private TableView<EditorRecord> tableView;
 	@FXML private TableColumn<EditorRecord, String> submissionColumn;
@@ -35,6 +40,7 @@ public class EditorController implements Initializable {
 	@FXML private TableColumn<EditorRecord, LocalDate> minorRevisionColumn;
 	@FXML private TableColumn<EditorRecord, LocalDate> revision1Column;
 	@FXML private TableColumn<EditorRecord, LocalDate> revision2Column;	
+	@FXML private Button btnAddJournal;
 	
 	/**
 	 * Initialize the controller class
@@ -68,9 +74,36 @@ public class EditorController implements Initializable {
 	}
 
 	// Logout
+	@FXML
 	public void logout (ActionEvent event) throws IOException{
 		openNewBorderPaneWindow(event, "/application/Login.fxml");
 	}	
+	
+//	public void openSomething(MouseEvent event) throws IOException {
+//		Parent fxmlRegParentParent = FXMLLoader.load(getClass().getResource("/application/Registration.fxml"));
+//		content.getChildren().removeAll();
+//		content.getChildren().setAll(fxmlRegParentParent);
+//		
+//	}
+	
+	//Creating pop up window
+	@FXML
+	public void addJournal(ActionEvent event) throws IOException{
+		Stage stage;
+		Parent root;
+		
+		if (event.getSource() == btnAddJournal) {
+			stage = new Stage();
+			//reference editor page 
+			root = FXMLLoader.load(getClass().getResource("/application/EditorAddJournalPopUp.fxml"));
+			stage.setScene(new Scene(root));
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(btnAddJournal.getScene().getWindow());
+			stage.showAndWait();
+		}
+
+		
+	}
 	
 	// Switch Windows (BorderPane)
 	public void openNewBorderPaneWindow(ActionEvent event, String newWindow) throws IOException {

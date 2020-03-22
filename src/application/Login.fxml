@@ -31,26 +31,6 @@
             </VBox>
             <Pane fx:id="content" layoutX="400.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="599.0" prefWidth="401.0" style="-fx-background-color: #fff;" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="400.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <Label alignment="CENTER" layoutX="1.0" layoutY="54.0" prefHeight="34.0" prefWidth="401.0" text="Sign in Form">
-                     <font>
-                        <Font name="Impact" size="28.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" layoutY="129.0" prefHeight="22.0" prefWidth="400.0" text="Sign in to continue">
-                     <font>
-                        <Font name="Arial Bold" size="19.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="258.0" layoutY="345.0" styleClass="forgotPassword" stylesheets="@../../src/application/application.css" text="Forgot Password?">
-                     <font>
-                        <Font size="10.0" />
-                     </font></Label>
-                  <Button layoutX="84.0" layoutY="395.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#buttonAction" prefHeight="46.0" prefWidth="250.0" styleClass="loginBtn" stylesheets="@../../src/application/application.css" text="Login" />
-                  <Label fx:id="infoLabel" alignment="CENTER" layoutX="1.0" layoutY="165.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="infoLabel" stylesheets="@application.css" text="Error message" textAlignment="CENTER" />
-                  <CheckBox fx:id="showPassword" layoutX="84.0" layoutY="342.0" mnemonicParsing="false" onAction="#togglevisiblePassword" text="Show password">
-                     <font>
-                        <Font size="9.0" />
-                     </font></CheckBox>
                   <JFXTextField fx:id="username2" labelFloat="true" layoutX="84.0" layoutY="249.0" onAction="#onEnter" onKeyPressed="#hideErrorMsg" prefWidth="250.0" promptText="Username">
                      <opaqueInsets>
                         <Insets />
@@ -72,6 +52,26 @@
                         <Tooltip text="Enter Password" />
                      </tooltip>
                   </JFXTextField>
+                  <CheckBox fx:id="showPassword" layoutX="84.0" layoutY="342.0" mnemonicParsing="false" onAction="#togglevisiblePassword" text="Show password">
+                     <font>
+                        <Font size="9.0" />
+                     </font></CheckBox>
+                  <Label alignment="CENTER" layoutX="1.0" layoutY="54.0" prefHeight="34.0" prefWidth="401.0" text="Sign in Form">
+                     <font>
+                        <Font name="Impact" size="28.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" layoutY="129.0" prefHeight="22.0" prefWidth="400.0" text="Sign in to continue">
+                     <font>
+                        <Font name="Arial Bold" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="258.0" layoutY="345.0" styleClass="forgotPassword" stylesheets="@../../src/application/application.css" text="Forgot Password?">
+                     <font>
+                        <Font size="10.0" />
+                     </font></Label>
+                  <Button layoutX="84.0" layoutY="395.0" maxHeight="-Infinity" maxWidth="-Infinity" mnemonicParsing="false" onAction="#buttonAction" prefHeight="46.0" prefWidth="250.0" styleClass="loginBtn" stylesheets="@../../src/application/application.css" text="Login" />
+                  <Label fx:id="infoLabel" alignment="CENTER" layoutX="1.0" layoutY="165.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0" styleClass="infoLabel" stylesheets="@application.css" text="Error message" textAlignment="CENTER" />
                   <Label layoutX="104.0" layoutY="456.0" text="Dont have an account?" />
                   <Label layoutX="243.0" layoutY="456.0" onMouseClicked="#openRegistration" styleClass="signup" stylesheets="@application.css" text="Signup here">
                      <cursor>

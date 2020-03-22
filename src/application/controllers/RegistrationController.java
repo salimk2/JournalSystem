@@ -11,7 +11,6 @@ import com.jfoenix.controls.JFXTextField;
 
 
 import application.Main;
-import application.PasswordHashing;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

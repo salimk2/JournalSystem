@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="251.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.EditorAddJournalPopUpController">
+   <children>
+      <HBox alignment="CENTER" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="32.0" prefWidth="400.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label style="-fx-font-size: 25; -fx-font-weight: bold;" text="Create Journal" />
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" layoutX="81.0" layoutY="113.0" prefHeight="97.0" prefWidth="239.0" spacing="20.0">
+         <children>
+            <JFXTextField fx:id="addJournal" alignment="CENTER" labelFloat="true" prefHeight="26.0" prefWidth="120.0" promptText="Enter Journal Name">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></JFXTextField>
+            <HBox alignment="CENTER" prefHeight="86.0" prefWidth="280.0" spacing="20.0">
+               <children>
+                  <JFXButton fx:id="createJournal" buttonType="RAISED" onAction="#createJournal" prefHeight="32.0" prefWidth="92.0" styleClass="createBtn" stylesheets="@application.css" text="Create">
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor></JFXButton>
+                  <Pane prefHeight="41.0" prefWidth="93.0">
+                     <children>
+                        <JFXButton fx:id="goBack" buttonType="RAISED" layoutY="10.0" onAction="#backToEditor" prefHeight="32.0" prefWidth="92.0" styleClass="loginBtn" stylesheets="@application.css" text="Go Back" visible="false">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                        <JFXButton fx:id="cancel" buttonType="RAISED" layoutY="10.0" onAction="#backToEditor" prefHeight="32.0" prefWidth="92.0" styleClass="cancelBtn" stylesheets="@application.css" text="Cancel">
+                           <cursor>
+                              <Cursor fx:constant="HAND" />
+                           </cursor>
+                        </JFXButton>
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

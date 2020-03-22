@@ -54,6 +54,7 @@ public class LoginController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		infoLabel.setVisible(false);
 		this.togglevisiblePassword(null);
+		
 	}
 	
 	@FXML
