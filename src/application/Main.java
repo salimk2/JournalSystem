@@ -19,7 +19,7 @@ public class Main extends Application {
 		
 		try {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getResource("Login.fxml"));//
-			//AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("Admin.fxml"));
+			//AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource("Researcher.fxml"));
 			Scene scene = new Scene(root,800,600);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());//
 			primaryStage.setScene(scene);
