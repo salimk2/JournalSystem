@@ -20,6 +20,9 @@ import javafx.stage.Stage;
 
 public class ResearcherController implements Initializable {
 	
+	private String username;
+	private int type;
+	
 	// Declare Components
 	@FXML private Label lblSub1, lblSub2, lblSub3, lblSubFinal;			 // submissions
 	@FXML private Button btnSub1, btnSub2, btnSub3, btnSubFinal;	
@@ -29,6 +32,23 @@ public class ResearcherController implements Initializable {
 	@FXML private Button btnUpload, btnWithdraw;						// upload/download
 	@FXML private Label lblNextSub, lblWithdrawPending;
 	
+	
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+	
+	public void initUser(String username, int type) {
+		setUsername(username);
+		setType(type);
+	}
+	
+	
+
 	/**
 	 * Initialize the controller class
 	 */
@@ -103,6 +123,7 @@ public class ResearcherController implements Initializable {
 	 */
 	public void logout (ActionEvent event) throws IOException{
 		openNewBorderPaneWindow(event, "/application/Login.fxml");
+		
 	}	
 	
 	/**
@@ -111,6 +132,7 @@ public class ResearcherController implements Initializable {
 	public void btnSub1Action(ActionEvent event) throws IOException{
 		// TODO implement the method
 		System.out.println("Downlaod Sub1 Clicked");
+		System.out.println("Username is :" + username + " Type is :" + type);
 	}	
 
 	/**

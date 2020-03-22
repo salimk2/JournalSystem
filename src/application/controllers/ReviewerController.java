@@ -12,8 +12,26 @@ import javafx.stage.Stage;
 
 public class ReviewerController {
 	
+	private String username;
+	private int type;
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+	
+	public void initUser(String username, int type) {
+		setUsername(username);
+		setType(type);
+	}
+	
+	
 	public void logout(ActionEvent event) throws IOException{
 		openNewWindow(event, "/application/Login.fxml");
+		System.out.println("Username is :" + username + "Type is :" + type);
 	}
 	
 	public void openNewWindow(ActionEvent event, String pageName) throws IOException  {

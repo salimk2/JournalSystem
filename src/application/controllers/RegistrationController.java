@@ -74,7 +74,7 @@ public class RegistrationController implements Initializable {
 
 	public void onEnter(ActionEvent pressed) throws IOException {
 
-		// buttonAction(pressed);
+		register(pressed);
 	}
 
 	@FXML
