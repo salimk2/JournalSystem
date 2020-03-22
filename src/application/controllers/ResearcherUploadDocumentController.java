@@ -18,6 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 public class ResearcherUploadDocumentController implements Initializable {
 
@@ -27,10 +28,16 @@ public class ResearcherUploadDocumentController implements Initializable {
 	private Utilities util = new Utilities();
 	private List<String> journals = new ArrayList<>();
 	ObservableList<String> list = FXCollections.observableArrayList();
-	
 
 	@FXML
 	private JFXComboBox<String> availableJournals;
+
+	@FXML
+	private JFXButton btnCreateFolder;
+	@FXML
+	private JFXButton btnUploadToJournal;
+	@FXML
+	private JFXButton btnGoBack;
 	@FXML
 	private Label messageLabel;
 	@FXML
@@ -39,7 +46,7 @@ public class ResearcherUploadDocumentController implements Initializable {
 	public void setUser(String username, int type) {
 		this.username = username;
 		this.type = type;
-		
+
 	}
 
 	@Override
@@ -56,31 +63,30 @@ public class ResearcherUploadDocumentController implements Initializable {
 
 		availableJournals.setItems(list);
 		messageLabel.setVisible(false);
+		btnUploadToJournal.setDisable(true);
 
 	}
+	
+	@FXML
+	public void goBack() throws IOException {
+		Stage stage = (Stage) btnGoBack.getScene().getWindow();
+		stage.close();
+	}
 
-	//researcher will upload a file to a specific folder located in projectDb->editor->journals->"name of journal"->"researcher username"-> "this is where the files resides"
-	public void uploadDoc() throws IOException {
-		
+	public void createUserFolder() {
+		btnUploadToJournal.setDisable(true);
 		boolean dirError = false;
-		
-		// check for combobox element to be selected
-		if (!availableJournals.getSelectionModel().isEmpty() ){
+		if (!availableJournals.getSelectionModel().isEmpty()) {
 			String chosenJournal = availableJournals.getValue();
-			//create user personal folder
+			// create user personal folder
 			dirError = util.createUserDir(username, type, chosenJournal);
 			if (!dirError) {
-				//upload file here 
-				System.out.println("Thing created");
-				File researcherPathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
-						+ File.separator + "editor" + File.separator + "journals" + File.separator + chosenJournal+ File.separator+ "researchers"  +File.separator+ username + File.separator);
-				
-				util.upload(researcherPathFile);
 
 				messageLabel.setStyle("-fx-text-fill:#027d00;");
 
 				messageLabel.setText(util.getMessage());
 				messageLabel.setVisible(true);
+				btnUploadToJournal.setDisable(false);
 
 			} else {
 				messageLabel.setStyle("-fx-text-fill:#d90024;");
@@ -88,6 +94,38 @@ public class ResearcherUploadDocumentController implements Initializable {
 				messageLabel.setText(util.getMessage());
 				messageLabel.setVisible(true);
 			}
+		} else {
+			messageLabel.setStyle("-fx-text-fill:#d90024;");
+
+			messageLabel.setText("Please select a journal first." + System.getProperty("line.separator")
+					+ "If no Journal available please contact the Editor");
+			messageLabel.setVisible(true);
+
+		}
+	}
+
+	// researcher will upload a file to a specific folder located in
+	// projectDb->editor->journals->"name of journal"->"researcher username"-> "this
+	// is where the files resides"
+	public void uploadDoc() throws IOException {
+
+		// check for combobox element to be selected
+		if (!availableJournals.getSelectionModel().isEmpty()) {
+			String chosenJournal = availableJournals.getValue();
+
+			// upload file here
+			System.out.println("Thing created");
+			File researcherPathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
+					+ File.separator + "editor" + File.separator + "journals" + File.separator + chosenJournal
+					+ File.separator + "researchers" + File.separator + username + File.separator);
+
+			util.upload(researcherPathFile);
+
+			messageLabel.setStyle("-fx-text-fill:#027d00;");
+
+			messageLabel.setText(util.getMessage());
+			messageLabel.setVisible(true);
+
 		} else {
 			messageLabel.setStyle("-fx-text-fill:#d90024;");
 

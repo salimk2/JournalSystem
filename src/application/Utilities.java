@@ -21,8 +21,8 @@ public class Utilities {
 	
 	private FileChooser upload = new FileChooser();
 	private FileChooser download = new FileChooser();
-	private ArrayList<File> storefiles = new ArrayList<>();
-	private HashMap<String, File> fileStorage = new HashMap<>();
+//	private ArrayList<File> storefiles = new ArrayList<>();
+//	private HashMap<String, File> fileStorage = new HashMap<>();
 
 	private String message;
 
@@ -181,10 +181,9 @@ public void upload(File fileDestinPath) throws IOException {
 			source = selectedFile.getAbsoluteFile();
 			System.out.println("Source is : " + source + " dest is  " + localDest);
 			copyFile(selectedFile, localDest, true);
+			message = fileName+" file uploaded succesfully";
+ 
 
-//			storefiles.add(selectedFile.getAbsoluteFile());
-//			fileStorage.put(fileName,source);
-			System.out.println(fileStorage);
 
 		} else {
 			 System.out.println("Selectoin got cancelled");
