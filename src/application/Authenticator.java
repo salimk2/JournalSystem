@@ -1,16 +1,26 @@
 package application;
+
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Authenticator {
 
-	
 	private HashMap<String, Account> accounts = new HashMap<String, Account>();
-
+	
+	/**
+	 * Constructor
+	 */
 	public Authenticator() {
-
 	}
 
+	/**
+	 * Register
+	 * @param username
+	 * @param password
+	 * @param type
+	 * @return
+	 */
 	public short register(String username, String password, int type) {
 		boolean correctUser = Account.usernameRequirement(username);
 		boolean correctPass = Account.passwordRequirement(password);
@@ -47,6 +57,10 @@ public class Authenticator {
 		else return -4;//"unknown issue";
 	}
 
+	/**
+	 * ReadData
+	 * @throws IOException
+	 */
 	public void ReadData() throws IOException {
 		try {
 			//For Windows
@@ -70,11 +84,15 @@ public class Authenticator {
 		}
 	}
 	
+	/**
+	 * login
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	public Account login(String username, String password) {
 		if (accounts.containsKey(username)) {
 			//compare password against hashed password
-			
-			
 			boolean pwdHashMatch =PasswordHashing.verifyUserPassword(password,accounts.get(username).getPassword(), accounts.get(username).getSalt());
 			System.out.println("this is the hashed pwd: " +accounts.get(username).getPassword() +"math: " + pwdHashMatch);
 			if (pwdHashMatch) {
@@ -90,5 +108,66 @@ public class Authenticator {
 		} 
 	}
 
+	/**
+	 * getSubmissions
+	 * @param userId
+	 * @return ArrayList<String>
+	 */
+	public ArrayList<String> getSubmissions(String userId) {
+		// create arrayList
+		ArrayList<String> submissions = new ArrayList<String>();
+		
+		// add user submissions		(these are fake submissions)
+		submissions.add("sub1");
+		submissions.add("sub2");
+		submissions.add("sub3");
+		submissions.add("subFinal");
+		
+		return submissions;
+	}
+	
+	/**
+	 * getReviews
+	 * @param userId, subID
+	 * @return ArrayList<String>
+	 */
+	public ArrayList<String> getReviews(String userId, String subID) {
+		// create arrayList
+		ArrayList<String> reviews = new ArrayList<String>();
+		
+		// add user reviews				(fake reviews:)
+		reviews.add("rev1");
+		reviews.add("rev2");
+		reviews.add("revMinor");
+		
+		return reviews;
+	}	
+	
+	/**
+	 * getComments
+	 * @param userId, revID
+	 * @return ArrayList<String>
+	 */
+	public ArrayList<String> getComments(String userId, String revID) {
+		// create arrayList
+		ArrayList<String> comments = new ArrayList<String>();
+		
+		// add user reviews				
+		comments.add("comment1");
+		comments.add("comment2");
+		//reviews.add("commentMinor");
+		
+		return comments;
+	}	
+	
+	/**
+	 * getWithdrawStatus
+	 * returns status of the withdraw, true = Pending
+	 * @param userId, subID
+	 * @return boolean
+	 */
+	public boolean getWithdrawStatus(String userId, String subID) {
+		return false;
+	}
 	
 }
