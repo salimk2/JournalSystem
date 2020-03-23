@@ -29,6 +29,7 @@
 .normalBtn{
 	-fx-background-color:#0595f5;
 	-fx-text-fill:white;
+	-fx-background-radius:10px;
 	
 }
 

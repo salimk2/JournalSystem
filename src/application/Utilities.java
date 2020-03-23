@@ -155,7 +155,7 @@ public class Utilities {
 					error = true;
 				}
 			} else {
-				message = "Journal Already Exists. Choose another name";
+				message = "Journal Already Exists. "+System.getProperty("line.separator")+"Choose another name or select upload version and click upload";
 				error = true;
 			}
 		} else {
@@ -165,16 +165,16 @@ public class Utilities {
 		return error;
 	}
 	
-public void upload(File fileDestinPath) throws IOException {
+public void upload(File fileDestinPath, String subVersion) throws IOException {
 		File source ;
 		//Add filters for files extensions
-		upload.getExtensionFilters().addAll(new ExtensionFilter("PDF File (.pdf)", "*.pdf"),
-				new ExtensionFilter("Word Document (.dox):", "*.docx"));
+		upload.getExtensionFilters().addAll(new ExtensionFilter("PDF File (.pdf)", "*.pdf"));
 		File selectedFile = upload.showOpenDialog(null);
 
 		if (selectedFile != null) {
-			String fileName = selectedFile.getName();
-			//hardcode the directory where the uploaded files will be stored
+			String ext = ".pdf";
+			String fileName = subVersion + "Submission" + ext ;
+			
 			File localDest = new File(fileDestinPath + File.separator + fileName);
 
 			//files.getItems().add(fileName);
@@ -194,37 +194,21 @@ public void upload(File fileDestinPath) throws IOException {
 	//testing the download function 
 	//needs more work, as of now it only downloads the last uploaded file since source is a global variable
 	//very easy to make it do more, just didnt have time
-//	public void download(ActionEvent event) throws IOException {
-//		String fileName = "";
-//		File selectedPath;
-//		download.setInitialFileName("myFile.pdf");
-//		download.getExtensionFilters().addAll(
-//				 new FileChooser.ExtensionFilter("All Files", "*"),
-//				 new FileChooser.ExtensionFilter("pdf Files", "*.pdf"),
-//			     new FileChooser.ExtensionFilter("Text Files", "*.txt")
-//			    
-//			);
-//		File selectedFile = download.showSaveDialog(null);
-//
-//		if (files != null) {
-//			destination = selectedFile.getAbsoluteFile();
-//			if(fileStorage!=null) {
-//				fileName = files.getSelectionModel().getSelectedItem();
-//				selectedPath = fileStorage.get(fileName);
-//				System.out.println("the selected path is " + selectedPath);
-//				copyFile(selectedPath, destination, false);
-//			}
-//			else {
-//				System.out.println("nothing to download");
-//			}
-//		} else {
-//			System.out.println("Something happened");
-//		}
-////		if(!storefiles.isEmpty()) {
-////			for (File file : storefiles) {
-////				System.out.println(file);
-////			}
-////		}
-//	}
+	public void download(File path, String subVersion) throws IOException {
+		File destination;
+		File selectedPath = path;
+		download.setInitialFileName("myFile.pdf");
+		download.getExtensionFilters().addAll(
+				 new FileChooser.ExtensionFilter("pdf Files", "*.pdf"));
+			 
+		File selectedFile = download.showSaveDialog(null);
+			destination = selectedFile.getAbsoluteFile();
+			
+				System.out.println("the selected path is " + selectedPath);
+				copyFile(selectedPath, destination, false);
+			
+			
+//		
+	}
 
 }

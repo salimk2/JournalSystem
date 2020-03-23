@@ -28,9 +28,13 @@ public class ResearcherUploadDocumentController implements Initializable {
 	private Utilities util = new Utilities();
 	private List<String> journals = new ArrayList<>();
 	ObservableList<String> list = FXCollections.observableArrayList();
+	ObservableList<String> subNum = FXCollections.observableArrayList("First","Second","Third","Final");
+	
 
 	@FXML
 	private JFXComboBox<String> availableJournals;
+	@FXML
+	private JFXComboBox<String> submissionNumber;
 
 	@FXML
 	private JFXButton btnCreateFolder;
@@ -62,8 +66,9 @@ public class ResearcherUploadDocumentController implements Initializable {
 		// availableJournals.getItems().clear();
 
 		availableJournals.setItems(list);
+		submissionNumber.setItems(subNum);
 		messageLabel.setVisible(false);
-		btnUploadToJournal.setDisable(true);
+		//btnUploadToJournal.setDisable(true);
 
 	}
 	
@@ -74,9 +79,9 @@ public class ResearcherUploadDocumentController implements Initializable {
 	}
 
 	public void createUserFolder() {
-		btnUploadToJournal.setDisable(true);
+		//btnUploadToJournal.setDisable(true);
 		boolean dirError = false;
-		if (!availableJournals.getSelectionModel().isEmpty()) {
+		if (!availableJournals.getSelectionModel().isEmpty() ) {
 			String chosenJournal = availableJournals.getValue();
 			// create user personal folder
 			dirError = util.createUserDir(username, type, chosenJournal);
@@ -110,8 +115,9 @@ public class ResearcherUploadDocumentController implements Initializable {
 	public void uploadDoc() throws IOException {
 
 		// check for combobox element to be selected
-		if (!availableJournals.getSelectionModel().isEmpty()) {
+		if (!availableJournals.getSelectionModel().isEmpty() && !submissionNumber.getSelectionModel().isEmpty()) {
 			String chosenJournal = availableJournals.getValue();
+			String subVersionString = submissionNumber.getValue();
 
 			// upload file here
 			System.out.println("Thing created");
@@ -119,7 +125,7 @@ public class ResearcherUploadDocumentController implements Initializable {
 					+ File.separator + "editor" + File.separator + "journals" + File.separator + chosenJournal
 					+ File.separator + "researchers" + File.separator + username + File.separator);
 
-			util.upload(researcherPathFile);
+			util.upload(researcherPathFile,subVersionString);
 
 			messageLabel.setStyle("-fx-text-fill:#027d00;");
 
