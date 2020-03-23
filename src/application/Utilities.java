@@ -210,7 +210,8 @@ public class Utilities {
 			File file = fileOriginPath.getAbsoluteFile();
 			System.out.println("Source is : " + file + " dest is  " + fileDest);
 			
-			copyFile(file, fileDest, false);
+			//set the flag to true to allow overriding files with the same name
+			copyFile(file, fileDest, true);
 			
 			System.out.println("Downloaded!");
  
