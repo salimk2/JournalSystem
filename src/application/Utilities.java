@@ -13,16 +13,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javafx.event.ActionEvent;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class Utilities {
 
 	
 	private FileChooser upload = new FileChooser();
-	private FileChooser download = new FileChooser();
-//	private ArrayList<File> storefiles = new ArrayList<>();
-//	private HashMap<String, File> fileStorage = new HashMap<>();
+	private DirectoryChooser download = new DirectoryChooser();
+	private ArrayList<File> storefiles = new ArrayList<>();
+	private HashMap<String, File> fileStorage = new HashMap<>();
 
 	private String message;
 
@@ -126,7 +128,7 @@ public class Utilities {
 			if(journalList.isEmpty()) {
 				System.out.println("There are no journals yet");
 			}
-			System.out.println("Inside Utilities the journals are: "+journalList);
+			//System.out.println("Inside Utilities the journals are: "+journalList);
 
 			
 		} catch (FileNotFoundException e) {
@@ -155,7 +157,7 @@ public class Utilities {
 					error = true;
 				}
 			} else {
-				message = "Journal Already Exists. "+System.getProperty("line.separator")+"Choose another name or select upload version and click upload";
+				message = "Journal Already Exists. Choose another name";
 				error = true;
 			}
 		} else {
@@ -165,7 +167,7 @@ public class Utilities {
 		return error;
 	}
 	
-public void upload(File fileDestinPath, String subVersion) throws IOException {
+	public void upload(File fileDestinPath, String subVersion) throws IOException {
 		File source ;
 		//Add filters for files extensions
 		upload.getExtensionFilters().addAll(new ExtensionFilter("PDF File (.pdf)", "*.pdf"));
@@ -191,24 +193,34 @@ public void upload(File fileDestinPath, String subVersion) throws IOException {
 		}
 
 	}
-	//testing the download function 
-	//needs more work, as of now it only downloads the last uploaded file since source is a global variable
-	//very easy to make it do more, just didnt have time
-	public void download(File path, String subVersion) throws IOException {
-		File destination;
-		File selectedPath = path;
-		download.setInitialFileName("myFile.pdf");
-		download.getExtensionFilters().addAll(
-				 new FileChooser.ExtensionFilter("pdf Files", "*.pdf"));
-			 
-		File selectedFile = download.showSaveDialog(null);
-			destination = selectedFile.getAbsoluteFile();
-			
-				System.out.println("the selected path is " + selectedPath);
-				copyFile(selectedPath, destination, false);
-			
-			
-//		
-	}
 
+
+
+	public void download(File fileOriginPath) throws IOException {
+		
+		Stage stage = null;
+		File dest = download.showDialog(stage);
+
+		if (dest != null) {
+			String fileName = fileOriginPath.getName();
+			//hardcode the directory where the uploaded files will be stored
+			File fileDest = new File(dest + File.separator + fileName);
+
+			//files.getItems().add(fileName);
+			File file = fileOriginPath.getAbsoluteFile();
+			System.out.println("Source is : " + file + " dest is  " + fileDest);
+			
+			copyFile(file, fileDest, false);
+			
+			System.out.println("Downloaded!");
+ 
+
+
+		} else {
+			 System.out.println("Selectoin got cancelled");
+
+		}
+	}
 }
+
+

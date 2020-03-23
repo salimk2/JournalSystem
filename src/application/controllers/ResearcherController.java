@@ -89,6 +89,10 @@ public class ResearcherController implements Initializable {
 		btnRev1.setDisable(true);
 		btnRev2.setDisable(true);
 		btnRevMinor.setDisable(true);
+		btnSub1.setDisable(true);
+		btnSub2.setDisable(true);
+		btnSub3.setDisable(true);
+		btnSubFinal.setDisable(true);
 		alert.setVisible(false);
 
 //		// create new authenticator
@@ -298,8 +302,12 @@ public class ResearcherController implements Initializable {
 	 * btnSub1
 	 */
 	public void btnSub1Action(ActionEvent event) throws IOException {
-		// TODO implement the method
-		System.out.println("Downlaod Sub1 Clicked");
+		if (event.getSource() == btnSub1) {
+			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
+					+ File.separator + "editor" + File.separator + "journals" + File.separator + "journal1"
+					+ File.separator + "researchers" + File.separator + username + File.separator + "FirstSubmission.pdf");
+			util.download(PathFile);
+		}
 
 	}
 
@@ -307,48 +315,72 @@ public class ResearcherController implements Initializable {
 	 * btnSub2
 	 */
 	public void btnSub2Action(ActionEvent event) throws IOException {
-		// TODO implement the method
-		System.out.println("Downlaod Sub2 Clicked");
+		if (event.getSource() == btnSub2) {
+			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
+					+ File.separator + "editor" + File.separator + "journals" + File.separator + "journal1"
+					+ File.separator + "researchers" + File.separator + username + File.separator + "SecondSubmission.pdf");
+			util.download(PathFile);
+		}
 	}
 
 	/**
 	 * btnSUb3
 	 */
 	public void btnSub3Action(ActionEvent event) throws IOException {
-		// TODO implement the method
-		System.out.println("Download Sub3 Clicked");
+		if (event.getSource() == btnSub3) {
+			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
+					+ File.separator + "editor" + File.separator + "journals" + File.separator + "journal1"
+					+ File.separator + "researchers" + File.separator + username + File.separator + "ThirdSubmission.pdf");
+			util.download(PathFile);
+		}
 	}
 
 	/**
 	 * btnSubFinal
 	 */
 	public void btnSubFinalAction(ActionEvent event) throws IOException {
-		// TODO implement the method
-		System.out.println("Download SubFinal Clicked");
+		if (event.getSource() == btnSubFinal) {
+			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
+					+ File.separator + "editor" + File.separator + "journals" + File.separator + "journal1"
+					+ File.separator + "researchers" + File.separator + username + File.separator + "FinalSubmission.pdf");
+			util.download(PathFile);
+		}
 	}
 
 	/**
 	 * btnRev1
 	 */
 	public void btnRev1Action(ActionEvent event) throws IOException {
-		// TODO implement the method
-		System.out.println("Download Rev1 Clicked");
+		if (event.getSource() == btnRev1) {
+			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
+					+ File.separator + "editor" + File.separator + "journals" + File.separator + "journal1"
+					+ File.separator + "researchers" + File.separator + username + File.separator + "Review1.pdf");
+			util.download(PathFile);
+		}
 	}
 
 	/**
 	 * btnRev2
 	 */
 	public void btnRev2Action(ActionEvent event) throws IOException {
-		// TODO implement the method
-		System.out.println("Download Rev2 Clicked");
+		if (event.getSource() == btnRev2) {
+			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
+					+ File.separator + "editor" + File.separator + "journals" + File.separator + "journal1"
+					+ File.separator + "researchers" + File.separator + username + File.separator + "Review2.pdf");
+			util.download(PathFile);
+		}
 	}
 
 	/**
 	 * btnRevMinor
 	 */
 	public void btnRevMinorAction(ActionEvent event) throws IOException {
-		// TODO implement the method
-		System.out.println("Download RevMinor Clicked");
+		if (event.getSource() == btnRevMinor) {
+			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
+					+ File.separator + "editor" + File.separator + "journals" + File.separator + "journal1"
+					+ File.separator + "researchers" + File.separator + username + File.separator + "ReviewMinor.pdf");
+			util.download(PathFile);
+		}
 	}
 
 	/**
