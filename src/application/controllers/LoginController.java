@@ -54,15 +54,16 @@ public class LoginController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		infoLabel.setVisible(false);
 		this.togglevisiblePassword(null);
+
 	}
-	
+
 	@FXML
-	public void onEnter(ActionEvent pressed) throws IOException{
-	   buttonAction(pressed);
+	public void onEnter(ActionEvent pressed) throws IOException {
+		buttonAction(pressed);
 	}
-	
+
 	@FXML
-	private void hideErrorMsg(){
+	private void hideErrorMsg() {
 		infoLabel.setVisible(false);
 	}
 
@@ -78,22 +79,21 @@ public class LoginController implements Initializable {
 			passwordText2.setVisible(false);
 		}
 	}
-	
+
 	public void openRegistration(MouseEvent event) throws IOException {
 		Parent fxmlRegParentParent = FXMLLoader.load(getClass().getResource("/application/Registration.fxml"));
 		content.getChildren().removeAll();
 		content.getChildren().setAll(fxmlRegParentParent);
-		
+
 	}
-	
+
 	public void buttonAction(ActionEvent event) throws IOException {
-		
+
 		String user = username2.getText();
 		String pass;
-		if(showPassword.isSelected()) {
+		if (showPassword.isSelected()) {
 			pass = passwordText2.getText();
-		}
-		else {
+		} else {
 			pass = password2.getText();
 		}
 		Account acc = Main.AuthSys.login(user, pass);
@@ -114,15 +114,15 @@ public class LoginController implements Initializable {
 				fxmlFileName = applicationAddr + usertype + ".fxml";
 				break;
 			case EDITOR:
-				fxmlFileName = applicationAddr + usertype + ".fxml";  
+				fxmlFileName = applicationAddr + usertype + ".fxml";
 				break;
 			default:
-				fxmlFileName = "/application/controllers/Login.fxml";
+				fxmlFileName = "/application/Login.fxml";
 				break;
 			}
 
-			//openNewWindow(event, fxmlFileName);
-			openNewAnchorPaneWindow(event, fxmlFileName);
+			// openNewWindow(event, fxmlFileName);
+			openNewAnchorPaneWindow(event, fxmlFileName, usertype, user);
 
 		} else {
 			infoLabel.setVisible(true);
@@ -135,21 +135,53 @@ public class LoginController implements Initializable {
 	}
 
 	// Switch Window (BorderPane)
-	public void openNewWindow(ActionEvent event, String pageName) throws IOException {
-		BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource(pageName));
-		Scene scene = new Scene(root);
+//	public void openNewWindow(ActionEvent event, String pageName, String userType) throws IOException {
+//		FXMLLoader loader = new FXMLLoader();
+//		loader.setLocation(getClass().getResource(pageName));
+//		BorderPane root = (BorderPane) loader.load();
+//		
+//		if (userType == "Researcher") {
+//			ResearcherController controller = loader.getController();
+//			controller.initUser(username, type);
+//		}
+//		else if (userType == "Reviewer") {
+//			
+//		}
+//		else {
+//			System.out.println("Something went wrong");
+//		}
+//		
+//		Scene scene = new Scene(root);
+//
+//		// This line gets the stage info
+//		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//
+//		window.setScene(scene);
+//		window.show();
+//
+//	}
 
-		// This line gets the stage info
-		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-		window.setScene(scene);
-		window.show();
-
-	}
-	
 	// Switch Window (AnchorPane)
-	public void openNewAnchorPaneWindow(ActionEvent event, String newWindow) throws IOException {
-		AnchorPane root = (AnchorPane) FXMLLoader.load(getClass().getResource(newWindow));
+	public void openNewAnchorPaneWindow(ActionEvent event, String newWindow, String userType, String username)
+			throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource(newWindow));
+		AnchorPane root = (AnchorPane) loader.load();
+
+		//This is used to pass the username and type to the next scene in order to use this 
+		//to create custom folders
+		if (userType == "Researcher") {
+			ResearcherController controller = loader.getController();
+			controller.initUser(username, 1);
+
+		} else if (userType == "Reviewer") {
+			ReviewerController controller = loader.getController();
+			controller.initUser(username, 3);
+
+		} else {
+			System.out.println("Something went wrong");
+		}
+
 		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(scene);

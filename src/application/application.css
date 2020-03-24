@@ -26,10 +26,17 @@
 	
 }
 
+.normalBtn{
+	-fx-background-color:#0595f5;
+	-fx-text-fill:white;
+	-fx-background-radius:10px;
+	
+}
+
  .loginBtn {
  	-fx-background-color:#3747CD;
  	-fx-text-fill:#fff;
- 	-fx-background-radius:15px;
+ 	-fx-background-radius:10px;
  	
  	
  }
@@ -39,9 +46,47 @@
  	-fx-background-radius:15px;
  	-fx-text-fill:#6747CD;
  	-fx-border-color:#6747CD;
- 	-fx-border-width:1px;
+ 	-fx-border-width:2px;
  	-fx-border-style: solid;
- 	-fx-border-radius:10px;
+ 	-fx-border-radius:7px;
+ 	
+ }
+ 
+ .createBtn {
+ 	-fx-background-color:#1cad43;
+ 	-fx-text-fill:#fff;
+ 	-fx-background-radius:10px;
+ 	
+ 	
+ }
+ 
+  .createBtn:hover {
+ 	-fx-background-color:transparent;
+ 	-fx-background-radius:15px;
+ 	-fx-text-fill:#06ba36;
+ 	-fx-border-color:#06ba36;
+ 	-fx-border-width:2px;
+ 	-fx-border-style: solid;
+ 	-fx-border-radius:7px;
+ 	
+ }
+ 
+ .cancelBtn {
+ 	-fx-background-color:#f53d43;
+ 	-fx-text-fill:#fff;
+ 	-fx-background-radius:10px;
+ 	
+ 	
+ }
+ 
+  .cancelBtn:hover {
+ 	-fx-background-color:transparent;
+ 	-fx-background-radius:15px;
+ 	-fx-text-fill:#db0007;
+ 	-fx-border-color:#db0007;
+ 	-fx-border-width:2px;
+ 	-fx-border-style: solid;
+ 	-fx-border-radius:7px;
  	
  }
  
