@@ -36,7 +36,7 @@
                         <Insets />
                      </opaqueInsets>
                      <cursor>
-                        <Cursor fx:constant="HAND" />
+                        <Cursor fx:constant="TEXT" />
                      </cursor>
                      <tooltip>
                         <Tooltip text="Enter Username: e.g. john" />
