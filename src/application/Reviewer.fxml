@@ -27,7 +27,7 @@
       <ListView layoutX="358.0" layoutY="99.0" prefHeight="298.0" prefWidth="156.0" />
       <Button layoutX="402.0" layoutY="407.0" mnemonicParsing="false" text="Upload" />
       <Button layoutX="637.0" layoutY="407.0" mnemonicParsing="false" text="Upload" />
-      <Label layoutX="104.0" layoutY="69.0" text="Submissions" underline="true">
+      <Label layoutX="104.0" layoutY="69.0" text="Submitions" underline="true">
          <font>
             <Font name="System Bold" size="20.0" />
          </font>
