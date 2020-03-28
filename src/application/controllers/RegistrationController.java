@@ -159,7 +159,7 @@ public class RegistrationController implements Initializable {
 		}
 		
 		//check for matching passwords
-		if ((!tempPwdString.equals(tempConfPwdString)) && (!tempTextPwdString.equals(tempTextConfPwdString))) {
+		if ((!tempPwdString.equals(tempConfPwdString)) || (!tempTextPwdString.equals(tempTextConfPwdString))) {
 			pwdMatchError.setVisible(true);
 			pwdMatchError.setText("'Password' and 'Confirm Pasword' dont match!");
 			numErrors++;
