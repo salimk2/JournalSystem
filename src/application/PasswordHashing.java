@@ -36,6 +36,13 @@ public class PasswordHashing {
             spec.clearPassword();
         }
     }
+    
+    /**
+	 * Hashing of the password and creation of the new protected password
+	 * @param 
+	 *  
+	 * @return The encoded password
+	 */
     public static String generateSecurePassword(String password, String salt) {
         String returnValue = null;
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
@@ -45,6 +52,11 @@ public class PasswordHashing {
         return returnValue;
     }
     
+    /**
+	 * Takes in the user password, secured password, and the salt. This method then determines if the provided password with the salt 
+	 * matches the secured password. If the password match the return value is true else false 
+	 * @return A boolean saying the password matches or not (boolean, True or False)
+	 */
     public static boolean verifyUserPassword(String providedPassword,
             String securedPassword, String salt)
     {
