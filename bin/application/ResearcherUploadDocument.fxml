@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="343.0" prefWidth="390.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.ResearcherUploadDocumentController">
+   <children>
+      <Label alignment="CENTER" layoutX="1.0" layoutY="19.0" prefHeight="33.0" prefWidth="464.0" style="-fx-font-size: 25; -fx-font-weight: bold;" text="Upload Document to Journal" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <JFXComboBox fx:id="availableJournals" layoutX="68.0" layoutY="112.0" minWidth="-Infinity" prefHeight="29.0" prefWidth="280.0" promptText="Select a Journal" />
+      <JFXButton fx:id="btnCreateFolder" layoutX="162.0" layoutY="149.0" onAction="#createUserFolder" styleClass="createBtn" stylesheets="@application.css" text="Create folder" />
+      <Label fx:id="messageLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="-1.0" layoutY="52.0" prefHeight="47.0" prefWidth="416.0" text="Message" AnchorPane.leftAnchor="-1.0" AnchorPane.rightAnchor="1.0" />
+      <JFXButton fx:id="btnUploadToJournal" layoutX="69.0" layoutY="251.0" onAction="#uploadDoc" prefHeight="32.0" prefWidth="121.0" styleClass="loginBtn" stylesheets="@application.css" text="Upload to Journal" />
+      <JFXButton fx:id="btnGoBack" layoutX="228.0" layoutY="251.0" onAction="#goBack" prefHeight="32.0" prefWidth="121.0" styleClass="cancelBtn" stylesheets="@application.css" text="Go Back" />
+      <JFXComboBox fx:id="submissionNumber" layoutX="69.0" layoutY="204.0" minWidth="-Infinity" prefHeight="29.0" prefWidth="280.0" promptText="Select Submission Version" />
+   </children>
+</AnchorPane>

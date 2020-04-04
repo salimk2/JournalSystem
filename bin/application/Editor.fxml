@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.EditorController">
+   <children>
+      <HBox alignment="CENTER" prefHeight="60.0" prefWidth="800.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label prefHeight="36.0" prefWidth="190.0" text="Welcome Editor">
+               <font>
+                  <Font name="System Bold" size="25.0" />
+               </font>
+            </Label>
+         </children>
+      </HBox>
+      <TableView fx:id="tableView" layoutX="25.0" layoutY="71.0" AnchorPane.bottomAnchor="136.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="71.0">
+         <columns>
+            <TableColumn fx:id="submissionColumn" prefWidth="150.0" text="Submissions" />
+            <TableColumn fx:id="reviewerColumn" prefWidth="150.0" text="Reviewer" />
+            <TableColumn fx:id="minorRevisionColumn" prefWidth="150.0" text="Minor Revision" />
+            <TableColumn fx:id="revision1Column" prefWidth="150.0" text="Revision 1" />
+            <TableColumn fx:id="revision2Column" prefWidth="150.0" text="Revision 2" />
+         </columns>
+      </TableView>
+      <HBox alignment="CENTER" layoutY="534.0" prefHeight="66.0" prefWidth="800.0" spacing="220.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <JFXButton fx:id="btnAddJournal" buttonType="RAISED" onAction="#addJournal" styleClass="normalBtn" stylesheets="@application.css" text="Add journal">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="btnReviewSubmissions" buttonType="RAISED" styleClass="normalBtn" stylesheets="@application.css" text="Review Submissions">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="btnReviewSubmissions" buttonType="RAISED" styleClass="normalBtn" stylesheets="@application.css" text="Assign Reviewer">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </children>
+      </HBox>
+      <JFXButton buttonType="RAISED" layoutX="733.0" layoutY="10.0" onAction="#logout" styleClass="normalBtn" stylesheets="@application.css" text="Logout">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+   </children>
+</AnchorPane>
