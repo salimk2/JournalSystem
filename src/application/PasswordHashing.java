@@ -17,6 +17,12 @@ public class PasswordHashing {
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 256;
     
+    /**
+	 * This method will generate a salt string number
+	 * 
+	 * @param int length
+	 * @return a string, salt number
+	 */
      public static String getSalt(int length) {
         StringBuilder returnValue = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
@@ -24,6 +30,12 @@ public class PasswordHashing {
         }
         return new String(returnValue);
     }
+     
+     /**
+ 	 * Hashing of the password and creating of the secret key
+ 	 * 
+ 	 * @throws NoSuchAlgorithm error while doing the salting 
+ 	 */
     public static byte[] hash(char[] password, byte[] salt) {
         PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
         Arrays.fill(password, Character.MIN_VALUE);
@@ -36,6 +48,13 @@ public class PasswordHashing {
             spec.clearPassword();
         }
     }
+    
+    /**
+	 * Hashing of the password and creation of the new protected password
+	 * @param 
+	 *  
+	 * @return The encoded password
+	 */
     public static String generateSecurePassword(String password, String salt) {
         String returnValue = null;
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
@@ -45,6 +64,11 @@ public class PasswordHashing {
         return returnValue;
     }
     
+    /**
+	 * Takes in the user password, secured password, and the salt. This method then determines if the provided password with the salt 
+	 * matches the secured password. If the password match the return value is true else false 
+	 * @return A boolean saying the password matches or not (boolean, True or False)
+	 */
     public static boolean verifyUserPassword(String providedPassword,
             String securedPassword, String salt)
     {
