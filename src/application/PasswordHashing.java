@@ -17,6 +17,12 @@ public class PasswordHashing {
     private static final int ITERATIONS = 10000;
     private static final int KEY_LENGTH = 256;
     
+    /**
+	 * This method will generate a salt string number
+	 * 
+	 * @param int length
+	 * @return a string, salt number
+	 */
      public static String getSalt(int length) {
         StringBuilder returnValue = new StringBuilder(length);
         for (int i = 0; i < length; i++) {
@@ -24,6 +30,12 @@ public class PasswordHashing {
         }
         return new String(returnValue);
     }
+     
+     /**
+ 	 * Hashing of the password and creating of the secret key
+ 	 * 
+ 	 * @throws NoSuchAlgorithm error while doing the salting 
+ 	 */
     public static byte[] hash(char[] password, byte[] salt) {
         PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
         Arrays.fill(password, Character.MIN_VALUE);
