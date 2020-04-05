@@ -159,5 +159,6 @@
       </HBox>
       <Label fx:id="alert" alignment="CENTER" layoutY="48.0" prefHeight="60.0" prefWidth="800.0" text="Message" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="1.0" />
       <FontAwesomeIcon fx:id="notification" fill="#21c904" glyphName="ENVELOPE" layoutX="646.0" layoutY="38.0" size="2.5em" />
+      <FontAwesomeIcon fx:id="refreshIcon" fill="#1b2afc" glyphName="REFRESH" layoutX="183.0" layoutY="45.0" onMouseClicked="#refreshPage" size="2.2em" />
    </children>
 </AnchorPane>

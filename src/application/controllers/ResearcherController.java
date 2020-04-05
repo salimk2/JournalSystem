@@ -4,6 +4,7 @@ package application.controllers;
 import application.Utilities;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 
+
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -26,7 +27,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -35,6 +36,7 @@ public class ResearcherController implements Initializable {
 
 	private String username;
 	private int type;
+
 
 	// Declare Components
 	@FXML
@@ -61,7 +63,8 @@ public class ResearcherController implements Initializable {
 	private List<String> journals = new ArrayList<>();
 	private ObservableList<String> list = FXCollections.observableArrayList();
 	@FXML
-	private FontAwesomeIcon notification;
+	private FontAwesomeIcon notification,refreshIcon;
+
 
 	private Utilities util = new Utilities();
 
@@ -72,6 +75,7 @@ public class ResearcherController implements Initializable {
 	public void setType(int type) {
 		this.type = type;
 	}
+
 
 	public void initUser(String username, int type) {
 		setUsername(username);
@@ -87,7 +91,7 @@ public class ResearcherController implements Initializable {
 		readFile();
 		for (int i = 0; i < journals.size(); i++) {
 			String j = journals.get(i);
-			// System.out.println("Initilaizer j :" + j);
+		
 			list.add(i, j);
 		}
 		selectJournal.setItems(list);
@@ -101,6 +105,8 @@ public class ResearcherController implements Initializable {
 		alert.setVisible(false);
 		notification.setVisible(false);
 		btnNominate.setDisable(true);
+		refreshIcon.setVisible(false);
+		
 
 	}
 	
@@ -120,6 +126,14 @@ public class ResearcherController implements Initializable {
 		}
 
 	
+	}
+	
+	@FXML
+	//Added the refresh option to clear any error label and enable any available button
+	public void refreshPage(MouseEvent click) {
+		String journalNameRefresh = selectJournal.getValue();
+		journalSelected(journalNameRefresh);
+		refreshIcon.setVisible(false);
 	}
 	
 	
@@ -146,6 +160,26 @@ public class ResearcherController implements Initializable {
 	@FXML
 	public void journalSelected(ActionEvent event) {
 		String journalName = selectJournal.getValue();
+		boolean userFound = checkJournalUserDir(journalName, username);
+		if (!userFound) {
+			btnRev1.setDisable(true);
+			btnRev2.setDisable(true);
+			btnRevMinor.setDisable(true);
+			btnSub1.setDisable(true);
+			btnSub2.setDisable(true);
+			btnSub3.setDisable(true);
+			btnSubFinal.setDisable(true);
+			alert.setText("Journal is empty. Please submbit files to " + journalName);
+			alert.setStyle("-fx-text-fill:#d90024;");
+			alert.setVisible(true);
+		} else {
+			checkJournalUserSubmissionFile(journalName, username);
+			alert.setVisible(false);
+			
+		}
+	}
+	//Overloaded function to refresh page
+	public void journalSelected(String journalName) {
 		boolean userFound = checkJournalUserDir(journalName, username);
 		if (!userFound) {
 			btnRev1.setDisable(true);
@@ -362,7 +396,7 @@ public class ResearcherController implements Initializable {
 	public void btnUploadAction(ActionEvent event) throws IOException {
 		// TODO implement the method
 		// Creating pop up window
-
+		refreshIcon.setVisible(true);
 		Stage stage;
 		Parent root;
 

@@ -15,10 +15,15 @@ import com.jfoenix.controls.JFXComboBox;
 import application.Utilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+
 import javafx.fxml.Initializable;
+
 import javafx.scene.control.Label;
+
 import javafx.stage.Stage;
+
 
 public class ResearcherUploadDocumentController implements Initializable {
 
@@ -73,9 +78,10 @@ public class ResearcherUploadDocumentController implements Initializable {
 	}
 	
 	@FXML
-	public void goBack() throws IOException {
+	public void goBack(ActionEvent event) throws IOException {
 		Stage stage = (Stage) btnGoBack.getScene().getWindow();
 		stage.close();
+		
 	}
 
 	public void createUserFolder() {
