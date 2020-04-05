@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXProgressBar?>
+<?import java.lang.String?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@../../src/application/application.css" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="200.0" fitWidth="250.0" layoutX="275.0" layoutY="200.0" pickOnBounds="true" smooth="false">
+               <image>
+                  <Image url="@../images/winipegLogo.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutX="1.0" layoutY="88.0" prefHeight="18.0" prefWidth="800.0" style="-fx-font-size: 30; -fx-font-weight: bold; -fx-text-fill: white;" text="Welcome to the Journal Submission System" />
+            <JFXProgressBar fx:id="progressBar" layoutX="276.0" layoutY="428.0" prefHeight="11.0" prefWidth="250.0" />
+            <ProgressIndicator layoutX="537.0" layoutY="424.0" prefHeight="20.0" prefWidth="20.0" />
+            <Label fx:id="loadingLabel" layoutX="276.0" layoutY="453.0" prefHeight="34.0" prefWidth="252.0" style="-fx-text-fill: white;" text="Loading" />
+         </children>
+         <styleClass>
+            <String fx:value="parent" />
+            <String fx:value="sideBar" />
+         </styleClass>
+      </AnchorPane>
+   </center>
+</BorderPane>

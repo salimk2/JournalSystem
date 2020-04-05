@@ -166,6 +166,7 @@ public class ResearcherController implements Initializable {
 
 	
 	/**
+	 * 
 	 * @param event
 	 */
 	@FXML
@@ -191,25 +192,29 @@ public class ResearcherController implements Initializable {
 			
 		}
 	}
-	//Overloaded function to refresh page
+	/**
+	 * Overloaded function to refresh page
+	 * 
+	 * @param journalName
+	 */
 	public void journalSelected(String journalName) {
 		boolean userFound = checkJournalUserDir(journalName, username);
 		if (!userFound) {
 			btnRev1.setDisable(true);
 			btnRev2.setDisable(true);
 			btnRevMinor.setDisable(true);
-			btnRevMinor.setDisable(true);
 			btnSub1.setDisable(true);
 			btnSub2.setDisable(true);
 			btnSub3.setDisable(true);
 			btnSubFinal.setDisable(true);
+			btnNominate.setDisable(true);
 			alert.setText("Journal is empty. Please submbit files to " + journalName);
 			alert.setStyle("-fx-text-fill:#d90024;");
 			alert.setVisible(true);
 		} else {
 			checkJournalUserSubmissionFile(journalName, username);
 			alert.setVisible(false);
-			btnRevMinor.setDisable(false);
+			btnNominate.setDisable(false);
 			
 		}
 	}
