@@ -32,6 +32,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * @author jdev
+ *
+ */
 public class ResearcherController implements Initializable {
 
 	private String username;
@@ -137,6 +141,9 @@ public class ResearcherController implements Initializable {
 	}
 	
 	
+	/**
+	 * 
+	 */
 	private void readFile() {
 
 		String journalList;
@@ -157,6 +164,10 @@ public class ResearcherController implements Initializable {
 		}
 	}
 
+	
+	/**
+	 * @param event
+	 */
 	@FXML
 	public void journalSelected(ActionEvent event) {
 		String journalName = selectJournal.getValue();
@@ -169,12 +180,14 @@ public class ResearcherController implements Initializable {
 			btnSub2.setDisable(true);
 			btnSub3.setDisable(true);
 			btnSubFinal.setDisable(true);
+			btnNominate.setDisable(true);
 			alert.setText("Journal is empty. Please submbit files to " + journalName);
 			alert.setStyle("-fx-text-fill:#d90024;");
 			alert.setVisible(true);
 		} else {
 			checkJournalUserSubmissionFile(journalName, username);
 			alert.setVisible(false);
+			btnNominate.setDisable(false);
 			
 		}
 	}
@@ -184,6 +197,7 @@ public class ResearcherController implements Initializable {
 		if (!userFound) {
 			btnRev1.setDisable(true);
 			btnRev2.setDisable(true);
+			btnRevMinor.setDisable(true);
 			btnRevMinor.setDisable(true);
 			btnSub1.setDisable(true);
 			btnSub2.setDisable(true);
@@ -195,6 +209,7 @@ public class ResearcherController implements Initializable {
 		} else {
 			checkJournalUserSubmissionFile(journalName, username);
 			alert.setVisible(false);
+			btnRevMinor.setDisable(false);
 			
 		}
 	}
