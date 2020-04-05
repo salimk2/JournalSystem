@@ -68,7 +68,7 @@ public class ResearcherUploadDocumentController implements Initializable {
 		availableJournals.setItems(list);
 		submissionNumber.setItems(subNum);
 		messageLabel.setVisible(false);
-		//btnUploadToJournal.setDisable(true);
+		btnUploadToJournal.setDisable(true);
 
 	}
 	
@@ -95,7 +95,7 @@ public class ResearcherUploadDocumentController implements Initializable {
 
 			} else {
 				messageLabel.setStyle("-fx-text-fill:#d90024;");
-
+				
 				messageLabel.setText(util.getMessage());
 				messageLabel.setVisible(true);
 			}
@@ -132,7 +132,15 @@ public class ResearcherUploadDocumentController implements Initializable {
 			messageLabel.setText(util.getMessage());
 			messageLabel.setVisible(true);
 
-		} else {
+		} 
+		else if(submissionNumber.getSelectionModel().isEmpty()) {
+			messageLabel.setStyle("-fx-text-fill:#d90024;");
+
+			messageLabel.setText("Please select a submission number.");
+			messageLabel.setVisible(true);
+			
+		}
+		else {
 			messageLabel.setStyle("-fx-text-fill:#d90024;");
 
 			messageLabel.setText("Please select a journal first." + System.getProperty("line.separator")

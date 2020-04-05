@@ -42,12 +42,14 @@ public class ResearcherNominateReviewerController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		message.setVisible(false);
+		//try to read reviewers from login.txt
 		try {
 			reviewersReviewers();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		// add the reviewers found to the arraylist
 		for (int i = 0; i < reviewersRead.size(); i++) {
 			String j = reviewersRead.get(i);
 			list.add(i, j);
@@ -81,7 +83,8 @@ public class ResearcherNominateReviewerController implements Initializable {
 			reviewerList.getSelectionModel().clearSelection();		
 			}
 		else {
-			System.out.println("Success to nominate");
+//			System.out.println("Success to nominate");
+			
 		}
 	}
 	
