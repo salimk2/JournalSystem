@@ -12,15 +12,13 @@ import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javafx.event.ActionEvent;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 import javafx.stage.FileChooser.ExtensionFilter;
+import javafx.stage.Stage;
 
 public class Utilities {
 
-	
 	private FileChooser upload = new FileChooser();
 	private DirectoryChooser download = new DirectoryChooser();
 	private ArrayList<File> storefiles = new ArrayList<>();
@@ -28,18 +26,48 @@ public class Utilities {
 
 	private String message;
 
-
-
 	public String getMessage() {
 		return message;
 	}
 
-	
 	public Utilities() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
+
+	/**
+	 * Only used to modify the status to the first line of this file
+	 */
+
+	public void modifyNominatedRevFileStatus(String status, String username, String journalName) {
+		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
+				+ File.separator + username + File.separator + "nominatedReviewers.txt");
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(writeToFile, false));
+			bw.write(status + System.getProperty("line.separator"));
+			bw.close();
+		} catch (IOException e) {
+			System.out.println("Error! Couldn't write to file");
+			e.printStackTrace();
+		}
+
+	}
+
+	public void writeNominatedRev(String username, String reviewername, String journalName) {
+		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
+				+ File.separator + username + File.separator + "nominatedReviewers.txt");
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(writeToFile, true));
+			bw.write(reviewername + System.getProperty("line.separator"));
+			bw.close();
+		} catch (IOException e) {
+			System.out.println("Error Saving DataBase.");
+			e.printStackTrace();
+		}
+	}
+
 	private void copyFile(File source, File dest, boolean avoidDuplicate) throws IOException {
 		if (avoidDuplicate)
 			Files.copy(source.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -49,7 +77,7 @@ public class Utilities {
 		}
 	}
 
-	//creates a user directory 
+	// creates a user directory
 	public boolean createUserDir(String username, int type, String chosenJournal) {
 
 		boolean error;
@@ -58,27 +86,29 @@ public class Utilities {
 
 		case 1:
 			// Researcher
-			if ((new File(System.getProperty("user.dir") + File.separator + "projectDB"
-					+ File.separator + "editor" + File.separator + "journals" + File.separator + chosenJournal + File.separator +"researchers" + File.separator + username))
-					.mkdirs()) {
+			if ((new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator + "editor"
+					+ File.separator + "journals" + File.separator + chosenJournal + File.separator + "researchers"
+					+ File.separator + username)).mkdirs()) {
 				message = "Directory for researcher was created succesfully";
 				error = false;
 
 			} else {
-				message = "Reseacher directory was not created "+System.getProperty("line.separator")+"or a folder with that name already exists";
+				message = "Reseacher directory was not created " + System.getProperty("line.separator")
+						+ "or a folder with that name already exists";
 				error = true;
 			}
 			break;
 		case 3:
 			// Reviewer
-			if ((new File(System.getProperty("user.dir") + File.separator + "projectDB"
-					+ File.separator + "editor" + File.separator + "journals" + File.separator + chosenJournal + File.separator +"reviewers" + File.separator + username))
-					.mkdirs()) {
+			if ((new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator + "editor"
+					+ File.separator + "journals" + File.separator + chosenJournal + File.separator + "reviewers"
+					+ File.separator + username)).mkdirs()) {
 				message = "Directory for researcher was created succesfully";
 				error = false;
 
 			} else {
-				message = "Reviewer directory was not created "+System.getProperty("line.separator")+"or a folder with that name already exists";
+				message = "Reviewer directory was not created " + System.getProperty("line.separator")
+						+ "or a folder with that name already exists";
 				error = true;
 			}
 			break;
@@ -92,53 +122,50 @@ public class Utilities {
 		return error;
 
 	}
-	
+
 	// only used to write to journalList.txt
-	public void writeJournalToFile(String journalName){
-		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
-				+ File.separator + "editor" + File.separator + "journals" + File.separator + "journalList.txt");
+	public void writeJournalToFile(String journalName) {
+		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+				+ "editor" + File.separator + "journals" + File.separator + "journalList.txt");
 		try {
-			BufferedWriter bw = new BufferedWriter(new FileWriter(writeToFile,true));
-			bw.write(journalName +System.getProperty("line.separator"));
+			BufferedWriter bw = new BufferedWriter(new FileWriter(writeToFile, true));
+			bw.write(journalName + System.getProperty("line.separator"));
 			bw.close();
 		} catch (IOException e) {
 			System.out.println("Error Saving DataBase.");
 			e.printStackTrace();
 		}
 	}
-	
+
 	// only used to read from journalList.txt
 	public String readJournalList() throws IOException {
-		String journalList="";
-		
-		File readFromFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
-				+ File.separator + "editor" + File.separator + "journals" + File.separator + "journalList.txt");
+		String journalList = "";
+
+		File readFromFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+				+ "editor" + File.separator + "journals" + File.separator + "journalList.txt");
 		try {
-			
+
 			BufferedReader br = new BufferedReader(new FileReader(readFromFile));
-			
+
 			String line = "";
-			
+
 			System.out.println("Journals:");
 			while ((line = br.readLine()) != null) {
-				journalList +=line + " ";
-				
+				journalList += line + " ";
+
 			}
 			br.close();
-			if(journalList.isEmpty()) {
+			if (journalList.isEmpty()) {
 				System.out.println("There are no journals yet");
 			}
-			//System.out.println("Inside Utilities the journals are: "+journalList);
+			// System.out.println("Inside Utilities the journals are: "+journalList);
 
-			
 		} catch (FileNotFoundException e) {
 			System.out.println("Error Loading DataBase.");
 			e.printStackTrace();
 		}
 		return journalList;
-    }
-	
-	
+	}
 
 	// only used to create journal folders
 	public boolean createJournalDir(String journalName) {
@@ -166,62 +193,54 @@ public class Utilities {
 		}
 		return error;
 	}
-	
+
 	public void upload(File fileDestinPath, String subVersion) throws IOException {
-		File source ;
-		//Add filters for files extensions
+		File source;
+		// Add filters for files extensions
 		upload.getExtensionFilters().addAll(new ExtensionFilter("PDF File (.pdf)", "*.pdf"));
 		File selectedFile = upload.showOpenDialog(null);
 
 		if (selectedFile != null) {
 			String ext = ".pdf";
-			String fileName = subVersion + "Submission" + ext ;
-			
+			String fileName = subVersion + "Submission" + ext;
+
 			File localDest = new File(fileDestinPath + File.separator + fileName);
 
-			//files.getItems().add(fileName);
+			// files.getItems().add(fileName);
 			source = selectedFile.getAbsoluteFile();
 			System.out.println("Source is : " + source + " dest is  " + localDest);
 			copyFile(selectedFile, localDest, true);
-			message = fileName+" file uploaded succesfully";
- 
-
+			message = fileName + " file uploaded succesfully";
 
 		} else {
-			 System.out.println("Selectoin got cancelled");
+			System.out.println("Selectoin got cancelled");
 
 		}
 
 	}
 
-
-
 	public void download(File fileOriginPath) throws IOException {
-		
+
 		Stage stage = null;
 		File dest = download.showDialog(stage);
 
 		if (dest != null) {
 			String fileName = fileOriginPath.getName();
-			//hardcode the directory where the uploaded files will be stored
+			// hardcode the directory where the uploaded files will be stored
 			File fileDest = new File(dest + File.separator + fileName);
 
-			//files.getItems().add(fileName);
+			// files.getItems().add(fileName);
 			File file = fileOriginPath.getAbsoluteFile();
 			System.out.println("Source is : " + file + " dest is  " + fileDest);
-			
-			//set the flag to true to allow overriding files with the same name
-			copyFile(file, fileDest, true);
-			
-			System.out.println("Downloaded!");
- 
 
+			// set the flag to true to allow overriding files with the same name
+			copyFile(file, fileDest, true);
+
+			System.out.println("Downloaded!");
 
 		} else {
-			 System.out.println("Selectoin got cancelled");
+			System.out.println("Selectoin got cancelled");
 
 		}
 	}
 }
-
-

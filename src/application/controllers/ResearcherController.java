@@ -72,10 +72,25 @@ public class ResearcherController implements Initializable {
 
 	private Utilities util = new Utilities();
 
+	/**
+	 * @param username
+	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
 
+	/**
+	 * @return
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+
+	/**
+	 * @param type
+	 */
 	public void setType(int type) {
 		this.type = type;
 	}
@@ -118,14 +133,20 @@ public class ResearcherController implements Initializable {
 	public void openNominateWin(ActionEvent event) throws IOException {
 		Stage stage;
 		Parent root;
-
+		String journalName = selectJournal.getValue();
+			
 		if (event.getSource() == btnNominate) {
 			stage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/application/ResearcherNominateReviewer.fxml"));
 			// reference editor page
-			root = FXMLLoader.load(getClass().getResource("/application/ResearcherNominateReviewer.fxml"));
+			root = loader.load();
+			ResearcherNominateReviewerController controller = loader.getController();
+			controller.setUserInfo(username, journalName);
+
 			stage.setScene(new Scene(root));
 			stage.initModality(Modality.APPLICATION_MODAL);
-			stage.initOwner(btnNominate.getScene().getWindow());
+			stage.initOwner(btnUpload.getScene().getWindow());
 			stage.showAndWait();
 		}
 

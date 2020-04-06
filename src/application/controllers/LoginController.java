@@ -2,7 +2,6 @@ package application.controllers;
 
 import java.io.IOException;
 import java.net.URL;
-
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -13,7 +12,6 @@ import com.jfoenix.controls.JFXTextField;
 import application.Account;
 import application.Main;
 import javafx.animation.FadeTransition;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,9 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class LoginController implements Initializable {
@@ -61,13 +57,15 @@ public class LoginController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		// done so you can only load the welcome page once, instead of going into a loop
-		if (!Main.isLoadScreenOn)
-			loadWelcomeWindow();
-		
-		startingAnimation();
+//      =================== DONT FORGET TO UNCOMMENT THIS  BELOW FOR FINAL SUBMISSION ========
+//		if (!Main.isLoadScreenOn)
+//			loadWelcomeWindow();
+
+		// startingAnimation();
 		infoLabel.setVisible(false);
+
 		this.togglevisiblePassword(null);
 
 	}
@@ -88,7 +86,7 @@ public class LoginController implements Initializable {
 	}
 
 	/**
-	 * Load and display welcome window with transition animations 
+	 * Load and display welcome window with transition animations
 	 */
 	private void loadWelcomeWindow() {
 		try {
