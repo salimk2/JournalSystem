@@ -1,10 +1,5 @@
 package application.controllers;
 
-
-import application.Utilities;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -16,6 +11,8 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 
+import application.Utilities;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -41,7 +38,6 @@ public class ResearcherController implements Initializable {
 	private String username;
 	private int type;
 
-
 	// Declare Components
 	@FXML
 	private Label lblSub1, lblSub2, lblSub3, lblSubFinal; // submissions
@@ -62,13 +58,12 @@ public class ResearcherController implements Initializable {
 	@FXML
 	private JFXComboBox<String> selectJournal;
 	@FXML
-	private Label alert,nominateRevLabel;
+	private Label alert, nominateRevLabel;
 
 	private List<String> journals = new ArrayList<>();
 	private ObservableList<String> list = FXCollections.observableArrayList();
 	@FXML
-	private FontAwesomeIcon notification,refreshIcon;
-
+	private FontAwesomeIcon notification, refreshIcon;
 
 	private Utilities util = new Utilities();
 
@@ -78,7 +73,6 @@ public class ResearcherController implements Initializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
 
 	/**
 	 * @return
@@ -87,14 +81,12 @@ public class ResearcherController implements Initializable {
 		return username;
 	}
 
-
 	/**
 	 * @param type
 	 */
 	public void setType(int type) {
 		this.type = type;
 	}
-
 
 	public void initUser(String username, int type) {
 		setUsername(username);
@@ -110,7 +102,7 @@ public class ResearcherController implements Initializable {
 		readFile();
 		for (int i = 0; i < journals.size(); i++) {
 			String j = journals.get(i);
-		
+
 			list.add(i, j);
 		}
 		selectJournal.setItems(list);
@@ -125,16 +117,15 @@ public class ResearcherController implements Initializable {
 		notification.setVisible(false);
 		btnNominate.setDisable(true);
 		refreshIcon.setVisible(false);
-		
 
 	}
-	
+
 	@FXML
 	public void openNominateWin(ActionEvent event) throws IOException {
 		Stage stage;
 		Parent root;
 		String journalName = selectJournal.getValue();
-			
+
 		if (event.getSource() == btnNominate) {
 			stage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
@@ -150,18 +141,17 @@ public class ResearcherController implements Initializable {
 			stage.showAndWait();
 		}
 
-	
 	}
-	
+
 	@FXML
-	//Added the refresh option to clear any error label and enable any available button
+	// Added the refresh option to clear any error label and enable any available
+	// button
 	public void refreshPage(MouseEvent click) {
 		String journalNameRefresh = selectJournal.getValue();
 		journalSelected(journalNameRefresh);
 		refreshIcon.setVisible(false);
 	}
-	
-	
+
 	/**
 	 * 
 	 */
@@ -175,7 +165,7 @@ public class ResearcherController implements Initializable {
 
 				String j = journals.get(i);
 
-				//System.out.println(j + " " + i);
+				// System.out.println(j + " " + i);
 			}
 
 		} catch (IOException e) {
@@ -185,7 +175,6 @@ public class ResearcherController implements Initializable {
 		}
 	}
 
-	
 	/**
 	 * 
 	 * @param event
@@ -193,7 +182,7 @@ public class ResearcherController implements Initializable {
 	@FXML
 	public void journalSelected(ActionEvent event) {
 		String journalName = selectJournal.getValue();
-		boolean userFound = checkJournalUserDir(journalName, username);
+		boolean userFound = util.checkResearcherFileExists(journalName, username);
 		if (!userFound) {
 			btnRev1.setDisable(true);
 			btnRev2.setDisable(true);
@@ -210,16 +199,17 @@ public class ResearcherController implements Initializable {
 			checkJournalUserSubmissionFile(journalName, username);
 			alert.setVisible(false);
 			btnNominate.setDisable(false);
-			
+
 		}
 	}
+
 	/**
-	 * Overloaded function to refresh page
+	 * Overloaded function to used to refresh page
 	 * 
 	 * @param journalName
 	 */
 	public void journalSelected(String journalName) {
-		boolean userFound = checkJournalUserDir(journalName, username);
+		boolean userFound = util.checkResearcherFileExists(journalName, username);
 		if (!userFound) {
 			btnRev1.setDisable(true);
 			btnRev2.setDisable(true);
@@ -236,7 +226,7 @@ public class ResearcherController implements Initializable {
 			checkJournalUserSubmissionFile(journalName, username);
 			alert.setVisible(false);
 			btnNominate.setDisable(false);
-			
+
 		}
 	}
 
@@ -314,25 +304,6 @@ public class ResearcherController implements Initializable {
 			btnSubFinal.setDisable(true);
 		}
 
-	}
-
-	//Chekc if journal directory exiists exists 
-	public boolean checkJournalUserDir(String journalName, String username) {
-		boolean hasUser;
-		File lookForDirFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
-				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
-				+ File.separator + username);
-
-		if (lookForDirFile.exists()) {
-			System.out.println(lookForDirFile);
-			System.out.println(journalName + " has a directory called " + username);
-			hasUser = true;
-		} else {
-			System.out.println(journalName + " doesn't directory called " + username);
-			hasUser = false;
-		}
-
-		return hasUser;
 	}
 
 	/**

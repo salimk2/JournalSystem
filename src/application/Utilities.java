@@ -9,8 +9,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.HashMap;
+//import java.util.ArrayList;
+//import java.util.HashMap;
 
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -21,8 +21,8 @@ public class Utilities {
 
 	private FileChooser upload = new FileChooser();
 	private DirectoryChooser download = new DirectoryChooser();
-	private ArrayList<File> storefiles = new ArrayList<>();
-	private HashMap<String, File> fileStorage = new HashMap<>();
+//	private ArrayList<File> storefiles = new ArrayList<>();
+//	private HashMap<String, File> fileStorage = new HashMap<>();
 
 	private String message;
 
@@ -75,6 +75,28 @@ public class Utilities {
 			Files.copy(source.toPath(), dest.toPath());
 
 		}
+	}
+
+	/**
+	 * Checks if a researcher has a folder for a specified journal and returns the
+	 * boolean
+	 * 
+	 * @param journalName
+	 * @param username
+	 * @return
+	 */
+	public boolean checkResearcherFileExists(String journalName, String username) {
+		boolean exists = false;
+		File journal = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
+				+ File.separator + username);
+		exists = journal.exists() ? true : false;
+		if (exists)
+			System.out.println("File exists :" + journalName);
+		else
+			System.out.println("FIle doesnt exists");
+
+		return exists;
 	}
 
 	// creates a user directory
