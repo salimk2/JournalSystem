@@ -31,7 +31,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btnReviewSubmissions" buttonType="RAISED" prefHeight="39.0" prefWidth="114.0" styleClass="normalBtn" stylesheets="@application.css" text="Assign Reviewer">
+            <JFXButton fx:id="btnReviewSubmissions" buttonType="RAISED" onAction="#AssignReviewer" prefHeight="39.0" prefWidth="114.0" styleClass="normalBtn" stylesheets="@application.css" text="Assign Reviewer">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>

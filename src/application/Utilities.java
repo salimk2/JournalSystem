@@ -9,8 +9,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-//import java.util.ArrayList;
-//import java.util.HashMap;
 
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
@@ -75,6 +73,59 @@ public class Utilities {
 			Files.copy(source.toPath(), dest.toPath());
 
 		}
+	}
+
+	/**
+	 * Lists all directories inside a directory and return a list containing those
+	 * elements names
+	 * 
+	 * @param path
+	 * @return
+	 */
+	public String[] listFilesInDir(File path) {
+		String[] list = {};
+
+		if (path.exists()) {
+			list = path.list();
+
+		} else {
+			System.out.println("Error! path doesnt exists");
+		}
+		return list;
+	}
+
+	/**
+	 * read nominatedReviewers file
+	 * 
+	 * @throws IOException
+	 */
+	public String readNomRevFile(String researcherUsername, String journalName) throws IOException {
+		String reviewer = "";
+		File readFromFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
+				+ File.separator + researcherUsername + File.separator + "nominatedReviewers.txt");
+		try {
+
+			BufferedReader br = new BufferedReader(new FileReader(readFromFile));
+
+			String line = "";
+
+			// System.out.println("Journals:");
+			while ((line = br.readLine()) != null) {
+				reviewer += line + " ";
+
+			}
+			br.close();
+			if (reviewer.isEmpty()) {
+				System.out.println("There are no journals yet");
+			}
+
+		} catch (FileNotFoundException e) {
+			System.out.println("Error Loading DataBase.");
+			e.printStackTrace();
+		}
+		return reviewer;
+
 	}
 
 	/**

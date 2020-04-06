@@ -53,7 +53,7 @@ public class EditorController implements Initializable {
 	@FXML
 	private TableColumn<EditorRecord, LocalDate> revision2Column;
 	@FXML
-	private Button btnAddJournal;
+	private Button btnAddJournal, btnReviewSubmissions;
 	@FXML
 	public JFXComboBox<String> cbJournals;
 	@FXML
@@ -223,6 +223,32 @@ public class EditorController implements Initializable {
 			stage.setScene(new Scene(root));
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.initOwner(btnAddJournal.getScene().getWindow());
+			stage.showAndWait();
+		}
+
+	}
+
+	public void AssignReviewer(ActionEvent event) throws IOException {
+		Stage stage;
+		Parent root;
+
+		if (event.getSource() == btnReviewSubmissions) {
+			String journalSelected = cbJournals.getValue();
+
+			stage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/application/EditorAssignReviewer.fxml"));
+			// reference editor page
+			root = loader.load();
+			EditorAssignReviewerController controller = loader.getController();
+			System.out.println("testing what is sent to assign rev " + journalSelected);
+			controller.setJournalSelected(journalSelected);
+
+			;
+
+			stage.setScene(new Scene(root));
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(btnReviewSubmissions.getScene().getWindow());
 			stage.showAndWait();
 		}
 
