@@ -406,9 +406,10 @@ public class ResearcherController implements Initializable {
 	 * btnUpload
 	 */
 	public void btnUploadAction(ActionEvent event) throws IOException {
-		// TODO implement the method
+
 		// Creating pop up window
 		refreshIcon.setVisible(true);
+
 		Stage stage;
 		Parent root;
 

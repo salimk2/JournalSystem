@@ -255,7 +255,7 @@ public class LoginController implements Initializable {
 			controller.initUser(username, 3);
 
 		} else {
-			System.out.println("Something went wrong");
+			System.out.println("Not a researcher or reviewers so ignore this");
 		}
 
 		Scene scene = new Scene(root);

@@ -171,7 +171,7 @@ public class Utilities {
 
 			String line = "";
 
-			System.out.println("Journals:");
+			// System.out.println("Journals:");
 			while ((line = br.readLine()) != null) {
 				journalList += line + " ";
 
