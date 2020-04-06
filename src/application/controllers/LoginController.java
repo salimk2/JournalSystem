@@ -2,14 +2,18 @@ package application.controllers;
 
 import java.io.IOException;
 import java.net.URL;
+
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import application.Account;
 import application.Main;
-
+import javafx.animation.FadeTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +29,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 public class LoginController implements Initializable {
 
@@ -34,6 +41,8 @@ public class LoginController implements Initializable {
 	public static final String RESEARCHER = "Researcher";
 	public static final String REVIEWER = "Reviewer";
 
+	@FXML
+	private BorderPane root;
 	@FXML
 	public Label myLabel;
 	@FXML
@@ -52,8 +61,76 @@ public class LoginController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		
+		// done so you can only load the welcome page once, instead of going into a loop
+		if (!Main.isLoadScreenOn)
+			loadWelcomeWindow();
+		
+		startingAnimation();
 		infoLabel.setVisible(false);
 		this.togglevisiblePassword(null);
+
+	}
+
+	/**
+	 * Create a subtle fadein animation when open
+	 */
+	private void startingAnimation() {
+		FadeTransition fadeIn = new FadeTransition();
+
+		fadeIn.setDuration(Duration.seconds(1));
+		fadeIn.setNode(root);
+
+		fadeIn.setFromValue(0);
+		fadeIn.setToValue(1);
+		fadeIn.setCycleCount(1);
+		fadeIn.play();
+	}
+
+	/**
+	 * Load and display welcome window with transition animations 
+	 */
+	private void loadWelcomeWindow() {
+		try {
+			Main.isLoadScreenOn = true;
+			// Load splash screen view FXML
+			AnchorPane pane = FXMLLoader.load(getClass().getResource(("/application/AppLoadingScreen.fxml")));
+			// Add it to root container (Can be StackPane, AnchorPane etc)
+			root.getChildren().setAll(pane);
+
+			// Load splash screen with fade in effect
+			FadeTransition fadeIn = new FadeTransition(Duration.seconds(.5), pane);
+			fadeIn.setFromValue(0);
+			fadeIn.setToValue(1);
+			fadeIn.setCycleCount(1);
+
+			// Finish splash with fade out effect
+			FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), pane);
+			fadeOut.setDelay(Duration.seconds(3));
+			fadeOut.setFromValue(1);
+			fadeOut.setToValue(0);
+			fadeOut.setCycleCount(1);
+
+			fadeIn.play();
+
+			// After fade in, start fade out
+			fadeIn.setOnFinished((e) -> {
+
+				fadeOut.play();
+			});
+
+			// After fade out, load actual content
+			fadeOut.setOnFinished((e) -> {
+				try {
+					BorderPane parentContent = FXMLLoader.load(getClass().getResource(("/application/Login.fxml")));
+					root.getChildren().setAll(parentContent);
+				} catch (IOException ex) {
+					Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+				}
+			});
+		} catch (IOException ex) {
+			Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+		}
 
 	}
 
@@ -168,8 +245,9 @@ public class LoginController implements Initializable {
 		loader.setLocation(getClass().getResource(newWindow));
 		AnchorPane root = (AnchorPane) loader.load();
 
-		//This is used to pass the username and type to the next scene in order to use this 
-		//to create custom folders
+		// This is used to pass the username and type to the next scene in order to use
+		// this
+		// to create custom folders
 		if (userType == "Researcher") {
 			ResearcherController controller = loader.getController();
 			controller.initUser(username, 1);

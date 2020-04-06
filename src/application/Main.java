@@ -13,6 +13,7 @@ public class Main extends Application {
 	
 	public static Stage stage = null;
 	public static Authenticator AuthSys = new Authenticator();
+	public static Boolean isLoadScreenOn = false;
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception{
