@@ -4,11 +4,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-
 
 import application.Main;
 import javafx.collections.FXCollections;
@@ -19,9 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.CheckBox;
-
 import javafx.scene.control.Label;
-
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -40,8 +36,8 @@ public class RegistrationController implements Initializable {
 
 	public TextField passwordText;
 	public TextField confirmPasswordText;
-	public JFXTextField username ;//= new JFXTextField();
-	public JFXPasswordField password ;//= new JFXPasswordField();
+	public JFXTextField username;// = new JFXTextField();
+	public JFXPasswordField password;// = new JFXPasswordField();
 	public JFXPasswordField confirmPassword;// = new JFXPasswordField();
 	public Pane content = new Pane();
 
@@ -55,6 +51,9 @@ public class RegistrationController implements Initializable {
 	public JFXComboBox<String> users;
 	ObservableList<String> list = FXCollections.observableArrayList("Admin", "Researcher", "Editor", "Reviewer");
 
+	/**
+	 *
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		accountError.setVisible(false);
@@ -66,17 +65,28 @@ public class RegistrationController implements Initializable {
 
 	}
 
+	/**
+	 * @param click
+	 * @throws IOException
+	 */
 	@FXML
 	public void backToLogin(MouseEvent click) throws IOException {
 		Parent fxmlLoginParent = FXMLLoader.load(getClass().getResource("/application/Login.fxml"));
 		Main.stage.getScene().setRoot(fxmlLoginParent);
 	}
 
+	/**
+	 * @param pressed
+	 * @throws IOException
+	 */
 	public void onEnter(ActionEvent pressed) throws IOException {
 
 		register(pressed);
 	}
 
+	/**
+	 * 
+	 */
 	@FXML
 	public void hideErrorMsg() {
 		accountError.setVisible(false);
@@ -86,6 +96,9 @@ public class RegistrationController implements Initializable {
 
 	}
 
+	/**
+	 * @param event
+	 */
 	public void getUserType(ActionEvent event) {
 		UserTypeName = users.getValue();
 
@@ -109,6 +122,9 @@ public class RegistrationController implements Initializable {
 
 	}
 
+	/**
+	 * @param event
+	 */
 	public void togglevisiblePassword(ActionEvent event) {
 		if (showPassword.isSelected()) {
 			passwordText.setText(password.getText());
@@ -128,9 +144,11 @@ public class RegistrationController implements Initializable {
 		}
 	}
 
+	/**
+	 * @param event
+	 */
 	public void register(ActionEvent event) {
-		
-			
+
 		String userName = null;
 		String pwd = null;
 		short numErrors = 0;
@@ -140,16 +158,15 @@ public class RegistrationController implements Initializable {
 		System.out.println(tempTextPwdString);
 		String tempTextConfPwdString = confirmPasswordText.getText();
 		System.out.println(tempTextConfPwdString);
-		
-		
-		//check for valid userType
+
+		// check for valid userType
 		if (UsertypeCode == -1) {
 			userTypeError.setVisible(true);
 			userTypeError.setText("Please select a valid user");
 			numErrors++;
 		}
 
-		//check for valid username
+		// check for valid username
 		if (username.getText() == null || username.getText().trim().isEmpty()) {
 			userNameError.setVisible(true);
 			userNameError.setText("Username can't be blank! Please enter a username");
@@ -157,65 +174,69 @@ public class RegistrationController implements Initializable {
 		} else {
 			userName = username.getText();
 		}
-		
-		//check for matching passwords
+
+		// check for matching passwords
 		if ((!tempPwdString.equals(tempConfPwdString)) || (!tempTextPwdString.equals(tempTextConfPwdString))) {
 			pwdMatchError.setVisible(true);
 			pwdMatchError.setText("'Password' and 'Confirm Pasword' dont match!");
 			numErrors++;
 		} else {
-			if(showPassword.isSelected())
-				pwd=passwordText.getText();
+			if (showPassword.isSelected())
+				pwd = passwordText.getText();
 			else {
-				pwd=password.getText();
+				pwd = password.getText();
 			}
-					
+
 		}
-		
-		if(numErrors == 0){
-			//System.out.println(UserTypeName + " " + UsertypeCode + " "+ pwd +" "+ userName);
-			
+
+		if (numErrors == 0) {
+			// System.out.println(UserTypeName + " " + UsertypeCode + " "+ pwd +" "+
+			// userName);
+
 			short creatAccount = Main.AuthSys.register(userName, pwd, UsertypeCode);
-			
+
 			switch (creatAccount) {
 			case 0:
 				accountError.setVisible(true);
 				accountError.setStyle("-fx-text-fill:green;");
-				accountError.setText("Account created succesfullt!"+ System.getProperty("line.separator") + "Please use arrow on top left corner "
-						+ System.getProperty("line.separator") + "to go back to login screen.");
+				accountError.setText("Account created succesfullt!" + System.getProperty("line.separator")
+						+ "Please use arrow on top left corner " + System.getProperty("line.separator")
+						+ "to go back to login screen.");
 				break;
-				
+
 			case -1:
 				accountError.setVisible(true);
-				accountError.setText("Invalid Username!"+ System.getProperty("line.separator") + "Please make sure username is at least"
-						+ System.getProperty("line.separator") + " 6 characters long and has no spaces.");
+				accountError.setText("Invalid Username!" + System.getProperty("line.separator")
+						+ "Please make sure username is at least" + System.getProperty("line.separator")
+						+ " 6 characters long and has no spaces.");
 				break;
-				
+
 			case -2:
 				accountError.setVisible(true);
-				accountError.setText("Username already exists!" + System.getProperty("line.separator")+ "Please try another username");
+				accountError.setText("Username already exists!" + System.getProperty("line.separator")
+						+ "Please try another username");
 				break;
-				
+
 			case -3:
 				accountError.setVisible(true);
-				accountError.setText("Invalid Password!"+ System.getProperty("line.separator") + "Please make sure password follows the following requirements:" + System.getProperty("line.separator")
-										+"-Minimum eight characters."+ System.getProperty("line.separator") +
-										"-Contain at least one digit . "+ System.getProperty("line.separator") );
+				accountError.setText("Invalid Password!" + System.getProperty("line.separator")
+						+ "Please make sure password follows the following requirements:"
+						+ System.getProperty("line.separator") + "-Minimum eight characters."
+						+ System.getProperty("line.separator") + "-Contain at least one digit . "
+						+ System.getProperty("line.separator"));
 				break;
-				
+
 			default:
 				accountError.setVisible(true);
-				accountError.setText("Unknown error occured!" + System.getProperty("line.separator") + "Please try again or contact an administrator.");
+				accountError.setText("Unknown error occured!" + System.getProperty("line.separator")
+						+ "Please try again or contact an administrator.");
 				break;
 			}
-			
+
 			System.out.println(creatAccount);
-		}
-		else {
+		} else {
 			accountError.setText("Please fix the indicated errors and try again");
 		}
-		
-		
 
 	}
 

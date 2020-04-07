@@ -43,6 +43,9 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 		Journal = journal;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		btnDownload.setDisable(true);
@@ -59,6 +62,9 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 		btnGetResearchers.setVisible(true);
 	}
 
+	/**
+	 * Button that loads the application and fills the researcher combo box
+	 */
 	public void getResearchers() {
 		fillResearcherComboBox();
 		btnGoBack.setDisable(false);
@@ -72,6 +78,9 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 		btnGetResearchers.setDisable(true);
 	}
 
+	/**
+	 * 
+	 */
 	private void fillResearcherComboBox() {
 		File path = new File(mainPath + File.separator + Journal + File.separator + "researchers" + File.separator);
 		researchersInJournal = Arrays.asList(util.listFilesInDir(path));
@@ -85,6 +94,9 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 		selectResearcher.setItems(researcherList);
 	}
 
+	/**
+	 * handles what happens when a researcher is selected inside the combo box
+	 */
 	public void researcherWasSelected() {
 		btnDownload.setDisable(false);
 		btnAccept.setDisable(false);
@@ -92,7 +104,10 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 	}
 
 	/**
-	 * btnSubFinal
+	 * handles the download of final submission if this exists
+	 * 
+	 * @param event
+	 * @throws IOException
 	 */
 	public void downloadFinalSub(ActionEvent event) throws IOException {
 		alert.setVisible(false);
@@ -127,6 +142,8 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 	}
 
 	/**
+	 * Accepts submissions
+	 * 
 	 * @throws IOException
 	 */
 	public void acceptSubmission() throws IOException {
@@ -175,6 +192,8 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 	}
 
 	/**
+	 * reject submissions
+	 * 
 	 * @throws IOException
 	 */
 	public void rejectSubmission() throws IOException {

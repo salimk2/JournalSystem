@@ -58,12 +58,12 @@ public class LoginController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		// done so you can only load the welcome page once, instead of going into a loop
+		// next 3 lines load the welcome page once, instead of going into a loop
 //      =================== DONT FORGET TO UNCOMMENT THIS  BELOW FOR FINAL SUBMISSION ========
-//		if (!Main.isLoadScreenOn)
-//			loadWelcomeWindow();
-//
-//		startingAnimation();
+		if (!Main.isLoadScreenOn)
+			loadWelcomeWindow();
+
+		startingAnimation();
 		infoLabel.setVisible(false);
 
 		this.togglevisiblePassword(null);
@@ -132,16 +132,26 @@ public class LoginController implements Initializable {
 
 	}
 
+	/**
+	 * @param pressed
+	 * @throws IOException
+	 */
 	@FXML
 	public void onEnter(ActionEvent pressed) throws IOException {
 		buttonAction(pressed);
 	}
 
+	/**
+	 * 
+	 */
 	@FXML
 	private void hideErrorMsg() {
 		infoLabel.setVisible(false);
 	}
 
+	/**
+	 * @param event
+	 */
 	public void togglevisiblePassword(ActionEvent event) {
 		if (showPassword.isSelected()) {
 			passwordText2.setText(password2.getText());
@@ -155,6 +165,10 @@ public class LoginController implements Initializable {
 		}
 	}
 
+	/**
+	 * @param event
+	 * @throws IOException
+	 */
 	public void openRegistration(MouseEvent event) throws IOException {
 		Parent fxmlRegParentParent = FXMLLoader.load(getClass().getResource("/application/Registration.fxml"));
 		content.getChildren().removeAll();
@@ -162,6 +176,12 @@ public class LoginController implements Initializable {
 
 	}
 
+	/**
+	 * Opens the correct window after a user enter credentials and presses log in
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	public void buttonAction(ActionEvent event) throws IOException {
 
 		String user = username2.getText();
@@ -203,40 +223,19 @@ public class LoginController implements Initializable {
 			infoLabel.setVisible(true);
 			infoLabel.setText("Username/Password not found!" + System.getProperty("line.separator")
 					+ "Please try again or create an account. ");
-//			username.clear();
-//			password.clear();
+
 		}
 
 	}
 
-	// Switch Window (BorderPane)
-//	public void openNewWindow(ActionEvent event, String pageName, String userType) throws IOException {
-//		FXMLLoader loader = new FXMLLoader();
-//		loader.setLocation(getClass().getResource(pageName));
-//		BorderPane root = (BorderPane) loader.load();
-//		
-//		if (userType == "Researcher") {
-//			ResearcherController controller = loader.getController();
-//			controller.initUser(username, type);
-//		}
-//		else if (userType == "Reviewer") {
-//			
-//		}
-//		else {
-//			System.out.println("Something went wrong");
-//		}
-//		
-//		Scene scene = new Scene(root);
-//
-//		// This line gets the stage info
-//		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
-//
-//		window.setScene(scene);
-//		window.show();
-//
-//	}
-
 	// Switch Window (AnchorPane)
+	/**
+	 * @param event
+	 * @param newWindow
+	 * @param userType
+	 * @param username
+	 * @throws IOException
+	 */
 	public void openNewAnchorPaneWindow(ActionEvent event, String newWindow, String userType, String username)
 			throws IOException {
 		FXMLLoader loader = new FXMLLoader();

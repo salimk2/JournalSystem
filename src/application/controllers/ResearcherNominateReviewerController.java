@@ -51,6 +51,9 @@ public class ResearcherNominateReviewerController implements Initializable {
 		currentWorkingJournal = journalName;
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		message.setVisible(false);
@@ -72,6 +75,9 @@ public class ResearcherNominateReviewerController implements Initializable {
 
 	}
 
+	/**
+	 * 
+	 */
 	@FXML
 	public void hideLabel() {
 
@@ -79,6 +85,9 @@ public class ResearcherNominateReviewerController implements Initializable {
 
 	}
 
+	/**
+	 * @param event
+	 */
 	@FXML
 	public void goBack(ActionEvent event) {
 		Stage stage = (Stage) btnGoBack.getScene().getWindow();
@@ -88,6 +97,9 @@ public class ResearcherNominateReviewerController implements Initializable {
 		stage.close();
 	}
 
+	/**
+	 * 
+	 */
 	@FXML
 	public void nominateReviewer() {
 		boolean error = displayNominateConfirmationMsg();
@@ -108,6 +120,9 @@ public class ResearcherNominateReviewerController implements Initializable {
 		}
 	}
 
+	/**
+	 * @return
+	 */
 	private boolean displayNominateConfirmationMsg() {
 		boolean success;
 		chosenRevs = reviewerList.getSelectionModel().getSelectedItems();
@@ -135,6 +150,11 @@ public class ResearcherNominateReviewerController implements Initializable {
 
 	}
 
+	/**
+	 * Reads and stores all the reviewers with an account *
+	 * 
+	 * @throws IOException
+	 */
 	private void readReviewers() throws IOException {
 
 		File readFromLoginFile = new File(System.getProperty("user.dir") + File.separator + "Login.txt");

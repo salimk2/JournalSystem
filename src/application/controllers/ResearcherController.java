@@ -131,6 +131,10 @@ public class ResearcherController implements Initializable {
 
 	}
 
+	/**
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void openNominateWin(ActionEvent event) throws IOException {
 		Stage stage;
@@ -275,6 +279,10 @@ public class ResearcherController implements Initializable {
 
 	}
 
+	/**
+	 * @param journalName
+	 * @param username
+	 */
 	public void checkJournalUserSubmissionFile(String journalName, String username) {
 
 		File baseFilePath = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator

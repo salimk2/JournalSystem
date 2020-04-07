@@ -14,13 +14,6 @@ public class Account {
 		this.accountType = type;
 		this.salt = salt;
 	}
-//	  public Account(String username, String password, int type) {
-//			super();
-//			this.username = username;
-//			this.password = password;
-//			this.accountType = type;
-//			
-//		}
 
 	/**
 	 * This method displays the username that was verified

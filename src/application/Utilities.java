@@ -66,6 +66,11 @@ public class Utilities {
 
 	}
 
+	/**
+	 * @param username
+	 * @param journalName
+	 * @param date
+	 */
 	public void writeRevDeadlines(String username, String journalName, String date) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
@@ -80,6 +85,11 @@ public class Utilities {
 		}
 	}
 
+	/**
+	 * @param status
+	 * @param username
+	 * @param journalName
+	 */
 	public void modifyNominatedRevFileStatus(String status, String username, String journalName) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
@@ -95,6 +105,11 @@ public class Utilities {
 
 	}
 
+	/**
+	 * @param username
+	 * @param reviewername
+	 * @param journalName
+	 */
 	public void writeNominatedRev(String username, String reviewername, String journalName) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
@@ -109,6 +124,12 @@ public class Utilities {
 		}
 	}
 
+	/**
+	 * @param source
+	 * @param dest
+	 * @param avoidDuplicate
+	 * @throws IOException
+	 */
 	private void copyFile(File source, File dest, boolean avoidDuplicate) throws IOException {
 		if (avoidDuplicate)
 			Files.copy(source.toPath(), dest.toPath(), StandardCopyOption.REPLACE_EXISTING);
@@ -193,7 +214,13 @@ public class Utilities {
 		return exists;
 	}
 
-	// creates a user directory
+	// creates a researcher directory
+	/**
+	 * @param username
+	 * @param type
+	 * @param chosenJournal
+	 * @return
+	 */
 	public boolean createUserDir(String username, int type, String chosenJournal) {
 
 		boolean error;
@@ -240,6 +267,9 @@ public class Utilities {
 	}
 
 	// only used to write to journalList.txt
+	/**
+	 * @param journalName
+	 */
 	public void writeJournalToFile(String journalName) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 				+ "editor" + File.separator + "journals" + File.separator + "journalList.txt");
@@ -254,6 +284,10 @@ public class Utilities {
 	}
 
 	// only used to read from journalList.txt
+	/**
+	 * @return
+	 * @throws IOException
+	 */
 	public String readJournalList() throws IOException {
 		String journalList = "";
 
@@ -284,6 +318,10 @@ public class Utilities {
 	}
 
 	// only used to create journal folders
+	/**
+	 * @param journalName
+	 * @return
+	 */
 	public boolean createJournalDir(String journalName) {
 		boolean error;
 		if (!journalName.isEmpty()) {
@@ -310,6 +348,11 @@ public class Utilities {
 		return error;
 	}
 
+	/**
+	 * @param fileDestinPath
+	 * @param subVersion
+	 * @throws IOException
+	 */
 	public void upload(File fileDestinPath, String subVersion) throws IOException {
 		File source;
 		// Add filters for files extensions
@@ -335,6 +378,10 @@ public class Utilities {
 
 	}
 
+	/**
+	 * @param fileOriginPath
+	 * @throws IOException
+	 */
 	public void download(File fileOriginPath) throws IOException {
 
 		Stage stage = null;

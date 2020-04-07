@@ -52,6 +52,9 @@ public class ResearcherUploadDocumentController implements Initializable {
 
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -71,6 +74,10 @@ public class ResearcherUploadDocumentController implements Initializable {
 
 	}
 
+	/**
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
 	public void goBack(ActionEvent event) throws IOException {
 		Stage stage = (Stage) btnGoBack.getScene().getWindow();
@@ -78,6 +85,9 @@ public class ResearcherUploadDocumentController implements Initializable {
 
 	}
 
+	/**
+	 * 
+	 */
 	public void createUserFolder() {
 		// btnUploadToJournal.setDisable(true);
 		boolean dirError = false;
@@ -156,6 +166,9 @@ public class ResearcherUploadDocumentController implements Initializable {
 		}
 	}
 
+	/**
+	 * reads and stores the names of all created journals inside the journals file
+	 */
 	private void readFile() {
 
 		String journalList;

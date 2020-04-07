@@ -83,6 +83,10 @@ public class EditorAssignReviewerController implements Initializable {
 		alert.setVisible(false);
 	}
 
+	/**
+	 * It fills the researcher combo box
+	 * 
+	 */
 	private void fillResearcherComboBox() {
 		File path = new File(
 				mainPath + File.separator + journalSelected + File.separator + "researchers" + File.separator);
@@ -97,6 +101,10 @@ public class EditorAssignReviewerController implements Initializable {
 		cbResearcher.setItems(researcherList);
 	}
 
+	/**
+	 * @param event
+	 * @throws IOException
+	 */
 	public void fillReviewerComboBox(ActionEvent event) throws IOException {
 		String researcherUsername = cbResearcher.getValue();
 		String dataRead = "";

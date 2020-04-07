@@ -98,6 +98,9 @@ public class EditorController implements Initializable {
 
 	}
 
+	/**
+	 * 
+	 */
 	private void fillJournalComboBox() {
 		String journalList;
 		try {
@@ -266,6 +269,12 @@ public class EditorController implements Initializable {
 
 	}
 
+	/**
+	 * Handles and opens a window when assign rev button is pressed
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	public void AssignReviewer(ActionEvent event) throws IOException {
 		Stage stage;
 		Parent root;
@@ -290,6 +299,12 @@ public class EditorController implements Initializable {
 
 	}
 
+	/**
+	 * Handles and opens a window when review sub button is pressed
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	public void reviewSubmission(ActionEvent event) throws IOException {
 		Stage stage;
 		Parent root;
