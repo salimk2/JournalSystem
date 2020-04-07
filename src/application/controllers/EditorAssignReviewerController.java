@@ -229,6 +229,14 @@ public class EditorAssignReviewerController implements Initializable {
 			alert.showAndWait();
 			dpMinorRev.getEditor().clear();
 
+		} else if (rev1 == null | rev2 == null | rev3 == null) {
+
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("Empty Date");
+			alert.setHeaderText("Date can't be empty");
+			alert.setContentText("Please select a date in order to continue");
+			alert.showAndWait();
+
 		}
 
 		else {

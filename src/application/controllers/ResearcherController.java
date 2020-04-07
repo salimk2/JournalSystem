@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.StringJoiner;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
@@ -22,6 +23,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -61,11 +64,16 @@ public class ResearcherController implements Initializable {
 	private Label alert, nominateRevLabel;
 
 	private List<String> journals = new ArrayList<>();
+	private String notificationList;
+	private boolean reviewerWasAssigned = false;
+	private String reviewerNominateStatus = "";
 	private ObservableList<String> list = FXCollections.observableArrayList();
 	@FXML
 	private FontAwesomeIcon notification, refreshIcon;
 
 	private Utilities util = new Utilities();
+	File mainPath = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator + "editor"
+			+ File.separator + "journals" + File.separator);
 
 	/**
 	 * @param username
@@ -98,6 +106,7 @@ public class ResearcherController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+//		
 
 		readFile();
 		for (int i = 0; i < journals.size(); i++) {
@@ -181,7 +190,9 @@ public class ResearcherController implements Initializable {
 	 */
 	@FXML
 	public void journalSelected(ActionEvent event) {
+
 		String journalName = selectJournal.getValue();
+		reviewerWasAssigned = false;
 		boolean userFound = util.checkResearcherFileExists(journalName, username);
 		if (!userFound) {
 			btnRev1.setDisable(true);
@@ -201,6 +212,13 @@ public class ResearcherController implements Initializable {
 			btnNominate.setDisable(false);
 
 		}
+
+		if (showNotifications(journalName)) {
+
+			notification.setVisible(true);
+		} else
+			notification.setVisible(false);
+
 	}
 
 	/**
@@ -209,6 +227,8 @@ public class ResearcherController implements Initializable {
 	 * @param journalName
 	 */
 	public void journalSelected(String journalName) {
+		reviewerWasAssigned = false;
+		notification.setVisible(false);
 		boolean userFound = util.checkResearcherFileExists(journalName, username);
 		if (!userFound) {
 			btnRev1.setDisable(true);
@@ -228,6 +248,11 @@ public class ResearcherController implements Initializable {
 			btnNominate.setDisable(false);
 
 		}
+		if (showNotifications(journalName))
+			notification.setVisible(true);
+		else
+			notification.setVisible(false);
+
 	}
 
 	public void checkJournalUserSubmissionFile(String journalName, String username) {
@@ -429,6 +454,75 @@ public class ResearcherController implements Initializable {
 		}
 
 		System.out.println("Upload Clicked");
+	}
+
+	private boolean showNotifications(String journalName) {
+		reviewerNominateStatus = "";
+		boolean notifications;
+		File path = new File(mainPath + File.separator + journalName + File.separator + "researchers" + File.separator
+				+ username + File.separator);
+		File pathToRevNomFile = new File(mainPath + File.separator + journalName + File.separator + "researchers"
+				+ File.separator + username + File.separator + File.separator + "nominatedReviewers.txt");
+//		if (path.exists())
+//			System.out.println("Path Exists " + path);
+//		else {
+//			System.out.println("Path doesnt exist " + path);
+//		}
+		StringJoiner joiner = new StringJoiner(" ");
+		String[] temp = util.listFilesInDir(path);
+		for (String string : temp) {
+			joiner.add(string);
+		}
+		notificationList = joiner.toString();
+
+		try {
+			if (pathToRevNomFile.exists())
+				reviewerNominateStatus = util.readNomRevFile(username, journalName);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (reviewerNominateStatus.contains("ASSIGNED"))
+			reviewerWasAssigned = true;
+		System.out.println("was rev assigned = " + reviewerWasAssigned);
+
+		// System.out.println(notificationList);
+		if (notificationList.contains("FinalSubmissionRejected.txt")
+				|| notificationList.contains("FinalSubmissionAccepted.txt") || reviewerWasAssigned)
+			notifications = true;
+		else
+			notifications = false;
+
+		return notifications;
+	}
+
+	public void desplayNotificationAlert(MouseEvent click) {
+
+		if (notificationList.contains("FinalSubmissionRejected.txt")) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Final Submission Update");
+			alert.setContentText(
+					"The editor has rejected your final submission. For more information please contact the Editor");
+			alert.showAndWait();
+
+		} else if (notificationList.contains("FinalSubmissionAccepted.txt")) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Final Submission Update");
+			alert.setContentText(
+					"Congratulations! The editor has Accepted your final submission. For more information please contact the Editor");
+			alert.showAndWait();
+		} else if (reviewerNominateStatus.contains("ASSIGNED")) {
+			String asgRevName = reviewerNominateStatus.substring(8);
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Assigned Reviewer Update");
+			alert.setContentText(
+					"Congratulations! The editor has assigned you a reviewer. Your reviewer name is: " + asgRevName);
+			alert.showAndWait();
+
+		}
+		reviewerWasAssigned = false;
+		notification.setVisible(false);
 	}
 
 	/**
