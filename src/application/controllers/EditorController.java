@@ -66,14 +66,13 @@ public class EditorController implements Initializable {
 
 	// define variables
 	ObservableList<String> journalsList = FXCollections.observableArrayList();
-	ObservableList<EditorRecord> records = FXCollections.observableArrayList();
 
 	/// Initializes components
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 		refreshIcon.setVisible(false);
-		btnReviewSubmissions.setDisable(true);
+		// btnReviewSubmissions.setDisable(true);
 
 		fillJournalComboBox();
 		// set columns
@@ -142,6 +141,7 @@ public class EditorController implements Initializable {
 	 */
 	public ObservableList<EditorRecord> getRecords(String Journal) {
 		// ObservaleList behaves like an ArrayList with feature for GUI environment
+		ObservableList<EditorRecord> records = FXCollections.observableArrayList();
 
 		try {
 			File PathFile = new File(path + File.separator + Journal + File.separator + "researchers" + File.separator);
@@ -159,10 +159,9 @@ public class EditorController implements Initializable {
 
 						for (int j = 0; j < subs.length; j++) {
 
-							if (!subs[j].contains(".txt")) // only used to ignore any txt files
-								records.add(new EditorRecord(subs[j], res[i], LocalDate.of(2020, Month.DECEMBER, 12),
-										LocalDate.of(2020, Month.DECEMBER, 20),
-										LocalDate.of(2020, Month.DECEMBER, 28)));
+							// if (!subs[j].contains(".txt")) // only used to ignore any txt files
+							records.add(new EditorRecord(subs[j], res[i], LocalDate.of(2020, Month.DECEMBER, 12),
+									LocalDate.of(2020, Month.DECEMBER, 20), LocalDate.of(2020, Month.DECEMBER, 28)));
 						}
 
 					}
@@ -187,11 +186,11 @@ public class EditorController implements Initializable {
 		// lblTest1.setText("journal: " + cbJournals.getValue());
 
 		tableView.setItems(getRecords(cbJournals.getValue()));
-		if (!records.isEmpty()) {
-			btnReviewSubmissions.setDisable(false);
-		} else {
-			btnReviewSubmissions.setDisable(true);
-		}
+//		if (!records.isEmpty()) {
+//			btnReviewSubmissions.setDisable(false);
+//		} else {
+//			btnReviewSubmissions.setDisable(true);
+//		}
 
 	}
 
