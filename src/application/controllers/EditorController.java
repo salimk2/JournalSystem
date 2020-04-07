@@ -54,7 +54,7 @@ public class EditorController implements Initializable {
 	@FXML
 	private TableColumn<EditorRecord, LocalDate> revision2Column;
 	@FXML
-	private Button btnAddJournal, btnReviewSubmissions;
+	private Button btnAddJournal, btnReviewSubmissions, btnAssignReviewer;
 	@FXML
 	public JFXComboBox<String> cbJournals;
 	@FXML
@@ -73,6 +73,7 @@ public class EditorController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		refreshIcon.setVisible(false);
+		btnAssignReviewer.setDisable(true);
 		btnReviewSubmissions.setDisable(true);
 
 		fillJournalComboBox();
@@ -160,28 +161,34 @@ public class EditorController implements Initializable {
 						String[] subs = sub.list();
 
 						for (int j = 0; j < subs.length; j++) {
+							// Set needed variables
 							File deadlineFile = new File(sub + File.separator + "reviewerDeadlines.txt");
 							File getNominatedRev = new File(sub + File.separator + "nominatedReviewers.txt");
 							String reviewer = "Not Assigned";
+							// check if there is a reviewerDeadline.txt
 							if (deadlineFile.exists()) {
+								// read the file, and store its contents
 								String[] deadLine = util.readRevDeadlines(res[i], Journal).split(" ");
 								LocalDate rev1 = LocalDate.parse(deadLine[0]);
 								LocalDate rev2 = LocalDate.parse(deadLine[1]);
 								LocalDate rev3 = LocalDate.parse(deadLine[2]);
 
+								// check if nominatedReviewers.txt exists
 								if (getNominatedRev.exists()) {
+									// read the file and store its contents
 									String[] getReviewerStrings = util.readNomRevFile(res[i], Journal).split(" ");
 //									
+									// check if the reviewer has been assigned and
 									if (getReviewerStrings[0].contains("ASSIGNED")) {
-										System.out.println("you passed assigned");
 										reviewer = getReviewerStrings[1];
 									}
 								}
-
+								// if all passes then this should store relevant values
 								if (!subs[j].contains(".txt")) // only used to ignore any txt files
 									records.add(new EditorRecord(res[i], subs[j], reviewer, rev1, rev2, rev3));
 
 							} else {
+								// if there are no deadlines then most of the data will be generic
 								if (!subs[j].contains(".txt")) // only used to ignore any txt files
 									records.add(new EditorRecord(res[i], subs[j], reviewer, null, null, null));
 							}
@@ -210,8 +217,10 @@ public class EditorController implements Initializable {
 		ObservableList<EditorRecord> checkList = getRecords(cbJournals.getValue());
 		tableView.setItems(getRecords(cbJournals.getValue()));
 		if (!checkList.isEmpty()) {
+			btnAssignReviewer.setDisable(false);
 			btnReviewSubmissions.setDisable(false);
 		} else {
+			btnAssignReviewer.setDisable(true);
 			btnReviewSubmissions.setDisable(true);
 		}
 
@@ -261,7 +270,7 @@ public class EditorController implements Initializable {
 		Stage stage;
 		Parent root;
 
-		if (event.getSource() == btnReviewSubmissions) {
+		if (event.getSource() == btnAssignReviewer) {
 			String journalSelected = cbJournals.getValue();
 
 			stage = new Stage();
@@ -270,17 +279,37 @@ public class EditorController implements Initializable {
 			// reference editor page
 			root = loader.load();
 			EditorAssignReviewerController controller = loader.getController();
-			System.out.println("testing what is sent to assign rev " + journalSelected);
 			controller.setJournalSelected(journalSelected);
 
 			;
+			stage.setScene(new Scene(root));
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(btnAssignReviewer.getScene().getWindow());
+			stage.showAndWait();
+		}
+
+	}
+
+	public void reviewSubmission(ActionEvent event) throws IOException {
+		Stage stage;
+		Parent root;
+
+		if (event.getSource() == btnReviewSubmissions) {
+			String journalSelected = cbJournals.getValue();
+
+			stage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/application/EditorReviewFinalSubmission.fxml"));
+			// reference editor page
+			root = loader.load();
+			EditorReviewFinalSubmissionController controller = loader.getController();
+			controller.setJournal(journalSelected);
 
 			stage.setScene(new Scene(root));
 			stage.initModality(Modality.APPLICATION_MODAL);
 			stage.initOwner(btnReviewSubmissions.getScene().getWindow());
 			stage.showAndWait();
 		}
-
 	}
 
 	// Switch Windows (BorderPane)

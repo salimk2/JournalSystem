@@ -62,8 +62,8 @@ public class LoginController implements Initializable {
 //      =================== DONT FORGET TO UNCOMMENT THIS  BELOW FOR FINAL SUBMISSION ========
 //		if (!Main.isLoadScreenOn)
 //			loadWelcomeWindow();
-
-		// startingAnimation();
+//
+//		startingAnimation();
 		infoLabel.setVisible(false);
 
 		this.togglevisiblePassword(null);

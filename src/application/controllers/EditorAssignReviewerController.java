@@ -40,7 +40,7 @@ public class EditorAssignReviewerController implements Initializable {
 	@FXML
 	private DatePicker dpMinorRev, dpRev1, dpRev2;
 	@FXML
-	private JFXButton btnGoBack, btnApproveRev, btnCheckJournal;
+	private JFXButton btnGoBack, btnApproveRev, btnCheckJournal, btnGetResearchers;
 	@FXML
 	private Label alert;
 
