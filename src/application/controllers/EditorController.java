@@ -72,7 +72,7 @@ public class EditorController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		refreshIcon.setVisible(false);
-		// btnReviewSubmissions.setDisable(true);
+		btnReviewSubmissions.setDisable(true);
 
 		fillJournalComboBox();
 		// set columns
@@ -159,9 +159,10 @@ public class EditorController implements Initializable {
 
 						for (int j = 0; j < subs.length; j++) {
 
-							// if (!subs[j].contains(".txt")) // only used to ignore any txt files
-							records.add(new EditorRecord(subs[j], res[i], LocalDate.of(2020, Month.DECEMBER, 12),
-									LocalDate.of(2020, Month.DECEMBER, 20), LocalDate.of(2020, Month.DECEMBER, 28)));
+							if (!subs[j].contains(".txt")) // only used to ignore any txt files
+								records.add(new EditorRecord(subs[j], res[i], LocalDate.of(2020, Month.DECEMBER, 12),
+										LocalDate.of(2020, Month.DECEMBER, 20),
+										LocalDate.of(2020, Month.DECEMBER, 28)));
 						}
 
 					}
@@ -183,14 +184,13 @@ public class EditorController implements Initializable {
 	 */
 	public void journalSelected(ActionEvent event) {
 
-		// lblTest1.setText("journal: " + cbJournals.getValue());
-
+		ObservableList<EditorRecord> checkList = getRecords(cbJournals.getValue());
 		tableView.setItems(getRecords(cbJournals.getValue()));
-//		if (!records.isEmpty()) {
-//			btnReviewSubmissions.setDisable(false);
-//		} else {
-//			btnReviewSubmissions.setDisable(true);
-//		}
+		if (!checkList.isEmpty()) {
+			btnReviewSubmissions.setDisable(false);
+		} else {
+			btnReviewSubmissions.setDisable(true);
+		}
 
 	}
 
