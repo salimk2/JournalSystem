@@ -1,25 +1,32 @@
 package application;
 
 import java.time.LocalDate;
+
 import javafx.beans.property.SimpleStringProperty;
 
 /**
  * Class for the table in the Editor window
  */
 public class EditorRecord {
-	
+
 	// string prperties
-	private SimpleStringProperty submission, reviewer;
+	private SimpleStringProperty researcher, submission, reviewer;
 	private LocalDate minorRevision, revision1, revision2;
-	
+
 	// constructor
-	public EditorRecord(String submission, String reviewer, LocalDate minorRevision, LocalDate revision1, LocalDate revision2) {
+	public EditorRecord(String researcher, String submission, String reviewer, LocalDate minorRevision,
+			LocalDate revision1, LocalDate revision2) {
+		this.researcher = new SimpleStringProperty(researcher);
 		this.submission = new SimpleStringProperty(submission);
 		this.reviewer = new SimpleStringProperty(reviewer);
 		this.minorRevision = minorRevision;
 		this.revision1 = revision1;
 		this.revision2 = revision2;
-	}	
+	}
+
+	public String getResearcher() {
+		return researcher.get();
+	}
 
 	// Getters and Setters
 	public String getSubmission() {
@@ -60,6 +67,10 @@ public class EditorRecord {
 
 	public void setRevision2(LocalDate revision2) {
 		this.revision2 = revision2;
+	}
+
+	public void setResearcher(SimpleStringProperty researcher) {
+		this.researcher = researcher;
 	}
 
 }

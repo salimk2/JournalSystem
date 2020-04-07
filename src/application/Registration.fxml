@@ -50,7 +50,7 @@
       </JFXPasswordField>
       <JFXPasswordField fx:id="confirmPassword" labelFloat="true" layoutX="75.0" layoutY="393.0" onAction="#onEnter" onKeyPressed="#hideErrorMsg" prefWidth="250.0" promptText="Confirm Password">
          <tooltip>
-            <Tooltip text="Enter Password" />
+            <Tooltip text="Confirm Password" />
          </tooltip>
       </JFXPasswordField>
       <JFXTextField fx:id="confirmPasswordText" labelFloat="true" layoutX="75.0" layoutY="393.0" onAction="#onEnter" onKeyPressed="#hideErrorMsg" prefWidth="250.0" promptText="Password" visible="false">

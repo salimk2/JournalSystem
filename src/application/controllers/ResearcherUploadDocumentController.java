@@ -2,7 +2,6 @@ package application.controllers;
 
 import java.io.File;
 import java.io.IOException;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,6 +14,7 @@ import com.jfoenix.controls.JFXComboBox;
 import application.Utilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -28,8 +28,7 @@ public class ResearcherUploadDocumentController implements Initializable {
 	private Utilities util = new Utilities();
 	private List<String> journals = new ArrayList<>();
 	ObservableList<String> list = FXCollections.observableArrayList();
-	ObservableList<String> subNum = FXCollections.observableArrayList("First","Second","Third","Final");
-	
+	ObservableList<String> subNum = FXCollections.observableArrayList("First", "Second", "Third", "Final");
 
 	@FXML
 	private JFXComboBox<String> availableJournals;
@@ -53,6 +52,9 @@ public class ResearcherUploadDocumentController implements Initializable {
 
 	}
 
+	/**
+	 *
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -68,20 +70,28 @@ public class ResearcherUploadDocumentController implements Initializable {
 		availableJournals.setItems(list);
 		submissionNumber.setItems(subNum);
 		messageLabel.setVisible(false);
-		//btnUploadToJournal.setDisable(true);
+		// btnUploadToJournal.setDisable(true);
 
 	}
-	
+
+	/**
+	 * @param event
+	 * @throws IOException
+	 */
 	@FXML
-	public void goBack() throws IOException {
+	public void goBack(ActionEvent event) throws IOException {
 		Stage stage = (Stage) btnGoBack.getScene().getWindow();
 		stage.close();
+
 	}
 
+	/**
+	 * 
+	 */
 	public void createUserFolder() {
-		//btnUploadToJournal.setDisable(true);
+		// btnUploadToJournal.setDisable(true);
 		boolean dirError = false;
-		if (!availableJournals.getSelectionModel().isEmpty() ) {
+		if (!availableJournals.getSelectionModel().isEmpty()) {
 			String chosenJournal = availableJournals.getValue();
 			// create user personal folder
 			dirError = util.createUserDir(username, type, chosenJournal);
@@ -91,7 +101,7 @@ public class ResearcherUploadDocumentController implements Initializable {
 
 				messageLabel.setText(util.getMessage());
 				messageLabel.setVisible(true);
-				btnUploadToJournal.setDisable(false);
+				// btnUploadToJournal.setDisable(false);
 
 			} else {
 				messageLabel.setStyle("-fx-text-fill:#d90024;");
@@ -118,18 +128,32 @@ public class ResearcherUploadDocumentController implements Initializable {
 		if (!availableJournals.getSelectionModel().isEmpty() && !submissionNumber.getSelectionModel().isEmpty()) {
 			String chosenJournal = availableJournals.getValue();
 			String subVersionString = submissionNumber.getValue();
+			boolean journalExists = util.checkResearcherFileExists(chosenJournal, username);
 
-			// upload file here
-			System.out.println("Thing created");
-			File researcherPathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
-					+ File.separator + "editor" + File.separator + "journals" + File.separator + chosenJournal
-					+ File.separator + "researchers" + File.separator + username + File.separator);
+			if (journalExists) {
+				// upload file here
+				System.out.println("Thing created");
+				File researcherPathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
+						+ File.separator + "editor" + File.separator + "journals" + File.separator + chosenJournal
+						+ File.separator + "researchers" + File.separator + username + File.separator);
 
-			util.upload(researcherPathFile,subVersionString);
+				util.upload(researcherPathFile, subVersionString);
 
-			messageLabel.setStyle("-fx-text-fill:#027d00;");
+				messageLabel.setStyle("-fx-text-fill:#027d00;");
 
-			messageLabel.setText(util.getMessage());
+				messageLabel.setText(util.getMessage());
+				messageLabel.setVisible(true);
+			} else {
+				messageLabel.setStyle("-fx-text-fill:#d90024;");
+
+				messageLabel.setText("journal is Empty. Please create a user folder first");
+				messageLabel.setVisible(true);
+			}
+
+		} else if (submissionNumber.getSelectionModel().isEmpty()) {
+			messageLabel.setStyle("-fx-text-fill:#d90024;");
+
+			messageLabel.setText("Please select a submission number.");
 			messageLabel.setVisible(true);
 
 		} else {
@@ -142,6 +166,9 @@ public class ResearcherUploadDocumentController implements Initializable {
 		}
 	}
 
+	/**
+	 * reads and stores the names of all created journals inside the journals file
+	 */
 	private void readFile() {
 
 		String journalList;

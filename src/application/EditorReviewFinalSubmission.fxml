@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="256.0" prefWidth="387.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.EditorReviewFinalSubmissionController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutY="12.0" prefHeight="29.0" prefWidth="387.0" style="-fx-font-size: 18; -fx-font-weight: bold;" text="Review Final Submission" textAlignment="CENTER" />
+      <JFXComboBox fx:id="selectResearcher" labelFloat="true" layoutX="117.0" layoutY="101.0" onAction="#researcherWasSelected" promptText="Select  Researcher" />
+      <JFXButton fx:id="btnDownload" buttonType="RAISED" layoutX="138.0" layoutY="138.0" onAction="#downloadFinalSub" style="-fx-font-size: 10;" styleClass="normalBtn" stylesheets="@application.css" text="Download Submission" />
+      <JFXButton fx:id="btnReject" buttonType="RAISED" layoutX="143.0" layoutY="189.0" onAction="#rejectSubmission" prefHeight="32.0" prefWidth="104.0" styleClass="cancelBtn" stylesheets="@application.css" text="Reject" />
+      <JFXButton fx:id="btnAccept" buttonType="RAISED" layoutX="29.0" layoutY="189.0" onAction="#acceptSubmission" prefHeight="32.0" prefWidth="104.0" styleClass="createBtn" stylesheets="@application.css" text="Accept" />
+      <JFXButton fx:id="btnGoBack" buttonType="RAISED" layoutX="257.0" layoutY="189.0" onAction="#goBack" prefHeight="32.0" prefWidth="104.0" styleClass="loginBtn" stylesheets="@application.css" text="Go Back" />
+      <JFXButton fx:id="btnGetResearchers" buttonType="RAISED" layoutX="149.0" layoutY="116.0" onAction="#getResearchers" style="-fx-font-size: 10;" styleClass="createBtn" stylesheets="@application.css" text="Get Researchers" visible="false" />
+      <Label fx:id="alert" alignment="CENTER" contentDisplay="CENTER" layoutX="2.0" layoutY="41.0" prefHeight="44.0" prefWidth="387.0" text="Message" />
+   </children>
+</AnchorPane>

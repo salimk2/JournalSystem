@@ -1,8 +1,5 @@
 package application.controllers;
 
-import application.Authenticator;
-import application.Utilities;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -10,10 +7,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.StringJoiner;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 
+import application.Utilities;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,13 +23,19 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * @author jdev
+ *
+ */
 public class ResearcherController implements Initializable {
 
 	private String username;
@@ -49,21 +55,43 @@ public class ResearcherController implements Initializable {
 	@FXML
 	private JFXButton btnUpload, btnWithdraw; // upload/download
 	@FXML
+	private JFXButton btnNominate;
+	@FXML
 	private Label lblNextSub, lblWithdrawPending;
 	@FXML
 	private JFXComboBox<String> selectJournal;
 	@FXML
-	private Label alert;
+	private Label alert, nominateRevLabel;
 
 	private List<String> journals = new ArrayList<>();
+	private String notificationList;
+	private boolean reviewerWasAssigned = false;
+	private String reviewerNominateStatus = "";
 	private ObservableList<String> list = FXCollections.observableArrayList();
+	@FXML
+	private FontAwesomeIcon notification, refreshIcon;
 
 	private Utilities util = new Utilities();
+	File mainPath = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator + "editor"
+			+ File.separator + "journals" + File.separator);
 
+	/**
+	 * @param username
+	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
+	/**
+	 * @return
+	 */
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * @param type
+	 */
 	public void setType(int type) {
 		this.type = type;
 	}
@@ -78,11 +106,12 @@ public class ResearcherController implements Initializable {
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
+//		
 
 		readFile();
 		for (int i = 0; i < journals.size(); i++) {
 			String j = journals.get(i);
-			// System.out.println("Initilaizer j :" + j);
+
 			list.add(i, j);
 		}
 		selectJournal.setItems(list);
@@ -94,69 +123,53 @@ public class ResearcherController implements Initializable {
 		btnSub3.setDisable(true);
 		btnSubFinal.setDisable(true);
 		alert.setVisible(false);
-
-//		// create new authenticator
-//		Authenticator myAuth = new Authenticator();
-//
-//		// get submissions
-//		ArrayList<String> submissions = myAuth.getSubmissions("research_1");
-//		// disable view
-//		if (!submissions.contains("subFinal")) {
-//			lblSubFinal.setDisable(true);
-//			btnSubFinal.setDisable(true);
-//			lblNextSub.setText("Next Submission: Final Submission");
-//			if (!submissions.contains("sub3")) {
-//				lblSub3.setDisable(true);
-//				btnSub3.setDisable(true);
-//				lblNextSub.setText("Next Submission: Post Revision 1");
-//				if (!submissions.contains("sub2")) {
-//					lblSub2.setDisable(true);
-//					btnSub2.setDisable(true);
-//					lblNextSub.setText("Next Submission: Post Revision 2");
-//					if (!submissions.contains("sub1")) {
-//						lblSub1.setDisable(true);
-//						btnSub1.setDisable(true);
-//						lblNextSub.setText("Next Submission: Post Minor Revision (Final Submission)");
-//					}
-//				}
-//			}
-//		}
-//
-//		// get reviews & disable view
-//		ArrayList<String> reviews = myAuth.getReviews("research_1", "sub_1");
-//		if (!reviews.contains("revMinor")) {
-//			lblRevMinor.setDisable(true);
-//			btnRevMinor.setDisable(true);
-//			if (!reviews.contains("rev2")) {
-//				lblRev2.setDisable(true);
-//				btnRev2.setDisable(true);
-//				if (!reviews.contains("rev1")) {
-//					lblRev1.setDisable(true);
-//					btnRev2.setDisable(true);
-//				}
-//			}
-//		}
-//
-//		// get comments & disable view
-//		ArrayList<String> comments = myAuth.getComments("research_1", "rev_1");
-//		if (!comments.contains("commentMinor")) {
-//			lblCommentMinor.setDisable(true);
-//			if (!comments.contains("comment2")) {
-//				lblComment2.setDisable(true);
-//				if (!comments.contains("comment1")) {
-//					lblComment1.setDisable(true);
-//				}
-//			}
-//		}
-//
-//		// get withdraw status
-//		boolean withdrawStatus = myAuth.getWithdrawStatus("research_1", "sub_1");
-//		if (!withdrawStatus) {
-//			lblWithdrawPending.setDisable(true);
-//		}
+		notification.setVisible(false);
+		btnNominate.setDisable(true);
+		refreshIcon.setVisible(false);
+		lblWithdrawPending.setVisible(false);
+		btnWithdraw.setDisable(true);
 
 	}
 
+	/**
+	 * @param event
+	 * @throws IOException
+	 */
+	@FXML
+	public void openNominateWin(ActionEvent event) throws IOException {
+		Stage stage;
+		Parent root;
+		String journalName = selectJournal.getValue();
+
+		if (event.getSource() == btnNominate) {
+			stage = new Stage();
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("/application/ResearcherNominateReviewer.fxml"));
+			// reference editor page
+			root = loader.load();
+			ResearcherNominateReviewerController controller = loader.getController();
+			controller.setUserInfo(username, journalName);
+
+			stage.setScene(new Scene(root));
+			stage.initModality(Modality.APPLICATION_MODAL);
+			stage.initOwner(btnUpload.getScene().getWindow());
+			stage.showAndWait();
+		}
+
+	}
+
+	@FXML
+	// Added the refresh option to clear any error label and enable any available
+	// button
+	public void refreshPage(MouseEvent click) {
+		String journalNameRefresh = selectJournal.getValue();
+		journalSelected(journalNameRefresh);
+		refreshIcon.setVisible(false);
+	}
+
+	/**
+	 * 
+	 */
 	private void readFile() {
 
 		String journalList;
@@ -167,7 +180,7 @@ public class ResearcherController implements Initializable {
 
 				String j = journals.get(i);
 
-				System.out.println(j + " " + i);
+				// System.out.println(j + " " + i);
 			}
 
 		} catch (IOException e) {
@@ -177,10 +190,16 @@ public class ResearcherController implements Initializable {
 		}
 	}
 
+	/**
+	 * 
+	 * @param event
+	 */
 	@FXML
 	public void journalSelected(ActionEvent event) {
+
 		String journalName = selectJournal.getValue();
-		boolean userFound = checkJournalUserDir(journalName, username);
+		reviewerWasAssigned = false;
+		boolean userFound = util.checkResearcherFileExists(journalName, username);
 		if (!userFound) {
 			btnRev1.setDisable(true);
 			btnRev2.setDisable(true);
@@ -189,14 +208,81 @@ public class ResearcherController implements Initializable {
 			btnSub2.setDisable(true);
 			btnSub3.setDisable(true);
 			btnSubFinal.setDisable(true);
-			alert.setText("Journal is empty. Please submbit files to " +journalName);
+			btnNominate.setDisable(true);
+			btnWithdraw.setDisable(true);
+			alert.setText("Journal is empty. Please submbit files to " + journalName);
 			alert.setStyle("-fx-text-fill:#d90024;");
 			alert.setVisible(true);
 		} else {
 			checkJournalUserSubmissionFile(journalName, username);
+			alert.setVisible(false);
+			btnNominate.setDisable(false);
+			File withdrawFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator
+					+ "researchers" + File.separator + username + File.separator + "WithdrawSubmitted.txt");
+			if (!withdrawFile.exists())
+				btnWithdraw.setDisable(false);
+			else {
+				btnWithdraw.setDisable(true);
+			}
+
 		}
+
+		if (showNotifications(journalName)) {
+
+			notification.setVisible(true);
+		} else
+			notification.setVisible(false);
+
 	}
 
+	/**
+	 * Overloaded function to used to refresh page
+	 * 
+	 * @param journalName
+	 */
+	public void journalSelected(String journalName) {
+		reviewerWasAssigned = false;
+		notification.setVisible(false);
+		boolean userFound = util.checkResearcherFileExists(journalName, username);
+		if (!userFound) {
+			btnRev1.setDisable(true);
+			btnRev2.setDisable(true);
+			btnRevMinor.setDisable(true);
+			btnSub1.setDisable(true);
+			btnSub2.setDisable(true);
+			btnSub3.setDisable(true);
+			btnSubFinal.setDisable(true);
+			btnNominate.setDisable(true);
+			btnWithdraw.setDisable(true);
+			alert.setText("Journal is empty. Please submbit files to " + journalName);
+			alert.setStyle("-fx-text-fill:#d90024;");
+			alert.setVisible(true);
+		} else {
+			checkJournalUserSubmissionFile(journalName, username);
+			alert.setVisible(false);
+			btnNominate.setDisable(false);
+			File withdrawFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator
+					+ "researchers" + File.separator + username + File.separator + "WithdrawSubmitted.txt");
+			if (!withdrawFile.exists())
+				btnWithdraw.setDisable(false);
+			else {
+				btnWithdraw.setDisable(true);
+			}
+
+		}
+		if (showNotifications(journalName))
+			notification.setVisible(true);
+		else
+			notification.setVisible(false);
+
+	}
+
+	/**
+	 * @param journalName
+	 * @param username
+	 */
 	public void checkJournalUserSubmissionFile(String journalName, String username) {
 
 		File baseFilePath = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
@@ -207,7 +293,8 @@ public class ResearcherController implements Initializable {
 		File thirdFile = new File(baseFilePath + File.separator + "ThirdSubmission.pdf");
 		File finalFile = new File(baseFilePath + File.separator + "FinalSubmission.pdf");
 
-		//======================Check First submission====================================================
+		// ======================Check First
+		// submission====================================================
 		if (firstFile.exists()) {
 			System.out.println(firstFile);
 			System.out.println(journalName + " has a directory called " + username + " and a file called "
@@ -221,8 +308,9 @@ public class ResearcherController implements Initializable {
 
 			btnSub1.setDisable(true);
 		}
-		
-		//======================Check Second submission====================================================
+
+		// ======================Check Second
+		// submission====================================================
 		if (secondFile.exists()) {
 			System.out.println(firstFile);
 			System.out.println(journalName + " has a directory called " + username + " and a file called "
@@ -236,8 +324,9 @@ public class ResearcherController implements Initializable {
 
 			btnSub2.setDisable(true);
 		}
-		
-		//======================Check Third submission====================================================
+
+		// ======================Check Third
+		// submission====================================================
 		if (thirdFile.exists()) {
 			System.out.println(firstFile);
 			System.out.println(journalName + " has a directory called " + username + " and a file called "
@@ -251,8 +340,9 @@ public class ResearcherController implements Initializable {
 
 			btnSub3.setDisable(true);
 		}
-		
-		//======================Check Final submission====================================================
+
+		// ======================Check Final
+		// submission====================================================
 		if (finalFile.exists()) {
 			System.out.println(firstFile);
 			System.out.println(journalName + " has a directory called " + username + " and a file called "
@@ -267,24 +357,6 @@ public class ResearcherController implements Initializable {
 			btnSubFinal.setDisable(true);
 		}
 
-	}
-
-	public boolean checkJournalUserDir(String journalName, String username) {
-		boolean hasUser;
-		File lookForDirFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
-				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
-				+ File.separator + username);
-
-		if (lookForDirFile.exists()) {
-			System.out.println(lookForDirFile);
-			System.out.println(journalName + " has a directory called " + username);
-			hasUser = true;
-		} else {
-			System.out.println(journalName + " doesnot directory called " + username);
-			hasUser = false;
-		}
-
-		return hasUser;
 	}
 
 	/**
@@ -303,9 +375,9 @@ public class ResearcherController implements Initializable {
 	 */
 	public void btnSub1Action(ActionEvent event) throws IOException {
 		if (event.getSource() == btnSub1) {
-			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
-					+ File.separator + "editor" + File.separator + "journals" + File.separator + "journal1"
-					+ File.separator + "researchers" + File.separator + username + File.separator + "FirstSubmission.pdf");
+			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + "journal1" + File.separator
+					+ "researchers" + File.separator + username + File.separator + "FirstSubmission.pdf");
 			util.download(PathFile);
 		}
 
@@ -316,9 +388,9 @@ public class ResearcherController implements Initializable {
 	 */
 	public void btnSub2Action(ActionEvent event) throws IOException {
 		if (event.getSource() == btnSub2) {
-			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
-					+ File.separator + "editor" + File.separator + "journals" + File.separator + "journal1"
-					+ File.separator + "researchers" + File.separator + username + File.separator + "SecondSubmission.pdf");
+			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + "journal1" + File.separator
+					+ "researchers" + File.separator + username + File.separator + "SecondSubmission.pdf");
 			util.download(PathFile);
 		}
 	}
@@ -328,9 +400,9 @@ public class ResearcherController implements Initializable {
 	 */
 	public void btnSub3Action(ActionEvent event) throws IOException {
 		if (event.getSource() == btnSub3) {
-			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
-					+ File.separator + "editor" + File.separator + "journals" + File.separator + "journal1"
-					+ File.separator + "researchers" + File.separator + username + File.separator + "ThirdSubmission.pdf");
+			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + "journal1" + File.separator
+					+ "researchers" + File.separator + username + File.separator + "ThirdSubmission.pdf");
 			util.download(PathFile);
 		}
 	}
@@ -340,9 +412,9 @@ public class ResearcherController implements Initializable {
 	 */
 	public void btnSubFinalAction(ActionEvent event) throws IOException {
 		if (event.getSource() == btnSubFinal) {
-			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
-					+ File.separator + "editor" + File.separator + "journals" + File.separator + "journal1"
-					+ File.separator + "researchers" + File.separator + username + File.separator + "FinalSubmission.pdf");
+			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + "journal1" + File.separator
+					+ "researchers" + File.separator + username + File.separator + "FinalSubmission.pdf");
 			util.download(PathFile);
 		}
 	}
@@ -352,9 +424,9 @@ public class ResearcherController implements Initializable {
 	 */
 	public void btnRev1Action(ActionEvent event) throws IOException {
 		if (event.getSource() == btnRev1) {
-			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
-					+ File.separator + "editor" + File.separator + "journals" + File.separator + "journal1"
-					+ File.separator + "researchers" + File.separator + username + File.separator + "Review1.pdf");
+			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + "journal1" + File.separator
+					+ "researchers" + File.separator + username + File.separator + "Review1.pdf");
 			util.download(PathFile);
 		}
 	}
@@ -364,9 +436,9 @@ public class ResearcherController implements Initializable {
 	 */
 	public void btnRev2Action(ActionEvent event) throws IOException {
 		if (event.getSource() == btnRev2) {
-			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
-					+ File.separator + "editor" + File.separator + "journals" + File.separator + "journal1"
-					+ File.separator + "researchers" + File.separator + username + File.separator + "Review2.pdf");
+			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + "journal1" + File.separator
+					+ "researchers" + File.separator + username + File.separator + "Review2.pdf");
 			util.download(PathFile);
 		}
 	}
@@ -376,9 +448,9 @@ public class ResearcherController implements Initializable {
 	 */
 	public void btnRevMinorAction(ActionEvent event) throws IOException {
 		if (event.getSource() == btnRevMinor) {
-			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
-					+ File.separator + "editor" + File.separator + "journals" + File.separator + "journal1"
-					+ File.separator + "researchers" + File.separator + username + File.separator + "ReviewMinor.pdf");
+			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + "journal1" + File.separator
+					+ "researchers" + File.separator + username + File.separator + "ReviewMinor.pdf");
 			util.download(PathFile);
 		}
 	}
@@ -387,8 +459,9 @@ public class ResearcherController implements Initializable {
 	 * btnUpload
 	 */
 	public void btnUploadAction(ActionEvent event) throws IOException {
-		// TODO implement the method
+
 		// Creating pop up window
+		refreshIcon.setVisible(true);
 
 		Stage stage;
 		Parent root;
@@ -412,11 +485,121 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
+	 * Checks for certain files and words inside files to determined if the
+	 * notification should be shown
+	 * 
+	 * @param journalName
+	 * @return
+	 */
+	private boolean showNotifications(String journalName) {
+		reviewerNominateStatus = "";
+		boolean notifications;
+		File path = new File(mainPath + File.separator + journalName + File.separator + "researchers" + File.separator
+				+ username + File.separator);
+		File pathToRevNomFile = new File(mainPath + File.separator + journalName + File.separator + "researchers"
+				+ File.separator + username + File.separator + File.separator + "nominatedReviewers.txt");
+//		if (path.exists())
+//			System.out.println("Path Exists " + path);
+//		else {
+//			System.out.println("Path doesnt exist " + path);
+//		}
+		StringJoiner joiner = new StringJoiner(" ");
+		String[] temp = util.listFilesInDir(path);
+		for (String string : temp) {
+			joiner.add(string);
+		}
+		notificationList = joiner.toString();
+
+		try {
+			if (pathToRevNomFile.exists())
+				reviewerNominateStatus = util.readNomRevFile(username, journalName);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (reviewerNominateStatus.contains("ASSIGNED"))
+			reviewerWasAssigned = true;
+		System.out.println("was rev assigned = " + reviewerWasAssigned);
+
+		// System.out.println(notificationList);
+		if (notificationList.contains("FinalSubmissionRejected.txt")
+				|| notificationList.contains("FinalSubmissionAccepted.txt") || reviewerWasAssigned)
+			notifications = true;
+		else
+			notifications = false;
+
+		return notifications;
+	}
+
+	/**
+	 * When clicked it display an informative alert
+	 * 
+	 * @param click
+	 */
+	public void desplayNotificationAlert(MouseEvent click) {
+
+		if (notificationList.contains("FinalSubmissionRejected.txt")) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Final Submission Update");
+			alert.setContentText(
+					"The editor has rejected your final submission. For more information please contact the Editor");
+			alert.showAndWait();
+
+		} else if (notificationList.contains("FinalSubmissionAccepted.txt")) {
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Final Submission Update");
+			alert.setContentText(
+					"Congratulations! The editor has Accepted your final submission. For more information please contact the Editor");
+			alert.showAndWait();
+		} else if (reviewerNominateStatus.contains("ASSIGNED")) {
+			String asgRevName = reviewerNominateStatus.substring(8);
+			Alert alert = new Alert(AlertType.INFORMATION);
+			alert.setTitle("Assigned Reviewer Update");
+			alert.setContentText(
+					"Congratulations! The editor has assigned you a reviewer. Your reviewer name is: " + asgRevName);
+			alert.showAndWait();
+
+		}
+		reviewerWasAssigned = false;
+		notification.setVisible(false);
+	}
+
+	/**
 	 * btnWithdraw
 	 */
 	public void btnWithdrawAction(ActionEvent event) throws IOException {
-		// TODO implement the method
-		System.out.println("Withdraw Clicked");
+		String Journal = selectJournal.getValue();
+		File withdrawFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+				+ "editor" + File.separator + "journals" + File.separator + Journal + File.separator + "researchers"
+				+ File.separator + username + File.separator + "WithdrawSubmitted.txt");
+		if (!withdrawFile.exists()) {
+			if (withdrawFile.createNewFile()) {
+				lblWithdrawPending.setStyle("-fx-text-fill:#027d00");
+				lblWithdrawPending.setText("Withdrawal has been submitted");
+				lblWithdrawPending.setVisible(true);
+				btnWithdraw.setDisable(true);
+			} else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error submitting withdrawal");
+				alert.setContentText(
+						"Unknown Error,please close window and try again. If issue persists please contact IT.");
+				alert.showAndWait();
+				btnWithdraw.setDisable(true);
+				lblWithdrawPending.setVisible(false);
+			}
+
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Withdrawal has already been submitted");
+
+			alert.setContentText("Editor is reviewing your withdrawal submission");
+
+			alert.showAndWait();
+			btnWithdraw.setDisable(true);
+			lblWithdrawPending.setVisible(false);
+		}
+
 	}
 
 	/**

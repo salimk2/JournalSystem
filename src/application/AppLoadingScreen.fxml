@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressIndicator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #DA2129;">
+         <children>
+            <ImageView fitHeight="200.0" fitWidth="250.0" layoutX="275.0" layoutY="200.0" pickOnBounds="true" smooth="false">
+               <image>
+                  <Image url="@../images/winipegLogo.png" />
+               </image>
+            </ImageView>
+            <Label alignment="CENTER" layoutY="74.0" prefHeight="18.0" prefWidth="800.0" style="-fx-font-size: 40; -fx-font-weight: bold; -fx-text-fill: white;" text="Welcome to Journal Submission System" />
+            <Label layoutX="621.0" layoutY="560.0" prefHeight="40.0" prefWidth="178.0" style="-fx-text-fill: white; -fx-font-size: 15;" text="© 2020 G15 Software Inc." />
+            <ProgressIndicator layoutX="372.0" layoutY="420.0" prefHeight="49.0" prefWidth="57.0" style="-fx-progress-color: #1fcbff;" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
