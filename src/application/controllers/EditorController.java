@@ -65,13 +65,15 @@ public class EditorController implements Initializable {
 			+ "editor" + File.separator + "journals");
 
 	// define variables
-	ObservableList<String> journalsList = FXCollections.observableArrayList();;
+	ObservableList<String> journalsList = FXCollections.observableArrayList();
+	ObservableList<EditorRecord> records = FXCollections.observableArrayList();
 
 	/// Initializes components
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
 		refreshIcon.setVisible(false);
+		btnReviewSubmissions.setDisable(true);
 
 		fillJournalComboBox();
 		// set columns
@@ -141,8 +143,6 @@ public class EditorController implements Initializable {
 	public ObservableList<EditorRecord> getRecords(String Journal) {
 		// ObservaleList behaves like an ArrayList with feature for GUI environment
 
-		ObservableList<EditorRecord> records = FXCollections.observableArrayList();
-
 		try {
 			File PathFile = new File(path + File.separator + Journal + File.separator + "researchers" + File.separator);
 
@@ -167,6 +167,7 @@ public class EditorController implements Initializable {
 
 					}
 				}
+
 			}
 
 		} catch (Exception e) {
@@ -186,6 +187,12 @@ public class EditorController implements Initializable {
 		// lblTest1.setText("journal: " + cbJournals.getValue());
 
 		tableView.setItems(getRecords(cbJournals.getValue()));
+		if (!records.isEmpty()) {
+			btnReviewSubmissions.setDisable(false);
+		} else {
+			btnReviewSubmissions.setDisable(true);
+		}
+
 	}
 
 	/**
