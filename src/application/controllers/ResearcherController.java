@@ -126,6 +126,8 @@ public class ResearcherController implements Initializable {
 		notification.setVisible(false);
 		btnNominate.setDisable(true);
 		refreshIcon.setVisible(false);
+		lblWithdrawPending.setVisible(false);
+		btnWithdraw.setDisable(true);
 
 	}
 
@@ -203,6 +205,7 @@ public class ResearcherController implements Initializable {
 			btnSub3.setDisable(true);
 			btnSubFinal.setDisable(true);
 			btnNominate.setDisable(true);
+			btnWithdraw.setDisable(true);
 			alert.setText("Journal is empty. Please submbit files to " + journalName);
 			alert.setStyle("-fx-text-fill:#d90024;");
 			alert.setVisible(true);
@@ -210,6 +213,14 @@ public class ResearcherController implements Initializable {
 			checkJournalUserSubmissionFile(journalName, username);
 			alert.setVisible(false);
 			btnNominate.setDisable(false);
+			File withdrawFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator
+					+ "researchers" + File.separator + username + File.separator + "WithdrawSubmitted.txt");
+			if (!withdrawFile.exists())
+				btnWithdraw.setDisable(false);
+			else {
+				btnWithdraw.setDisable(true);
+			}
 
 		}
 
@@ -239,6 +250,7 @@ public class ResearcherController implements Initializable {
 			btnSub3.setDisable(true);
 			btnSubFinal.setDisable(true);
 			btnNominate.setDisable(true);
+			btnWithdraw.setDisable(true);
 			alert.setText("Journal is empty. Please submbit files to " + journalName);
 			alert.setStyle("-fx-text-fill:#d90024;");
 			alert.setVisible(true);
@@ -246,6 +258,14 @@ public class ResearcherController implements Initializable {
 			checkJournalUserSubmissionFile(journalName, username);
 			alert.setVisible(false);
 			btnNominate.setDisable(false);
+			File withdrawFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator
+					+ "researchers" + File.separator + username + File.separator + "WithdrawSubmitted.txt");
+			if (!withdrawFile.exists())
+				btnWithdraw.setDisable(false);
+			else {
+				btnWithdraw.setDisable(true);
+			}
 
 		}
 		if (showNotifications(journalName))
@@ -456,6 +476,13 @@ public class ResearcherController implements Initializable {
 		System.out.println("Upload Clicked");
 	}
 
+	/**
+	 * Checks for certain files and words inside files to determined if the
+	 * notification should be shown
+	 * 
+	 * @param journalName
+	 * @return
+	 */
 	private boolean showNotifications(String journalName) {
 		reviewerNominateStatus = "";
 		boolean notifications;
@@ -497,6 +524,11 @@ public class ResearcherController implements Initializable {
 		return notifications;
 	}
 
+	/**
+	 * When clicked it display an informative alert
+	 * 
+	 * @param click
+	 */
 	public void desplayNotificationAlert(MouseEvent click) {
 
 		if (notificationList.contains("FinalSubmissionRejected.txt")) {
@@ -529,8 +561,37 @@ public class ResearcherController implements Initializable {
 	 * btnWithdraw
 	 */
 	public void btnWithdrawAction(ActionEvent event) throws IOException {
-		// TODO implement the method
-		System.out.println("Withdraw Clicked");
+		String Journal = selectJournal.getValue();
+		File withdrawFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+				+ "editor" + File.separator + "journals" + File.separator + Journal + File.separator + "researchers"
+				+ File.separator + username + File.separator + "WithdrawSubmitted.txt");
+		if (!withdrawFile.exists()) {
+			if (withdrawFile.createNewFile()) {
+				lblWithdrawPending.setStyle("-fx-text-fill:#027d00");
+				lblWithdrawPending.setText("Withdrawal has been submitted");
+				lblWithdrawPending.setVisible(true);
+				btnWithdraw.setDisable(true);
+			} else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("Error submitting withdrawal");
+				alert.setContentText(
+						"Unknown Error,please close window and try again. If issue persists please contact IT.");
+				alert.showAndWait();
+				btnWithdraw.setDisable(true);
+				lblWithdrawPending.setVisible(false);
+			}
+
+		} else {
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("Withdrawal has already been submitted");
+
+			alert.setContentText("Editor is reviewing your withdrawal submission");
+
+			alert.showAndWait();
+			btnWithdraw.setDisable(true);
+			lblWithdrawPending.setVisible(false);
+		}
+
 	}
 
 	/**

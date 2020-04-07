@@ -137,7 +137,7 @@
             </VBox>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="400.0">
                <children>
-                  <JFXButton fx:id="btnWithdraw" alignment="CENTER" buttonType="RAISED" onAction="#btnWithdrawAction" prefHeight="44.0" prefWidth="226.0" styleClass="normalBtn" stylesheets="@application.css" text="Upload Withdrawal">
+                  <JFXButton fx:id="btnWithdraw" alignment="CENTER" buttonType="RAISED" onAction="#btnWithdrawAction" prefHeight="44.0" prefWidth="226.0" styleClass="normalBtn" stylesheets="@application.css" text="Submit Withdrawal">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
