@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -47,6 +46,8 @@ public class EditorController implements Initializable {
 	@FXML
 	private TableColumn<EditorRecord, String> reviewerColumn;
 	@FXML
+	private TableColumn<EditorRecord, String> researcherColumn;
+	@FXML
 	private TableColumn<EditorRecord, LocalDate> minorRevisionColumn;
 	@FXML
 	private TableColumn<EditorRecord, LocalDate> revision1Column;
@@ -76,6 +77,7 @@ public class EditorController implements Initializable {
 
 		fillJournalComboBox();
 		// set columns
+		researcherColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("researcher"));
 		submissionColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("submission")); // instance
 																											// variable
 																											// to look
@@ -158,11 +160,32 @@ public class EditorController implements Initializable {
 						String[] subs = sub.list();
 
 						for (int j = 0; j < subs.length; j++) {
+							File deadlineFile = new File(sub + File.separator + "reviewerDeadlines.txt");
+							File getNominatedRev = new File(sub + File.separator + "nominatedReviewers.txt");
+							String reviewer = "Not Assigned";
+							if (deadlineFile.exists()) {
+								String[] deadLine = util.readRevDeadlines(res[i], Journal).split(" ");
+								LocalDate rev1 = LocalDate.parse(deadLine[0]);
+								LocalDate rev2 = LocalDate.parse(deadLine[1]);
+								LocalDate rev3 = LocalDate.parse(deadLine[2]);
 
-							if (!subs[j].contains(".txt")) // only used to ignore any txt files
-								records.add(new EditorRecord(subs[j], res[i], LocalDate.of(2020, Month.DECEMBER, 12),
-										LocalDate.of(2020, Month.DECEMBER, 20),
-										LocalDate.of(2020, Month.DECEMBER, 28)));
+								if (getNominatedRev.exists()) {
+									String[] getReviewerStrings = util.readNomRevFile(res[i], Journal).split(" ");
+//									
+									if (getReviewerStrings[0].contains("ASSIGNED")) {
+										System.out.println("you passed assigned");
+										reviewer = getReviewerStrings[1];
+									}
+								}
+
+								if (!subs[j].contains(".txt")) // only used to ignore any txt files
+									records.add(new EditorRecord(res[i], subs[j], reviewer, rev1, rev2, rev3));
+
+							} else {
+								if (!subs[j].contains(".txt")) // only used to ignore any txt files
+									records.add(new EditorRecord(res[i], subs[j], reviewer, null, null, null));
+							}
+
 						}
 
 					}

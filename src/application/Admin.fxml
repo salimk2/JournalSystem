@@ -16,17 +16,18 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <TableView fx:id="tableView" layoutX="25.0" layoutY="73.0" onMouseClicked="#columnSelected" prefHeight="393.0" prefWidth="750.0">
-         <columns>
-            <TableColumn fx:id="submissionColumn" prefWidth="150.0" text="Submissions" />
-            <TableColumn fx:id="reviewerColumn" prefWidth="150.0" text="Reviewer" />
-            <TableColumn fx:id="minorRevisionColumn" prefWidth="150.0" text="Minor Revision" />
-            <TableColumn fx:id="revision1Column" prefWidth="150.0" text="Revision 1" />
-            <TableColumn fx:id="revision2Column" prefWidth="150.0" text="Revision 2" />
-         </columns>
-      </TableView>
       <Label fx:id="lblTest1" layoutX="83.0" layoutY="488.0" text="label" />
       <Label fx:id="lblTest2" layoutX="83.0" layoutY="509.0" text="label" />
       <JFXComboBox fx:id="cbJournals" layoutX="25.0" layoutY="17.0" onAction="#journalSelected" prefHeight="31.0" prefWidth="154.0" />
+      <TableView fx:id="tableView" layoutX="26.0" layoutY="90.0" onMouseClicked="#columnSelected" prefHeight="393.0" prefWidth="750.0">
+         <columns>
+            <TableColumn fx:id="researcherColumn" prefWidth="123.33833694458008" text="Researcher" />
+            <TableColumn fx:id="submissionColumn" prefWidth="150.66163635253906" text="Submissions" />
+            <TableColumn fx:id="reviewerColumn" prefWidth="130.69174194335938" text="Reviewer" />
+            <TableColumn fx:id="minorRevisionColumn" prefWidth="108.695556640625" text="Minor Revision" />
+            <TableColumn fx:id="revision1Column" prefWidth="108.3609619140625" text="Revision 1" />
+            <TableColumn fx:id="revision2Column" prefWidth="125.0" text="Revision 2" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>

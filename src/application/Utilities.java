@@ -37,6 +37,35 @@ public class Utilities {
 	 * Only used to modify the status to the first line of this file
 	 */
 
+	public String readRevDeadlines(String researcherUsername, String journalName) throws IOException {
+		String deadline = "";
+		File readFromFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
+				+ File.separator + researcherUsername + File.separator + "reviewerDeadlines.txt");
+		try {
+
+			BufferedReader br = new BufferedReader(new FileReader(readFromFile));
+
+			String line = "";
+
+			// System.out.println("Journals:");
+			while ((line = br.readLine()) != null) {
+				deadline += line + " ";
+
+			}
+			br.close();
+			if (deadline.isEmpty()) {
+				System.out.println("There are no journals yet");
+			}
+
+		} catch (FileNotFoundException e) {
+			System.out.println("Error Loading DataBase.");
+			e.printStackTrace();
+		}
+		return deadline;
+
+	}
+
 	public void writeRevDeadlines(String username, String journalName, String date) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
