@@ -18,6 +18,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 
@@ -99,10 +101,17 @@ public class EditorAssignReviewerController implements Initializable {
 				+ "researchers" + File.separator + researcherUsername + File.separator + "nominatedReviewers.txt");
 		if (!pathFile.exists()) {
 			System.out.println("File doesnt exists " + pathFile);
-			alert.setStyle("-fx-text-fill:#d90024;");
-			alert.setText("Selected researcher hasn't Nominated reviewers" + System.getProperty("line.separator")
-					+ "Please select different Researcher if available ");
-			alert.setVisible(true);
+//			alert.setStyle("-fx-text-fill:#d90024;");
+//			alert.setText("Selected researcher hasn't Nominated reviewers" + System.getProperty("line.separator")
+//					+ "Please select different Researcher if available ");
+//			alert.setVisible(true);
+			Alert alert = new Alert(AlertType.WARNING);
+			alert.setTitle("No nominated reviewers");
+			alert.setHeaderText(researcherUsername + " hasn't nominated reviewers");
+			alert.setContentText("Please select different Researcher if available or contact " + researcherUsername
+					+ " to submit his nominee(s)");
+
+			alert.showAndWait();
 		} else {
 			System.out.println("File does exixst " + pathFile);
 //			util.modifyNominatedRevFileStatus("ASSIGNED", researcherUsername, journalSelected);

@@ -21,7 +21,7 @@
       <JFXDatePicker fx:id="dpRev2" defaultColor="#003894" editable="false" layoutX="228.0" layoutY="262.0" prefWidth="157.0" showWeekNumbers="true" />
       <JFXComboBox fx:id="cbResearcher" labelFloat="true" layoutX="49.0" layoutY="117.0" onAction="#fillReviewerComboBox" prefHeight="31.0" prefWidth="157.0" promptText="Select Researcher" />
       <JFXComboBox fx:id="cbReviewers" layoutX="228.0" layoutY="117.0" prefHeight="31.0" prefWidth="157.0" promptText="Select Reviewer" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="41.0" prefHeight="39.0" prefWidth="432.0" text="Message" />
+      <Label fx:id="alert" alignment="CENTER" contentDisplay="CENTER" layoutX="4.0" layoutY="41.0" prefHeight="39.0" prefWidth="432.0" text="Message" />
       <Label layoutX="49.0" layoutY="275.0" text="Minor/Last Revision Deadline" />
       <Label layoutX="49.0" layoutY="189.0" text="First Revision Deadline" />
       <Label layoutX="49.0" layoutY="232.0" text="Second Revision Deadline" />
