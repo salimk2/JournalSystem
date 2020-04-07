@@ -37,6 +37,20 @@ public class Utilities {
 	 * Only used to modify the status to the first line of this file
 	 */
 
+	public void writeRevDeadlines(String username, String journalName, String date) {
+		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
+				+ File.separator + username + File.separator + "reviewerDeadlines.txt");
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(writeToFile, true));
+			bw.write(date + System.getProperty("line.separator"));
+			bw.close();
+		} catch (IOException e) {
+			System.out.println("Error! Couldn't write to file");
+			e.printStackTrace();
+		}
+	}
+
 	public void modifyNominatedRevFileStatus(String status, String username, String journalName) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
