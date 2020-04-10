@@ -26,8 +26,8 @@
             <TableColumn fx:id="reviewColumn" minWidth="8.0" prefWidth="156.0" text="Review" />
          </columns>
       </TableView>
-      <JFXButton layoutX="327.0" layoutY="500.0" prefHeight="36.0" prefWidth="147.0" styleClass="normalBtn" stylesheets="@application.css" text="Download Submission" />
-      <JFXButton layoutX="612.0" layoutY="500.0" prefHeight="36.0" prefWidth="117.0" styleClass="normalBtn" stylesheets="@application.css" text="Upload Review" />
+      <JFXButton layoutX="327.0" layoutY="500.0" onAction="#downloadSubmission" prefHeight="36.0" prefWidth="147.0" styleClass="normalBtn" stylesheets="@application.css" text="Download Submission" />
+      <JFXButton layoutX="612.0" layoutY="500.0" onAction="#uploadReview" prefHeight="36.0" prefWidth="117.0" styleClass="normalBtn" stylesheets="@application.css" text="Upload Review" />
       <JFXButton layoutX="708.0" layoutY="17.0" onAction="#logout" prefHeight="36.0" prefWidth="67.0" styleClass="cancelBtn" stylesheets="@application.css" text="Logout" />
    </children>
 </AnchorPane>
