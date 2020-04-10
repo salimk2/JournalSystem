@@ -40,7 +40,6 @@ import javafx.stage.Stage;
 public class ReviewerController implements Initializable {
 	
 	private String username;
-	
 	private int type;
 	
 	private Pane content = new Pane();
@@ -72,33 +71,7 @@ public class ReviewerController implements Initializable {
 	// define variables
 	ObservableList<String> journalsList = FXCollections.observableArrayList();
 
-	/// Initializes components
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-
-		////refreshIcon.setVisible(false);
-		btnDownloadSubmission.setDisable(true);
-		btnUploadReview.setDisable(true);
-
-		fillJournalComboBox();
-		// set columns
-		researcherColumn.setCellValueFactory(new PropertyValueFactory<ReviewerRecord, String>("researcher"));
-		submissionColumn.setCellValueFactory(new PropertyValueFactory<ReviewerRecord, String>("submission")); // instance
-																											// variable
-																											// to look
-																											// for:
-																											// submission
-		deadlineColumn.setCellValueFactory(new PropertyValueFactory<ReviewerRecord, LocalDate>("deadline"));
-		reviewColumn.setCellValueFactory(new PropertyValueFactory<ReviewerRecord, LocalDate>("Review"));
-
-		// set table selection
-		tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-		// !!! test - set labels
-		// lblTest1.setText("journal: " + cbJournals.getValue());
-		// lblTest2.setText("submission: none");
-
-	}
+	
 	
 	public void setUsername(String username) {
 		this.username = username;
@@ -122,11 +95,43 @@ public class ReviewerController implements Initializable {
 		setUsername(username);
 		setType(type);
 	}
+	
+	
+	/// Initializes components
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+		////refreshIcon.setVisible(false);
+		btnDownloadSubmission.setDisable(true);
+		btnUploadReview.setDisable(true);
+
+		// set columns
+		researcherColumn.setCellValueFactory(new PropertyValueFactory<ReviewerRecord, String>("researcher"));
+		submissionColumn.setCellValueFactory(new PropertyValueFactory<ReviewerRecord, String>("submission")); // instance
+																																		// to look
+																											// for:
+																											// submission
+		deadlineColumn.setCellValueFactory(new PropertyValueFactory<ReviewerRecord, LocalDate>("deadline"));
+		reviewColumn.setCellValueFactory(new PropertyValueFactory<ReviewerRecord, LocalDate>("Review"));
+
+		// set table selection
+		tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+		// !!! test - set labels
+		// lblTest1.setText("journal: " + cbJournals.getValue());
+		// lblTest2.setText("submission: none");
+
+	}
+	
+	
 
 	/**
 	 * 
 	 */
 	private void fillJournalComboBox() {
+		
+		
+		
 		String journalList;
 		try {
 			journalList = util.readJournalList();
@@ -134,7 +139,6 @@ public class ReviewerController implements Initializable {
 			
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println("File was not found, Can't read it");
 			e.printStackTrace();
 		}
@@ -161,16 +165,19 @@ public class ReviewerController implements Initializable {
 								// Set needed variables
 								File getNominatedRev = new File(sub + File.separator + "nominatedReviewers.txt");
 								// check if there is a reviewerDeadline.txt
-								
+
 								if (getNominatedRev.exists()) {
 									// read the file and store its contents
+									
 									String[] getReviewerStrings = util.readNomRevFile(res[k], j).split(" ");
 //									
 									// check if the reviewer has been assigned and
 									if (getReviewerStrings[0].contains("ASSIGNED")) {
 										for (int rev = 1; rev < getReviewerStrings.length; rev++) {
-											if (getReviewerStrings[rev].contains(username)){
+											System.out.println("Nom " + rev + " is " + getReviewerStrings[rev]);
+											if (getReviewerStrings[rev].matches(username)){
 												journalsList.add(j);
+												getReviewerStrings = null;
 											}
 										}
 									}
@@ -190,17 +197,21 @@ public class ReviewerController implements Initializable {
 		// System.out.println(journalsList);
 		// availableJournals.getItems().clear();
 
+		
+		
 		cbJournals.setItems(journalsList);
+		
+		
 	}
 
 	@FXML
 	// Added the refresh the combobox values
 	// button
-	public void refreshPage(MouseEvent click) {
-		journalsList.clear();
-		fillJournalComboBox();
-		////refreshIcon.setVisible(false);
-
+	public void update(MouseEvent event) {
+		if(cbJournals.getItems().isEmpty()) {
+			fillJournalComboBox();
+		}
+		
 	}
 
 	/**
@@ -230,17 +241,23 @@ public class ReviewerController implements Initializable {
 							// Set needed variables
 							File deadlineFile = new File(sub + File.separator + "reviewerDeadlines.txt");
 							// check if there is a reviewerDeadline.txt
-							if (false) {  //deadlineFile.exists()
+							if (deadlineFile.exists()) {
 								// read the file, and store its contents
 								String[] deadLine = util.readRevDeadlines(res[i], Journal).split(" ");
 								LocalDate rev1 = LocalDate.parse(deadLine[0]);
 								LocalDate rev2 = LocalDate.parse(deadLine[1]);
 								LocalDate rev3 = LocalDate.parse(deadLine[2]);
 								
-							} else {
-								// if there are no deadlines then most of the data will be generic
-								if (!subs[j].contains(".txt")) // only used to ignore any txt files
-									records.add(new ReviewerRecord(res[i], subs[j], null, null));
+								if(subs[j].matches("FirstSubmission.pdf")) {
+									records.add(new ReviewerRecord(res[i], subs[j], rev1, null));
+								}
+								if(subs[j].matches("SecondSubmission.pdf")) {
+									records.add(new ReviewerRecord(res[i], subs[j], rev2, null));
+								}
+								if(subs[j].matches("ThirdSubmission.pdf")) {
+									records.add(new ReviewerRecord(res[i], subs[j], rev3, null));
+								}
+								
 							}
 
 						}
@@ -264,6 +281,8 @@ public class ReviewerController implements Initializable {
 	 */
 	public void journalSelected(ActionEvent event) {
 
+		
+		
 		ObservableList<ReviewerRecord> checkList = getRecords(cbJournals.getValue());
 		tableView.setItems(getRecords(cbJournals.getValue()));
 		if (!checkList.isEmpty()) {
