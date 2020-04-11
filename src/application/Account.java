@@ -47,7 +47,7 @@ public class Account {
 	 * Calls the function usernameRequirement(string), to verify if the username is correct
 	 * The username will now be used by the application by equaling it to this.username
 	 * 
-	 * @param user Username (String) being tested
+	 * @param user Username(String) being tested
 	 */
 	public void setUsername(String user) {
 		if (usernameRequirement(user)) {
@@ -60,7 +60,7 @@ public class Account {
 	 * Calls the function passwordRequirement(string), to verify if the password is correct
 	 * The password will be used in the application to log-in
 	 * 
-	 * @param pass The password (String) being tested
+	 * @param pass The password(String) being tested
 	 */
 	public void setPassword(String pass) {
 		if (passwordRequirement(pass)) {
@@ -82,7 +82,7 @@ public class Account {
 	}
 
 	/**
-	 * This method will select 
+	 * This method will get the account type that was previously selected to use in the application
 	 * 
 	 * @return the correct account type
 	 */
@@ -91,9 +91,9 @@ public class Account {
 	}
 
 	/**
-	 * Checks if the password matches to what the username is associated with
+	 * Checks if the password matches the specific requirements 
 	 * 
-	 * @param String password
+	 * @param password The password(String) entered to be verified 
 	 * @return True if the password matches and False if the password does not match
 	 */
 	public static Boolean passwordRequirement(String password) {
@@ -110,7 +110,7 @@ public class Account {
 	/**
 	 * Checks if the username meets the requirements 
 	 * 
-	 * @param String username
+	 * @param username The username(String) entered to be verified 
 	 * @return True if the username matches and False if the username does not match
 	 */
 	public static Boolean usernameRequirement(String username) {
