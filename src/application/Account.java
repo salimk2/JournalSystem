@@ -44,10 +44,10 @@ public class Account {
 	}
 
 	/**
-	 * Calls the function usernameRequirement(string), to verify if the username is
-	 * correct
+	 * Calls the function usernameRequirement(string), to verify if the username is correct
+	 * The username will now be used by the application by equaling it to this.username
 	 * 
-	 * @author
+	 * @param user Username (String) being tested
 	 */
 	public void setUsername(String user) {
 		if (usernameRequirement(user)) {
@@ -57,10 +57,10 @@ public class Account {
 	}
 
 	/**
-	 * Calls the function passwordRequirement(string), to verify if the password is
-	 * correct
+	 * Calls the function passwordRequirement(string), to verify if the password is correct
+	 * The password will be used in the application to log-in
 	 * 
-	 * @author
+	 * @param pass The password (String) being tested
 	 */
 	public void setPassword(String pass) {
 		if (passwordRequirement(pass)) {
@@ -69,9 +69,10 @@ public class Account {
 	}
 
 	/**
-	 * Depending on the username it will select the specific account type index
+	 * Depending on the username it will pass the specific account type index
+	 * The account type will be equal to the specific index for the application to identify the type
 	 * 
-	 * @param int type
+	 * @param type An interger that will be used to identify the account type, betweem 0 and 3
 	 */
 	public void setAccountType(int type) {
 		if (0 <= type && type <= 3) {
@@ -81,7 +82,7 @@ public class Account {
 	}
 
 	/**
-	 * This method takes the account type declared in setAccountype
+	 * This method will select 
 	 * 
 	 * @return the correct account type
 	 */
@@ -107,7 +108,7 @@ public class Account {
 	}
 
 	/**
-	 * Checks if the username matches to what the username registered
+	 * Checks if the username meets the requirements 
 	 * 
 	 * @param String username
 	 * @return True if the username matches and False if the username does not match
