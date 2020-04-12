@@ -5,5 +5,5 @@ There are three JUnit test files:
 3) UtilitiesTest.java        contains test cases for Utilities.java
 
 The AccountTest.java test file is in the application folder because
-Account.java contains protected methods. Therefore they must be in the 
+Account.java contains protected methods. Therefore they must be in the
 same package.
