@@ -36,7 +36,6 @@ public class Utilities {
 	/**
 	 * Only used to modify the status to the first line of this file
 	 */
-
 	public String readRevDeadlines(String researcherUsername, String journalName) throws IOException {
 		String deadline = "";
 		File readFromFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
