@@ -82,7 +82,7 @@ public class AccountTest {
 	/**
 	 * Test the passwordRequirement method works correctly
 	 * 
-	 * this test case is using the Boundary-Based selection,
+	 * this test case is using Boundary-Based selection,
 	 * it is checking the size boundary
 	 */
 	@Test
@@ -96,7 +96,7 @@ public class AccountTest {
 	/**
 	 * Test the usernameRequirement method works correctly
 	 * 
-	 * this test case is using the Boundary-Based selection,
+	 * this test case is using Boundary-Based selection,
 	 * it is checking the size boundary
 	 */
 	@Test
