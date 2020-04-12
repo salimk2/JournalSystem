@@ -71,8 +71,7 @@ class AuthenticatorTest {
 			System.out.println("Error reading from Login.txt, or it's empty");
 			e.printStackTrace();
 		}
-		
-	}	
+	}
 	
 	/*
 	@Test
