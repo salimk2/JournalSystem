@@ -27,7 +27,7 @@ class AuthenticatorTest {
 		assertSame("The user does not exist.", shortNum, myAuthenticator.register("username1", "password123", 0));
 		
 		// this test case will attempt to create an existing user, username1. 
-		// If it does not succeed (as expected), then 0 is not returned
+		// It should fail and return 0 (shortNum)
 		assertNotSame("The user already exists.", shortNum, myAuthenticator.register("username1", "password123", 0));
 	}
 
@@ -48,8 +48,8 @@ class AuthenticatorTest {
 		myAccount = myAuthenticator.login("username1", "password123");							// username1 exists 
 		assertSame("It should be a successful login.", 0, myAccount.getAccountType());
 		
-		myAccount = myAuthenticator.login("username2", "password123");							// username2 does not exist
-		assertSame("The username doesn't exist, therefore should unsuccessful.", null, myAccount);
+		myAccount = myAuthenticator.login("NotExist", "password123");							// NotExist does not exist
+		assertSame("The username doesn't exist, therefore should be unsuccessful.", null, myAccount);
 	}
 	
 	/**
@@ -62,13 +62,14 @@ class AuthenticatorTest {
 		
 		// executing
 		myAuthenticator = new Authenticator();
+		myAuthenticator.register("username1", "password123", 0);		// ensures login file isn't empty
 		
 		// verification
 		try {
 			myAuthenticator.ReadData();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("Error reading from Login.txt, or it's empty");
+			System.out.println("Error reading from Login.txt.");
 			e.printStackTrace();
 		}
 	}
