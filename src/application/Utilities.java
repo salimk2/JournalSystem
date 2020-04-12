@@ -202,9 +202,9 @@ public class Utilities {
 	 * Checks if a researcher has a folder for a specified journal and returns the
 	 * boolean
 	 * 
-	 * @param journalName
-	 * @param username
-	 * @return
+	 * @param journalName The journal name
+	 * @param username The username of the current user
+	 * @return True if file exist else False if file does not exist
 	 */
 	public boolean checkResearcherFileExists(String journalName, String username) {
 		boolean exists = false;
