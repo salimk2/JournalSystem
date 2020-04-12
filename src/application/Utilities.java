@@ -202,7 +202,7 @@ public class Utilities {
 	 * Checks if a researcher has a folder for a specified journal and returns the
 	 * boolean
 	 * 
-	 * @param journalName The journal name
+	 * @param journalName The journal name 
 	 * @param username The username of the current user
 	 * @return True if file exist else False if file does not exist
 	 */
@@ -220,12 +220,14 @@ public class Utilities {
 		return exists;
 	}
 
-	// creates a researcher directory
+	
+
 	/**
-	 * @param username
-	 * @param type
-	 * @param chosenJournal
-	 * @return
+	 *  This method creates a researcher directory
+	 * @param username The username of the current user
+	 * @param type The account type
+	 * @param chosenJournal the name of the selected  journal
+	 * @return True if an error was encountered and False if the researcher was created successfully
 	 */
 	public boolean createUserDir(String username, int type, String chosenJournal) {
 
@@ -272,9 +274,10 @@ public class Utilities {
 
 	}
 
-	// only used to write to journalList.txt
+	
 	/**
-	 * @param journalName
+	 *  This method is only used to write to journalList.txt
+	 * @param journalName The name of the journal being used
 	 */
 	public void writeJournalToFile(String journalName) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
@@ -289,9 +292,10 @@ public class Utilities {
 		}
 	}
 
-	// only used to read from journalList.txt
+	
 	/**
-	 * @return
+	 * This method is only used to read from journalList.txt
+	 * @return The data read from the journal
 	 * @throws IOException
 	 */
 	public String readJournalList() throws IOException {
@@ -323,10 +327,10 @@ public class Utilities {
 		return journalList;
 	}
 
-	// only used to create journal folders
-	/**
-	 * @param journalName
-	 * @return
+	
+	/** This method is used to create journal folders
+	 * @param journalName The name of the journal being used
+	 * @return True if an error occurred creating the journal directory and false for no errors
 	 */
 	public boolean createJournalDir(String journalName) {
 		boolean error;
