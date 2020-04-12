@@ -1,14 +1,28 @@
 package application.test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
 
+import application.Utilities;
+
+/**
+ * JUnit testing for the Utilities class
+ */
 class UtilitiesTest {
 
+	/**
+	 * Test the writeRevDeadlines method works correctly
+	 */
 	@Test
 	void test() {
-		fail("Not yet implemented");
+		 // setup 
+		Utilities myUtilities;
+		
+		// executing
+		myUtilities = new Utilities();
+		//myUtilities.writeRevDeadlines("username1", "journal1", date);
+		
+		// verification
+		
 	}
 
 }

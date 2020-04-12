@@ -32,28 +32,6 @@ class AuthenticatorTest {
 	}
 
 	/**
-	 * Test the ReadData method 
-	 */
-	@Test
-	void testReadData() {
-		// setup
-		Authenticator myAuthenticator;
-		
-		// executing
-		myAuthenticator = new Authenticator();
-		
-		// verification
-		try {
-			myAuthenticator.ReadData();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Error reading from Login.txt, or it's empty");
-			e.printStackTrace();
-		}
-		
-	}
-
-	/**
 	 * Test the login method 
 	 */
 	@Test
@@ -73,6 +51,28 @@ class AuthenticatorTest {
 		myAccount = myAuthenticator.login("username2", "password123");							// username2 does not exist
 		assertSame("The username doesn't exist, therefore should unsuccessful.", null, myAccount);
 	}
+	
+	/**
+	 * Test the ReadData method 
+	 */
+	@Test
+	void testReadData() {
+		// setup
+		Authenticator myAuthenticator;
+		
+		// executing
+		myAuthenticator = new Authenticator();
+		
+		// verification
+		try {
+			myAuthenticator.ReadData();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			System.out.println("Error reading from Login.txt, or it's empty");
+			e.printStackTrace();
+		}
+		
+	}	
 	
 	/*
 	@Test
