@@ -18,7 +18,6 @@ public class AccountTest {
 	 */
 	@Test
 	void testAccount() {
-		
 		// setup
 		Account myAccount;
 		
@@ -37,7 +36,6 @@ public class AccountTest {
 	 */
 	@Test
 	void testSetUsername() {
-		
 		// setup
 		Account myAccount;
 		
@@ -54,7 +52,6 @@ public class AccountTest {
 	 */
 	@Test
 	void testSetPassword() {
-		
 		// setup
 		Account myAccount;
 		
@@ -71,7 +68,6 @@ public class AccountTest {
 	 */
 	@Test
 	void testSetAccountType() {
-		
 		// setup
 		Account myAccount;
 		
@@ -91,7 +87,6 @@ public class AccountTest {
 	 */
 	@Test
 	void testPasswordRequirement() {
-		
 		// verification
 		assertFalse("The password must be at least 8 characters.", Account.passwordRequirement("abcdfgh"));		// 7
 		assertTrue("The password must be at least 8 characters.", Account.passwordRequirement("abcdfgh1"));		// 8
@@ -106,7 +101,6 @@ public class AccountTest {
 	 */
 	@Test
 	void testUsernameRequirement() {
-	
 		// verification
 		assertFalse("The username must be at least 6 characters.", Account.usernameRequirement("abcdf"));	// 5
 		assertTrue("The username must be at least 6 characters.", Account.usernameRequirement("abcdfg"));	// 6
@@ -118,7 +112,6 @@ public class AccountTest {
 	 */
 	@Test
 	void testAccountTypetoString() {
-		
 		// setup
 		Account myAccount;
 		
