@@ -64,7 +64,7 @@ public class EditorAddJournalPopUpController implements Initializable {
 	}
 
 	/** This method is the creation of the journal page, setting all the necessary labels, style and texts.
-	 * @param pressed
+	 * @param pressed event component that does a desired action when pressed
 	 * @throws IOException
 	 */
 	@FXML

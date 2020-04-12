@@ -359,8 +359,9 @@ public class Utilities {
 	}
 
 	/**
-	 * @param fileDestinPath
-	 * @param subVersion
+	 * This methods uploads a file to a selected destination
+	 * @param fileDestinPath The destination of the file that will be uploaded
+	 * @param subVersion The submission version
 	 * @throws IOException
 	 */
 	public void upload(File fileDestinPath, String subVersion) throws IOException {
@@ -389,6 +390,7 @@ public class Utilities {
 	}
 
 	/**
+	 * This methods downloads a file
 	 * @param fileOriginPath
 	 * @throws IOException
 	 */
