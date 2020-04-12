@@ -20,7 +20,7 @@ public class PasswordHashing {
     /**
 	 * This method will generate a salt string number
 	 * 
-	 * @param int length
+	 * @param length The length of the actual salt
 	 * @return a string, salt number
 	 */
      public static String getSalt(int length) {
@@ -33,8 +33,10 @@ public class PasswordHashing {
      
      /**
  	 * Hashing of the password and creating of the secret key
- 	 * 
+ 	 * @param salt The salt number
+ 	 * @param password The password to be hashed 
  	 * @throws NoSuchAlgorithm error while doing the salting 
+ 	 * @return The secret key
  	 */
     public static byte[] hash(char[] password, byte[] salt) {
         PBEKeySpec spec = new PBEKeySpec(password, salt, ITERATIONS, KEY_LENGTH);
@@ -51,8 +53,8 @@ public class PasswordHashing {
     
     /**
 	 * Hashing of the password and creation of the new protected password
-	 * @param 
-	 *  
+	 * @param password The password entered 
+	 * @param salt The salt number
 	 * @return The encoded password
 	 */
     public static String generateSecurePassword(String password, String salt) {
@@ -67,6 +69,9 @@ public class PasswordHashing {
     /**
 	 * Takes in the user password, secured password, and the salt. This method then determines if the provided password with the salt 
 	 * matches the secured password. If the password match the return value is true else false 
+	 * @param providedPassword The password before the hashing
+	 * @param securedPassword The hashed password
+	 * @param salt The salt number
 	 * @return A boolean saying the password matches or not (boolean, True or False)
 	 */
     public static boolean verifyUserPassword(String providedPassword,

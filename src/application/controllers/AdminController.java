@@ -59,7 +59,10 @@ public class AdminController implements Initializable {
 	// define variables
 	ObservableList<String> journalsList = FXCollections.observableArrayList();;
 
-	// Initializes components
+	/**
+	 * Initializes the components 
+	 * @param 
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -176,7 +179,7 @@ public class AdminController implements Initializable {
 	}
 
 	/**
-	 * journal selected method gets the journal name
+	 * This method gets the appropriate journal name
 	 * 
 	 * @param event
 	 */

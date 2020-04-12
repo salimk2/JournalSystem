@@ -35,7 +35,7 @@ public class EditorAddJournalPopUpController implements Initializable {
 	}
 
 	/**
-	 * 
+	 * To hide a certain label from being seen, or to been hiden until an action is taken to render it visible
 	 */
 	@FXML
 	public void hideLable() {
@@ -43,6 +43,7 @@ public class EditorAddJournalPopUpController implements Initializable {
 	}
 
 	/**
+	 * Goes back to the editor window
 	 * @throws IOException
 	 */
 	@FXML
@@ -52,7 +53,8 @@ public class EditorAddJournalPopUpController implements Initializable {
 	}
 
 	/**
-	 * @param pressed
+	 * The purpose of this method is when the button is pressed it will generete a Journal
+	 * @param pressed Invoke action, using space bar or a key
 	 * @throws IOException
 	 */
 	@FXML
@@ -61,7 +63,7 @@ public class EditorAddJournalPopUpController implements Initializable {
 		createJournal(pressed);
 	}
 
-	/**
+	/** This method is the creation of the journal page, setting all the necessary labels, style and texts.
 	 * @param pressed
 	 * @throws IOException
 	 */

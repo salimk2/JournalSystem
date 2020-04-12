@@ -35,6 +35,9 @@ public class Utilities {
 
 	/**
 	 * Only used to modify the status to the first line of this file
+	 * @param researcherUsername The name of the current researcher 
+	 * @param journalName The name of the journal
+	 * @return The journal with the modified line
 	 */
 
 	public String readRevDeadlines(String researcherUsername, String journalName) throws IOException {
@@ -67,9 +70,10 @@ public class Utilities {
 	}
 
 	/**
-	 * @param username
-	 * @param journalName
-	 * @param date
+	 * Writing to the file with the deadline (Reviewer)
+	 * @param username The username of the current user
+	 * @param journalName The name of the journal
+	 * @param date The current date of the deadline
 	 */
 	public void writeRevDeadlines(String username, String journalName, String date) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
@@ -86,9 +90,10 @@ public class Utilities {
 	}
 
 	/**
-	 * @param status
-	 * @param username
-	 * @param journalName
+	 * Modifying the reviewer file status
+	 * @param status The file status (Reviewer)
+	 * @param username The username of the current user
+	 * @param journalName The journal name 
 	 */
 	public void modifyNominatedRevFileStatus(String status, String username, String journalName) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
@@ -105,10 +110,10 @@ public class Utilities {
 
 	}
 
-	/**
-	 * @param username
-	 * @param reviewername
-	 * @param journalName
+	/** Write the reviewer nominations 
+	 * @param username The username of the current user
+	 * @param reviewername The name for the reviewer
+	 * @param journalName The journal name
 	 */
 	public void writeNominatedRev(String username, String reviewername, String journalName) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
@@ -125,9 +130,10 @@ public class Utilities {
 	}
 
 	/**
-	 * @param source
-	 * @param dest
-	 * @param avoidDuplicate
+	 * This methods copies a selected file to a new destination
+	 * @param source The file that needs to be copied
+	 * @param dest The new destination of the copied file
+	 * @param avoidDuplicate To determine if the file already exists
 	 * @throws IOException
 	 */
 	private void copyFile(File source, File dest, boolean avoidDuplicate) throws IOException {
