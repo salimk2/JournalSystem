@@ -89,7 +89,7 @@ public class AccountTest {
 	void testPasswordRequirement() {
 		// verification
 		assertFalse("The password must be at least 8 characters.", Account.passwordRequirement("abcdfgh"));		// 7 characters long, fail
-		assertTrue("The password must be at least 8 characters.", Account.passwordRequirement("abcdfgh1"));		// 8 characters long, pass
+		assertTrue("The password is at least 8 characters.", Account.passwordRequirement("abcdfgh1"));			// 8 characters long, pass
 		assertFalse("The password must contain at least 1 digit.", Account.passwordRequirement("abcdfghj"));
 	}	
 	
@@ -103,7 +103,7 @@ public class AccountTest {
 	void testUsernameRequirement() {
 		// verification
 		assertFalse("The username must be at least 6 characters.", Account.usernameRequirement("abcdf"));	// 5 characters long, fail
-		assertTrue("The username must be at least 6 characters.", Account.usernameRequirement("abcdfg"));	// 6 characters long, pass
+		assertTrue("The username is at least 6 characters.", Account.usernameRequirement("abcdfg"));		// 6 characters long, pass
 		assertFalse("The username must not contain spaces.", Account.usernameRequirement("abcd fghj"));
 	}		
 	
