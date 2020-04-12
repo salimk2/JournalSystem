@@ -23,12 +23,18 @@ public class EditorRecord {
 		this.revision1 = revision1;
 		this.revision2 = revision2;
 	}
+	
 
+	/**
+	 * Getters and Setters for the application
+	 */
+	
+	
 	public String getResearcher() {
 		return researcher.get();
 	}
 
-	// Getters and Setters
+	
 	public String getSubmission() {
 		return submission.get();
 	}

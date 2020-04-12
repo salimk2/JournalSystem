@@ -59,7 +59,11 @@ public class AdminController implements Initializable {
 	// define variables
 	ObservableList<String> journalsList = FXCollections.observableArrayList();;
 
-	// Initializes components
+	/**
+	 * Initializes the components 
+	 * @param location resolve relative paths for the root object,or null if the location is not known.
+	 * @param resources localize the root object, or null ifthe root object was not localized.
+	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -113,7 +117,7 @@ public class AdminController implements Initializable {
 
 	/**
 	 * getRecords this method will return an ObersableList of People objects
-	 * 
+	 * @param Journal The name of the journal being used 
 	 * @return ObservableList<EditorRecord>
 	 */
 	public ObservableList<EditorRecord> getRecords(String Journal) {
@@ -176,9 +180,9 @@ public class AdminController implements Initializable {
 	}
 
 	/**
-	 * journal selected method gets the journal name
+	 * This method gets the appropriate journal name
 	 * 
-	 * @param event
+	 * @param event component that does a desired action when pressed
 	 */
 	public void journalSelected(ActionEvent event) {
 
@@ -188,9 +192,10 @@ public class AdminController implements Initializable {
 	}
 
 	/**
+	 *
 	 * columnSelected method gets the submission file name
 	 * 
-	 * @param event
+	 * @param event component that does a desired action when pressed
 	 */
 	public void columnSelected(MouseEvent event) {
 		// create observable list of records type
@@ -201,12 +206,22 @@ public class AdminController implements Initializable {
 		}
 	}
 
-	// logout
+	/**
+	 * This methods permits to log out fo the application 
+	 * 
+	 * @param event component that does a desired action when pressed
+	 */
 	public void logout(ActionEvent event) throws IOException {
 		openNewWindow(event, "/application/Login.fxml");
 	}
 
 	// open new window (BorderPane)
+	/**
+	 * This methods permits to open new window (BorderPane)
+	 * 
+	 * @param event component that does a desired action when pressed
+	 * @param pageName This will be the name of the new window 
+	 */
 	public void openNewWindow(ActionEvent event, String pageName) throws IOException {
 		BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource(pageName));
 		Scene scene = new Scene(root);

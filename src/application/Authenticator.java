@@ -147,9 +147,9 @@ public class Authenticator {
 	}	
 	
 	/**
-	 * getComments
+	 * Gets all the comments that are left on the assigned file
 	 * @param userId, revID
-	 * @return ArrayList<String>
+	 * @return ArrayList<String> of all the comments
 	 */
 	public ArrayList<String> getComments(String userId, String revID) {
 		// create arrayList
