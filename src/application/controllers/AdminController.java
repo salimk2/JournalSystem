@@ -9,8 +9,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import application.EditorRecord;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+
+import application.AdminRecord;
 import application.Utilities;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,112 +22,157 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Controller class for reviewer.fxml
+ */
 public class AdminController implements Initializable {
-
-	/* Declare components */
+	
+	private String username;
+	private int type;
+	private File active;
+	
+	public static final String FIRST = "First";
+	public static final String SECOND = "Second";
+	public static final String THIRD = "Third";
+	
+	private Pane content = new Pane();
+	// configure table
 	@FXML
-	public ComboBox<String> cbJournals; /* Configure 'ComboBox' */
+	private TableView<AdminRecord> tableView; // configure TableView
 	@FXML
-	private TableView<EditorRecord> tableView; /* Configure 'TableView' */
+	private TableColumn<AdminRecord, String> submissionColumn;
 	@FXML
-	private TableColumn<EditorRecord, String> submissionColumn;
+	private TableColumn<AdminRecord, String> researcherColumn;
 	@FXML
-	private TableColumn<EditorRecord, String> reviewerColumn;
+	private TableColumn<AdminRecord, LocalDate> reviewerColumn;
 	@FXML
-	private TableColumn<EditorRecord, String> researcherColumn;
+	private TableColumn<AdminRecord, LocalDate> reviewColumn;
 	@FXML
-	private TableColumn<EditorRecord, LocalDate> minorRevisionColumn;
+	private JFXButton btnDownloadSubmission, btnDownloadReview;
 	@FXML
-	private TableColumn<EditorRecord, LocalDate> revision1Column;
+	public JFXComboBox<String> cbJournals;
 	@FXML
-	private TableColumn<EditorRecord, LocalDate> revision2Column;
-	@FXML
-	private Label lblTest1, lblTest2; /* !!! Testing */
+	private Label selected;
+	//@FXML
+	//private FontAwesomeIcon //refreshIcon;
 
 	private Utilities util = new Utilities();
 	private List<String> journals = new ArrayList<>();
 	private File path = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 			+ "editor" + File.separator + "journals");
 
-	/* Define variables */
-	ObservableList<String> journalsList = FXCollections.observableArrayList();;
+	// define variables
+	ObservableList<String> journalsList = FXCollections.observableArrayList();
+
+	
+	
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
 	/**
-	 * Initializes the components.
-	 * 
-	 * @param location: Resolve the relative paths for the root object, or NULL if the location is unknown.
-	 * @param resources: Localize the root object, or NULL if the root object wasn't localized.
+	 * @return
 	 */
+	public String getUsername() {
+		return username;
+	}
+
+	/**
+	 * @param type
+	 */
+	public void setType(int type) {
+		this.type = type;
+	}
+
+	public void initUser(String username, int type) {
+		setUsername(username);
+		setType(type);
+	}
+	
+	
+	/// Initializes components
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+		////refreshIcon.setVisible(false);
+		btnDownloadSubmission.setDisable(true);
+		btnDownloadReview.setDisable(true);
+
+		// set columns
+		researcherColumn.setCellValueFactory(new PropertyValueFactory<AdminRecord, String>("researcher"));
+		submissionColumn.setCellValueFactory(new PropertyValueFactory<AdminRecord, String>("submission")); // instance
+																																		// to look
+																											// for:
+																											// submission
+		reviewerColumn.setCellValueFactory(new PropertyValueFactory<AdminRecord, LocalDate>("reviewer"));
+		reviewColumn.setCellValueFactory(new PropertyValueFactory<AdminRecord, LocalDate>("review"));
+
+		// set table selection
+		tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+
+		selected.setText("Submission: ");
+
+	}
+	
+	
+
+	/**
+	 * 
+	 */
+	private void fillJournalComboBox() {
+		
+		
+		
 		String journalList;
 		try {
 			journalList = util.readJournalList();
 			journals = Arrays.asList(journalList.split(" "));
-			for (int i = 0; i < journals.size(); i++) {
-
-				String j = journals.get(i);
-
-				// System.out.println(j + " " + i);
-			}
+			
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			System.out.println("File was not found, Can't read it");
 			e.printStackTrace();
 		}
 
 		for (int i = 0; i < journals.size(); i++) {
 			String j = journals.get(i);
-			// System.out.println("Initilaizer j :" + j);
-			journalsList.add(i, j);
+			journalsList.add(j);
 		}
 		// System.out.println(journalsList);
 		// availableJournals.getItems().clear();
+		cbJournals.setItems(journalsList);	
+	}
 
-		cbJournals.setItems(journalsList);
-
-		/* Set columns */
-		researcherColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("researcher"));
-		submissionColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("submission")); /* Instance
-																											// variable
-																											// to look
-																											// for: submission */
-		reviewerColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("reviewer"));
-		minorRevisionColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("minorRevision"));
-		revision1Column.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("revision1"));
-		revision2Column.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("revision2"));
-
-		/* Set table selection */
-		tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-		/* !!! Test - Set labels */
-		lblTest1.setText("journal: " + cbJournals.getValue());
-		lblTest2.setText("submission: none");
-
+	@FXML
+	// Added the refresh the combobox values
+	// button
+	public void update(MouseEvent event) {
+		if(cbJournals.getItems().isEmpty()) {
+			fillJournalComboBox();
+		}
+		
 	}
 
 	/**
-	 * Returns an 'ObservableList' of 'People' objects.
-	 *
-	 * @param Journal: The name of the journal being used. 
-	 * @return ObservableList<EditorRecord>
+	 * getRecords this method will return an ObersableList of People objects
+	 * 
+	 * @return ObservableList<AdminRecord>
 	 */
-	public ObservableList<EditorRecord> getRecords(String Journal) {
+	public ObservableList<AdminRecord> getRecords(String Journal) {
 		// ObservaleList behaves like an ArrayList with feature for GUI environment
-		ObservableList<EditorRecord> records = FXCollections.observableArrayList();
+		ObservableList<AdminRecord> records = FXCollections.observableArrayList();
 
 		try {
 			File PathFile = new File(path + File.separator + Journal + File.separator + "researchers" + File.separator);
@@ -140,32 +189,46 @@ public class AdminController implements Initializable {
 						String[] subs = sub.list();
 
 						for (int j = 0; j < subs.length; j++) {
-							File deadlineFile = new File(sub + File.separator + "reviewerDeadlines.txt");
-							File getNominatedRev = new File(sub + File.separator + "nominatedReviewers.txt");
-							String reviewer = "Not Assigned";
-							if (deadlineFile.exists()) {
-								String[] deadLine = util.readRevDeadlines(res[i], Journal).split(" ");
-								LocalDate rev1 = LocalDate.parse(deadLine[0]);
-								LocalDate rev2 = LocalDate.parse(deadLine[1]);
-								LocalDate rev3 = LocalDate.parse(deadLine[2]);
-
-								if (getNominatedRev.exists()) {
-									String[] getReviewerStrings = util.readNomRevFile(res[i], Journal).split(" ");
-//									
-									if (getReviewerStrings[0].contains("ASSIGNED")) {
-										System.out.println("you passed assigned");
-										reviewer = getReviewerStrings[1];
-									}
+							
+							File nomFile = new File(sub + File.separator + "nominatedReviewers.txt");
+							
+							
+							if (nomFile.exists()) {
+									
+								String[] nom = util.readNomRevFile(res[i], Journal).split(" ");
+								
+								File reviewFile = new File(sub + File.separator + "reviewerReviews.txt");
+								
+								LocalDate[] rev = {null,null,null};
+								
+								if (reviewFile.exists()) {
+									String[] review = util.readRevReviews(res[i], Journal).split(" ");
+									try {
+										rev[0] = LocalDate.parse(review[0]);
+									} catch (Exception e) {;}
+									try {
+										rev[1] = LocalDate.parse(review[1]);
+									} catch (Exception e) {;}
+									try {
+										rev[2] = LocalDate.parse(review[2]);
+									} catch (Exception e) {;}
 								}
-
-								if (!subs[j].contains(".txt")) // only used to ignore any txt files
-									records.add(new EditorRecord(res[i], subs[j], reviewer, rev1, rev2, rev3));
-
-							} else {
-								if (!subs[j].contains(".txt")) // only used to ignore any txt files
-									records.add(new EditorRecord(res[i], subs[j], reviewer, null, null, null));
+								
+								
+								
+								
+								if(subs[j].matches("FirstSubmission.pdf")) {
+									records.add(new AdminRecord(res[i], subs[j], nom[1] , rev[0]));
+								}
+								if(subs[j].matches("SecondSubmission.pdf")) {
+									records.add(new AdminRecord(res[i], subs[j], nom[1], rev[1]));
+								}
+								if(subs[j].matches("ThirdSubmission.pdf")) {
+									records.add(new AdminRecord(res[i], subs[j], nom[1], rev[2]));
+								}
+	
 							}
-
+							
 						}
 
 					}
@@ -181,54 +244,75 @@ public class AdminController implements Initializable {
 	}
 
 	/**
-	 * Gets the appropriate Journal name.
+	 * journal selected method gets the journal name
 	 * 
-	 * @param event: Component that does a desired action when pressed.
+	 * @param event
 	 */
 	public void journalSelected(ActionEvent event) {
-
-		lblTest1.setText("journal: " + cbJournals.getValue());
-
 		tableView.setItems(getRecords(cbJournals.getValue()));
+		active = null;
+		selected.setText("Submission: ");
+		btnDownloadSubmission.setDisable(true);
+		btnDownloadReview.setDisable(true);
 	}
 
 	/**
-	 * Gets the Submission file name.
+	 * columnSelected method gets the submission file name
 	 * 
-	 * @param event: Component that does a desired action when pressed.
+	 * @param event
 	 */
 	public void columnSelected(MouseEvent event) {
-		/* Create 'ObservableList' of records type */
-		ObservableList<EditorRecord> records;
-		records = tableView.getSelectionModel().getSelectedItems(); /* Get row contents */
-		if (records.get(0) != null) { /* Ensures the user selected available submission */
-			lblTest2.setText("submission: " + records.get(0).getSubmission());
+		// create observable list of records type
+		ObservableList<AdminRecord> records;
+		records = tableView.getSelectionModel().getSelectedItems(); // gets row contents
+		if (records.get(0) != null && cbJournals.getValue() != null) { // ensures user selected available submission
+			 selected.setText("Submission: " + records.get(0).getSubmission());
+			 active = new File(path + File.separator + cbJournals.getValue() + File.separator + "researchers" + File.separator + records.get(0).getResearcher() + File.separator + records.get(0).getSubmission());
+			 btnDownloadSubmission.setDisable(false);
+			 
+			 //Prevents re-upload of a review
+			 if(records.get(0).getReview() == null) {
+				btnDownloadReview.setDisable(true); 
+			 } else {
+				btnDownloadReview.setDisable(false);
+			 }
+			 
+			
 		}
 	}
 
-	/**
-	 * Permits to log out for the application. 
-	 * 
-	 * @param event: Component that does a desired action when pressed.
-	 */
+	// Logout
+	@FXML
 	public void logout(ActionEvent event) throws IOException {
-		openNewWindow(event, "/application/Login.fxml");
+		openNewBorderPaneWindow(event, "/application/Login.fxml");
 	}
 
-	// open new window (BorderPane)
 
-	/**
-	 * Permits to open new window (BorderPane).
-	 * 
-	 * @param event: Component that does a desired action when pressed.
-	 * @param pageName: This will be the name of the new window. 
-	 */
-	public void openNewWindow(ActionEvent event, String pageName) throws IOException {
-		BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource(pageName));
+	
+	public void downloadSubmission(ActionEvent event) throws IOException {
+		//System.out.println("Download Clicked");
+		if(active != null) {
+			util.download(active);
+		}
+	}
+
+
+
+	
+	public void downloadReview(ActionEvent event) throws IOException {
+		//System.out.println("Upload Clicked");
+		util.download(new File(active.getParentFile() + File.separator + "Rev" + active.getName()));
+	}
+
+	// Switch Windows (BorderPane)
+	public void openNewBorderPaneWindow(ActionEvent event, String newWindow) throws IOException {
+		Parent root = FXMLLoader.load(getClass().getResource(newWindow));
 		Scene scene = new Scene(root);
 		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(scene);
 		window.show();
-
 	}
+
+	
+
 }

@@ -3,6 +3,7 @@ package application.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -307,69 +308,142 @@ public class ResearcherController implements Initializable {
 		File baseFilePath = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
 				+ File.separator + username + File.separator);
+		
 		File firstFile = new File(baseFilePath + File.separator + "FirstSubmission.pdf");
 		File secondFile = new File(baseFilePath + File.separator + "SecondSubmission.pdf");
 		File thirdFile = new File(baseFilePath + File.separator + "ThirdSubmission.pdf");
 		File finalFile = new File(baseFilePath + File.separator + "FinalSubmission.pdf");
+		
+		File firstRev = new File(baseFilePath + File.separator + "RevFirstSubmission.pdf");
+		File secondRev = new File(baseFilePath + File.separator + "RevSecondSubmission.pdf");
+		File thirdRev = new File(baseFilePath + File.separator + "RevThirdSubmission.pdf");
 
 		/*						*** Check First Submission *** 						*/
 		if (firstFile.exists()) {
-			System.out.println(firstFile);
-			System.out.println(journalName + " has a directory called " + username + " and a file called "
-					+ "FirstSubmission.pdf");
+			//System.out.println(journalName + " has a directory called " + username + " and a file called "
+			//		+ "FirstSubmission.pdf");
 
 			btnSub1.setDisable(false);
 		} else {
 
-			System.out.println(journalName + " does not have a directory called " + username
-					+ " and a file called FirstSubmission.pdf");
+			//System.out.println(journalName + " does not have a directory called " + username
+			//		+ " and a file called FirstSubmission.pdf");
 
 			btnSub1.setDisable(true);
 		}
 
 		/*						*** Check Second Submission *** 					*/
 		if (secondFile.exists()) {
-			System.out.println(firstFile);
-			System.out.println(journalName + " has a directory called " + username + " and a file called "
-					+ "SecondSubmission.pdf");
+			//System.out.println(journalName + " has a directory called " + username + " and a file called "
+			//		+ "SecondSubmission.pdf");
 
 			btnSub2.setDisable(false);
 		} else {
 
-			System.out.println(journalName + " does not have a directory called " + username
-					+ " and a file called SecondSubmission.pdf");
+			//System.out.println(journalName + " does not have a directory called " + username
+			//		+ " and a file called SecondSubmission.pdf");
 
 			btnSub2.setDisable(true);
 		}
 
 		/*						*** Check Third Submisiion *** 							*/
 		if (thirdFile.exists()) {
-			System.out.println(firstFile);
-			System.out.println(journalName + " has a directory called " + username + " and a file called "
-					+ "ThirdSubmission.pdf");
+			//System.out.println(journalName + " has a directory called " + username + " and a file called "
+			//		+ "ThirdSubmission.pdf");
 
 			btnSub3.setDisable(false);
 		} else {
 
-			System.out.println(journalName + " does not have a directory called " + username
-					+ " and a file called ThirdSubmission.pdf");
+			//System.out.println(journalName + " does not have a directory called " + username
+			//		+ " and a file called ThirdSubmission.pdf");
 
 			btnSub3.setDisable(true);
 		}
 
 		/*						*** Check Final Submission *** 							*/
 		if (finalFile.exists()) {
-			System.out.println(firstFile);
-			System.out.println(journalName + " has a directory called " + username + " and a file called "
-					+ "FinalSubmission.pdf");
+			//System.out.println(journalName + " has a directory called " + username + " and a file called "
+			//		+ "FinalSubmission.pdf");
 
 			btnSubFinal.setDisable(false);
 		} else {
 
-			System.out.println(journalName + " does not have a directory called " + username
-					+ " and a file called FinalSubmission.pdf");
+			//System.out.println(journalName + " does not have a directory called " + username
+			//		+ " and a file called FinalSubmission.pdf");
 
 			btnSubFinal.setDisable(true);
+		}
+		
+		
+		File reviewFile = new File(baseFilePath + File.separator + "reviewerReviews.txt");
+		if (reviewFile.exists()) {
+			try {
+				String[] review = util.readRevReviews(username, journalName).split(" ");
+				if (!review[0].equals("null")) {
+					lblComment1.setText(review[0]);
+				}
+				
+				if (!review[1].equals("null")) {
+					lblComment2.setText(review[1]);
+				}
+				
+				if (!review[2].equals("null")) {
+					lblCommentMinor.setText(review[2]);
+				}
+				
+				
+				
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			lblComment1.setText("");
+			lblComment2.setText("");
+			lblCommentMinor.setText("");
+		}
+		
+		
+		
+		// ======================Check First Rev
+		// submission====================================================
+		if (firstRev.exists()) {
+			//System.out.println(journalName + " has a directory called " + username + " and a file called "
+			//		+ "FirstSubmission.pdf");
+			btnRev1.setDisable(false);
+		} else {
+
+			//System.out.println(journalName + " does not have a directory called " + username
+			//		+ " and a file called FirstSubmission.pdf");
+
+			btnRev1.setDisable(true);
+		}
+
+		// ======================Check Second Rev
+		// submission====================================================
+		if (secondRev.exists()) {
+			//System.out.println(journalName + " has a directory called " + username + " and a file called "
+			//		+ "SecondSubmission.pdf");
+			btnRev2.setDisable(false);
+		} else {
+
+			//System.out.println(journalName + " does not have a directory called " + username
+			//		+ " and a file called SecondSubmission.pdf");
+
+			btnRev2.setDisable(true);
+		}
+
+		// ======================Check Third Rev
+		// submission====================================================
+		if (thirdRev.exists()) {
+			//System.out.println(journalName + " has a directory called " + username + " and a file called "
+			//		+ "ThirdSubmission.pdf");
+			btnRevMinor.setDisable(false);
+		} else {
+
+			//System.out.println(journalName + " does not have a directory called " + username
+			//		+ " and a file called ThirdSubmission.pdf");
+
+			btnRevMinor.setDisable(true);
 		}
 
 	}
@@ -456,7 +530,7 @@ public class ResearcherController implements Initializable {
 		if (event.getSource() == btnRev1) {
 			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 					+ "editor" + File.separator + "journals" + File.separator + "journal1" + File.separator
-					+ "researchers" + File.separator + username + File.separator + "Review1.pdf");
+					+ "researchers" + File.separator + username + File.separator + "RevFirstSubmission.pdf");
 			util.download(PathFile);
 		}
 	}
@@ -471,7 +545,7 @@ public class ResearcherController implements Initializable {
 		if (event.getSource() == btnRev2) {
 			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 					+ "editor" + File.separator + "journals" + File.separator + "journal1" + File.separator
-					+ "researchers" + File.separator + username + File.separator + "Review2.pdf");
+					+ "researchers" + File.separator + username + File.separator + "RevSecondSubmission.pdf");
 			util.download(PathFile);
 		}
 	}
@@ -486,7 +560,7 @@ public class ResearcherController implements Initializable {
 		if (event.getSource() == btnRevMinor) {
 			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 					+ "editor" + File.separator + "journals" + File.separator + "journal1" + File.separator
-					+ "researchers" + File.separator + username + File.separator + "ReviewMinor.pdf");
+					+ "researchers" + File.separator + username + File.separator + "RevThirdSubmission.pdf");
 			util.download(PathFile);
 		}
 	}
