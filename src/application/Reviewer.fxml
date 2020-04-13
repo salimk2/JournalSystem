@@ -15,8 +15,7 @@
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Label fx:id="lblTest1" layoutX="83.0" layoutY="488.0" text="label" />
-      <Label fx:id="lblTest2" layoutX="83.0" layoutY="509.0" text="label" />
+      <Label fx:id="selected" layoutX="83.0" layoutY="509.0" text="label" />
       <JFXComboBox fx:id="cbJournals" layoutX="25.0" layoutY="17.0" onAction="#journalSelected" onMouseClicked="#update" prefHeight="31.0" prefWidth="154.0" />
       <TableView fx:id="tableView" layoutX="77.0" layoutY="79.0" onMouseClicked="#columnSelected" prefHeight="393.0" prefWidth="647.0">
          <columns>

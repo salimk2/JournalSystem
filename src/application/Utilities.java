@@ -63,7 +63,6 @@ public class Utilities {
 			e.printStackTrace();
 		}
 		return deadline;
-
 	}
 
 	/**
@@ -78,6 +77,64 @@ public class Utilities {
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(writeToFile, true));
 			bw.write(date + System.getProperty("line.separator"));
+			bw.close();
+		} catch (IOException e) {
+			System.out.println("Error! Couldn't write to file");
+			e.printStackTrace();
+		}
+	}
+	
+	public String readRevReviews(String researcherUsername, String journalName) throws IOException {
+		String review = "";
+		File readFromFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
+				+ File.separator + researcherUsername + File.separator + "reviewerReviews.txt");
+		try {
+
+			BufferedReader br = new BufferedReader(new FileReader(readFromFile));
+
+			String line = "";
+
+			// System.out.println("Journals:");
+			while ((line = br.readLine()) != null) {
+				review += line + " ";
+
+			}
+			br.close();
+			if (review.isEmpty()) {
+				System.out.println("There are no journals yet");
+			}
+
+		} catch (FileNotFoundException e) {
+			System.out.println("Error Loading DataBase.");
+			e.printStackTrace();
+		}
+		return review;
+	}
+	
+	public void writeRevReviews(String username, String journalName, String date, int rev) {
+		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
+				+ File.separator + username + File.separator + "reviewerReviews.txt");
+		
+		String[] revDates = {null,null,null};
+		
+		if(writeToFile.exists()) {
+			try {
+				revDates = readRevReviews(username, journalName).split(" ");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		revDates[rev] = date;
+		
+		try {
+			BufferedWriter bw = new BufferedWriter(new FileWriter(writeToFile, false));
+			for (int i = 0; i < 3; i++) {
+				bw.write(revDates[i] + System.getProperty("line.separator"));
+			}
+			
 			bw.close();
 		} catch (IOException e) {
 			System.out.println("Error! Couldn't write to file");
@@ -367,7 +424,7 @@ public class Utilities {
 
 			// files.getItems().add(fileName);
 			source = selectedFile.getAbsoluteFile();
-			System.out.println("Source is : " + source + " dest is  " + localDest);
+			//System.out.println("Source is : " + source + " dest is  " + localDest);
 			copyFile(selectedFile, localDest, true);
 			message = fileName + " file uploaded succesfully";
 
@@ -394,7 +451,7 @@ public class Utilities {
 
 			// files.getItems().add(fileName);
 			File file = fileOriginPath.getAbsoluteFile();
-			System.out.println("Source is : " + file + " dest is  " + fileDest);
+			//System.out.println("Source is : " + file + " dest is  " + fileDest);
 
 			// set the flag to true to allow overriding files with the same name
 			copyFile(file, fileDest, true);
