@@ -149,7 +149,7 @@ public class EditorAssignReviewerController implements Initializable {
 	}
 
 	/**
-	 * 
+	 * Enables all buttons and elements when a Reviewer is selected.
 	 */
 	public void selectedReviewer() {
 
@@ -161,7 +161,8 @@ public class EditorAssignReviewerController implements Initializable {
 	}
 
 	/**
-	 * 
+	 * Enables the 'Researcher' ComboBox, and 'goes back' once the 
+	 * Check Journal button is invoked.
 	 */
 	public void checkJournal() {
 
