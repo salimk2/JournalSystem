@@ -58,7 +58,7 @@ public class LoginController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		// next 3 lines load the welcome page once, instead of going into a loop
+		/* Next 3 lines loads the Welcome Page once, instead of going into a loop */
 //      =================== DONT FORGET TO UNCOMMENT THIS  BELOW FOR FINAL SUBMISSION ========
 		if (!Main.isLoadScreenOn)
 			loadWelcomeWindow();
@@ -67,11 +67,10 @@ public class LoginController implements Initializable {
 		infoLabel.setVisible(false);
 
 		this.togglevisiblePassword(null);
-
 	}
 
 	/**
-	 * Create a subtle fadein animation when open
+	 * Creates a subtle fadeIn animation when opened.
 	 */
 	private void startingAnimation() {
 		FadeTransition fadeIn = new FadeTransition();
@@ -86,17 +85,17 @@ public class LoginController implements Initializable {
 	}
 
 	/**
-	 * Load and display welcome window with transition animations
+	 * Loads and displays Welcome window with transition animations.
 	 */
 	private void loadWelcomeWindow() {
 		try {
 			Main.isLoadScreenOn = true;
-			// Load splash screen view FXML
+			/* Load splash screen view FXML */
 			AnchorPane pane = FXMLLoader.load(getClass().getResource(("/application/AppLoadingScreen.fxml")));
-			// Add it to root container (Can be StackPane, AnchorPane etc)
+			/* Add it to root container (Can be StackPane, AnchorPane etc.) */
 			root.getChildren().setAll(pane);
 
-			// Load splash screen with fade in effect
+			/* Load splash screen with fade in effect */
 			FadeTransition fadeIn = new FadeTransition(Duration.seconds(.5), pane);
 			fadeIn.setFromValue(0);
 			fadeIn.setToValue(1);
@@ -111,13 +110,13 @@ public class LoginController implements Initializable {
 
 			fadeIn.play();
 
-			// After fade in, start fade out
+			/* After fade in, start fade out */
 			fadeIn.setOnFinished((e) -> {
 
 				fadeOut.play();
 			});
 
-			// After fade out, load actual content
+			/* After fade out, load actual content */
 			fadeOut.setOnFinished((e) -> {
 				try {
 					BorderPane parentContent = FXMLLoader.load(getClass().getResource(("/application/Login.fxml")));
@@ -133,7 +132,7 @@ public class LoginController implements Initializable {
 	}
 
 	/**
-	 * @param pressed
+	 * @param pressed: Action taken by user.
 	 * @throws IOException
 	 */
 	@FXML
@@ -142,7 +141,7 @@ public class LoginController implements Initializable {
 	}
 
 	/**
-	 * 
+	 * Hides error messages if error has not yet been encountered.
 	 */
 	@FXML
 	private void hideErrorMsg() {
@@ -150,7 +149,9 @@ public class LoginController implements Initializable {
 	}
 
 	/**
-	 * @param event
+	 * User has the option to view the password as it is being typed/
+	 * 
+	 * @param event: Event component that does a desired action when pressed.
 	 */
 	public void togglevisiblePassword(ActionEvent event) {
 		if (showPassword.isSelected()) {
@@ -166,7 +167,9 @@ public class LoginController implements Initializable {
 	}
 
 	/**
-	 * @param event
+	 * Opens the Registration window.
+	 * 
+	 * @param event: Event component that does a desired action when pressed.
 	 * @throws IOException
 	 */
 	public void openRegistration(MouseEvent event) throws IOException {
@@ -177,9 +180,9 @@ public class LoginController implements Initializable {
 	}
 
 	/**
-	 * Opens the correct window after a user enter credentials and presses log in
+	 * Opens the correct window after a user enters their credentials and presses 'Login'.
 	 * 
-	 * @param event
+	 * @param event: Event component that does a desired action when pressed.
 	 * @throws IOException
 	 */
 	public void buttonAction(ActionEvent event) throws IOException {
@@ -228,12 +231,12 @@ public class LoginController implements Initializable {
 
 	}
 
-	// Switch Window (AnchorPane)
+	/* Switch Window (AnchorPane) */
 	/**
-	 * @param event
-	 * @param newWindow
-	 * @param userType
-	 * @param username
+	 * @param event: Event component that does a desired action when pressed.
+	 * @param newWindow: New window to be created.
+	 * @param userType: The type of user.
+	 * @param username: The username corresponding to the that type of user.
 	 * @throws IOException
 	 */
 	public void openNewAnchorPaneWindow(ActionEvent event, String newWindow, String userType, String username)
@@ -242,9 +245,8 @@ public class LoginController implements Initializable {
 		loader.setLocation(getClass().getResource(newWindow));
 		AnchorPane root = (AnchorPane) loader.load();
 
-		// This is used to pass the username and type to the next scene in order to use
-		// this
-		// to create custom folders
+		/* This is used to pass the username and type of user to the next scene in order to use
+		   this, to be able to create custom folders */
 		if (userType == "Researcher") {
 			ResearcherController controller = loader.getController();
 			controller.initUser(username, 1);

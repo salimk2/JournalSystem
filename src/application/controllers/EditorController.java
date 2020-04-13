@@ -34,13 +34,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * Controller class for EditorV1.fxml
+ * Controller class for EditorV1.fxml.
  */
 public class EditorController implements Initializable {
 	private Pane content = new Pane();
-	// configure table
+	/* Configure table */
 	@FXML
-	private TableView<EditorRecord> tableView; // configure TableView
+	private TableView<EditorRecord> tableView; /* Configure 'TableView' */
 	@FXML
 	private TableColumn<EditorRecord, String> submissionColumn;
 	@FXML
@@ -65,10 +65,10 @@ public class EditorController implements Initializable {
 	private File path = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 			+ "editor" + File.separator + "journals");
 
-	// define variables
+	/* Define variables */
 	ObservableList<String> journalsList = FXCollections.observableArrayList();
 
-	/// Initializes components
+	/* Initializes components */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -77,29 +77,28 @@ public class EditorController implements Initializable {
 		btnReviewSubmissions.setDisable(true);
 
 		fillJournalComboBox();
-		// set columns
+		/* Set columns */
 		researcherColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("researcher"));
-		submissionColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("submission")); // instance
+		submissionColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("submission")); /* instance
 																											// variable
 																											// to look
-																											// for:
-																											// submission
+																											// for: submission */
 		reviewerColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("reviewer"));
 		minorRevisionColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("minorRevision"));
 		revision1Column.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("revision1"));
 		revision2Column.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("revision2"));
 
-		// set table selection
+		/* set table selection */
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-		// !!! test - set labels
+		/* !!! Test - Set labels */
 		// lblTest1.setText("journal: " + cbJournals.getValue());
 		// lblTest2.setText("submission: none");
 
 	}
 
 	/**
-	 * 
+	 * Loads the available 'journalsList' into the Journal combo box.
 	 */
 	private void fillJournalComboBox() {
 		String journalList;
@@ -131,8 +130,13 @@ public class EditorController implements Initializable {
 	}
 
 	@FXML
-	// Added the refresh the combobox values
-	// button
+	/* Added the refresh the ComboBox values button */
+	
+	/* 
+	 * Refreshes the page/ 
+	 *
+	 * @param click: Action taken by user.
+	 */
 	public void refreshPage(MouseEvent click) {
 		journalsList.clear();
 		fillJournalComboBox();
@@ -141,12 +145,12 @@ public class EditorController implements Initializable {
 	}
 
 	/**
-	 * getRecords this method will return an ObersableList of People objects
+	 * Returns an 'ObservableList' of 'People' objects.
 	 * 
 	 * @return ObservableList<EditorRecord>
 	 */
 	public ObservableList<EditorRecord> getRecords(String Journal) {
-		// ObservaleList behaves like an ArrayList with feature for GUI environment
+		/* ObservableList behaves like an ArrayList with feature for GUI environment */
 		ObservableList<EditorRecord> records = FXCollections.observableArrayList();
 
 		try {
@@ -164,35 +168,35 @@ public class EditorController implements Initializable {
 						String[] subs = sub.list();
 
 						for (int j = 0; j < subs.length; j++) {
-							// Set needed variables
+							/* Set needed variables */
 							File deadlineFile = new File(sub + File.separator + "reviewerDeadlines.txt");
 							File getNominatedRev = new File(sub + File.separator + "nominatedReviewers.txt");
 							String reviewer = "Not Assigned";
-							// check if there is a reviewerDeadline.txt
+							/* check if there is a 'reviewerDeadline.txt' */
 							if (deadlineFile.exists()) {
-								// read the file, and store its contents
+								/* Read the file, and store its contents */
 								String[] deadLine = util.readRevDeadlines(res[i], Journal).split(" ");
 								LocalDate rev1 = LocalDate.parse(deadLine[0]);
 								LocalDate rev2 = LocalDate.parse(deadLine[1]);
 								LocalDate rev3 = LocalDate.parse(deadLine[2]);
 
-								// check if nominatedReviewers.txt exists
+								/* Check if 'nominatedReviewers.txt' exists */
 								if (getNominatedRev.exists()) {
-									// read the file and store its contents
+									/* Read the file, and store its contents */
 									String[] getReviewerStrings = util.readNomRevFile(res[i], Journal).split(" ");
 //									
-									// check if the reviewer has been assigned and
+									/* Check if the reviewer has been assigned */
 									if (getReviewerStrings[0].contains("ASSIGNED")) {
 										reviewer = getReviewerStrings[1];
 									}
 								}
-								// if all passes then this should store relevant values
-								if (!subs[j].contains(".txt")) // only used to ignore any txt files
+								/* If all conditions passe then store relevant values here */
+								if (!subs[j].contains(".txt")) /* Only used to ignore any '.txt' files */
 									records.add(new EditorRecord(res[i], subs[j], reviewer, rev1, rev2, rev3));
 
 							} else {
-								// if there are no deadlines then most of the data will be generic
-								if (!subs[j].contains(".txt")) // only used to ignore any txt files
+								/* If there are no deadlines then most of the data will be generic */
+								if (!subs[j].contains(".txt")) /* Only used to ignore any '.txt' files */
 									records.add(new EditorRecord(res[i], subs[j], reviewer, null, null, null));
 							}
 
@@ -211,9 +215,9 @@ public class EditorController implements Initializable {
 	}
 
 	/**
-	 * journal selected method gets the journal name
+	 * Gets the current journal's name.
 	 * 
-	 * @param event
+	 * @param event: Event component that does a desired action when pressed.
 	 */
 	public void journalSelected(ActionEvent event) {
 
@@ -230,26 +234,26 @@ public class EditorController implements Initializable {
 	}
 
 	/**
-	 * columnSelected method gets the submission file name
+	 * Gets the Submission file name.
 	 * 
-	 * @param event
+	 * @param event: Event component that does a desired action when pressed.
 	 */
 	public void columnSelected(MouseEvent event) {
-		// create observable list of records type
+		/* Create 'ObservableList' of records type */
 		ObservableList<EditorRecord> records;
-		records = tableView.getSelectionModel().getSelectedItems(); // gets row contents
-		if (records.get(0) != null) { // ensures user selected available submission
+		records = tableView.getSelectionModel().getSelectedItems(); /* Gets row contents */
+		if (records.get(0) != null) { /* Ensures user selected available submission */
 			// lblTest2.setText("submission: " + records.get(0).getSubmission());
 		}
 	}
 
-	// Logout
+	/* Logout */
 	@FXML
 	public void logout(ActionEvent event) throws IOException {
 		openNewBorderPaneWindow(event, "/application/Login.fxml");
 	}
 
-	// Creating pop up window
+	/* Creating pop up window */
 	@FXML
 	public void addJournal(ActionEvent event) throws IOException {
 		refreshIcon.setVisible(true);
@@ -259,7 +263,7 @@ public class EditorController implements Initializable {
 
 		if (event.getSource() == btnAddJournal) {
 			stage = new Stage();
-			// reference editor page
+			/* Reference Editor page */
 			root = FXMLLoader.load(getClass().getResource("/application/EditorAddJournalPopUp.fxml"));
 			stage.setScene(new Scene(root));
 			stage.initModality(Modality.APPLICATION_MODAL);
@@ -270,9 +274,9 @@ public class EditorController implements Initializable {
 	}
 
 	/**
-	 * Handles and opens a window when assign rev button is pressed
+	 * Handles and opens a window when the 'Assign Reviewer' button is pressed.
 	 * 
-	 * @param event
+	 * @param event: Event component that does a desired action when pressed.
 	 * @throws IOException
 	 */
 	public void AssignReviewer(ActionEvent event) throws IOException {
@@ -285,7 +289,7 @@ public class EditorController implements Initializable {
 			stage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/application/EditorAssignReviewer.fxml"));
-			// reference editor page
+			/* Reference Editor page */
 			root = loader.load();
 			EditorAssignReviewerController controller = loader.getController();
 			controller.setJournalSelected(journalSelected);
@@ -300,9 +304,9 @@ public class EditorController implements Initializable {
 	}
 
 	/**
-	 * Handles and opens a window when review sub button is pressed
+	 * Handles and opens a window when the 'Review Submission' button is pressed.
 	 * 
-	 * @param event
+	 * @param event: Event component that does a desired action when pressed.
 	 * @throws IOException
 	 */
 	public void reviewSubmission(ActionEvent event) throws IOException {
@@ -315,7 +319,7 @@ public class EditorController implements Initializable {
 			stage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/application/EditorReviewFinalSubmission.fxml"));
-			// reference editor page
+			/* Reference Editor page */
 			root = loader.load();
 			EditorReviewFinalSubmissionController controller = loader.getController();
 			controller.setJournal(journalSelected);
@@ -327,7 +331,7 @@ public class EditorController implements Initializable {
 		}
 	}
 
-	// Switch Windows (BorderPane)
+	/* Switch Windows (BorderPane) */
 	public void openNewBorderPaneWindow(ActionEvent event, String newWindow) throws IOException {
 		Parent root = FXMLLoader.load(getClass().getResource(newWindow));
 		Scene scene = new Scene(root);

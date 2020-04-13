@@ -13,6 +13,11 @@ public class Main extends Application {
 	public static Authenticator AuthSys = new Authenticator();
 	public static Boolean isLoadScreenOn = false;
 
+	/**
+	 *  Creates the start of the Journal application (JavaFx)
+	 * @param 
+	 */
+	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 
@@ -40,7 +45,7 @@ public class Main extends Application {
 
 	/**
 	 * 
-	 * Launch the application
+	 * Launches the application
 	 */
 	public static void main(String[] args) {
 		launch(args);

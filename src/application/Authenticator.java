@@ -15,10 +15,12 @@ public class Authenticator {
 	}
 
 	/**
-	 * Register
-	 * @param username
-	 * @param password
-	 * @param type
+	 * Registers the correct username, password and account type for the application 
+	 * It will then start the hashing process if username, password and account type are correct.
+	 * 
+	 * @param username The correct username(String) that was entered
+	 * @param password The correct password(String) that was entered
+	 * @param type The correct account type(int) that was selected based 
 	 * @return
 	 */
 	public short register(String username, String password, int type) {
@@ -58,7 +60,7 @@ public class Authenticator {
 	}
 
 	/**
-	 * ReadData
+	 * Reads the data from a selected character-input stream
 	 * @throws IOException
 	 */
 	public void ReadData() throws IOException {
@@ -85,10 +87,10 @@ public class Authenticator {
 	}
 	
 	/**
-	 * login
-	 * @param username
-	 * @param password
-	 * @return
+	 * Checks for a valid log-in username, and checks for valid account with the password and hashed password
+	 * @param username The username(String) entered
+	 * @param password The password(String) entered
+	 * @return Will return nothing if the account is not found, else it will return the account with the username 
 	 */
 	public Account login(String username, String password) {
 		if (accounts.containsKey(username)) {
@@ -109,9 +111,9 @@ public class Authenticator {
 	}
 
 	/**
-	 * getSubmissions
-	 * @param userId
-	 * @return ArrayList<String>
+	 * Gets all the submissions tha were added
+	 * @param userId The userID for the submitted submissions added
+	 * @return ArrayList<String> of all the submissions 
 	 */
 	public ArrayList<String> getSubmissions(String userId) {
 		// create arrayList
@@ -127,9 +129,10 @@ public class Authenticator {
 	}
 	
 	/**
-	 * getReviews
-	 * @param userId, subID
-	 * @return ArrayList<String>
+	 *  Gets all the reviews that were added
+	 * @param userId 
+	 * @param subID
+	 * @return ArrayList<String> of all the reviews 
 	 */
 	public ArrayList<String> getReviews(String userId, String subID) {
 		// create arrayList
@@ -144,9 +147,9 @@ public class Authenticator {
 	}	
 	
 	/**
-	 * getComments
+	 * Gets all the comments that are left on the assigned file
 	 * @param userId, revID
-	 * @return ArrayList<String>
+	 * @return ArrayList<String> of all the comments
 	 */
 	public ArrayList<String> getComments(String userId, String revID) {
 		// create arrayList
