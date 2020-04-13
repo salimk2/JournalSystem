@@ -122,7 +122,7 @@ public class ReviewerController implements Initializable {
 		// set table selection
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-		selected.setText("submission: ");
+		selected.setText("Submission: ");
 
 	}
 	
@@ -295,7 +295,7 @@ public class ReviewerController implements Initializable {
 	public void journalSelected(ActionEvent event) {
 		tableView.setItems(getRecords(cbJournals.getValue()));
 		active = null;
-		selected.setText("submission: ");
+		selected.setText("Submission: ");
 		btnDownloadSubmission.setDisable(true);
 		btnUploadReview.setDisable(true);
 	}
@@ -310,7 +310,7 @@ public class ReviewerController implements Initializable {
 		ObservableList<ReviewerRecord> records;
 		records = tableView.getSelectionModel().getSelectedItems(); // gets row contents
 		if (records.get(0) != null && cbJournals.getValue() != null) { // ensures user selected available submission
-			 selected.setText("submission: " + records.get(0).getSubmission());
+			 selected.setText("Submission: " + records.get(0).getSubmission());
 			 active = new File(path + File.separator + cbJournals.getValue() + File.separator + "researchers" + File.separator + records.get(0).getResearcher() + File.separator + records.get(0).getSubmission());
 			 btnDownloadSubmission.setDisable(false);
 			 
