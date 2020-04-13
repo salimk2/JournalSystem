@@ -23,8 +23,8 @@ public class ReviewerController {
 	}
 
 	/**
-	 * @param username
-	 * @param type
+	 * @param username: Username of user.
+	 * @param type: Type of user.
 	 */
 	public void initUser(String username, int type) {
 		setUsername(username);
@@ -32,7 +32,7 @@ public class ReviewerController {
 	}
 
 	/**
-	 * @param event
+	 * @param event: Event component that does a desired action when pressed.
 	 * @throws IOException
 	 */
 	public void logout(ActionEvent event) throws IOException {
@@ -41,8 +41,10 @@ public class ReviewerController {
 	}
 
 	/**
-	 * @param event
-	 * @param pageName
+	 * Opens a new window.
+	 *
+	 * @param event: Event component that does a desired action when pressed.
+	 * @param pageName: Name of the current page displayed.
 	 * @throws IOException
 	 */
 	public void openNewWindow(ActionEvent event, String pageName) throws IOException {

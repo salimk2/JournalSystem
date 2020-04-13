@@ -41,7 +41,7 @@ public class ResearcherController implements Initializable {
 	private String username;
 	private int type;
 
-	// Declare Components
+	/* Declare Components */
 	@FXML
 	private Label lblSub1, lblSub2, lblSub3, lblSubFinal; // submissions
 	@FXML
@@ -76,14 +76,14 @@ public class ResearcherController implements Initializable {
 			+ File.separator + "journals" + File.separator);
 
 	/**
-	 * @param username
+	 * @param username: Username of the user.
 	 */
 	public void setUsername(String username) {
 		this.username = username;
 	}
 
 	/**
-	 * @return
+	 * @return username
 	 */
 	public String getUsername() {
 		return username;
@@ -96,17 +96,22 @@ public class ResearcherController implements Initializable {
 		this.type = type;
 	}
 
+	/** 
+	 * Initialize user.
+	 *
+	 * @param username: Username of the user.
+	 * @param type: Type of user.
+	 */
 	public void initUser(String username, int type) {
 		setUsername(username);
 		setType(type);
 	}
 
 	/**
-	 * Initialize the controller class
+	 * Initialize the 'Controller' class.
 	 */
 	@Override
 	public void initialize(URL url, ResourceBundle rb) {
-//		
 
 		readFile();
 		for (int i = 0; i < journals.size(); i++) {
@@ -132,7 +137,9 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
-	 * @param event
+	 * Opens the Nomination window.
+	 *
+	 * @param event: Event component that does a desired action when pressed.
 	 * @throws IOException
 	 */
 	@FXML
@@ -159,8 +166,12 @@ public class ResearcherController implements Initializable {
 	}
 
 	@FXML
-	// Added the refresh option to clear any error label and enable any available
-	// button
+	/**
+	 * Added the refresh option to clear any error label and enable any available button
+	 *
+	 * @param click: Actin taken by user. 
+	 */  
+	
 	public void refreshPage(MouseEvent click) {
 		String journalNameRefresh = selectJournal.getValue();
 		journalSelected(journalNameRefresh);
@@ -168,7 +179,7 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
-	 * 
+	 * Read file.
 	 */
 	private void readFile() {
 
@@ -191,8 +202,9 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
+	 * Processes the selected Journal.
 	 * 
-	 * @param event
+	 * @param event: Event component that does a desired action when pressed.
 	 */
 	@FXML
 	public void journalSelected(ActionEvent event) {
@@ -237,9 +249,9 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
-	 * Overloaded function to used to refresh page
+	 * Overloaded function: Used to refresh page.
 	 * 
-	 * @param journalName
+	 * @param journalName: Name of the journal.
 	 */
 	public void journalSelected(String journalName) {
 		reviewerWasAssigned = false;
@@ -280,8 +292,10 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
-	 * @param journalName
-	 * @param username
+	 * Checks if the submitted files by the 'Researcher' exist.
+	 *
+	 * @param journalName: Name of the journal submitted.
+	 * @param username: Username of the 'Researcher'.
 	 */
 	public void checkJournalUserSubmissionFile(String journalName, String username) {
 
@@ -293,8 +307,7 @@ public class ResearcherController implements Initializable {
 		File thirdFile = new File(baseFilePath + File.separator + "ThirdSubmission.pdf");
 		File finalFile = new File(baseFilePath + File.separator + "FinalSubmission.pdf");
 
-		// ======================Check First
-		// submission====================================================
+		/*						*** Check First Submission *** 						*/
 		if (firstFile.exists()) {
 			System.out.println(firstFile);
 			System.out.println(journalName + " has a directory called " + username + " and a file called "
@@ -309,8 +322,7 @@ public class ResearcherController implements Initializable {
 			btnSub1.setDisable(true);
 		}
 
-		// ======================Check Second
-		// submission====================================================
+		/*						*** Check Second Submission *** 					*/
 		if (secondFile.exists()) {
 			System.out.println(firstFile);
 			System.out.println(journalName + " has a directory called " + username + " and a file called "
@@ -325,8 +337,7 @@ public class ResearcherController implements Initializable {
 			btnSub2.setDisable(true);
 		}
 
-		// ======================Check Third
-		// submission====================================================
+		/*						*** Check Third Submisiion *** 							*/
 		if (thirdFile.exists()) {
 			System.out.println(firstFile);
 			System.out.println(journalName + " has a directory called " + username + " and a file called "
@@ -341,8 +352,7 @@ public class ResearcherController implements Initializable {
 			btnSub3.setDisable(true);
 		}
 
-		// ======================Check Final
-		// submission====================================================
+		/*						*** Check Final Submission *** 							*/
 		if (finalFile.exists()) {
 			System.out.println(firstFile);
 			System.out.println(journalName + " has a directory called " + username + " and a file called "
@@ -360,9 +370,9 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
-	 * Logout
+	 * Users logouts.
 	 * 
-	 * @param event
+	 * @param event: Event component that does a desired action when pressed.
 	 * @throws IOException
 	 */
 	public void logout(ActionEvent event) throws IOException {
@@ -371,7 +381,10 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
-	 * btnSub1
+	 * Button to view the first submitted file. 
+	 *
+	 * @param event: Event component that does a desired action when pressed.
+	 * @throws IOException
 	 */
 	public void btnSub1Action(ActionEvent event) throws IOException {
 		if (event.getSource() == btnSub1) {
@@ -384,7 +397,10 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
-	 * btnSub2
+	 * Button to view the second submitted file.
+	 *
+	 * @param event: Event component that does a desired action when pressed.
+	 * @throws IOException
 	 */
 	public void btnSub2Action(ActionEvent event) throws IOException {
 		if (event.getSource() == btnSub2) {
@@ -396,7 +412,10 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
-	 * btnSUb3
+	 * Button to view the third submitted file.
+	 *
+	 * @param event: Event component that does a desired action when pressed.
+	 * @throws IOException
 	 */
 	public void btnSub3Action(ActionEvent event) throws IOException {
 		if (event.getSource() == btnSub3) {
@@ -408,7 +427,10 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
-	 * btnSubFinal
+	 * Button to view the final submission file.
+	 *
+	 * @param event: Event component that does a desired action when pressed.
+	 * @throws IOException
 	 */
 	public void btnSubFinalAction(ActionEvent event) throws IOException {
 		if (event.getSource() == btnSubFinal) {
@@ -420,7 +442,10 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
-	 * btnRev1
+	 * Button to download the first submission review.
+	 *
+	 * @param event: Event component that does a desired action when pressed.
+	 * @throws IOException
 	 */
 	public void btnRev1Action(ActionEvent event) throws IOException {
 		if (event.getSource() == btnRev1) {
@@ -432,7 +457,10 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
-	 * btnRev2
+	 * Button to download the second submission review.
+	 *
+	 * @param event: Event component that does a desired action when pressed.
+	 * @throws IOException
 	 */
 	public void btnRev2Action(ActionEvent event) throws IOException {
 		if (event.getSource() == btnRev2) {
@@ -444,7 +472,10 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
-	 * btnRevMinor
+	 * Button to download the minor revision.
+	 *
+	 * @param event: Event component that does a desired action when pressed.
+	 * @throws IOException
 	 */
 	public void btnRevMinorAction(ActionEvent event) throws IOException {
 		if (event.getSource() == btnRevMinor) {
@@ -456,11 +487,14 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
-	 * btnUpload
+	 * Button to perform the Upload action.
+	 *
+	 * @param event: Event component that does a desired action when pressed.
+	 * @throws IOException
 	 */
 	public void btnUploadAction(ActionEvent event) throws IOException {
 
-		// Creating pop up window
+		/* Creating pop up window */
 		refreshIcon.setVisible(true);
 
 		Stage stage;
@@ -470,7 +504,7 @@ public class ResearcherController implements Initializable {
 			stage = new Stage();
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/application/ResearcherUploadDocument.fxml"));
-			// reference editor page
+			/* Reference Editor page */
 			root = loader.load();
 			ResearcherUploadDocumentController controller = loader.getController();
 			controller.setUser(username, type);
@@ -486,10 +520,10 @@ public class ResearcherController implements Initializable {
 
 	/**
 	 * Checks for certain files and words inside files to determined if the
-	 * notification should be shown
+	 * notification should be shown.
 	 * 
-	 * @param journalName
-	 * @return
+	 * @param journalName: Name of the journal.
+	 * @return notifications
 	 */
 	private boolean showNotifications(String journalName) {
 		reviewerNominateStatus = "";
@@ -533,9 +567,9 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
-	 * When clicked it display an informative alert
+	 * When clicked, it displays an informative alert.
 	 * 
-	 * @param click
+	 * @param click: Action taken by user.
 	 */
 	public void desplayNotificationAlert(MouseEvent click) {
 
@@ -566,7 +600,10 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
-	 * btnWithdraw
+	 * Button to perform the Withdraw action.
+	 *
+	 * @param event: Event component that does a desired action when pressed.
+	 * @throws IOException
 	 */
 	public void btnWithdrawAction(ActionEvent event) throws IOException {
 		String Journal = selectJournal.getValue();
@@ -605,8 +642,8 @@ public class ResearcherController implements Initializable {
 	/**
 	 * Switch Windows (BorderPane)
 	 * 
-	 * @param event
-	 * @param newWindow
+	 * @param event: Event component that does a desired action when pressed.
+	 * @param newWindow: New window to be created.
 	 * @throws IOException
 	 */
 	public void openNewBorderPaneWindow(ActionEvent event, String newWindow) throws IOException {

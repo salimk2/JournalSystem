@@ -31,11 +31,11 @@ import javafx.stage.Stage;
 
 public class AdminController implements Initializable {
 
-	// declare components
+	/* Declare components */
 	@FXML
-	public ComboBox<String> cbJournals; // configure ComboBox
+	public ComboBox<String> cbJournals; /* Configure 'ComboBox' */
 	@FXML
-	private TableView<EditorRecord> tableView; // configure TableView
+	private TableView<EditorRecord> tableView; /* Configure 'TableView' */
 	@FXML
 	private TableColumn<EditorRecord, String> submissionColumn;
 	@FXML
@@ -49,20 +49,21 @@ public class AdminController implements Initializable {
 	@FXML
 	private TableColumn<EditorRecord, LocalDate> revision2Column;
 	@FXML
-	private Label lblTest1, lblTest2; // !!! Testing
+	private Label lblTest1, lblTest2; /* !!! Testing */
 
 	private Utilities util = new Utilities();
 	private List<String> journals = new ArrayList<>();
 	private File path = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 			+ "editor" + File.separator + "journals");
 
-	// define variables
+	/* Define variables */
 	ObservableList<String> journalsList = FXCollections.observableArrayList();;
 
 	/**
-	 * Initializes the components 
-	 * @param location resolve relative paths for the root object,or null if the location is not known.
-	 * @param resources localize the root object, or null ifthe root object was not localized.
+	 * Initializes the components.
+	 * 
+	 * @param location: Resolve the relative paths for the root object, or NULL if the location is unknown.
+	 * @param resources: Localize the root object, or NULL if the root object wasn't localized.
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -94,30 +95,30 @@ public class AdminController implements Initializable {
 
 		cbJournals.setItems(journalsList);
 
-		// set columns
+		/* Set columns */
 		researcherColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("researcher"));
-		submissionColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("submission")); // instance
+		submissionColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("submission")); /* Instance
 																											// variable
 																											// to look
-																											// for:
-																											// submission
+																											// for: submission */
 		reviewerColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("reviewer"));
 		minorRevisionColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("minorRevision"));
 		revision1Column.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("revision1"));
 		revision2Column.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("revision2"));
 
-		// set table selection
+		/* Set table selection */
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-		// !!! test - set labels
+		/* !!! Test - Set labels */
 		lblTest1.setText("journal: " + cbJournals.getValue());
 		lblTest2.setText("submission: none");
 
 	}
 
 	/**
-	 * getRecords this method will return an ObersableList of People objects
-	 * @param Journal The name of the journal being used 
+	 * Returns an 'ObservableList' of 'People' objects.
+	 *
+	 * @param Journal: The name of the journal being used. 
 	 * @return ObservableList<EditorRecord>
 	 */
 	public ObservableList<EditorRecord> getRecords(String Journal) {
@@ -180,9 +181,9 @@ public class AdminController implements Initializable {
 	}
 
 	/**
-	 * This method gets the appropriate journal name
+	 * Gets the appropriate Journal name.
 	 * 
-	 * @param event component that does a desired action when pressed
+	 * @param event: Component that does a desired action when pressed.
 	 */
 	public void journalSelected(ActionEvent event) {
 
@@ -192,35 +193,35 @@ public class AdminController implements Initializable {
 	}
 
 	/**
-	 *
-	 * columnSelected method gets the submission file name
+	 * Gets the Submission file name.
 	 * 
-	 * @param event component that does a desired action when pressed
+	 * @param event: Component that does a desired action when pressed.
 	 */
 	public void columnSelected(MouseEvent event) {
-		// create observable list of records type
+		/* Create 'ObservableList' of records type */
 		ObservableList<EditorRecord> records;
-		records = tableView.getSelectionModel().getSelectedItems(); // gets row contents
-		if (records.get(0) != null) { // ensures user selected available submission
+		records = tableView.getSelectionModel().getSelectedItems(); /* Get row contents */
+		if (records.get(0) != null) { /* Ensures the user selected available submission */
 			lblTest2.setText("submission: " + records.get(0).getSubmission());
 		}
 	}
 
 	/**
-	 * This methods permits to log out fo the application 
+	 * Permits to log out for the application. 
 	 * 
-	 * @param event component that does a desired action when pressed
+	 * @param event: Component that does a desired action when pressed.
 	 */
 	public void logout(ActionEvent event) throws IOException {
 		openNewWindow(event, "/application/Login.fxml");
 	}
 
 	// open new window (BorderPane)
+
 	/**
-	 * This methods permits to open new window (BorderPane)
+	 * Permits to open new window (BorderPane).
 	 * 
-	 * @param event component that does a desired action when pressed
-	 * @param pageName This will be the name of the new window 
+	 * @param event: Component that does a desired action when pressed.
+	 * @param pageName: This will be the name of the new window. 
 	 */
 	public void openNewWindow(ActionEvent event, String pageName) throws IOException {
 		BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource(pageName));
@@ -230,5 +231,4 @@ public class AdminController implements Initializable {
 		window.show();
 
 	}
-
 }
