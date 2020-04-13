@@ -1,5 +1,6 @@
 package application.test;
 
+// Imports
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 import java.io.IOException;
@@ -7,6 +8,10 @@ import org.junit.jupiter.api.Test;
 import application.Account;
 import application.Authenticator;
 
+/**
+ * AuthenticatorTest
+ * JUnit testing for the Authenticator class 
+ */
 class AuthenticatorTest {
 
 	/**
