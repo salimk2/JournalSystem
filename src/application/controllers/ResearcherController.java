@@ -232,8 +232,11 @@ public class ResearcherController implements Initializable {
 			File withdrawFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 					+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator
 					+ "researchers" + File.separator + username + File.separator + "WithdrawSubmitted.txt");
-			if (!withdrawFile.exists())
+			if (!withdrawFile.exists()) {
 				btnWithdraw.setDisable(false);
+				lblWithdrawPending.setVisible(false);
+				
+			}
 			else {
 				btnWithdraw.setDisable(true);
 			}
@@ -277,8 +280,10 @@ public class ResearcherController implements Initializable {
 			File withdrawFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 					+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator
 					+ "researchers" + File.separator + username + File.separator + "WithdrawSubmitted.txt");
-			if (!withdrawFile.exists())
+			if (!withdrawFile.exists()) {
 				btnWithdraw.setDisable(false);
+				lblWithdrawPending.setVisible(false);
+			}			
 			else {
 				btnWithdraw.setDisable(true);
 			}
@@ -358,7 +363,7 @@ public class ResearcherController implements Initializable {
 			System.out.println(journalName + " has a directory called " + username + " and a file called "
 					+ "FinalSubmission.pdf");
 
-			btnSub1.setDisable(false);
+			btnSubFinal.setDisable(false);
 		} else {
 
 			System.out.println(journalName + " does not have a directory called " + username

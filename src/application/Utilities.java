@@ -211,10 +211,10 @@ public class Utilities {
 				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
 				+ File.separator + username);
 		exists = journal.exists() ? true : false;
-		if (exists)
-			System.out.println("File exists :" + journalName);
-		else
-			System.out.println("FIle doesnt exists");
+//		if (exists)
+//			System.out.println("File exists :" + journalName);
+//		else
+//			System.out.println("FIle doesnt exists");
 
 		return exists;
 	}
