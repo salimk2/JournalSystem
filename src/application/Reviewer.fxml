@@ -1,46 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.ReviewerController">
    <children>
-      <Label layoutX="289.0" layoutY="14.0" prefHeight="36.0" prefWidth="227.0" text="Welcome Reviewer">
+      <Label layoutX="287.0" layoutY="17.0" prefHeight="36.0" prefWidth="227.0" text="Welcome Reviewer">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Label layoutX="398.0" layoutY="69.0" text="Reviews" underline="true">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <Label layoutX="621.0" layoutY="69.0" text="Comments" underline="true">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <ListView layoutX="358.0" layoutY="99.0" prefHeight="298.0" prefWidth="156.0" />
-      <Button layoutX="402.0" layoutY="407.0" mnemonicParsing="false" text="Upload" />
-      <Button layoutX="637.0" layoutY="407.0" mnemonicParsing="false" text="Upload" />
-      <Label layoutX="104.0" layoutY="69.0" text="Submissions" underline="true">
-         <font>
-            <Font name="System Bold" size="20.0" />
-         </font>
-      </Label>
-      <ListView layoutX="45.0" layoutY="99.0" prefHeight="298.0" prefWidth="156.0" />
-      <Button layoutX="114.0" layoutY="407.0" mnemonicParsing="false" text="Download" />
-      <ListView layoutX="201.0" layoutY="99.0" prefHeight="298.0" prefWidth="76.0" />
-      <Button layoutX="308.0" layoutY="486.0" mnemonicParsing="false" text="View Nominations">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Button>
-      <TextArea layoutX="572.0" layoutY="110.0" prefHeight="283.0" prefWidth="200.0" />
-      <Button layoutX="718.0" layoutY="17.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+      <Label fx:id="selected" layoutX="83.0" layoutY="509.0" text="label" />
+      <JFXComboBox fx:id="cbJournals" layoutX="25.0" layoutY="17.0" onAction="#journalSelected" onMouseClicked="#update" prefHeight="31.0" prefWidth="154.0" />
+      <TableView fx:id="tableView" layoutX="77.0" layoutY="79.0" onMouseClicked="#columnSelected" prefHeight="393.0" prefWidth="647.0">
+         <columns>
+            <TableColumn fx:id="researcherColumn" prefWidth="153.0" text="Researcher" />
+            <TableColumn fx:id="submissionColumn" prefWidth="171.0" text="Submissions" />
+            <TableColumn fx:id="deadlineColumn" prefWidth="165.0" text="Deadline" />
+            <TableColumn fx:id="reviewColumn" minWidth="8.0" prefWidth="156.0" text="Review" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="btnDownloadSubmission" layoutX="327.0" layoutY="500.0" onAction="#downloadSubmission" prefHeight="36.0" prefWidth="147.0" styleClass="normalBtn" stylesheets="@application.css" text="Download Submission" />
+      <JFXButton fx:id="btnUploadReview" layoutX="612.0" layoutY="500.0" onAction="#uploadReview" prefHeight="36.0" prefWidth="117.0" styleClass="normalBtn" stylesheets="@application.css" text="Upload Review" />
+      <JFXButton layoutX="708.0" layoutY="17.0" onAction="#logout" prefHeight="36.0" prefWidth="67.0" styleClass="cancelBtn" stylesheets="@application.css" text="Logout" />
    </children>
 </AnchorPane>

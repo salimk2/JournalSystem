@@ -40,11 +40,10 @@ public class ResearcherNominateReviewerController implements Initializable {
 	private ObservableList<String> chosenRevs;
 
 	/**
-	 * Used to get the username and currenttly selected journal from
-	 * ResearcherController
+	 * Gets the username and the currenttly selected journal from the 'ResearchControler' class
 	 * 
-	 * @param username
-	 * @param journalName
+	 * @param username: Username of the user.
+	 * @param journalName: Name of the journal.
 	 */
 	public void setUserInfo(String username, String journalName) {
 		researcherUsername = username;
@@ -52,19 +51,19 @@ public class ResearcherNominateReviewerController implements Initializable {
 	}
 
 	/**
-	 *
+	 * Initialize needed components.
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		message.setVisible(false);
-		// try to read reviewers from login.txt
+		/* Try to read Reviewers from 'login.txt' */
 		try {
 			readReviewers();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// add the reviewers found to the arraylist
+		/* Add the Reviewers found to 'reviewerList' */
 		for (int i = 0; i < reviewersRead.size(); i++) {
 			String j = reviewersRead.get(i);
 			list.add(i, j);
@@ -76,17 +75,18 @@ public class ResearcherNominateReviewerController implements Initializable {
 	}
 
 	/**
-	 * 
+	 * Hides a particular label from being seen. It may be hidden until an action is taken to render it visible.
 	 */
 	@FXML
 	public void hideLabel() {
-
 		message.setVisible(false);
 
 	}
 
 	/**
-	 * @param event
+	 * Goes back to original window. 
+	 *
+	 * @param event: Event component that does a desired action when pressed.
 	 */
 	@FXML
 	public void goBack(ActionEvent event) {
@@ -98,7 +98,7 @@ public class ResearcherNominateReviewerController implements Initializable {
 	}
 
 	/**
-	 * 
+	 * Nominates whichever Reviewer is desired.
 	 */
 	@FXML
 	public void nominateReviewer() {
@@ -121,7 +121,9 @@ public class ResearcherNominateReviewerController implements Initializable {
 	}
 
 	/**
-	 * @return
+	 * Displays the nomination confirmation message window.
+	 *
+	 * @return success
 	 */
 	private boolean displayNominateConfirmationMsg() {
 		boolean success;
@@ -151,7 +153,7 @@ public class ResearcherNominateReviewerController implements Initializable {
 	}
 
 	/**
-	 * Reads and stores all the reviewers with an account *
+	 * Reads and stores all the Reviewers with an account.
 	 * 
 	 * @throws IOException
 	 */

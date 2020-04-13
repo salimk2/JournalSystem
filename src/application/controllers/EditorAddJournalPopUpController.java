@@ -28,6 +28,9 @@ public class EditorAddJournalPopUpController implements Initializable {
 	private Label confirmation;
 
 	@Override
+	/**
+	 * Initializes needed components.
+	 */
 	public void initialize(URL location, ResourceBundle resources) {
 		goBack.setVisible(false);
 		confirmation.setVisible(false);
@@ -35,7 +38,7 @@ public class EditorAddJournalPopUpController implements Initializable {
 	}
 
 	/**
-	 * 
+	 * Hides a particular label from being seen. It may be hidden until an action is taken to render it visible.
 	 */
 	@FXML
 	public void hideLable() {
@@ -43,6 +46,7 @@ public class EditorAddJournalPopUpController implements Initializable {
 	}
 
 	/**
+	 * Goes back to the editor window.
 	 * @throws IOException
 	 */
 	@FXML
@@ -52,7 +56,9 @@ public class EditorAddJournalPopUpController implements Initializable {
 	}
 
 	/**
-	 * @param pressed
+	 * When a button is pressed, it will generate a Journal entry.
+	 * 
+	 * @param pressed Invoke an action, using space bar or a key.
 	 * @throws IOException
 	 */
 	@FXML
@@ -61,8 +67,10 @@ public class EditorAddJournalPopUpController implements Initializable {
 		createJournal(pressed);
 	}
 
-	/**
-	 * @param pressed
+	/** 
+	 * Creates the Journal page, setting all the necessary labels, style, and texts.
+	 * 
+	 * @param pressed: Event component that does a desired action when pressed.
 	 * @throws IOException
 	 */
 	@FXML

@@ -44,7 +44,7 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 	}
 
 	/**
-	 *
+	 * Initialize needed components.
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -63,7 +63,7 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 	}
 
 	/**
-	 * Button that loads the application and fills the researcher combo box
+	 * Button that loads the application and fills the 'Researcher' combo box.
 	 */
 	public void getResearchers() {
 		fillResearcherComboBox();
@@ -79,7 +79,7 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 	}
 
 	/**
-	 * 
+	 * Loads the variable 'researcherList' into the 'Researcher' combo box.
 	 */
 	private void fillResearcherComboBox() {
 		File path = new File(mainPath + File.separator + Journal + File.separator + "researchers" + File.separator);
@@ -95,7 +95,7 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 	}
 
 	/**
-	 * handles what happens when a researcher is selected inside the combo box
+	 * Handles what happens when a Researcher is selected inside the combo box.
 	 */
 	public void researcherWasSelected() {
 		btnDownload.setDisable(false);
@@ -104,9 +104,9 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 	}
 
 	/**
-	 * handles the download of final submission if this exists
+	 * Handles the download of a final submission, if this exists.
 	 * 
-	 * @param event
+	 * @param event: Event component that does a desired action when pressed.
 	 * @throws IOException
 	 */
 	public void downloadFinalSub(ActionEvent event) throws IOException {
@@ -142,7 +142,7 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 	}
 
 	/**
-	 * Accepts submissions
+	 * Accepts the submitted file.
 	 * 
 	 * @throws IOException
 	 */
@@ -192,7 +192,7 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 	}
 
 	/**
-	 * reject submissions
+	 * Rejects the submitted file.
 	 * 
 	 * @throws IOException
 	 */
@@ -243,9 +243,9 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 	}
 
 	/**
-	 * Go back to main editor page
+	 * Go back to main Editor page.
 	 * 
-	 * @param event
+	 * @param event: Event component that does a desired action when pressed.
 	 */
 	@FXML
 	public void goBack(ActionEvent event) {
