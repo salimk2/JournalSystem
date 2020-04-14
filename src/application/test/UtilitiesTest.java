@@ -114,7 +114,7 @@ class UtilitiesTest {
 	@Test
 	void testReadJournalList() {
 		// PLease update if new journals are added before testing
-		String JournalsAvailable = "journal1 journal2 journal3 journal4 journal5 journal6 testJournal ";
+		String JournalsAvailable = "Seng Math Science ";
 		String readJournals = "";
 		try {
 			readJournals = testingUtil.readJournalList();

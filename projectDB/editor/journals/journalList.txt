@@ -1,1 +1,3 @@
 Seng
+Math
+Science
