@@ -7,10 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-
 import application.Utilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -20,6 +18,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ * ResearcherUploadDocumentController
+ * 
+ * Controller class for ResearcherUploadDocument.FXML
+ */
 public class ResearcherUploadDocumentController implements Initializable {
 
 	private String username;
@@ -61,17 +64,13 @@ public class ResearcherUploadDocumentController implements Initializable {
 		readFile();
 		for (int i = 0; i < journals.size(); i++) {
 			String j = journals.get(i);
-			// System.out.println("Initilaizer j :" + j);
 			list.add(i, j);
 		}
 		System.out.println(list);
-		// availableJournals.getItems().clear();
 
 		availableJournals.setItems(list);
 		submissionNumber.setItems(subNum);
 		messageLabel.setVisible(false);
-		// btnUploadToJournal.setDisable(true);
-
 	}
 
 	/**
@@ -91,7 +90,6 @@ public class ResearcherUploadDocumentController implements Initializable {
 	 * Creates a personal folder for the current user.
 	 */
 	public void createUserFolder() {
-		// btnUploadToJournal.setDisable(true);
 		boolean dirError = false;
 		if (!availableJournals.getSelectionModel().isEmpty()) {
 			String chosenJournal = availableJournals.getValue();
@@ -100,20 +98,16 @@ public class ResearcherUploadDocumentController implements Initializable {
 			if (!dirError) {
 
 				messageLabel.setStyle("-fx-text-fill:#027d00;");
-
 				messageLabel.setText(util.getMessage());
 				messageLabel.setVisible(true);
-				// btnUploadToJournal.setDisable(false);
 
 			} else {
 				messageLabel.setStyle("-fx-text-fill:#d90024;");
-
 				messageLabel.setText(util.getMessage());
 				messageLabel.setVisible(true);
 			}
 		} else {
 			messageLabel.setStyle("-fx-text-fill:#d90024;");
-
 			messageLabel.setText("Please select a journal first." + System.getProperty("line.separator")
 					+ "If no Journal available please contact the Editor");
 			messageLabel.setVisible(true);

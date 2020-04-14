@@ -14,6 +14,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ * EditorAddJournalPopUpController
+ * 
+ * Controller class for EditorAddJournalPopUp.FXML
+ */
 public class EditorAddJournalPopUpController implements Initializable {
 
 	@FXML

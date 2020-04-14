@@ -4,6 +4,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Authenticator
+ * 
+ */
 public class Authenticator {
 
 	private HashMap<String, Account> accounts = new HashMap<String, Account>();
@@ -94,6 +98,7 @@ public class Authenticator {
 	 */
 	public Account login(String username, String password) {
 		if (accounts.containsKey(username)) {
+			
 			//compare password against hashed password
 			boolean pwdHashMatch =PasswordHashing.verifyUserPassword(password,accounts.get(username).getPassword(), accounts.get(username).getSalt());
 			System.out.println("this is the hashed pwd: " +accounts.get(username).getPassword() +"math: " + pwdHashMatch);

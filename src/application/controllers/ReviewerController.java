@@ -35,6 +35,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
+ * ReviewerController
+ * 
  * Controller class for reviewer.fxml
  */
 public class ReviewerController implements Initializable {
@@ -65,8 +67,6 @@ public class ReviewerController implements Initializable {
 	public JFXComboBox<String> cbJournals;
 	@FXML
 	private Label selected;
-	//@FXML
-	//private FontAwesomeIcon //refreshIcon;
 
 	private Utilities util = new Utilities();
 	private List<String> journals = new ArrayList<>();
@@ -196,8 +196,7 @@ public class ReviewerController implements Initializable {
 			}
 			
 		}
-		// System.out.println(journalsList);
-		// availableJournals.getItems().clear();
+
 		cbJournals.setItems(journalsList);	
 	}
 
@@ -334,17 +333,12 @@ public class ReviewerController implements Initializable {
 
 	
 	public void downloadSubmission(ActionEvent event) throws IOException {
-		//System.out.println("Download Clicked");
 		if(active != null) {
 			util.download(active);
 		}
 	}
 
-
-
-	
 	public void uploadReview(ActionEvent event) throws IOException {
-		//System.out.println("Upload Clicked");
 		String filename;
 		String suffix = "Submission.pdf";
 		String num = active.getName().substring(0, active.getName().length() - suffix.length()); //removes "Submission.pdf"

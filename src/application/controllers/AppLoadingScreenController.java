@@ -10,6 +10,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
+/**
+ * AppLoadingScreenController
+ * 
+ * Controller class for AppLoadingScreen.FXML
+ */
 public class AppLoadingScreenController implements Initializable {
 	@FXML
 	private StackPane rootPane;

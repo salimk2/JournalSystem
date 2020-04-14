@@ -15,13 +15,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
+/**
+ * Utilities
+ */
 public class Utilities {
 
 	private FileChooser upload = new FileChooser();
 	private DirectoryChooser download = new DirectoryChooser();
-//	private ArrayList<File> storefiles = new ArrayList<>();
-//	private HashMap<String, File> fileStorage = new HashMap<>();
-
 	private String message;
 
 	public String getMessage() {
@@ -50,7 +50,6 @@ public class Utilities {
 
 			String line = "";
 
-			// System.out.println("Journals:");
 			while ((line = br.readLine()) != null) {
 				deadline += line + " ";
 
@@ -103,7 +102,6 @@ public class Utilities {
 
 			String line = "";
 
-			// System.out.println("Journals:");
 			while ((line = br.readLine()) != null) {
 				review += line + " ";
 
@@ -249,7 +247,6 @@ public class Utilities {
 
 			String line = "";
 
-			// System.out.println("Journals:");
 			while ((line = br.readLine()) != null) {
 				reviewer += line + " ";
 
@@ -281,10 +278,6 @@ public class Utilities {
 				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
 				+ File.separator + username);
 		exists = journal.exists() ? true : false;
-//		if (exists)
-//			System.out.println("File exists :" + journalName);
-//		else
-//			System.out.println("FIle doesnt exists");
 
 		return exists;
 	}
@@ -378,7 +371,6 @@ public class Utilities {
 
 			String line = "";
 
-			// System.out.println("Journals:");
 			while ((line = br.readLine()) != null) {
 				journalList += line + " ";
 
@@ -387,7 +379,6 @@ public class Utilities {
 			if (journalList.isEmpty()) {
 				System.out.println("There are no journals yet");
 			}
-			// System.out.println("Inside Utilities the journals are: "+journalList);
 
 		} catch (FileNotFoundException e) {
 			System.out.println("Error Loading DataBase.");
@@ -445,9 +436,7 @@ public class Utilities {
 
 			File localDest = new File(fileDestinPath + File.separator + fileName);
 
-			// files.getItems().add(fileName);
 			source = selectedFile.getAbsoluteFile();
-			//System.out.println("Source is : " + source + " dest is  " + localDest);
 			copyFile(selectedFile, localDest, true);
 			message = fileName + " file uploaded succesfully";
 
@@ -475,7 +464,6 @@ public class Utilities {
 
 			// files.getItems().add(fileName);
 			File file = fileOriginPath.getAbsoluteFile();
-			//System.out.println("Source is : " + file + " dest is  " + fileDest);
 
 			// set the flag to true to allow overriding files with the same name
 			copyFile(file, fileDest, true);

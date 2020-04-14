@@ -5,7 +5,8 @@ import java.time.LocalDate;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- * Class for the table in the Editor window
+ * AdminRecord
+ * Class for the table in the Admin window
  */
 public class AdminRecord {
 

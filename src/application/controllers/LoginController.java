@@ -30,6 +30,11 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * LoginController
+ * 
+ * Controller class for Login.FXML
+ */
 public class LoginController implements Initializable {
 
 	public static final String ADMIN = "Admin";
