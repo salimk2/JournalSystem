@@ -14,6 +14,12 @@ import org.junit.jupiter.api.Test;
 
 import application.Utilities;
 
+/**
+ * UtilitiesTest
+ * 
+ * JUnit testing for Utilities.java class
+ *
+ */
 class UtilitiesTest {
 
 	Utilities testingUtil = new Utilities();

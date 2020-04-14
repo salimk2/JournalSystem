@@ -12,6 +12,7 @@ import java.util.HashMap;
 /**
  * Authenticator
  * 
+ * Authenticator.java registers new users and authenticates user data.
  */
 public class Authenticator {
 

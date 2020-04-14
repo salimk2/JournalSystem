@@ -6,7 +6,8 @@ import javafx.beans.property.SimpleStringProperty;
 
 /**
  * ReviewerRecord
- * Class for the table in the Editor window
+ * 
+ * Class for the table in the Reviewer window
  */
 public class ReviewerRecord {
 

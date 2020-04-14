@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 
 /**
  * Utilities
+ * 
+ * Contains utilities methods for Journal System.
  */
 public class Utilities {
 

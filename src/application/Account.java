@@ -2,6 +2,7 @@ package application;
 
 /**
  * Account
+ * 
  * Account.java creates user accounts
  */
 public class Account {

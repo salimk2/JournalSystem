@@ -12,7 +12,9 @@ import application.Account;
 import application.Authenticator;
 
 /**
- * AuthenticatorTest JUnit testing for the Authenticator class
+ * AuthenticatorTest 
+ * 
+ * JUnit testing for the Authenticator.java class
  */
 class AuthenticatorTest {
 
