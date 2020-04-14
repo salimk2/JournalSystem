@@ -39,7 +39,6 @@ public class Utilities {
 	 * @param journalName The name of the journal
 	 * @return The journal with the modified line
 	 */
-
 	public String readRevDeadlines(String researcherUsername, String journalName) throws IOException {
 		String deadline = "";
 		File readFromFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
