@@ -3,7 +3,6 @@ package application.controllers;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -97,11 +96,11 @@ public class ResearcherController implements Initializable {
 		this.type = type;
 	}
 
-	/** 
+	/**
 	 * Initialize user.
 	 *
 	 * @param username: Username of the user.
-	 * @param type: Type of user.
+	 * @param type:     Type of user.
 	 */
 	public void initUser(String username, int type) {
 		setUsername(username);
@@ -168,11 +167,12 @@ public class ResearcherController implements Initializable {
 
 	@FXML
 	/**
-	 * Added the refresh option to clear any error label and enable any available button
+	 * Added the refresh option to clear any error label and enable any available
+	 * button
 	 *
-	 * @param click: Actin taken by user. 
-	 */  
-	
+	 * @param click: Actin taken by user.
+	 */
+
 	public void refreshPage(MouseEvent click) {
 		String journalNameRefresh = selectJournal.getValue();
 		journalSelected(journalNameRefresh);
@@ -236,9 +236,8 @@ public class ResearcherController implements Initializable {
 			if (!withdrawFile.exists()) {
 				btnWithdraw.setDisable(false);
 				lblWithdrawPending.setVisible(false);
-				
-			}
-			else {
+
+			} else {
 				btnWithdraw.setDisable(true);
 			}
 
@@ -284,8 +283,7 @@ public class ResearcherController implements Initializable {
 			if (!withdrawFile.exists()) {
 				btnWithdraw.setDisable(false);
 				lblWithdrawPending.setVisible(false);
-			}			
-			else {
+			} else {
 				btnWithdraw.setDisable(true);
 			}
 
@@ -301,80 +299,87 @@ public class ResearcherController implements Initializable {
 	 * Checks if the submitted files by the 'Researcher' exist.
 	 *
 	 * @param journalName: Name of the journal submitted.
-	 * @param username: Username of the 'Researcher'.
+	 * @param username:    Username of the 'Researcher'.
 	 */
 	public void checkJournalUserSubmissionFile(String journalName, String username) {
 
 		File baseFilePath = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
 				+ File.separator + username + File.separator);
-		
+
 		File firstFile = new File(baseFilePath + File.separator + "FirstSubmission.pdf");
 		File secondFile = new File(baseFilePath + File.separator + "SecondSubmission.pdf");
 		File thirdFile = new File(baseFilePath + File.separator + "ThirdSubmission.pdf");
 		File finalFile = new File(baseFilePath + File.separator + "FinalSubmission.pdf");
-		
+
 		File firstRev = new File(baseFilePath + File.separator + "RevFirstSubmission.pdf");
 		File secondRev = new File(baseFilePath + File.separator + "RevSecondSubmission.pdf");
 		File thirdRev = new File(baseFilePath + File.separator + "RevThirdSubmission.pdf");
 
-		/*						*** Check First Submission *** 						*/
+		/* *** Check First Submission *** */
 		if (firstFile.exists()) {
-			//System.out.println(journalName + " has a directory called " + username + " and a file called "
-			//		+ "FirstSubmission.pdf");
+			// System.out.println(journalName + " has a directory called " + username + "
+			// and a file called "
+			// + "FirstSubmission.pdf");
 
 			btnSub1.setDisable(false);
 		} else {
 
-			//System.out.println(journalName + " does not have a directory called " + username
-			//		+ " and a file called FirstSubmission.pdf");
+			// System.out.println(journalName + " does not have a directory called " +
+			// username
+			// + " and a file called FirstSubmission.pdf");
 
 			btnSub1.setDisable(true);
 		}
 
-		/*						*** Check Second Submission *** 					*/
+		/* *** Check Second Submission *** */
 		if (secondFile.exists()) {
-			//System.out.println(journalName + " has a directory called " + username + " and a file called "
-			//		+ "SecondSubmission.pdf");
+			// System.out.println(journalName + " has a directory called " + username + "
+			// and a file called "
+			// + "SecondSubmission.pdf");
 
 			btnSub2.setDisable(false);
 		} else {
 
-			//System.out.println(journalName + " does not have a directory called " + username
-			//		+ " and a file called SecondSubmission.pdf");
+			// System.out.println(journalName + " does not have a directory called " +
+			// username
+			// + " and a file called SecondSubmission.pdf");
 
 			btnSub2.setDisable(true);
 		}
 
-		/*						*** Check Third Submisiion *** 							*/
+		/* *** Check Third Submisiion *** */
 		if (thirdFile.exists()) {
-			//System.out.println(journalName + " has a directory called " + username + " and a file called "
-			//		+ "ThirdSubmission.pdf");
+			// System.out.println(journalName + " has a directory called " + username + "
+			// and a file called "
+			// + "ThirdSubmission.pdf");
 
 			btnSub3.setDisable(false);
 		} else {
 
-			//System.out.println(journalName + " does not have a directory called " + username
-			//		+ " and a file called ThirdSubmission.pdf");
+			// System.out.println(journalName + " does not have a directory called " +
+			// username
+			// + " and a file called ThirdSubmission.pdf");
 
 			btnSub3.setDisable(true);
 		}
 
-		/*						*** Check Final Submission *** 							*/
+		/* *** Check Final Submission *** */
 		if (finalFile.exists()) {
-			//System.out.println(journalName + " has a directory called " + username + " and a file called "
-			//		+ "FinalSubmission.pdf");
+			// System.out.println(journalName + " has a directory called " + username + "
+			// and a file called "
+			// + "FinalSubmission.pdf");
 
 			btnSubFinal.setDisable(false);
 		} else {
 
-			//System.out.println(journalName + " does not have a directory called " + username
-			//		+ " and a file called FinalSubmission.pdf");
+			// System.out.println(journalName + " does not have a directory called " +
+			// username
+			// + " and a file called FinalSubmission.pdf");
 
 			btnSubFinal.setDisable(true);
 		}
-		
-		
+
 		File reviewFile = new File(baseFilePath + File.separator + "reviewerReviews.txt");
 		if (reviewFile.exists()) {
 			try {
@@ -382,17 +387,15 @@ public class ResearcherController implements Initializable {
 				if (!review[0].equals("null")) {
 					lblComment1.setText(review[0]);
 				}
-				
+
 				if (!review[1].equals("null")) {
 					lblComment2.setText(review[1]);
 				}
-				
+
 				if (!review[2].equals("null")) {
 					lblCommentMinor.setText(review[2]);
 				}
-				
-				
-				
+
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -401,19 +404,19 @@ public class ResearcherController implements Initializable {
 			lblComment2.setText("");
 			lblCommentMinor.setText("");
 		}
-		
-		
-		
+
 		// ======================Check First Rev
 		// submission====================================================
 		if (firstRev.exists()) {
-			//System.out.println(journalName + " has a directory called " + username + " and a file called "
-			//		+ "FirstSubmission.pdf");
+			// System.out.println(journalName + " has a directory called " + username + "
+			// and a file called "
+			// + "FirstSubmission.pdf");
 			btnRev1.setDisable(false);
 		} else {
 
-			//System.out.println(journalName + " does not have a directory called " + username
-			//		+ " and a file called FirstSubmission.pdf");
+			// System.out.println(journalName + " does not have a directory called " +
+			// username
+			// + " and a file called FirstSubmission.pdf");
 
 			btnRev1.setDisable(true);
 		}
@@ -421,13 +424,15 @@ public class ResearcherController implements Initializable {
 		// ======================Check Second Rev
 		// submission====================================================
 		if (secondRev.exists()) {
-			//System.out.println(journalName + " has a directory called " + username + " and a file called "
-			//		+ "SecondSubmission.pdf");
+			// System.out.println(journalName + " has a directory called " + username + "
+			// and a file called "
+			// + "SecondSubmission.pdf");
 			btnRev2.setDisable(false);
 		} else {
 
-			//System.out.println(journalName + " does not have a directory called " + username
-			//		+ " and a file called SecondSubmission.pdf");
+			// System.out.println(journalName + " does not have a directory called " +
+			// username
+			// + " and a file called SecondSubmission.pdf");
 
 			btnRev2.setDisable(true);
 		}
@@ -435,13 +440,15 @@ public class ResearcherController implements Initializable {
 		// ======================Check Third Rev
 		// submission====================================================
 		if (thirdRev.exists()) {
-			//System.out.println(journalName + " has a directory called " + username + " and a file called "
-			//		+ "ThirdSubmission.pdf");
+			// System.out.println(journalName + " has a directory called " + username + "
+			// and a file called "
+			// + "ThirdSubmission.pdf");
 			btnRevMinor.setDisable(false);
 		} else {
 
-			//System.out.println(journalName + " does not have a directory called " + username
-			//		+ " and a file called ThirdSubmission.pdf");
+			// System.out.println(journalName + " does not have a directory called " +
+			// username
+			// + " and a file called ThirdSubmission.pdf");
 
 			btnRevMinor.setDisable(true);
 		}
@@ -460,15 +467,16 @@ public class ResearcherController implements Initializable {
 	}
 
 	/**
-	 * Button to view the first submitted file. 
+	 * Button to view the first submitted file.
 	 *
 	 * @param event: Event component that does a desired action when pressed.
 	 * @throws IOException
 	 */
 	public void btnSub1Action(ActionEvent event) throws IOException {
+		String journalNameString = selectJournal.getValue();
 		if (event.getSource() == btnSub1) {
 			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
-					+ "editor" + File.separator + "journals" + File.separator + "journal1" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + journalNameString + File.separator
 					+ "researchers" + File.separator + username + File.separator + "FirstSubmission.pdf");
 			util.download(PathFile);
 		}
@@ -482,9 +490,10 @@ public class ResearcherController implements Initializable {
 	 * @throws IOException
 	 */
 	public void btnSub2Action(ActionEvent event) throws IOException {
+		String journalNameString = selectJournal.getValue();
 		if (event.getSource() == btnSub2) {
 			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
-					+ "editor" + File.separator + "journals" + File.separator + "journal1" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + journalNameString + File.separator
 					+ "researchers" + File.separator + username + File.separator + "SecondSubmission.pdf");
 			util.download(PathFile);
 		}
@@ -497,9 +506,10 @@ public class ResearcherController implements Initializable {
 	 * @throws IOException
 	 */
 	public void btnSub3Action(ActionEvent event) throws IOException {
+		String journalNameString = selectJournal.getValue();
 		if (event.getSource() == btnSub3) {
 			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
-					+ "editor" + File.separator + "journals" + File.separator + "journal1" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + journalNameString + File.separator
 					+ "researchers" + File.separator + username + File.separator + "ThirdSubmission.pdf");
 			util.download(PathFile);
 		}
@@ -512,9 +522,10 @@ public class ResearcherController implements Initializable {
 	 * @throws IOException
 	 */
 	public void btnSubFinalAction(ActionEvent event) throws IOException {
+		String journalNameString = selectJournal.getValue();
 		if (event.getSource() == btnSubFinal) {
 			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
-					+ "editor" + File.separator + "journals" + File.separator + "journal1" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + journalNameString + File.separator
 					+ "researchers" + File.separator + username + File.separator + "FinalSubmission.pdf");
 			util.download(PathFile);
 		}
@@ -527,9 +538,10 @@ public class ResearcherController implements Initializable {
 	 * @throws IOException
 	 */
 	public void btnRev1Action(ActionEvent event) throws IOException {
+		String journalNameString = selectJournal.getValue();
 		if (event.getSource() == btnRev1) {
 			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
-					+ "editor" + File.separator + "journals" + File.separator + "journal1" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + journalNameString + File.separator
 					+ "researchers" + File.separator + username + File.separator + "RevFirstSubmission.pdf");
 			util.download(PathFile);
 		}
@@ -542,9 +554,10 @@ public class ResearcherController implements Initializable {
 	 * @throws IOException
 	 */
 	public void btnRev2Action(ActionEvent event) throws IOException {
+		String journalNameString = selectJournal.getValue();
 		if (event.getSource() == btnRev2) {
 			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
-					+ "editor" + File.separator + "journals" + File.separator + "journal1" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + journalNameString + File.separator
 					+ "researchers" + File.separator + username + File.separator + "RevSecondSubmission.pdf");
 			util.download(PathFile);
 		}
@@ -557,9 +570,10 @@ public class ResearcherController implements Initializable {
 	 * @throws IOException
 	 */
 	public void btnRevMinorAction(ActionEvent event) throws IOException {
+		String journalNameString = selectJournal.getValue();
 		if (event.getSource() == btnRevMinor) {
 			File PathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
-					+ "editor" + File.separator + "journals" + File.separator + "journal1" + File.separator
+					+ "editor" + File.separator + "journals" + File.separator + journalNameString + File.separator
 					+ "researchers" + File.separator + username + File.separator + "RevThirdSubmission.pdf");
 			util.download(PathFile);
 		}
@@ -721,7 +735,7 @@ public class ResearcherController implements Initializable {
 	/**
 	 * Switch Windows (BorderPane)
 	 * 
-	 * @param event: Event component that does a desired action when pressed.
+	 * @param event:     Event component that does a desired action when pressed.
 	 * @param newWindow: New window to be created.
 	 * @throws IOException
 	 */
