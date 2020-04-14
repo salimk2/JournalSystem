@@ -84,14 +84,4 @@ class AuthenticatorTest {
 		}
 	}
 
-	/*
-	 * @Test void testGetSubmissions() { fail("Not yet implemented"); }
-	 * 
-	 * @Test void testGetReviews() { fail("Not yet implemented"); }
-	 * 
-	 * @Test void testGetComments() { fail("Not yet implemented"); }
-	 * 
-	 * @Test void testGetWithdrawStatus() { fail("Not yet implemented"); }
-	 */
-
 }
