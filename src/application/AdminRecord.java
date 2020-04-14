@@ -5,16 +5,15 @@ import java.time.LocalDate;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- * AdminRecord
- * Class for the table in the Admin window
+ * Class for the table in the Admin window.
  */
 public class AdminRecord {
 
-	// string prperties
+	/* String properties */
 	private SimpleStringProperty researcher, submission, reviewer;
 	private LocalDate review;
 
-	// constructor
+	/* Constructor */
 	public AdminRecord(String researcher, String submission, String reviewer, LocalDate review) {
 		this.researcher = new SimpleStringProperty(researcher);
 		this.submission = new SimpleStringProperty(submission);
@@ -26,12 +25,10 @@ public class AdminRecord {
 		return researcher.get();
 	}
 
-	// Getters and Setters
+	/* Getters and Setters */
 	public String getSubmission() {
 		return submission.get();
 	}
-
-	
 
 	public void setSubmission(SimpleStringProperty submission) {
 		this.submission = submission;

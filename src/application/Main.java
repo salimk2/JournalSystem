@@ -17,8 +17,9 @@ public class Main extends Application {
 	public static Boolean isLoadScreenOn = false;
 
 	/**
-	 *  Creates the start of the Journal application (JavaFx)
-	 * @param 
+	 *  Creates the start of the Journal application (JavaFx).
+	 *
+	 *  @param primaryStage 
 	 */
 	
 	@Override
@@ -45,7 +46,7 @@ public class Main extends Application {
 	}
 
 	/**
-	 * Launches the application
+	 * Launches the application.
 	 */
 	public static void main(String[] args) {
 		launch(args);

@@ -34,11 +34,12 @@ public class Utilities {
 	}
 
 	/**
-	 * Only used to modify the status to the first line of this file
+	 * Only used to modify the status to the first line of this file.
 	 * 
-	 * @param researcherUsername The name of the current researcher
-	 * @param journalName        The name of the journal
-	 * @return The journal with the modified line
+	 * @param researcherUsername: The name of the current researcher.
+	 * @param journalName:        The name of the journal.
+	 *
+	 * @return deadline:          The journal with the modified line.
 	 */
 	public String readRevDeadlines(String researcherUsername, String journalName) throws IOException {
 		String deadline = "";
@@ -65,11 +66,11 @@ public class Utilities {
 	}
 
 	/**
-	 * Writing to the file with the deadline (Reviewer)
+	 * Writing to the file with the deadline (Reviewer).
 	 * 
-	 * @param username    The username of the current user
-	 * @param journalName The name of the journal
-	 * @param date        The current date of the deadline
+	 * @param username:    The username of the current user.
+	 * @param journalName: The name of the journal.
+	 * @param date:        The current date of the deadline.
 	 */
 	public void writeRevDeadlines(String username, String journalName, String date) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
@@ -86,10 +87,12 @@ public class Utilities {
 	}
 
 	/**
-	 * This method makes it possible to read what the reviewer written reviews
+	 * This method makes it possible to read what the reviewer written reviews.
 	 * 
-	 * @param researcherUsername The username of the researcher
-	 * @param journalName        The journal name
+	 * @param researcherUsername: The username of the researcher.
+	 * @param journalName:        The journal name.
+	 *
+	 * @return review:			  Review to be written.
 	 */
 	public String readRevReviews(String researcherUsername, String journalName) throws IOException {
 		String review = "";
@@ -116,13 +119,13 @@ public class Utilities {
 	}
 
 	/**
-	 * This method will make the reviewer able to write his/her reviews
+	 * This method will make the reviewer able to write his/her reviews.
 	 * 
-	 * @param date        this will be the date on which it was written
-	 * @param username    The username of the current user
-	 * @param journalName The journal name
-	 * @param rev         will be update as the application runs to determine
-	 *                    reviewer dates
+	 * @param date:        this will be the date on which it was written.
+	 * @param username:    The username of the current user.
+	 * @param journalName: The journal name.
+	 * @param rev:         Will be update as the application runs to determine
+	 *                     reviewer dates.
 	 */
 	public void writeRevReviews(String username, String journalName, String date, int rev) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
@@ -155,11 +158,11 @@ public class Utilities {
 	}
 
 	/**
-	 * Modifying the reviewer file status
+	 * Modifying the reviewer file status.
 	 * 
-	 * @param status      The file status (Reviewer)
-	 * @param username    The username of the current user
-	 * @param journalName The journal name
+	 * @param status:      The file status (Reviewer).
+	 * @param username:    The username of the current user.
+	 * @param journalName: The journal name.
 	 */
 	public void modifyNominatedRevFileStatus(String status, String username, String journalName) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
@@ -177,11 +180,11 @@ public class Utilities {
 	}
 
 	/**
-	 * Write the reviewer nominations
+	 * Write the reviewer nominations.
 	 * 
-	 * @param username     The username of the current user
-	 * @param reviewername The name for the reviewer
-	 * @param journalName  The journal name
+	 * @param username:     The username of the current user.
+	 * @param reviewername: The name for the reviewer.
+	 * @param journalName:  The journal name.
 	 */
 	public void writeNominatedRev(String username, String reviewername, String journalName) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
@@ -198,11 +201,12 @@ public class Utilities {
 	}
 
 	/**
-	 * This methods copies a selected file to a new destination
+	 * This methods copies a selected file to a new destination.
 	 * 
-	 * @param source         The file that needs to be copied
-	 * @param dest           The new destination of the copied file
-	 * @param avoidDuplicate To determine if the file already exists
+	 * @param source:         The file that needs to be copied.
+	 * @param dest:           The new destination of the copied file.
+	 * @param avoidDuplicate: To determine if the file already exists.
+	 *
 	 * @throws IOException
 	 */
 	private void copyFile(File source, File dest, boolean avoidDuplicate) throws IOException {
@@ -216,10 +220,11 @@ public class Utilities {
 
 	/**
 	 * Lists all directories inside a directory and return a list containing those
-	 * elements names
+	 * elements names.
 	 * 
-	 * @param path the path to the file
-	 * @return the list of all the directories
+	 * @param path:  The path to the file.
+	 *
+	 * @return list: List of all the directories.
 	 */
 	public String[] listFilesInDir(File path) {
 		String[] list = {};
@@ -232,10 +237,11 @@ public class Utilities {
 	}
 
 	/**
-	 * read nominatedReviewers file
+	 * Read 'nominatedReviewers' file.
 	 * 
-	 * @param researcherUsername This will be the username for the researcher
-	 * @param journalName        this will be the name of the journal
+	 * @param researcherUsername: This will be the username for the researcher.
+	 * @param journalName:        This will be the name of the journal.
+	 *
 	 * @throws IOException
 	 */
 	public String readNomRevFile(String researcherUsername, String journalName) throws IOException {
@@ -264,12 +270,12 @@ public class Utilities {
 	}
 
 	/**
-	 * Checks if a researcher has a folder for a specified journal and returns the
-	 * boolean
+	 * Checks if a 'Researcher' has a folder for a specified journal and returns the
+	 * boolean.
 	 * 
-	 * @param journalName The journal name
-	 * @param username    The username of the current user
-	 * @return True if file exist else False if file does not exist
+	 * @param journalName The journal name.
+	 * @param username    The username of the current user.
+	 * @return exists:    If file exist else False if file does not exist.
 	 */
 	public boolean checkResearcherFileExists(String journalName, String username) {
 		boolean exists = false;
@@ -282,13 +288,13 @@ public class Utilities {
 	}
 
 	/**
-	 * This method creates a researcher directory
+	 * This method creates a researcher directory.
 	 * 
-	 * @param username      The username of the current user
-	 * @param type          The account type
-	 * @param chosenJournal the name of the selected journal
-	 * @return True if an error was encountered and False if the researcher was
-	 *         created successfully
+	 * @param username:      The username of the current user.
+	 * @param type:          The account type.
+	 * @param chosenJournal: The name of the selected journal.
+	 * @return error:        True if an error was encountered and False if the researcher was
+	 *                       created successfully.
 	 */
 	public boolean createUserDir(String username, int type, String chosenJournal) {
 
@@ -297,7 +303,7 @@ public class Utilities {
 		switch (type) {
 
 		case 1:
-			// Researcher
+			/* Researcher */
 			if ((new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator + "editor"
 					+ File.separator + "journals" + File.separator + chosenJournal + File.separator + "researchers"
 					+ File.separator + username)).mkdirs()) {
@@ -311,7 +317,7 @@ public class Utilities {
 			}
 			break;
 		case 3:
-			// Reviewer
+			/* Reviewer */
 			if ((new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator + "editor"
 					+ File.separator + "journals" + File.separator + chosenJournal + File.separator + "reviewers"
 					+ File.separator + username)).mkdirs()) {
@@ -336,9 +342,9 @@ public class Utilities {
 	}
 
 	/**
-	 * This method is only used to write to journalList.txt
+	 * This method is only used to write to journalList.txt.
 	 * 
-	 * @param journalName The name of the journal being used
+	 * @param journalName: The name of the journal being used.
 	 */
 	public void writeJournalToFile(String journalName) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
@@ -354,9 +360,10 @@ public class Utilities {
 	}
 
 	/**
-	 * This method is only used to read from journalList.txt
+	 * This method is only used to read from journalList.txt.
 	 * 
-	 * @return The data read from the journal
+	 * @return journalList: The data read from the journal.
+	 *
 	 * @throws IOException
 	 */
 	public String readJournalList() throws IOException {
@@ -384,11 +391,12 @@ public class Utilities {
 	}
 
 	/**
-	 * This method is used to create journal folders
+	 * This method is used to create journal folders.
 	 * 
-	 * @param journalName The name of the journal being used
-	 * @return True if an error occurred creating the journal directory and false
-	 *         for no errors
+	 * @param journalName: The name of the journal being used.
+	 *
+	 * @return error:      True if an error occurred creating the journal directory and false
+	 *                     for no errors.
 	 */
 	public boolean createJournalDir(String journalName) {
 		boolean error;
@@ -417,10 +425,11 @@ public class Utilities {
 	}
 
 	/**
-	 * This methods uploads a file to a selected destination
+	 * This methods uploads a file to a selected destination.
 	 * 
-	 * @param fileDestinPath The destination of the file that will be uploaded
-	 * @param subVersion     The submission version
+	 * @param fileDestinPath: The destination of the file that will be uploaded.
+	 * @param subVersion:     The submission version.
+	 *
 	 * @throws IOException
 	 */
 	public void upload(File fileDestinPath, String subVersion) throws IOException {
@@ -444,9 +453,10 @@ public class Utilities {
 	}
 
 	/**
-	 * This methods downloads a file
+	 * Downloads a corresponding file.
 	 * 
-	 * @param fileOriginPath This is the path that the original file is located at
+	 * @param fileOriginPath: This is the path that the original file is located at.
+	 *
 	 * @throws IOException
 	 */
 	public void download(File fileOriginPath) throws IOException {
@@ -456,13 +466,13 @@ public class Utilities {
 
 		if (dest != null) {
 			String fileName = fileOriginPath.getName();
-			// hardcode the directory where the uploaded files will be stored
+			/* Hardcode the directory where the uploaded files will be stored */
 			File fileDest = new File(dest + File.separator + fileName);
 
 			// files.getItems().add(fileName);
 			File file = fileOriginPath.getAbsoluteFile();
 
-			// set the flag to true to allow overriding files with the same name
+			/* Set the flag to true to allow overriding files with the same name */
 			copyFile(file, fileDest, true);
 
 		}

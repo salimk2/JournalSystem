@@ -5,16 +5,15 @@ import java.time.LocalDate;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
- * ReviewerRecord
- * Class for the table in the Editor window
+ * Class for the table in the Editor Window.
  */
 public class ReviewerRecord {
 
-	// string prperties
+	/* String properties */
 	private SimpleStringProperty researcher, submission;
 	private LocalDate review, deadline;
 
-	// constructor
+	/* Constructor */
 	public ReviewerRecord(String researcher, String submission, LocalDate deadline, LocalDate review) {
 		this.researcher = new SimpleStringProperty(researcher);
 		this.submission = new SimpleStringProperty(submission);
@@ -26,19 +25,14 @@ public class ReviewerRecord {
 		return researcher.get();
 	}
 
-	// Getters and Setters
+	/* Getters and Setters */
 	public String getSubmission() {
 		return submission.get();
 	}
 
-	
-
 	public void setSubmission(SimpleStringProperty submission) {
 		this.submission = submission;
 	}
-
-	
-	
 
 	public LocalDate getReview() {
 		return review;
