@@ -18,7 +18,6 @@ import application.Utilities;
  * UtilitiesTest
  * 
  * JUnit testing for Utilities.java class
- *
  */
 class UtilitiesTest {
 
