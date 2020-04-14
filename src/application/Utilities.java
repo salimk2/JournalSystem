@@ -87,6 +87,11 @@ public class Utilities {
 		}
 	}
 	
+	/**
+	 * This method makes it possible to read what the reviewer written reviews  
+	 * @param researcherUsername The username of the researcher
+	 * @param journalName The journal name 
+	 */
 	public String readRevReviews(String researcherUsername, String journalName) throws IOException {
 		String review = "";
 		File readFromFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
@@ -115,6 +120,13 @@ public class Utilities {
 		return review;
 	}
 	
+	/**
+	 * This method will make the reviewer able to write his/her reviews
+	 * @param date this will be the date on which it was written
+	 * @param username The username of the current user
+	 * @param journalName The journal name 
+	 * @param rev will be update as the application runs to determine reviewer dates
+	 */
 	public void writeRevReviews(String username, String journalName, String date, int rev) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
@@ -205,8 +217,8 @@ public class Utilities {
 	 * Lists all directories inside a directory and return a list containing those
 	 * elements names
 	 * 
-	 * @param path
-	 * @return
+	 * @param path the path to the file
+	 * @return the list of all the directories 
 	 */
 	public String[] listFilesInDir(File path) {
 		String[] list = {};
@@ -222,7 +234,8 @@ public class Utilities {
 
 	/**
 	 * read nominatedReviewers file
-	 * 
+	 * @param researcherUsername This will be the username for the researcher
+	 * @param journalName this will be the name of the journal 
 	 * @throws IOException
 	 */
 	public String readNomRevFile(String researcherUsername, String journalName) throws IOException {
@@ -447,7 +460,7 @@ public class Utilities {
 
 	/**
 	 * This methods downloads a file
-	 * @param fileOriginPath
+	 * @param fileOriginPath This is the path that the original file is located at
 	 * @throws IOException
 	 */
 	public void download(File fileOriginPath) throws IOException {
