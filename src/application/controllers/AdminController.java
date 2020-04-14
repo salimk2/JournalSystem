@@ -48,7 +48,7 @@ public class AdminController implements Initializable {
 	public static final String THIRD = "Third";
 
 	private Pane content = new Pane();
-	
+
 	// configure table
 	@FXML
 	private TableView<AdminRecord> tableView; // configure TableView
@@ -134,7 +134,7 @@ public class AdminController implements Initializable {
 			journals = Arrays.asList(journalList.split(" "));
 
 		} catch (IOException e) {
-			System.out.println("File was not found, Can't read it");
+
 			e.printStackTrace();
 		}
 
@@ -142,7 +142,7 @@ public class AdminController implements Initializable {
 			String j = journals.get(i);
 			journalsList.add(j);
 		}
-		
+
 		cbJournals.setItems(journalsList);
 	}
 
@@ -268,14 +268,27 @@ public class AdminController implements Initializable {
 		openNewBorderPaneWindow(event, "/application/Login.fxml");
 	}
 
+	/**
+	 * Downloads the selected submission
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	public void downloadSubmission(ActionEvent event) throws IOException {
 		if (active != null) {
 			util.download(active);
 		}
 	}
 
+	/**
+	 * Downloads the selected review This function was created for future options
+	 * but it is not displayed and not used
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	public void downloadReview(ActionEvent event) throws IOException {
-		// System.out.println("Upload Clicked");
+
 		util.download(new File(active.getParentFile() + File.separator + "Rev" + active.getName()));
 	}
 

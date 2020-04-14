@@ -93,7 +93,7 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 		for (int i = 0; i < researchersInJournal.size(); i++) {
 			String elem = researchersInJournal.get(i);
 			researcherList.add(i, elem);
-			System.out.println(elem);
+
 		}
 
 		selectResearcher.setItems(researcherList);
@@ -116,7 +116,7 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 	 */
 	public void downloadFinalSub(ActionEvent event) throws IOException {
 		alert.setVisible(false);
-		System.out.println("Dowload was pressed");
+
 		String username = selectResearcher.getValue();
 		if (event.getSource() == btnDownload) {
 			File fileToDownload = new File(

@@ -29,8 +29,9 @@ import javafx.stage.Stage;
 /**
  * EditorAssignReviewerController
  * 
- * Controller class for 'EditorV1AssignReviewer'. Implements and interface 
- * called 'Initializable' when code is run, the class runs the 'initialize()' method.
+ * Controller class for 'EditorV1AssignReviewer'. Implements and interface
+ * called 'Initializable' when code is run, the class runs the 'initialize()'
+ * method.
  */
 public class EditorAssignReviewerController implements Initializable {
 
@@ -90,7 +91,7 @@ public class EditorAssignReviewerController implements Initializable {
 		for (int i = 0; i < researchersInJournal.size(); i++) {
 			String elem = researchersInJournal.get(i);
 			researcherList.add(i, elem);
-			System.out.println(elem);
+
 		}
 
 		cbResearcher.setItems(researcherList);
@@ -108,7 +109,6 @@ public class EditorAssignReviewerController implements Initializable {
 		File pathFile = new File(mainPath + File.separator + File.separator + journalSelected + File.separator
 				+ "researchers" + File.separator + researcherUsername + File.separator + "nominatedReviewers.txt");
 		if (!pathFile.exists()) {
-			System.out.println("File doesnt exists " + pathFile);
 
 			// Added alerts cause they are more informative
 			Alert alert = new Alert(AlertType.WARNING);
@@ -120,7 +120,6 @@ public class EditorAssignReviewerController implements Initializable {
 			alert.showAndWait();
 			cbResearcher.getValue();
 		} else {
-			System.out.println("File does exixst " + pathFile);
 
 			dataRead = util.readNomRevFile(researcherUsername, journalSelected);
 
@@ -137,7 +136,6 @@ public class EditorAssignReviewerController implements Initializable {
 				for (int i = 0; i < reviewersInNomList.size(); i++) {
 					String elem = reviewersInNomList.get(i);
 					reviewersList.add(i, elem);
-					System.out.println("Testing " + reviewersList.get(i));
 
 				}
 				reviewersList.remove(0);

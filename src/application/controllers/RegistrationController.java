@@ -168,9 +168,8 @@ public class RegistrationController implements Initializable {
 		String tempPwdString = password.getText();
 		String tempConfPwdString = confirmPassword.getText();
 		String tempTextPwdString = passwordText.getText();
-		System.out.println(tempTextPwdString);
+
 		String tempTextConfPwdString = confirmPasswordText.getText();
-		System.out.println(tempTextConfPwdString);
 
 		/* Check for valid 'userType' */
 		if (UsertypeCode == -1) {
@@ -244,7 +243,6 @@ public class RegistrationController implements Initializable {
 				break;
 			}
 
-			System.out.println(creatAccount);
 		} else {
 			accountError.setText("Please fix the indicated errors and try again");
 		}

@@ -97,22 +97,16 @@ public class EditorController implements Initializable {
 		try {
 			journalList = util.readJournalList();
 			journals = Arrays.asList(journalList.split(" "));
-			for (int i = 0; i < journals.size(); i++) {
-
-				String j = journals.get(i);
-
-				// System.out.println(j + " " + i);
-			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("File was not found, Can't read it");
+
 			e.printStackTrace();
 		}
 
 		for (int i = 0; i < journals.size(); i++) {
 			String j = journals.get(i);
-			// System.out.println("Initilaizer j :" + j);
+
 			journalsList.add(i, j);
 		}
 
@@ -252,7 +246,7 @@ public class EditorController implements Initializable {
 		ObservableList<EditorRecord> records;
 		records = tableView.getSelectionModel().getSelectedItems(); /* Gets row contents */
 		if (records.get(0) != null) { /* Ensures user selected available submission */
-			// lblTest2.setText("submission: " + records.get(0).getSubmission());
+
 		}
 	}
 

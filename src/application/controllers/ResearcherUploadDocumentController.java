@@ -7,8 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+
 import application.Utilities;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -66,7 +68,6 @@ public class ResearcherUploadDocumentController implements Initializable {
 			String j = journals.get(i);
 			list.add(i, j);
 		}
-		System.out.println(list);
 
 		availableJournals.setItems(list);
 		submissionNumber.setItems(subNum);
@@ -115,10 +116,10 @@ public class ResearcherUploadDocumentController implements Initializable {
 		}
 	}
 
-	/** 
-	 * 'Researcher' will upload a file to a specific folder located in
-	 *  projectDb -> editor -> journals -> "Journal Name" -> "Researcher Username" 
-	 *  -> "File resides in here".
+	/**
+	 * 'Researcher' will upload a file to a specific folder located in projectDb ->
+	 * editor -> journals -> "Journal Name" -> "Researcher Username" -> "File
+	 * resides in here".
 	 *
 	 * @throws IOException
 	 */
@@ -132,7 +133,7 @@ public class ResearcherUploadDocumentController implements Initializable {
 
 			if (journalExists) {
 				/* Upload file */
-				System.out.println("Thing created");
+
 				File researcherPathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
 						+ File.separator + "editor" + File.separator + "journals" + File.separator + chosenJournal
 						+ File.separator + "researchers" + File.separator + username + File.separator);
@@ -167,7 +168,8 @@ public class ResearcherUploadDocumentController implements Initializable {
 	}
 
 	/**
-	 * Reads and stores the names of all created journals inside the 'Journals' file.
+	 * Reads and stores the names of all created journals inside the 'Journals'
+	 * file.
 	 */
 	private void readFile() {
 
@@ -175,16 +177,10 @@ public class ResearcherUploadDocumentController implements Initializable {
 		try {
 			journalList = util.readJournalList();
 			journals = Arrays.asList(journalList.split(" "));
-			for (int i = 0; i < journals.size(); i++) {
-
-				String j = journals.get(i);
-
-				System.out.println(j + " " + i);
-			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("File was not found, Can't read it");
+
 			e.printStackTrace();
 		}
 	}

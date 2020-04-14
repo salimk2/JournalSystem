@@ -45,9 +45,10 @@ public class ResearcherNominateReviewerController implements Initializable {
 	private ObservableList<String> chosenRevs;
 
 	/**
-	 * Gets the username and the currenttly selected journal from the 'ResearchControler' class
+	 * Gets the username and the currenttly selected journal from the
+	 * 'ResearchControler' class
 	 * 
-	 * @param username: Username of the user.
+	 * @param username:    Username of the user.
 	 * @param journalName: Name of the journal.
 	 */
 	public void setUserInfo(String username, String journalName) {
@@ -80,7 +81,8 @@ public class ResearcherNominateReviewerController implements Initializable {
 	}
 
 	/**
-	 * Hides a particular label from being seen. It may be hidden until an action is taken to render it visible.
+	 * Hides a particular label from being seen. It may be hidden until an action is
+	 * taken to render it visible.
 	 */
 	@FXML
 	public void hideLabel() {
@@ -89,7 +91,7 @@ public class ResearcherNominateReviewerController implements Initializable {
 	}
 
 	/**
-	 * Goes back to original window. 
+	 * Goes back to original window.
 	 *
 	 * @param event: Event component that does a desired action when pressed.
 	 */
@@ -170,13 +172,13 @@ public class ResearcherNominateReviewerController implements Initializable {
 
 				if (Integer.parseInt(loginInfo[2]) == 3) {
 					reviewersRead.add(loginInfo[0]);
-					// System.out.println(loginInfo[0]);
+
 				}
 
 			}
 			read.close();
 		} catch (FileNotFoundException e) {
-			System.out.println("Error reading login info.");
+
 			e.printStackTrace();
 		}
 	}

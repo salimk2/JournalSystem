@@ -102,8 +102,6 @@ class UtilitiesTest {
 				+ "researchers" + File.separator + User);
 		boolean noError = testingUtil.createUserDir(User, 1, testJournalName);
 		boolean error = testingUtil.createUserDir(testingUsername, 4, User);
-//		System.out.println(testingUtil.getMessage());
-//		System.out.println(testingUtil.getMessage());
 
 		assertFalse(noError);
 		assertTrue(error);

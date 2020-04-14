@@ -189,16 +189,10 @@ public class ResearcherController implements Initializable {
 		try {
 			journalList = util.readJournalList();
 			journals = Arrays.asList(journalList.split(" "));
-			for (int i = 0; i < journals.size(); i++) {
-
-				String j = journals.get(i);
-
-				// System.out.println(j + " " + i);
-			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("File was not found, Can't read it");
+
 			e.printStackTrace();
 		}
 	}
@@ -549,7 +543,6 @@ public class ResearcherController implements Initializable {
 			stage.showAndWait();
 		}
 
-		System.out.println("Upload Clicked");
 	}
 
 	/**
@@ -566,7 +559,7 @@ public class ResearcherController implements Initializable {
 				+ username + File.separator);
 		File pathToRevNomFile = new File(mainPath + File.separator + journalName + File.separator + "researchers"
 				+ File.separator + username + File.separator + File.separator + "nominatedReviewers.txt");
-		
+
 		StringJoiner joiner = new StringJoiner(" ");
 		String[] temp = util.listFilesInDir(path);
 		for (String string : temp) {
@@ -584,9 +577,7 @@ public class ResearcherController implements Initializable {
 
 		if (reviewerNominateStatus.contains("ASSIGNED"))
 			reviewerWasAssigned = true;
-		System.out.println("was rev assigned = " + reviewerWasAssigned);
 
-		// System.out.println(notificationList);
 		if (notificationList.contains("FinalSubmissionRejected.txt")
 				|| notificationList.contains("FinalSubmissionAccepted.txt") || reviewerWasAssigned)
 			notifications = true;
