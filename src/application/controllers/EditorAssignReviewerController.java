@@ -27,10 +27,10 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
- * Controller class for EditorV1AssignReviewer
+ * Controller class for 'EditorV1AssignReviewer'.
  * 
- * implements and interface called Initializable when code is run, the class
- * runs the initialize() method
+ * Implements and interface called 'Initializable' when code is run, the class
+ * runs the 'initialize()' method.
  */
 public class EditorAssignReviewerController implements Initializable {
 
@@ -44,10 +44,10 @@ public class EditorAssignReviewerController implements Initializable {
 	@FXML
 	private Label alert;
 
-	// !!! Testing
+	/* !!! Testing */
 	@FXML
 
-	// define variables
+	/* Define variables */
 	private List<String> researchersInJournal = new ArrayList<>();
 	private List<String> reviewersInNomList = new ArrayList<>();
 	private ObservableList<String> researcherList = FXCollections.observableArrayList();
@@ -58,19 +58,15 @@ public class EditorAssignReviewerController implements Initializable {
 			+ File.separator + "journals" + File.separator);
 
 	/**
-	 * @param journalSelected
+	 * @param journalSelected: Current journal selected.
 	 */
 	public void setJournalSelected(String journalSelected) {
 		this.journalSelected = journalSelected;
 	}
 
-	/**
-	 * @return
-	 */
-
 	LocalDate ldMinorRev, ldRev1, ldRev2;
 
-	// Initializes components
+	/* Initializes needed components */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		cbResearcher.setDisable(true);
@@ -84,8 +80,7 @@ public class EditorAssignReviewerController implements Initializable {
 	}
 
 	/**
-	 * It fills the researcher combo box
-	 * 
+	 * Loads the variable 'researcherList' into the Researcher combo box.
 	 */
 	private void fillResearcherComboBox() {
 		File path = new File(
@@ -102,7 +97,9 @@ public class EditorAssignReviewerController implements Initializable {
 	}
 
 	/**
-	 * @param event
+	 * Loads the variable 'reviewerList' into the Reviwer combo box.
+
+	 * @param event: Action taken by user.
 	 * @throws IOException
 	 */
 	public void fillReviewerComboBox(ActionEvent event) throws IOException {
@@ -152,7 +149,7 @@ public class EditorAssignReviewerController implements Initializable {
 	}
 
 	/**
-	 * 
+	 * Enables all buttons and elements when a Reviewer is selected.
 	 */
 	public void selectedReviewer() {
 
@@ -164,7 +161,8 @@ public class EditorAssignReviewerController implements Initializable {
 	}
 
 	/**
-	 * 
+	 * Enables the 'Researcher' ComboBox, and 'goes back' once the 
+	 * Check Journal button is invoked.
 	 */
 	public void checkJournal() {
 
@@ -179,10 +177,7 @@ public class EditorAssignReviewerController implements Initializable {
 	/**
 	 * Handle the file changes that have to happen when a reviewer gets approved
 	 * 
-	 * @param event
-	 */
-	/**
-	 * @param event
+	 * @param event: Action taken by user.
 	 */
 	public void AproveRev(ActionEvent event) {
 		String researcherUsername = cbResearcher.getValue();
@@ -190,13 +185,13 @@ public class EditorAssignReviewerController implements Initializable {
 		ArrayList<String> dateArrayList = new ArrayList<>();
 		String reviewername = cbReviewers.getValue();
 
-		// get the deadlines and store them in a file
+		/* Get the deadlines and store them in a file */
 		rev1 = dpRev1.getValue();
 		rev2 = dpRev2.getValue();
 		rev3 = dpMinorRev.getValue();
 
 		if (rev1.isBefore(timeNow) || rev1.equals(timeNow)) {
-			// first review date is before or equal to current date
+			/* First review date is before or equal to current date */
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Invalid Date");
 			alert.setHeaderText(
@@ -207,7 +202,7 @@ public class EditorAssignReviewerController implements Initializable {
 			dpRev1.getEditor().clear();
 
 		} else if (rev2.isBefore(rev1) || rev2.equals(timeNow) || rev2.isBefore(timeNow) || rev2.equals(rev1)) {
-			// second review date is before or equal First review date or equal to current
+			/* Second review date is before or equal First review date or equal to current */
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Invalid Date");
 			alert.setHeaderText(
@@ -222,7 +217,7 @@ public class EditorAssignReviewerController implements Initializable {
 
 		} else if (rev3.isBefore(rev2) || rev3.equals(rev2) || rev3.isBefore(rev1) || rev3.equals(rev1)
 				|| rev3.equals(timeNow) || rev3.isBefore(timeNow)) {
-			// second review date is before or equal First review date or equal to current
+			/* Second review date is before or equal First review date or equal to current */
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("Invalid Date");
 			alert.setHeaderText(
@@ -255,8 +250,7 @@ public class EditorAssignReviewerController implements Initializable {
 			for (int i = 0; i < 3; i++) {
 				util.writeRevDeadlines(researcherUsername, journalSelected, dateArrayList.get(i));
 			}
-			// change the PENDING to ASSIGNED status in nominatedReviewer.txt and add the
-			// assigned reviewer
+			/* Change the PENDING to ASSIGNED status in nominatedReviewer.txt and add the assigned reviewer */
 			util.modifyNominatedRevFileStatus("ASSIGNED", researcherUsername, journalSelected);
 			util.writeNominatedRev(researcherUsername, reviewername, journalSelected);
 
@@ -269,9 +263,9 @@ public class EditorAssignReviewerController implements Initializable {
 	}
 
 	/**
-	 * Go back to main editor page
+	 * Goes back to main editor page.
 	 * 
-	 * @param event
+	 * @param event: Action taken by user.
 	 */
 	@FXML
 	public void goBack(ActionEvent event) {

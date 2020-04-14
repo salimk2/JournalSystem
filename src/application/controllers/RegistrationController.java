@@ -52,7 +52,7 @@ public class RegistrationController implements Initializable {
 	ObservableList<String> list = FXCollections.observableArrayList("Admin", "Researcher", "Editor", "Reviewer");
 
 	/**
-	 *
+	 * Initialize needed components.
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -66,7 +66,9 @@ public class RegistrationController implements Initializable {
 	}
 
 	/**
-	 * @param click
+	 * Goes back to the Login window. 
+	 *
+	 * @param click: Action taken by user.
 	 * @throws IOException
 	 */
 	@FXML
@@ -76,7 +78,7 @@ public class RegistrationController implements Initializable {
 	}
 
 	/**
-	 * @param pressed
+	 * @param pressed: Event component that does a desired action when pressed.
 	 * @throws IOException
 	 */
 	public void onEnter(ActionEvent pressed) throws IOException {
@@ -85,7 +87,7 @@ public class RegistrationController implements Initializable {
 	}
 
 	/**
-	 * 
+	 * Hides error messages if error has not yet been encountered.
 	 */
 	@FXML
 	public void hideErrorMsg() {
@@ -97,7 +99,9 @@ public class RegistrationController implements Initializable {
 	}
 
 	/**
-	 * @param event
+	 * Gets the type of user. 
+	 *
+	 * @param event: Event component that does a desired action when pressed.
 	 */
 	public void getUserType(ActionEvent event) {
 		UserTypeName = users.getValue();
@@ -123,7 +127,9 @@ public class RegistrationController implements Initializable {
 	}
 
 	/**
-	 * @param event
+	 * User has the option to view their password as it is being typed. 
+	 *
+	 * @param event: Event component that does a desired action when pressed.
 	 */
 	public void togglevisiblePassword(ActionEvent event) {
 		if (showPassword.isSelected()) {
@@ -145,7 +151,9 @@ public class RegistrationController implements Initializable {
 	}
 
 	/**
-	 * @param event
+	 * Registers the user.
+	 *
+	 * @param event: Event component that does a desired action when pressed.
 	 */
 	public void register(ActionEvent event) {
 
@@ -159,14 +167,14 @@ public class RegistrationController implements Initializable {
 		String tempTextConfPwdString = confirmPasswordText.getText();
 		System.out.println(tempTextConfPwdString);
 
-		// check for valid userType
+		/* Check for valid 'userType' */
 		if (UsertypeCode == -1) {
 			userTypeError.setVisible(true);
 			userTypeError.setText("Please select a valid user");
 			numErrors++;
 		}
 
-		// check for valid username
+		/* Check for valid username */
 		if (username.getText() == null || username.getText().trim().isEmpty()) {
 			userNameError.setVisible(true);
 			userNameError.setText("Username can't be blank! Please enter a username");
@@ -175,7 +183,7 @@ public class RegistrationController implements Initializable {
 			userName = username.getText();
 		}
 
-		// check for matching passwords
+		/* Check for matching passwords */
 		if ((!tempPwdString.equals(tempConfPwdString)) || (!tempTextPwdString.equals(tempTextConfPwdString))) {
 			pwdMatchError.setVisible(true);
 			pwdMatchError.setText("'Password' and 'Confirm Pasword' dont match!");

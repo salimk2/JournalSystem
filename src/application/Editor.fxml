@@ -43,14 +43,12 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <TableView fx:id="tableView" layoutX="25.0" layoutY="81.0" onMouseClicked="#columnSelected" prefHeight="393.0" prefWidth="750.0">
+      <TableView fx:id="tableView" layoutX="60.0" layoutY="81.0" onMouseClicked="#columnSelected" prefHeight="393.0" prefWidth="680.0">
          <columns>
-            <TableColumn fx:id="researcherColumn" prefWidth="123.33833694458008" text="Researcher" />
-            <TableColumn fx:id="submissionColumn" prefWidth="150.66163635253906" text="Submissions" />
-            <TableColumn fx:id="reviewerColumn" prefWidth="130.69174194335938" text="Reviewer" />
-            <TableColumn fx:id="minorRevisionColumn" prefWidth="108.695556640625" text="Minor Revision" />
-            <TableColumn fx:id="revision1Column" prefWidth="108.3609619140625" text="Revision 1" />
-            <TableColumn fx:id="revision2Column" prefWidth="125.0" text="Revision 2" />
+            <TableColumn fx:id="researcherColumn" prefWidth="173.0" text="Researcher" />
+            <TableColumn fx:id="submissionColumn" prefWidth="167.0" text="Submissions" />
+            <TableColumn fx:id="reviewerColumn" prefWidth="158.0" text="Reviewer" />
+            <TableColumn fx:id="deadlineColumn" prefWidth="181.0" text="Deadline" />
          </columns>
       </TableView>
       <FontAwesomeIcon fx:id="refreshIcon" fill="#1b2afc" fontSmoothingType="LCD" glyphName="REFRESH" layoutX="168.0" layoutY="37.0" onMouseClicked="#refreshPage" size="1.8em" wrappingWidth="26.11428451538086">

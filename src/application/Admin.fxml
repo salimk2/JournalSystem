@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -10,24 +10,23 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.controllers.AdminController">
    <children>
-      <Button layoutX="718.0" layoutY="17.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
-      <Label layoutX="301.0" layoutY="14.0" prefHeight="36.0" prefWidth="199.0" text="Welcome Admin">
+      <Label layoutX="302.0" layoutY="17.0" prefHeight="36.0" prefWidth="197.0" text="Welcome Admin">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Label fx:id="lblTest1" layoutX="83.0" layoutY="488.0" text="label" />
-      <Label fx:id="lblTest2" layoutX="83.0" layoutY="509.0" text="label" />
-      <JFXComboBox fx:id="cbJournals" layoutX="25.0" layoutY="17.0" onAction="#journalSelected" prefHeight="31.0" prefWidth="154.0" />
-      <TableView fx:id="tableView" layoutX="26.0" layoutY="90.0" onMouseClicked="#columnSelected" prefHeight="393.0" prefWidth="750.0">
+      <Label fx:id="selected" layoutX="83.0" layoutY="509.0" text="label" />
+      <JFXComboBox fx:id="cbJournals" layoutX="25.0" layoutY="17.0" onAction="#journalSelected" onMouseClicked="#update" prefHeight="31.0" prefWidth="154.0" />
+      <TableView fx:id="tableView" layoutX="77.0" layoutY="79.0" onMouseClicked="#columnSelected" prefHeight="393.0" prefWidth="647.0">
          <columns>
-            <TableColumn fx:id="researcherColumn" prefWidth="123.33833694458008" text="Researcher" />
-            <TableColumn fx:id="submissionColumn" prefWidth="150.66163635253906" text="Submissions" />
-            <TableColumn fx:id="reviewerColumn" prefWidth="130.69174194335938" text="Reviewer" />
-            <TableColumn fx:id="minorRevisionColumn" prefWidth="108.695556640625" text="Minor Revision" />
-            <TableColumn fx:id="revision1Column" prefWidth="108.3609619140625" text="Revision 1" />
-            <TableColumn fx:id="revision2Column" prefWidth="125.0" text="Revision 2" />
+            <TableColumn fx:id="researcherColumn" prefWidth="153.0" text="Researcher" />
+            <TableColumn fx:id="submissionColumn" prefWidth="171.0" text="Submissions" />
+            <TableColumn fx:id="reviewerColumn" prefWidth="165.0" text="Reviewer" />
+            <TableColumn fx:id="reviewColumn" minWidth="8.0" prefWidth="156.0" text="Review" />
          </columns>
       </TableView>
+      <JFXButton fx:id="btnDownloadSubmission" layoutX="327.0" layoutY="500.0" onAction="#downloadSubmission" prefHeight="36.0" prefWidth="147.0" styleClass="normalBtn" stylesheets="@application.css" text="Download Submission" />
+      <JFXButton fx:id="btnDownloadReview" layoutX="612.0" layoutY="500.0" onAction="#downloadReview" prefHeight="36.0" prefWidth="117.0" styleClass="normalBtn" stylesheets="@application.css" text="Download Review" />
+      <JFXButton layoutX="708.0" layoutY="17.0" onAction="#logout" prefHeight="36.0" prefWidth="67.0" styleClass="cancelBtn" stylesheets="@application.css" text="Logout" />
    </children>
 </AnchorPane>

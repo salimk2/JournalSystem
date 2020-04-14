@@ -53,7 +53,7 @@ public class ResearcherUploadDocumentController implements Initializable {
 	}
 
 	/**
-	 *
+	 * Initializes needed components.
 	 */
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -75,7 +75,9 @@ public class ResearcherUploadDocumentController implements Initializable {
 	}
 
 	/**
-	 * @param event
+	 * Goes back to the original window.
+	 * 
+	 * @param event: Event component that does a desired action when pressed.
 	 * @throws IOException
 	 */
 	@FXML
@@ -86,14 +88,14 @@ public class ResearcherUploadDocumentController implements Initializable {
 	}
 
 	/**
-	 * 
+	 * Creates a personal folder for the current user.
 	 */
 	public void createUserFolder() {
 		// btnUploadToJournal.setDisable(true);
 		boolean dirError = false;
 		if (!availableJournals.getSelectionModel().isEmpty()) {
 			String chosenJournal = availableJournals.getValue();
-			// create user personal folder
+			/* Create user personal folder */
 			dirError = util.createUserDir(username, type, chosenJournal);
 			if (!dirError) {
 
@@ -119,19 +121,23 @@ public class ResearcherUploadDocumentController implements Initializable {
 		}
 	}
 
-	// researcher will upload a file to a specific folder located in
-	// projectDb->editor->journals->"name of journal"->"researcher username"-> "this
-	// is where the files resides"
+	/** 
+	 * 'Researcher' will upload a file to a specific folder located in
+	 *  projectDb -> editor -> journals -> "Journal Name" -> "Researcher Username" 
+	 *  -> "File resides in here".
+	 *
+	 * @throws IOException
+	 */
 	public void uploadDoc() throws IOException {
 
-		// check for combobox element to be selected
+		/* Check for ComboBox element to be selected */
 		if (!availableJournals.getSelectionModel().isEmpty() && !submissionNumber.getSelectionModel().isEmpty()) {
 			String chosenJournal = availableJournals.getValue();
 			String subVersionString = submissionNumber.getValue();
 			boolean journalExists = util.checkResearcherFileExists(chosenJournal, username);
 
 			if (journalExists) {
-				// upload file here
+				/* Upload file */
 				System.out.println("Thing created");
 				File researcherPathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
 						+ File.separator + "editor" + File.separator + "journals" + File.separator + chosenJournal
@@ -167,7 +173,7 @@ public class ResearcherUploadDocumentController implements Initializable {
 	}
 
 	/**
-	 * reads and stores the names of all created journals inside the journals file
+	 * Reads and stores the names of all created journals inside the 'Journals' file.
 	 */
 	private void readFile() {
 
