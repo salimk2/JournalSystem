@@ -22,6 +22,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ * EditorReviewFinalSubmissionController
+ * 
+ * Controller class for EditorReviewFinalSubmission.FXML
+ */
 public class EditorReviewFinalSubmissionController implements Initializable {
 
 	private String Journal;

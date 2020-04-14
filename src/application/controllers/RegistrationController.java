@@ -22,6 +22,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+/**
+ * RegistrationController
+ * 
+ * Controller class for Registration.FXML
+ */
 public class RegistrationController implements Initializable {
 
 	private static short UsertypeCode = -1;
@@ -36,9 +41,9 @@ public class RegistrationController implements Initializable {
 
 	public TextField passwordText;
 	public TextField confirmPasswordText;
-	public JFXTextField username;// = new JFXTextField();
-	public JFXPasswordField password;// = new JFXPasswordField();
-	public JFXPasswordField confirmPassword;// = new JFXPasswordField();
+	public JFXTextField username;
+	public JFXPasswordField password;
+	public JFXPasswordField confirmPassword;
 	public Pane content = new Pane();
 
 	public CheckBox showPassword;
@@ -198,8 +203,6 @@ public class RegistrationController implements Initializable {
 		}
 
 		if (numErrors == 0) {
-			// System.out.println(UserTypeName + " " + UsertypeCode + " "+ pwd +" "+
-			// userName);
 
 			short creatAccount = Main.AuthSys.register(userName, pwd, UsertypeCode);
 

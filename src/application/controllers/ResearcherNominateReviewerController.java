@@ -22,6 +22,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.stage.Stage;
 
+/**
+ * ResearcherNominateReviewerController
+ * 
+ * Controller class for ResearcherNominateReviewer.FXML
+ */
 public class ResearcherNominateReviewerController implements Initializable {
 
 	private String researcherUsername;
@@ -91,9 +96,6 @@ public class ResearcherNominateReviewerController implements Initializable {
 	@FXML
 	public void goBack(ActionEvent event) {
 		Stage stage = (Stage) btnGoBack.getScene().getWindow();
-//		System.out.println("The current user username is : " + researcherUsername);
-//		System.out.println("the current journal is " + currentWorkingJournal);
-
 		stage.close();
 	}
 
@@ -107,13 +109,10 @@ public class ResearcherNominateReviewerController implements Initializable {
 		if (!error) {
 			reviewerList.getSelectionModel().clearSelection();
 		} else {
-//			System.out.println("Success to nominate");
 			util.modifyNominatedRevFileStatus("PENDING", researcherUsername, currentWorkingJournal);
 
 			for (String rev : chosenRevs) {
-//				System.out.println(rev);
 				util.writeNominatedRev(researcherUsername, rev, currentWorkingJournal);
-//				System.out.println(rev);
 
 			}
 
@@ -166,8 +165,6 @@ public class ResearcherNominateReviewerController implements Initializable {
 
 			String line = "";
 			String[] loginInfo = new String[10000];
-//			System.out.println("These are the Researcher accounts:");
-//			System.out.println();
 			while ((line = read.readLine()) != null) {
 				loginInfo = line.split(" ");
 

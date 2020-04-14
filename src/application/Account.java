@@ -1,12 +1,24 @@
 package application;
 
+/**
+ * Account
+ * Account.java creates user accounts
+ */
 public class Account {
 
+	// Declare user variables
 	private String username;
 	private String password;
 	private int accountType;
 	private String salt;
 
+	/**
+	 * Account Constructor
+	 * @param username
+	 * @param password
+	 * @param type
+	 * @param salt
+	 */
 	public Account(String username, String password, int type, String salt) {
 		super();
 		this.username = username;
@@ -97,10 +109,8 @@ public class Account {
 	 * @return True if the password matches and False if the password does not match
 	 */
 	public static Boolean passwordRequirement(String password) {
-		// if(password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$") )
-		// {//password.length() >= 6 && !password.contains(" ")){
-		if (password.matches("^(?=.*\\d).{8,60}$")) {// Password expression. Password must be between 4 and 8 digits
-														// long and include at least one numeric digit.
+		if (password.matches("^(?=.*\\d).{8,60}$")) {				// Password expression. Password must be between 4 and 8 digits
+																	// long and include at least one numeric digit.
 			return true;
 		} else {
 			return false;

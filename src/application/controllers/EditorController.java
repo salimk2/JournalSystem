@@ -34,6 +34,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
+ * Editor Controller
+ * 
  * Controller class for EditorV1.fxml.
  */
 public class EditorController implements Initializable {
@@ -85,10 +87,6 @@ public class EditorController implements Initializable {
 		/* set table selection */
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-		/* !!! Test - Set labels */
-		// lblTest1.setText("journal: " + cbJournals.getValue());
-		// lblTest2.setText("submission: none");
-
 	}
 
 	/**
@@ -117,8 +115,6 @@ public class EditorController implements Initializable {
 			// System.out.println("Initilaizer j :" + j);
 			journalsList.add(i, j);
 		}
-		// System.out.println(journalsList);
-		// availableJournals.getItems().clear();
 
 		cbJournals.setItems(journalsList);
 	}

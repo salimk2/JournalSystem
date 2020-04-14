@@ -33,7 +33,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
- * Controller class for reviewer.fxml
+ * AdminController
+ * 
+ * Controller class for Admin.fxml
  */
 public class AdminController implements Initializable {
 
@@ -46,6 +48,7 @@ public class AdminController implements Initializable {
 	public static final String THIRD = "Third";
 
 	private Pane content = new Pane();
+	
 	// configure table
 	@FXML
 	private TableView<AdminRecord> tableView; // configure TableView
@@ -63,8 +66,6 @@ public class AdminController implements Initializable {
 	public JFXComboBox<String> cbJournals;
 	@FXML
 	private Label selected;
-	// @FXML
-	// private FontAwesomeIcon //refreshIcon;
 
 	private Utilities util = new Utilities();
 	private List<String> journals = new ArrayList<>();
@@ -141,8 +142,7 @@ public class AdminController implements Initializable {
 			String j = journals.get(i);
 			journalsList.add(j);
 		}
-		// System.out.println(journalsList);
-		// availableJournals.getItems().clear();
+		
 		cbJournals.setItems(journalsList);
 	}
 
@@ -213,12 +213,6 @@ public class AdminController implements Initializable {
 								if (subs[j].matches("FinalSubmission.pdf")) {
 									records.add(new AdminRecord(res[i], subs[j], nom[1], rev[0]));
 								}
-//								if(subs[j].matches("SecondSubmission.pdf")) {
-//									records.add(new AdminRecord(res[i], subs[j], nom[1], rev[1]));
-//								}
-//								if(subs[j].matches("ThirdSubmission.pdf")) {
-//									records.add(new AdminRecord(res[i], subs[j], nom[1], rev[2]));
-//								}
 
 							}
 
@@ -275,7 +269,6 @@ public class AdminController implements Initializable {
 	}
 
 	public void downloadSubmission(ActionEvent event) throws IOException {
-		// System.out.println("Download Clicked");
 		if (active != null) {
 			util.download(active);
 		}

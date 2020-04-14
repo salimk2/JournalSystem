@@ -33,8 +33,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * @author jdev
- *
+ * ResearcherController
+ * 
+ * Controller class for Researcher.FXML
  */
 public class ResearcherController implements Initializable {
 
@@ -318,65 +319,29 @@ public class ResearcherController implements Initializable {
 
 		/* *** Check First Submission *** */
 		if (firstFile.exists()) {
-			// System.out.println(journalName + " has a directory called " + username + "
-			// and a file called "
-			// + "FirstSubmission.pdf");
-
 			btnSub1.setDisable(false);
 		} else {
-
-			// System.out.println(journalName + " does not have a directory called " +
-			// username
-			// + " and a file called FirstSubmission.pdf");
-
 			btnSub1.setDisable(true);
 		}
 
 		/* *** Check Second Submission *** */
 		if (secondFile.exists()) {
-			// System.out.println(journalName + " has a directory called " + username + "
-			// and a file called "
-			// + "SecondSubmission.pdf");
-
 			btnSub2.setDisable(false);
 		} else {
-
-			// System.out.println(journalName + " does not have a directory called " +
-			// username
-			// + " and a file called SecondSubmission.pdf");
-
 			btnSub2.setDisable(true);
 		}
 
 		/* *** Check Third Submisiion *** */
 		if (thirdFile.exists()) {
-			// System.out.println(journalName + " has a directory called " + username + "
-			// and a file called "
-			// + "ThirdSubmission.pdf");
-
 			btnSub3.setDisable(false);
 		} else {
-
-			// System.out.println(journalName + " does not have a directory called " +
-			// username
-			// + " and a file called ThirdSubmission.pdf");
-
 			btnSub3.setDisable(true);
 		}
 
 		/* *** Check Final Submission *** */
 		if (finalFile.exists()) {
-			// System.out.println(journalName + " has a directory called " + username + "
-			// and a file called "
-			// + "FinalSubmission.pdf");
-
 			btnSubFinal.setDisable(false);
 		} else {
-
-			// System.out.println(journalName + " does not have a directory called " +
-			// username
-			// + " and a file called FinalSubmission.pdf");
-
 			btnSubFinal.setDisable(true);
 		}
 
@@ -408,48 +373,24 @@ public class ResearcherController implements Initializable {
 		// ======================Check First Rev
 		// submission====================================================
 		if (firstRev.exists()) {
-			// System.out.println(journalName + " has a directory called " + username + "
-			// and a file called "
-			// + "FirstSubmission.pdf");
 			btnRev1.setDisable(false);
 		} else {
-
-			// System.out.println(journalName + " does not have a directory called " +
-			// username
-			// + " and a file called FirstSubmission.pdf");
-
 			btnRev1.setDisable(true);
 		}
 
 		// ======================Check Second Rev
 		// submission====================================================
 		if (secondRev.exists()) {
-			// System.out.println(journalName + " has a directory called " + username + "
-			// and a file called "
-			// + "SecondSubmission.pdf");
 			btnRev2.setDisable(false);
 		} else {
-
-			// System.out.println(journalName + " does not have a directory called " +
-			// username
-			// + " and a file called SecondSubmission.pdf");
-
 			btnRev2.setDisable(true);
 		}
 
 		// ======================Check Third Rev
 		// submission====================================================
 		if (thirdRev.exists()) {
-			// System.out.println(journalName + " has a directory called " + username + "
-			// and a file called "
-			// + "ThirdSubmission.pdf");
 			btnRevMinor.setDisable(false);
 		} else {
-
-			// System.out.println(journalName + " does not have a directory called " +
-			// username
-			// + " and a file called ThirdSubmission.pdf");
-
 			btnRevMinor.setDisable(true);
 		}
 
@@ -625,11 +566,7 @@ public class ResearcherController implements Initializable {
 				+ username + File.separator);
 		File pathToRevNomFile = new File(mainPath + File.separator + journalName + File.separator + "researchers"
 				+ File.separator + username + File.separator + File.separator + "nominatedReviewers.txt");
-//		if (path.exists())
-//			System.out.println("Path Exists " + path);
-//		else {
-//			System.out.println("Path doesnt exist " + path);
-//		}
+		
 		StringJoiner joiner = new StringJoiner(" ");
 		String[] temp = util.listFilesInDir(path);
 		for (String string : temp) {

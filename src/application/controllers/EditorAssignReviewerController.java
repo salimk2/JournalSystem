@@ -27,10 +27,10 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 /**
- * Controller class for 'EditorV1AssignReviewer'.
+ * EditorAssignReviewerController
  * 
- * Implements and interface called 'Initializable' when code is run, the class
- * runs the 'initialize()' method.
+ * Controller class for 'EditorV1AssignReviewer'. Implements and interface 
+ * called 'Initializable' when code is run, the class runs the 'initialize()' method.
  */
 public class EditorAssignReviewerController implements Initializable {
 
