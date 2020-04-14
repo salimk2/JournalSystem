@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
+ * ReviewerRecord
  * Class for the table in the Editor window
  */
 public class ReviewerRecord {

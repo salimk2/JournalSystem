@@ -22,6 +22,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+/**
+ * RegistrationController
+ * 
+ * Controller class for Registration.FXML
+ */
 public class RegistrationController implements Initializable {
 
 	private static short UsertypeCode = -1;
@@ -36,9 +41,9 @@ public class RegistrationController implements Initializable {
 
 	public TextField passwordText;
 	public TextField confirmPasswordText;
-	public JFXTextField username;// = new JFXTextField();
-	public JFXPasswordField password;// = new JFXPasswordField();
-	public JFXPasswordField confirmPassword;// = new JFXPasswordField();
+	public JFXTextField username;
+	public JFXPasswordField password;
+	public JFXPasswordField confirmPassword;
 	public Pane content = new Pane();
 
 	public CheckBox showPassword;
@@ -66,7 +71,7 @@ public class RegistrationController implements Initializable {
 	}
 
 	/**
-	 * Goes back to the Login window. 
+	 * Goes back to the Login window.
 	 *
 	 * @param click: Action taken by user.
 	 * @throws IOException
@@ -99,7 +104,7 @@ public class RegistrationController implements Initializable {
 	}
 
 	/**
-	 * Gets the type of user. 
+	 * Gets the type of user.
 	 *
 	 * @param event: Event component that does a desired action when pressed.
 	 */
@@ -127,7 +132,7 @@ public class RegistrationController implements Initializable {
 	}
 
 	/**
-	 * User has the option to view their password as it is being typed. 
+	 * User has the option to view their password as it is being typed.
 	 *
 	 * @param event: Event component that does a desired action when pressed.
 	 */
@@ -163,9 +168,8 @@ public class RegistrationController implements Initializable {
 		String tempPwdString = password.getText();
 		String tempConfPwdString = confirmPassword.getText();
 		String tempTextPwdString = passwordText.getText();
-		System.out.println(tempTextPwdString);
+
 		String tempTextConfPwdString = confirmPasswordText.getText();
-		System.out.println(tempTextConfPwdString);
 
 		/* Check for valid 'userType' */
 		if (UsertypeCode == -1) {
@@ -198,8 +202,6 @@ public class RegistrationController implements Initializable {
 		}
 
 		if (numErrors == 0) {
-			// System.out.println(UserTypeName + " " + UsertypeCode + " "+ pwd +" "+
-			// userName);
 
 			short creatAccount = Main.AuthSys.register(userName, pwd, UsertypeCode);
 
@@ -241,7 +243,6 @@ public class RegistrationController implements Initializable {
 				break;
 			}
 
-			System.out.println(creatAccount);
 		} else {
 			accountError.setText("Please fix the indicated errors and try again");
 		}

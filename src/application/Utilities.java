@@ -15,13 +15,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 import javafx.stage.Stage;
 
+/**
+ * Utilities
+ */
 public class Utilities {
 
 	private FileChooser upload = new FileChooser();
 	private DirectoryChooser download = new DirectoryChooser();
-//	private ArrayList<File> storefiles = new ArrayList<>();
-//	private HashMap<String, File> fileStorage = new HashMap<>();
-
 	private String message;
 
 	public String getMessage() {
@@ -35,8 +35,9 @@ public class Utilities {
 
 	/**
 	 * Only used to modify the status to the first line of this file
-	 * @param researcherUsername The name of the current researcher 
-	 * @param journalName The name of the journal
+	 * 
+	 * @param researcherUsername The name of the current researcher
+	 * @param journalName        The name of the journal
 	 * @return The journal with the modified line
 	 */
 	public String readRevDeadlines(String researcherUsername, String journalName) throws IOException {
@@ -50,18 +51,14 @@ public class Utilities {
 
 			String line = "";
 
-			// System.out.println("Journals:");
 			while ((line = br.readLine()) != null) {
 				deadline += line + " ";
 
 			}
 			br.close();
-			if (deadline.isEmpty()) {
-				System.out.println("There are no journals yet");
-			}
 
 		} catch (FileNotFoundException e) {
-			System.out.println("Error Loading DataBase.");
+
 			e.printStackTrace();
 		}
 		return deadline;
@@ -69,9 +66,10 @@ public class Utilities {
 
 	/**
 	 * Writing to the file with the deadline (Reviewer)
-	 * @param username The username of the current user
+	 * 
+	 * @param username    The username of the current user
 	 * @param journalName The name of the journal
-	 * @param date The current date of the deadline
+	 * @param date        The current date of the deadline
 	 */
 	public void writeRevDeadlines(String username, String journalName, String date) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
@@ -82,11 +80,17 @@ public class Utilities {
 			bw.write(date + System.getProperty("line.separator"));
 			bw.close();
 		} catch (IOException e) {
-			System.out.println("Error! Couldn't write to file");
+
 			e.printStackTrace();
 		}
 	}
-	
+
+	/**
+	 * This method makes it possible to read what the reviewer written reviews
+	 * 
+	 * @param researcherUsername The username of the researcher
+	 * @param journalName        The journal name
+	 */
 	public String readRevReviews(String researcherUsername, String journalName) throws IOException {
 		String review = "";
 		File readFromFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
@@ -98,58 +102,64 @@ public class Utilities {
 
 			String line = "";
 
-			// System.out.println("Journals:");
 			while ((line = br.readLine()) != null) {
 				review += line + " ";
 
 			}
 			br.close();
-			if (review.isEmpty()) {
-				System.out.println("There are no journals yet");
-			}
 
 		} catch (FileNotFoundException e) {
-			System.out.println("Error Loading DataBase.");
+
 			e.printStackTrace();
 		}
 		return review;
 	}
-	
+
+	/**
+	 * This method will make the reviewer able to write his/her reviews
+	 * 
+	 * @param date        this will be the date on which it was written
+	 * @param username    The username of the current user
+	 * @param journalName The journal name
+	 * @param rev         will be update as the application runs to determine
+	 *                    reviewer dates
+	 */
 	public void writeRevReviews(String username, String journalName, String date, int rev) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
 				+ File.separator + username + File.separator + "reviewerReviews.txt");
-		
-		String[] revDates = {null,null,null};
-		
-		if(writeToFile.exists()) {
+
+		String[] revDates = { null, null, null };
+
+		if (writeToFile.exists()) {
 			try {
 				revDates = readRevReviews(username, journalName).split(" ");
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		}
-		
+
 		revDates[rev] = date;
-		
+
 		try {
 			BufferedWriter bw = new BufferedWriter(new FileWriter(writeToFile, false));
 			for (int i = 0; i < 3; i++) {
 				bw.write(revDates[i] + System.getProperty("line.separator"));
 			}
-			
+
 			bw.close();
 		} catch (IOException e) {
-			System.out.println("Error! Couldn't write to file");
+
 			e.printStackTrace();
 		}
 	}
 
 	/**
 	 * Modifying the reviewer file status
-	 * @param status The file status (Reviewer)
-	 * @param username The username of the current user
-	 * @param journalName The journal name 
+	 * 
+	 * @param status      The file status (Reviewer)
+	 * @param username    The username of the current user
+	 * @param journalName The journal name
 	 */
 	public void modifyNominatedRevFileStatus(String status, String username, String journalName) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
@@ -160,16 +170,18 @@ public class Utilities {
 			bw.write(status + System.getProperty("line.separator"));
 			bw.close();
 		} catch (IOException e) {
-			System.out.println("Error! Couldn't write to file");
+
 			e.printStackTrace();
 		}
 
 	}
 
-	/** Write the reviewer nominations 
-	 * @param username The username of the current user
+	/**
+	 * Write the reviewer nominations
+	 * 
+	 * @param username     The username of the current user
 	 * @param reviewername The name for the reviewer
-	 * @param journalName The journal name
+	 * @param journalName  The journal name
 	 */
 	public void writeNominatedRev(String username, String reviewername, String journalName) {
 		File writeToFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
@@ -180,15 +192,16 @@ public class Utilities {
 			bw.write(reviewername + System.getProperty("line.separator"));
 			bw.close();
 		} catch (IOException e) {
-			System.out.println("Error Saving DataBase.");
+
 			e.printStackTrace();
 		}
 	}
 
 	/**
 	 * This methods copies a selected file to a new destination
-	 * @param source The file that needs to be copied
-	 * @param dest The new destination of the copied file
+	 * 
+	 * @param source         The file that needs to be copied
+	 * @param dest           The new destination of the copied file
 	 * @param avoidDuplicate To determine if the file already exists
 	 * @throws IOException
 	 */
@@ -205,8 +218,8 @@ public class Utilities {
 	 * Lists all directories inside a directory and return a list containing those
 	 * elements names
 	 * 
-	 * @param path
-	 * @return
+	 * @param path the path to the file
+	 * @return the list of all the directories
 	 */
 	public String[] listFilesInDir(File path) {
 		String[] list = {};
@@ -214,8 +227,6 @@ public class Utilities {
 		if (path.exists()) {
 			list = path.list();
 
-		} else {
-			System.out.println("Error! path doesnt exists");
 		}
 		return list;
 	}
@@ -223,6 +234,8 @@ public class Utilities {
 	/**
 	 * read nominatedReviewers file
 	 * 
+	 * @param researcherUsername This will be the username for the researcher
+	 * @param journalName        this will be the name of the journal
 	 * @throws IOException
 	 */
 	public String readNomRevFile(String researcherUsername, String journalName) throws IOException {
@@ -236,18 +249,14 @@ public class Utilities {
 
 			String line = "";
 
-			// System.out.println("Journals:");
 			while ((line = br.readLine()) != null) {
 				reviewer += line + " ";
 
 			}
 			br.close();
-			if (reviewer.isEmpty()) {
-				System.out.println("There are no journals yet");
-			}
 
 		} catch (FileNotFoundException e) {
-			System.out.println("Error Loading DataBase.");
+
 			e.printStackTrace();
 		}
 		return reviewer;
@@ -258,8 +267,8 @@ public class Utilities {
 	 * Checks if a researcher has a folder for a specified journal and returns the
 	 * boolean
 	 * 
-	 * @param journalName The journal name 
-	 * @param username The username of the current user
+	 * @param journalName The journal name
+	 * @param username    The username of the current user
 	 * @return True if file exist else False if file does not exist
 	 */
 	public boolean checkResearcherFileExists(String journalName, String username) {
@@ -268,22 +277,18 @@ public class Utilities {
 				+ "editor" + File.separator + "journals" + File.separator + journalName + File.separator + "researchers"
 				+ File.separator + username);
 		exists = journal.exists() ? true : false;
-//		if (exists)
-//			System.out.println("File exists :" + journalName);
-//		else
-//			System.out.println("FIle doesnt exists");
 
 		return exists;
 	}
 
-	
-
 	/**
-	 *  This method creates a researcher directory
-	 * @param username The username of the current user
-	 * @param type The account type
-	 * @param chosenJournal the name of the selected  journal
-	 * @return True if an error was encountered and False if the researcher was created successfully
+	 * This method creates a researcher directory
+	 * 
+	 * @param username      The username of the current user
+	 * @param type          The account type
+	 * @param chosenJournal the name of the selected journal
+	 * @return True if an error was encountered and False if the researcher was
+	 *         created successfully
 	 */
 	public boolean createUserDir(String username, int type, String chosenJournal) {
 
@@ -330,9 +335,9 @@ public class Utilities {
 
 	}
 
-	
 	/**
-	 *  This method is only used to write to journalList.txt
+	 * This method is only used to write to journalList.txt
+	 * 
 	 * @param journalName The name of the journal being used
 	 */
 	public void writeJournalToFile(String journalName) {
@@ -343,14 +348,14 @@ public class Utilities {
 			bw.write(journalName + System.getProperty("line.separator"));
 			bw.close();
 		} catch (IOException e) {
-			System.out.println("Error Saving DataBase.");
+
 			e.printStackTrace();
 		}
 	}
 
-	
 	/**
 	 * This method is only used to read from journalList.txt
+	 * 
 	 * @return The data read from the journal
 	 * @throws IOException
 	 */
@@ -365,28 +370,25 @@ public class Utilities {
 
 			String line = "";
 
-			// System.out.println("Journals:");
 			while ((line = br.readLine()) != null) {
 				journalList += line + " ";
 
 			}
 			br.close();
-			if (journalList.isEmpty()) {
-				System.out.println("There are no journals yet");
-			}
-			// System.out.println("Inside Utilities the journals are: "+journalList);
 
 		} catch (FileNotFoundException e) {
-			System.out.println("Error Loading DataBase.");
+
 			e.printStackTrace();
 		}
 		return journalList;
 	}
 
-	
-	/** This method is used to create journal folders
+	/**
+	 * This method is used to create journal folders
+	 * 
 	 * @param journalName The name of the journal being used
-	 * @return True if an error occurred creating the journal directory and false for no errors
+	 * @return True if an error occurred creating the journal directory and false
+	 *         for no errors
 	 */
 	public boolean createJournalDir(String journalName) {
 		boolean error;
@@ -416,8 +418,9 @@ public class Utilities {
 
 	/**
 	 * This methods uploads a file to a selected destination
+	 * 
 	 * @param fileDestinPath The destination of the file that will be uploaded
-	 * @param subVersion The submission version
+	 * @param subVersion     The submission version
 	 * @throws IOException
 	 */
 	public void upload(File fileDestinPath, String subVersion) throws IOException {
@@ -432,14 +435,9 @@ public class Utilities {
 
 			File localDest = new File(fileDestinPath + File.separator + fileName);
 
-			// files.getItems().add(fileName);
 			source = selectedFile.getAbsoluteFile();
-			//System.out.println("Source is : " + source + " dest is  " + localDest);
 			copyFile(selectedFile, localDest, true);
 			message = fileName + " file uploaded succesfully";
-
-		} else {
-			System.out.println("Selectoin got cancelled");
 
 		}
 
@@ -447,7 +445,8 @@ public class Utilities {
 
 	/**
 	 * This methods downloads a file
-	 * @param fileOriginPath
+	 * 
+	 * @param fileOriginPath This is the path that the original file is located at
 	 * @throws IOException
 	 */
 	public void download(File fileOriginPath) throws IOException {
@@ -462,15 +461,9 @@ public class Utilities {
 
 			// files.getItems().add(fileName);
 			File file = fileOriginPath.getAbsoluteFile();
-			//System.out.println("Source is : " + file + " dest is  " + fileDest);
 
 			// set the flag to true to allow overriding files with the same name
 			copyFile(file, fileDest, true);
-
-			System.out.println("Downloaded!");
-
-		} else {
-			System.out.println("Selectoin got cancelled");
 
 		}
 	}

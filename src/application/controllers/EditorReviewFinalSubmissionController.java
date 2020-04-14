@@ -22,6 +22,11 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ * EditorReviewFinalSubmissionController
+ * 
+ * Controller class for EditorReviewFinalSubmission.FXML
+ */
 public class EditorReviewFinalSubmissionController implements Initializable {
 
 	private String Journal;
@@ -88,7 +93,7 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 		for (int i = 0; i < researchersInJournal.size(); i++) {
 			String elem = researchersInJournal.get(i);
 			researcherList.add(i, elem);
-			System.out.println(elem);
+
 		}
 
 		selectResearcher.setItems(researcherList);
@@ -111,7 +116,7 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 	 */
 	public void downloadFinalSub(ActionEvent event) throws IOException {
 		alert.setVisible(false);
-		System.out.println("Dowload was pressed");
+
 		String username = selectResearcher.getValue();
 		if (event.getSource() == btnDownload) {
 			File fileToDownload = new File(
@@ -154,41 +159,59 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 		File rejectFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 				+ "editor" + File.separator + "journals" + File.separator + Journal + File.separator + "researchers"
 				+ File.separator + username + File.separator + "FinalSubmissionRejected.txt");
-		if (!acceptFile.exists() && !rejectFile.exists()) {
-			if (acceptFile.createNewFile()) {
-				alert.setStyle("-fx-text-fill:#027d00");
-				alert.setText("FinalSubmission.pdf has been Accepted");
-				alert.setVisible(true);
-			} else {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Final Submision Couldn't be accepted");
+		File fileToCheckIfExists = new File(System.getProperty("user.dir") + File.separator + "projectDB"
+				+ File.separator + "editor" + File.separator + "journals" + File.separator + Journal + File.separator
+				+ "researchers" + File.separator + username + File.separator + "FinalSubmission.pdf");
+		if (!fileToCheckIfExists.exists()) {
+			btnAccept.setDisable(true);
+			btnReject.setDisable(true);
+			btnDownload.setDisable(true);
 
-				alert.setContentText(
-						"Unknown Error,please close window and try again. If issue persists please contact IT.");
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("No Final Submision File to download");
+			alert.setHeaderText(username + " has not submitted a Final Submission file");
+			alert.setContentText("Please select different Researcher if available or contact " + username
+					+ " to submit his Final Submission");
+			alert.showAndWait();
+		} else {
+
+			if (!acceptFile.exists() && !rejectFile.exists()) {
+				if (acceptFile.createNewFile()) {
+					alert.setStyle("-fx-text-fill:#027d00");
+					alert.setText("FinalSubmission.pdf has been Accepted");
+					alert.setVisible(true);
+				} else {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Final Submision Couldn't be accepted");
+
+					alert.setContentText(
+							"Unknown Error,please close window and try again. If issue persists please contact IT.");
+
+					alert.showAndWait();
+					btnAccept.setDisable(true);
+					btnReject.setDisable(true);
+				}
+			} else if (rejectFile.exists()) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Final Submision Has already been rejected");
+
+				alert.setContentText("This submission can't be aceepted because it was already marked as rejected");
+
+				alert.showAndWait();
+				btnAccept.setDisable(true);
+				btnReject.setDisable(true);
+			} else {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Final Submision Has already been accepted");
+
+				alert.setContentText("This submission can't be accepted because it was already marked as accepted");
 
 				alert.showAndWait();
 				btnAccept.setDisable(true);
 				btnReject.setDisable(true);
 			}
-		} else if (rejectFile.exists()) {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Final Submision Has already been rejected");
-
-			alert.setContentText("This submission can't be aceepted because it was already marked as rejected");
-
-			alert.showAndWait();
-			btnAccept.setDisable(true);
-			btnReject.setDisable(true);
-		} else {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Final Submision Has already been accepted");
-
-			alert.setContentText("This submission can't be accepted because it was already marked as accepted");
-
-			alert.showAndWait();
-			btnAccept.setDisable(true);
-			btnReject.setDisable(true);
 		}
+
 	}
 
 	/**
@@ -205,40 +228,57 @@ public class EditorReviewFinalSubmissionController implements Initializable {
 		File rejectFile = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 				+ "editor" + File.separator + "journals" + File.separator + Journal + File.separator + "researchers"
 				+ File.separator + username + File.separator + "FinalSubmissionRejected.txt");
-		if (!acceptFile.exists() && !rejectFile.exists()) {
-			if (rejectFile.createNewFile()) {
-				alert.setStyle("-fx-text-fill:#027d00");
-				alert.setText("FinalSubmission.pdf has been Rejected");
-				alert.setVisible(true);
-			} else {
-				Alert alert = new Alert(AlertType.ERROR);
-				alert.setTitle("Final Submision Couldn't be accepted");
 
-				alert.setContentText(
-						"Unknown Error,please close window and try again. If issue persists please contact IT.");
+		File fileToCheckIfExists = new File(System.getProperty("user.dir") + File.separator + "projectDB"
+				+ File.separator + "editor" + File.separator + "journals" + File.separator + Journal + File.separator
+				+ "researchers" + File.separator + username + File.separator + "FinalSubmission.pdf");
+		if (!fileToCheckIfExists.exists()) {
+			btnAccept.setDisable(true);
+			btnReject.setDisable(true);
+			btnDownload.setDisable(true);
+
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setTitle("No Final Submision File to download");
+			alert.setHeaderText(username + " has not submitted a Final Submission file");
+			alert.setContentText("Please select different Researcher if available or contact " + username
+					+ " to submit his Final Submission");
+			alert.showAndWait();
+		} else {
+			if (!acceptFile.exists() && !rejectFile.exists()) {
+				if (rejectFile.createNewFile()) {
+					alert.setStyle("-fx-text-fill:#027d00");
+					alert.setText("FinalSubmission.pdf has been Rejected");
+					alert.setVisible(true);
+				} else {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setTitle("Final Submision Couldn't be accepted");
+
+					alert.setContentText(
+							"Unknown Error,please close window and try again. If issue persists please contact IT.");
+
+					alert.showAndWait();
+					btnAccept.setDisable(true);
+					btnReject.setDisable(true);
+				}
+			} else if (acceptFile.exists()) {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Final Submision Has already been accepted");
+
+				alert.setContentText("This submission can't be rejected because it was already marked as accepted");
+
+				alert.showAndWait();
+				btnAccept.setDisable(true);
+				btnReject.setDisable(true);
+			} else {
+				Alert alert = new Alert(AlertType.WARNING);
+				alert.setTitle("Final Submision Has already been rejected");
+
+				alert.setContentText("This submission can't be rejected because it was already marked as rejected");
 
 				alert.showAndWait();
 				btnAccept.setDisable(true);
 				btnReject.setDisable(true);
 			}
-		} else if (acceptFile.exists()) {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Final Submision Has already been accepted");
-
-			alert.setContentText("This submission can't be rejected because it was already marked as accepted");
-
-			alert.showAndWait();
-			btnAccept.setDisable(true);
-			btnReject.setDisable(true);
-		} else {
-			Alert alert = new Alert(AlertType.WARNING);
-			alert.setTitle("Final Submision Has already been rejected");
-
-			alert.setContentText("This submission can't be rejected because it was already marked as rejected");
-
-			alert.showAndWait();
-			btnAccept.setDisable(true);
-			btnReject.setDisable(true);
 		}
 	}
 

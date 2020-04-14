@@ -20,6 +20,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ * ResearcherUploadDocumentController
+ * 
+ * Controller class for ResearcherUploadDocument.FXML
+ */
 public class ResearcherUploadDocumentController implements Initializable {
 
 	private String username;
@@ -61,17 +66,12 @@ public class ResearcherUploadDocumentController implements Initializable {
 		readFile();
 		for (int i = 0; i < journals.size(); i++) {
 			String j = journals.get(i);
-			// System.out.println("Initilaizer j :" + j);
 			list.add(i, j);
 		}
-		System.out.println(list);
-		// availableJournals.getItems().clear();
 
 		availableJournals.setItems(list);
 		submissionNumber.setItems(subNum);
 		messageLabel.setVisible(false);
-		// btnUploadToJournal.setDisable(true);
-
 	}
 
 	/**
@@ -91,7 +91,6 @@ public class ResearcherUploadDocumentController implements Initializable {
 	 * Creates a personal folder for the current user.
 	 */
 	public void createUserFolder() {
-		// btnUploadToJournal.setDisable(true);
 		boolean dirError = false;
 		if (!availableJournals.getSelectionModel().isEmpty()) {
 			String chosenJournal = availableJournals.getValue();
@@ -100,20 +99,16 @@ public class ResearcherUploadDocumentController implements Initializable {
 			if (!dirError) {
 
 				messageLabel.setStyle("-fx-text-fill:#027d00;");
-
 				messageLabel.setText(util.getMessage());
 				messageLabel.setVisible(true);
-				// btnUploadToJournal.setDisable(false);
 
 			} else {
 				messageLabel.setStyle("-fx-text-fill:#d90024;");
-
 				messageLabel.setText(util.getMessage());
 				messageLabel.setVisible(true);
 			}
 		} else {
 			messageLabel.setStyle("-fx-text-fill:#d90024;");
-
 			messageLabel.setText("Please select a journal first." + System.getProperty("line.separator")
 					+ "If no Journal available please contact the Editor");
 			messageLabel.setVisible(true);
@@ -121,10 +116,10 @@ public class ResearcherUploadDocumentController implements Initializable {
 		}
 	}
 
-	/** 
-	 * 'Researcher' will upload a file to a specific folder located in
-	 *  projectDb -> editor -> journals -> "Journal Name" -> "Researcher Username" 
-	 *  -> "File resides in here".
+	/**
+	 * 'Researcher' will upload a file to a specific folder located in projectDb ->
+	 * editor -> journals -> "Journal Name" -> "Researcher Username" -> "File
+	 * resides in here".
 	 *
 	 * @throws IOException
 	 */
@@ -138,7 +133,7 @@ public class ResearcherUploadDocumentController implements Initializable {
 
 			if (journalExists) {
 				/* Upload file */
-				System.out.println("Thing created");
+
 				File researcherPathFile = new File(System.getProperty("user.dir") + File.separator + "projectDB"
 						+ File.separator + "editor" + File.separator + "journals" + File.separator + chosenJournal
 						+ File.separator + "researchers" + File.separator + username + File.separator);
@@ -173,7 +168,8 @@ public class ResearcherUploadDocumentController implements Initializable {
 	}
 
 	/**
-	 * Reads and stores the names of all created journals inside the 'Journals' file.
+	 * Reads and stores the names of all created journals inside the 'Journals'
+	 * file.
 	 */
 	private void readFile() {
 
@@ -181,16 +177,10 @@ public class ResearcherUploadDocumentController implements Initializable {
 		try {
 			journalList = util.readJournalList();
 			journals = Arrays.asList(journalList.split(" "));
-			for (int i = 0; i < journals.size(); i++) {
-
-				String j = journals.get(i);
-
-				System.out.println(j + " " + i);
-			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("File was not found, Can't read it");
+
 			e.printStackTrace();
 		}
 	}

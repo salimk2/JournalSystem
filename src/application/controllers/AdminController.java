@@ -14,7 +14,6 @@ import com.jfoenix.controls.JFXComboBox;
 
 import application.AdminRecord;
 import application.Utilities;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -31,23 +30,25 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
- * Controller class for reviewer.fxml
+ * AdminController
+ * 
+ * Controller class for Admin.fxml
  */
 public class AdminController implements Initializable {
-	
+
 	private String username;
 	private int type;
 	private File active;
-	
+
 	public static final String FIRST = "First";
 	public static final String SECOND = "Second";
 	public static final String THIRD = "Third";
-	
+
 	private Pane content = new Pane();
+
 	// configure table
 	@FXML
 	private TableView<AdminRecord> tableView; // configure TableView
@@ -65,8 +66,6 @@ public class AdminController implements Initializable {
 	public JFXComboBox<String> cbJournals;
 	@FXML
 	private Label selected;
-	//@FXML
-	//private FontAwesomeIcon //refreshIcon;
 
 	private Utilities util = new Utilities();
 	private List<String> journals = new ArrayList<>();
@@ -76,8 +75,6 @@ public class AdminController implements Initializable {
 	// define variables
 	ObservableList<String> journalsList = FXCollections.observableArrayList();
 
-	
-	
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -100,20 +97,20 @@ public class AdminController implements Initializable {
 		setUsername(username);
 		setType(type);
 	}
-	
-	
+
 	/// Initializes components
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		////refreshIcon.setVisible(false);
+		//// refreshIcon.setVisible(false);
 		btnDownloadSubmission.setDisable(true);
 		btnDownloadReview.setDisable(true);
+		btnDownloadReview.setVisible(false);
 
 		// set columns
 		researcherColumn.setCellValueFactory(new PropertyValueFactory<AdminRecord, String>("researcher"));
 		submissionColumn.setCellValueFactory(new PropertyValueFactory<AdminRecord, String>("submission")); // instance
-																																		// to look
+																											// to look
 																											// for:
 																											// submission
 		reviewerColumn.setCellValueFactory(new PropertyValueFactory<AdminRecord, LocalDate>("reviewer"));
@@ -125,24 +122,19 @@ public class AdminController implements Initializable {
 		selected.setText("Submission: ");
 
 	}
-	
-	
 
 	/**
 	 * 
 	 */
 	private void fillJournalComboBox() {
-		
-		
-		
+
 		String journalList;
 		try {
 			journalList = util.readJournalList();
 			journals = Arrays.asList(journalList.split(" "));
-			
 
 		} catch (IOException e) {
-			System.out.println("File was not found, Can't read it");
+
 			e.printStackTrace();
 		}
 
@@ -150,19 +142,18 @@ public class AdminController implements Initializable {
 			String j = journals.get(i);
 			journalsList.add(j);
 		}
-		// System.out.println(journalsList);
-		// availableJournals.getItems().clear();
-		cbJournals.setItems(journalsList);	
+
+		cbJournals.setItems(journalsList);
 	}
 
 	@FXML
 	// Added the refresh the combobox values
 	// button
 	public void update(MouseEvent event) {
-		if(cbJournals.getItems().isEmpty()) {
+		if (cbJournals.getItems().isEmpty()) {
 			fillJournalComboBox();
 		}
-		
+
 	}
 
 	/**
@@ -189,46 +180,42 @@ public class AdminController implements Initializable {
 						String[] subs = sub.list();
 
 						for (int j = 0; j < subs.length; j++) {
-							
+
 							File nomFile = new File(sub + File.separator + "nominatedReviewers.txt");
-							
-							
+
 							if (nomFile.exists()) {
-									
+
 								String[] nom = util.readNomRevFile(res[i], Journal).split(" ");
-								
+
 								File reviewFile = new File(sub + File.separator + "reviewerReviews.txt");
-								
-								LocalDate[] rev = {null,null,null};
-								
+
+								LocalDate[] rev = { null, null, null };
+
 								if (reviewFile.exists()) {
 									String[] review = util.readRevReviews(res[i], Journal).split(" ");
 									try {
 										rev[0] = LocalDate.parse(review[0]);
-									} catch (Exception e) {;}
+									} catch (Exception e) {
+										;
+									}
 									try {
 										rev[1] = LocalDate.parse(review[1]);
-									} catch (Exception e) {;}
+									} catch (Exception e) {
+										;
+									}
 									try {
 										rev[2] = LocalDate.parse(review[2]);
-									} catch (Exception e) {;}
+									} catch (Exception e) {
+										;
+									}
 								}
-								
-								
-								
-								
-								if(subs[j].matches("FirstSubmission.pdf")) {
-									records.add(new AdminRecord(res[i], subs[j], nom[1] , rev[0]));
+
+								if (subs[j].matches("FinalSubmission.pdf")) {
+									records.add(new AdminRecord(res[i], subs[j], nom[1], rev[0]));
 								}
-								if(subs[j].matches("SecondSubmission.pdf")) {
-									records.add(new AdminRecord(res[i], subs[j], nom[1], rev[1]));
-								}
-								if(subs[j].matches("ThirdSubmission.pdf")) {
-									records.add(new AdminRecord(res[i], subs[j], nom[1], rev[2]));
-								}
-	
+
 							}
-							
+
 						}
 
 					}
@@ -253,7 +240,7 @@ public class AdminController implements Initializable {
 		active = null;
 		selected.setText("Submission: ");
 		btnDownloadSubmission.setDisable(true);
-		btnDownloadReview.setDisable(true);
+
 	}
 
 	/**
@@ -266,18 +253,12 @@ public class AdminController implements Initializable {
 		ObservableList<AdminRecord> records;
 		records = tableView.getSelectionModel().getSelectedItems(); // gets row contents
 		if (records.get(0) != null && cbJournals.getValue() != null) { // ensures user selected available submission
-			 selected.setText("Submission: " + records.get(0).getSubmission());
-			 active = new File(path + File.separator + cbJournals.getValue() + File.separator + "researchers" + File.separator + records.get(0).getResearcher() + File.separator + records.get(0).getSubmission());
-			 btnDownloadSubmission.setDisable(false);
-			 
-			 //Prevents re-upload of a review
-			 if(records.get(0).getReview() == null) {
-				btnDownloadReview.setDisable(true); 
-			 } else {
-				btnDownloadReview.setDisable(false);
-			 }
-			 
-			
+			selected.setText("Submission: " + records.get(0).getSubmission());
+			active = new File(
+					path + File.separator + cbJournals.getValue() + File.separator + "researchers" + File.separator
+							+ records.get(0).getResearcher() + File.separator + records.get(0).getSubmission());
+			btnDownloadSubmission.setDisable(false);
+
 		}
 	}
 
@@ -287,20 +268,27 @@ public class AdminController implements Initializable {
 		openNewBorderPaneWindow(event, "/application/Login.fxml");
 	}
 
-
-	
+	/**
+	 * Downloads the selected submission
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	public void downloadSubmission(ActionEvent event) throws IOException {
-		//System.out.println("Download Clicked");
-		if(active != null) {
+		if (active != null) {
 			util.download(active);
 		}
 	}
 
-
-
-	
+	/**
+	 * Downloads the selected review This function was created for future options
+	 * but it is not displayed and not used
+	 * 
+	 * @param event
+	 * @throws IOException
+	 */
 	public void downloadReview(ActionEvent event) throws IOException {
-		//System.out.println("Upload Clicked");
+
 		util.download(new File(active.getParentFile() + File.separator + "Rev" + active.getName()));
 	}
 
@@ -312,7 +300,5 @@ public class AdminController implements Initializable {
 		window.setScene(scene);
 		window.show();
 	}
-
-	
 
 }

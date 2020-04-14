@@ -14,6 +14,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ * EditorAddJournalPopUpController
+ * 
+ * Controller class for EditorAddJournalPopUp.FXML
+ */
 public class EditorAddJournalPopUpController implements Initializable {
 
 	@FXML
@@ -38,7 +43,8 @@ public class EditorAddJournalPopUpController implements Initializable {
 	}
 
 	/**
-	 * Hides a particular label from being seen. It may be hidden until an action is taken to render it visible.
+	 * Hides a particular label from being seen. It may be hidden until an action is
+	 * taken to render it visible.
 	 */
 	@FXML
 	public void hideLable() {
@@ -47,6 +53,7 @@ public class EditorAddJournalPopUpController implements Initializable {
 
 	/**
 	 * Goes back to the editor window.
+	 * 
 	 * @throws IOException
 	 */
 	@FXML
@@ -67,7 +74,7 @@ public class EditorAddJournalPopUpController implements Initializable {
 		createJournal(pressed);
 	}
 
-	/** 
+	/**
 	 * Creates the Journal page, setting all the necessary labels, style, and texts.
 	 * 
 	 * @param pressed: Event component that does a desired action when pressed.
@@ -94,7 +101,6 @@ public class EditorAddJournalPopUpController implements Initializable {
 			confirmation.setStyle("-fx-text-fill:#027d00;");
 			confirmation.setText(message);
 		}
-		System.out.println(message);
 
 	}
 

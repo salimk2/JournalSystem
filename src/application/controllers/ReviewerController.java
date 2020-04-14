@@ -14,7 +14,6 @@ import com.jfoenix.controls.JFXComboBox;
 
 import application.ReviewerRecord;
 import application.Utilities;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,24 +29,23 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Pane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
+ * ReviewerController
+ * 
  * Controller class for reviewer.fxml
  */
 public class ReviewerController implements Initializable {
-	
+
 	private String username;
 	private int type;
 	private File active;
-	
+
 	public static final String FIRST = "First";
 	public static final String SECOND = "Second";
 	public static final String THIRD = "Third";
-	
-	private Pane content = new Pane();
+
 	// configure table
 	@FXML
 	private TableView<ReviewerRecord> tableView; // configure TableView
@@ -65,8 +63,6 @@ public class ReviewerController implements Initializable {
 	public JFXComboBox<String> cbJournals;
 	@FXML
 	private Label selected;
-	//@FXML
-	//private FontAwesomeIcon //refreshIcon;
 
 	private Utilities util = new Utilities();
 	private List<String> journals = new ArrayList<>();
@@ -76,8 +72,6 @@ public class ReviewerController implements Initializable {
 	// define variables
 	ObservableList<String> journalsList = FXCollections.observableArrayList();
 
-	
-	
 	public void setUsername(String username) {
 		this.username = username;
 	}
@@ -100,22 +94,22 @@ public class ReviewerController implements Initializable {
 		setUsername(username);
 		setType(type);
 	}
-	
-	
+
 	/// Initializes components
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		////refreshIcon.setVisible(false);
+		//// refreshIcon.setVisible(false);
 		btnDownloadSubmission.setDisable(true);
 		btnUploadReview.setDisable(true);
 
 		// set columns
 		researcherColumn.setCellValueFactory(new PropertyValueFactory<ReviewerRecord, String>("researcher"));
 		submissionColumn.setCellValueFactory(new PropertyValueFactory<ReviewerRecord, String>("submission")); // instance
-																																		// to look
-																											// for:
-																											// submission
+																												// to
+																												// look
+																												// for:
+																												// submission
 		deadlineColumn.setCellValueFactory(new PropertyValueFactory<ReviewerRecord, LocalDate>("deadline"));
 		reviewColumn.setCellValueFactory(new PropertyValueFactory<ReviewerRecord, LocalDate>("Review"));
 
@@ -125,30 +119,24 @@ public class ReviewerController implements Initializable {
 		selected.setText("Submission: ");
 
 	}
-	
-	
 
 	/**
 	 * 
 	 */
 	private void fillJournalComboBox() {
-		
-		
-		
+
 		String journalList;
 		try {
 			journalList = util.readJournalList();
 			journals = Arrays.asList(journalList.split(" "));
-			
 
 		} catch (IOException e) {
-			System.out.println("File was not found, Can't read it");
+
 			e.printStackTrace();
 		}
 
 		for (int i = 0; i < journals.size(); i++) {
 			String j = journals.get(i);
-
 
 			try {
 				File PathFile = new File(path + File.separator + j + File.separator + "researchers" + File.separator);
@@ -171,13 +159,13 @@ public class ReviewerController implements Initializable {
 
 								if (getNominatedRev.exists()) {
 									// read the file and store its contents
-									
+
 									String[] getReviewerStrings = util.readNomRevFile(res[k], j).split(" ");
 //									
 									// check if the reviewer has been assigned and
 									if (getReviewerStrings[0].contains("ASSIGNED")) {
 										for (int rev = 1; rev < getReviewerStrings.length; rev++) {
-											if (getReviewerStrings[rev].matches(username)){
+											if (getReviewerStrings[rev].matches(username)) {
 												journalsList.add(j);
 												getReviewerStrings = null;
 											}
@@ -194,21 +182,20 @@ public class ReviewerController implements Initializable {
 
 			} catch (Exception e) {
 			}
-			
+
 		}
-		// System.out.println(journalsList);
-		// availableJournals.getItems().clear();
-		cbJournals.setItems(journalsList);	
+
+		cbJournals.setItems(journalsList);
 	}
 
 	@FXML
 	// Added the refresh the combobox values
 	// button
 	public void update(MouseEvent event) {
-		if(cbJournals.getItems().isEmpty()) {
+		if (cbJournals.getItems().isEmpty()) {
 			fillJournalComboBox();
 		}
-		
+
 	}
 
 	/**
@@ -241,36 +228,42 @@ public class ReviewerController implements Initializable {
 							if (deadlineFile.exists()) {
 								// read the file, and store its contents
 								String[] deadLine = util.readRevDeadlines(res[i], Journal).split(" ");
-								LocalDate[] dead = {LocalDate.parse(deadLine[0]),LocalDate.parse(deadLine[1]),LocalDate.parse(deadLine[2])};
-								
+								LocalDate[] dead = { LocalDate.parse(deadLine[0]), LocalDate.parse(deadLine[1]),
+										LocalDate.parse(deadLine[2]) };
+
 								File reviewFile = new File(sub + File.separator + "reviewerReviews.txt");
-								
-								LocalDate[] rev = {null,null,null};
-								
+
+								LocalDate[] rev = { null, null, null };
+
 								if (reviewFile.exists()) {
 									String[] review = util.readRevReviews(res[i], Journal).split(" ");
 									try {
 										rev[0] = LocalDate.parse(review[0]);
-									} catch (Exception e) {;}
+									} catch (Exception e) {
+										;
+									}
 									try {
 										rev[1] = LocalDate.parse(review[1]);
-									} catch (Exception e) {;}
+									} catch (Exception e) {
+										;
+									}
 									try {
 										rev[2] = LocalDate.parse(review[2]);
-									} catch (Exception e) {;}
+									} catch (Exception e) {
+										;
+									}
 								}
-								
-								
-								if(subs[j].matches("FirstSubmission.pdf")) {
+
+								if (subs[j].matches("FirstSubmission.pdf")) {
 									records.add(new ReviewerRecord(res[i], subs[j], dead[0], rev[0]));
 								}
-								if(subs[j].matches("SecondSubmission.pdf")) {
+								if (subs[j].matches("SecondSubmission.pdf")) {
 									records.add(new ReviewerRecord(res[i], subs[j], dead[1], rev[1]));
 								}
-								if(subs[j].matches("ThirdSubmission.pdf")) {
+								if (subs[j].matches("ThirdSubmission.pdf")) {
 									records.add(new ReviewerRecord(res[i], subs[j], dead[2], rev[2]));
 								}
-								
+
 							}
 
 						}
@@ -310,18 +303,19 @@ public class ReviewerController implements Initializable {
 		ObservableList<ReviewerRecord> records;
 		records = tableView.getSelectionModel().getSelectedItems(); // gets row contents
 		if (records.get(0) != null && cbJournals.getValue() != null) { // ensures user selected available submission
-			 selected.setText("Submission: " + records.get(0).getSubmission());
-			 active = new File(path + File.separator + cbJournals.getValue() + File.separator + "researchers" + File.separator + records.get(0).getResearcher() + File.separator + records.get(0).getSubmission());
-			 btnDownloadSubmission.setDisable(false);
-			 
-			 //Prevents re-upload of a review
-			 if(records.get(0).getReview() == null) {
-				btnUploadReview.setDisable(false); 
-			 } else {
+			selected.setText("Submission: " + records.get(0).getSubmission());
+			active = new File(
+					path + File.separator + cbJournals.getValue() + File.separator + "researchers" + File.separator
+							+ records.get(0).getResearcher() + File.separator + records.get(0).getSubmission());
+			btnDownloadSubmission.setDisable(false);
+
+			// Prevents re-upload of a review
+			if (records.get(0).getReview() == null) {
+				btnUploadReview.setDisable(false);
+			} else {
 				btnUploadReview.setDisable(true);
-			 }
-			 
-			
+			}
+
 		}
 	}
 
@@ -331,35 +325,32 @@ public class ReviewerController implements Initializable {
 		openNewBorderPaneWindow(event, "/application/Login.fxml");
 	}
 
-
-	
 	public void downloadSubmission(ActionEvent event) throws IOException {
-		//System.out.println("Download Clicked");
-		if(active != null) {
+		if (active != null) {
 			util.download(active);
 		}
 	}
 
-
-
-	
 	public void uploadReview(ActionEvent event) throws IOException {
-		//System.out.println("Upload Clicked");
 		String filename;
 		String suffix = "Submission.pdf";
-		String num = active.getName().substring(0, active.getName().length() - suffix.length()); //removes "Submission.pdf"
-		filename = "Rev" + num; //Adds "Rev"
+		String num = active.getName().substring(0, active.getName().length() - suffix.length()); // removes
+																									// "Submission.pdf"
+		filename = "Rev" + num; // Adds "Rev"
 		util.upload(new File(active.getParent()), filename);
-		
-		switch(num) {
+
+		switch (num) {
 		case FIRST:
-			util.writeRevReviews(active.getParentFile().getName(), cbJournals.getValue(), LocalDate.now().toString(), 0);
+			util.writeRevReviews(active.getParentFile().getName(), cbJournals.getValue(), LocalDate.now().toString(),
+					0);
 			break;
 		case SECOND:
-			util.writeRevReviews(active.getParentFile().getName(), cbJournals.getValue(), LocalDate.now().toString(), 1);
+			util.writeRevReviews(active.getParentFile().getName(), cbJournals.getValue(), LocalDate.now().toString(),
+					1);
 			break;
 		case THIRD:
-			util.writeRevReviews(active.getParentFile().getName(), cbJournals.getValue(), LocalDate.now().toString(), 2);
+			util.writeRevReviews(active.getParentFile().getName(), cbJournals.getValue(), LocalDate.now().toString(),
+					2);
 			break;
 		default:
 			System.out.println("Error uploading " + filename);
@@ -377,7 +368,5 @@ public class ReviewerController implements Initializable {
 		window.setScene(scene);
 		window.show();
 	}
-
-	
 
 }

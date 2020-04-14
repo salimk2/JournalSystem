@@ -34,6 +34,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
+ * Editor Controller
+ * 
  * Controller class for EditorV1.fxml.
  */
 public class EditorController implements Initializable {
@@ -48,11 +50,7 @@ public class EditorController implements Initializable {
 	@FXML
 	private TableColumn<EditorRecord, String> researcherColumn;
 	@FXML
-	private TableColumn<EditorRecord, LocalDate> minorRevisionColumn;
-	@FXML
-	private TableColumn<EditorRecord, LocalDate> revision1Column;
-	@FXML
-	private TableColumn<EditorRecord, LocalDate> revision2Column;
+	private TableColumn<EditorRecord, LocalDate> deadlineColumn;
 	@FXML
 	private Button btnAddJournal, btnReviewSubmissions, btnAssignReviewer;
 	@FXML
@@ -79,21 +77,15 @@ public class EditorController implements Initializable {
 		fillJournalComboBox();
 		/* Set columns */
 		researcherColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("researcher"));
-		submissionColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("submission")); /* instance
-																											// variable
-																											// to look
-																											// for: submission */
+		submissionColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>(
+				"submission")); /*
+								 * instance // variable // to look // for: submission
+								 */
 		reviewerColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("reviewer"));
-		minorRevisionColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("minorRevision"));
-		revision1Column.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("revision1"));
-		revision2Column.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("revision2"));
+		deadlineColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("deadline"));
 
 		/* set table selection */
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-		/* !!! Test - Set labels */
-		// lblTest1.setText("journal: " + cbJournals.getValue());
-		// lblTest2.setText("submission: none");
 
 	}
 
@@ -105,35 +97,27 @@ public class EditorController implements Initializable {
 		try {
 			journalList = util.readJournalList();
 			journals = Arrays.asList(journalList.split(" "));
-			for (int i = 0; i < journals.size(); i++) {
-
-				String j = journals.get(i);
-
-				// System.out.println(j + " " + i);
-			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("File was not found, Can't read it");
+
 			e.printStackTrace();
 		}
 
 		for (int i = 0; i < journals.size(); i++) {
 			String j = journals.get(i);
-			// System.out.println("Initilaizer j :" + j);
+
 			journalsList.add(i, j);
 		}
-		// System.out.println(journalsList);
-		// availableJournals.getItems().clear();
 
 		cbJournals.setItems(journalsList);
 	}
 
 	@FXML
 	/* Added the refresh the ComboBox values button */
-	
-	/* 
-	 * Refreshes the page/ 
+
+	/*
+	 * Refreshes the page/
 	 *
 	 * @param click: Action taken by user.
 	 */
@@ -191,13 +175,32 @@ public class EditorController implements Initializable {
 									}
 								}
 								/* If all conditions passe then store relevant values here */
-								if (!subs[j].contains(".txt")) /* Only used to ignore any '.txt' files */
-									records.add(new EditorRecord(res[i], subs[j], reviewer, rev1, rev2, rev3));
+								if (!subs[j].contains(".txt")
+										&& !subs[j].contains("Rev")) { /* Only used to ignore any '.txt' files */
 
+									switch (subs[j]) {
+									case "FirstSubmission.pdf":
+										records.add(new EditorRecord(res[i], subs[j], reviewer, rev1));
+										break;
+									case "SecondSubmission.pdf":
+										records.add(new EditorRecord(res[i], subs[j], reviewer, rev2));
+										break;
+									case "ThirdSubmission.pdf":
+										records.add(new EditorRecord(res[i], subs[j], reviewer, rev3));
+										break;
+									case "FinalSubmission.pdf":
+										records.add(new EditorRecord(res[i], subs[j], reviewer, rev3));
+										break;
+									default:
+										break;
+									}
+
+								}
 							} else {
 								/* If there are no deadlines then most of the data will be generic */
-								if (!subs[j].contains(".txt")) /* Only used to ignore any '.txt' files */
-									records.add(new EditorRecord(res[i], subs[j], reviewer, null, null, null));
+								if (!subs[j].contains(".txt")
+										&& !subs[j].contains("Rev")) /* Only used to ignore any '.txt' files */
+									records.add(new EditorRecord(res[i], subs[j], reviewer, null));
 							}
 
 						}
@@ -243,7 +246,7 @@ public class EditorController implements Initializable {
 		ObservableList<EditorRecord> records;
 		records = tableView.getSelectionModel().getSelectedItems(); /* Gets row contents */
 		if (records.get(0) != null) { /* Ensures user selected available submission */
-			// lblTest2.setText("submission: " + records.get(0).getSubmission());
+
 		}
 	}
 
@@ -280,6 +283,7 @@ public class EditorController implements Initializable {
 	 * @throws IOException
 	 */
 	public void AssignReviewer(ActionEvent event) throws IOException {
+		refreshIcon.setVisible(true);
 		Stage stage;
 		Parent root;
 

@@ -7,6 +7,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+/**
+ * Main
+ */
 public class Main extends Application {
 
 	public static Stage stage = null;
@@ -23,8 +26,6 @@ public class Main extends Application {
 
 		try {
 			BorderPane root = (BorderPane) FXMLLoader.load(getClass().getResource("Login.fxml"));//
-			// AnchorPane root = (AnchorPane)
-			// FXMLLoader.load(getClass().getResource("Researcher.fxml"));
 			Scene scene = new Scene(root, 800, 600);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());//
 			primaryStage.setScene(scene);
@@ -44,7 +45,6 @@ public class Main extends Application {
 	}
 
 	/**
-	 * 
 	 * Launches the application
 	 */
 	public static void main(String[] args) {

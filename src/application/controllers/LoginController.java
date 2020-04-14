@@ -30,6 +30,11 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+/**
+ * LoginController
+ * 
+ * Controller class for Login.FXML
+ */
 public class LoginController implements Initializable {
 
 	public static final String ADMIN = "Admin";
@@ -59,7 +64,7 @@ public class LoginController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		/* Next 3 lines loads the Welcome Page once, instead of going into a loop */
-//      =================== DONT FORGET TO UNCOMMENT THIS  BELOW FOR FINAL SUBMISSION ========
+
 		if (!Main.isLoadScreenOn)
 			loadWelcomeWindow();
 
@@ -180,7 +185,8 @@ public class LoginController implements Initializable {
 	}
 
 	/**
-	 * Opens the correct window after a user enters their credentials and presses 'Login'.
+	 * Opens the correct window after a user enters their credentials and presses
+	 * 'Login'.
 	 * 
 	 * @param event: Event component that does a desired action when pressed.
 	 * @throws IOException
@@ -233,10 +239,10 @@ public class LoginController implements Initializable {
 
 	/* Switch Window (AnchorPane) */
 	/**
-	 * @param event: Event component that does a desired action when pressed.
+	 * @param event:     Event component that does a desired action when pressed.
 	 * @param newWindow: New window to be created.
-	 * @param userType: The type of user.
-	 * @param username: The username corresponding to the that type of user.
+	 * @param userType:  The type of user.
+	 * @param username:  The username corresponding to the that type of user.
 	 * @throws IOException
 	 */
 	public void openNewAnchorPaneWindow(ActionEvent event, String newWindow, String userType, String username)
@@ -245,8 +251,10 @@ public class LoginController implements Initializable {
 		loader.setLocation(getClass().getResource(newWindow));
 		AnchorPane root = (AnchorPane) loader.load();
 
-		/* This is used to pass the username and type of user to the next scene in order to use
-		   this, to be able to create custom folders */
+		/*
+		 * This is used to pass the username and type of user to the next scene in order
+		 * to use this, to be able to create custom folders
+		 */
 		if (userType == "Researcher") {
 			ResearcherController controller = loader.getController();
 			controller.initUser(username, 1);
@@ -255,8 +263,6 @@ public class LoginController implements Initializable {
 			ReviewerController controller = loader.getController();
 			controller.initUser(username, 3);
 
-		} else {
-			System.out.println("Not a researcher or reviewers so ignore this");
 		}
 
 		Scene scene = new Scene(root);
