@@ -9,6 +9,8 @@ import javafx.stage.Stage;
 
 /**
  * Main
+ * 
+ * Launches Journal System.
  */
 public class Main extends Application {
 

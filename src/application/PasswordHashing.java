@@ -14,6 +14,7 @@ import javax.crypto.spec.PBEKeySpec;
 /**
  * PasswordHashing
  * 
+ * Responsible for hashing user password.
  */
 public class PasswordHashing {
 	

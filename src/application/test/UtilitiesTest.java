@@ -14,6 +14,12 @@ import org.junit.jupiter.api.Test;
 
 import application.Utilities;
 
+/**
+ * UtilitiesTest
+ * 
+ * JUnit testing for Utilities.java class
+ *
+ */
 class UtilitiesTest {
 
 	Utilities testingUtil = new Utilities();
@@ -53,8 +59,10 @@ class UtilitiesTest {
 		File JournalTestFIles = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
 				+ "editor" + File.separator + "journals" + File.separator + testJournalName + File.separator);
 		// change this array with more files or folder names in needed more testing
-		String[] filesThatExist = { "researchers" };
+		String[] filesThatExist = { "researchers","testingDir"
+				,"testingDir2" };
 		String[] testFilesExist = testingUtil.listFilesInDir(JournalTestFIles);
+		
 
 		assertArrayEquals(filesThatExist, testFilesExist);
 
