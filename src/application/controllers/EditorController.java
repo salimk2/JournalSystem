@@ -75,10 +75,10 @@ public class EditorController implements Initializable {
 		fillJournalComboBox();
 		/* Set columns */
 		researcherColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("researcher"));
-		submissionColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("submission")); /* instance
-																											// variable
-																											// to look
-																											// for: submission */
+		submissionColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>(
+				"submission")); /*
+								 * instance // variable // to look // for: submission
+								 */
 		reviewerColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("reviewer"));
 		deadlineColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("deadline"));
 
@@ -125,9 +125,9 @@ public class EditorController implements Initializable {
 
 	@FXML
 	/* Added the refresh the ComboBox values button */
-	
-	/* 
-	 * Refreshes the page/ 
+
+	/*
+	 * Refreshes the page/
 	 *
 	 * @param click: Action taken by user.
 	 */
@@ -185,9 +185,10 @@ public class EditorController implements Initializable {
 									}
 								}
 								/* If all conditions passe then store relevant values here */
-								if (!subs[j].contains(".txt") && !subs[j].contains("Rev")) { /* Only used to ignore any '.txt' files */
-									
-									switch(subs[j]) {
+								if (!subs[j].contains(".txt")
+										&& !subs[j].contains("Rev")) { /* Only used to ignore any '.txt' files */
+
+									switch (subs[j]) {
 									case "FirstSubmission.pdf":
 										records.add(new EditorRecord(res[i], subs[j], reviewer, rev1));
 										break;
@@ -197,14 +198,18 @@ public class EditorController implements Initializable {
 									case "ThirdSubmission.pdf":
 										records.add(new EditorRecord(res[i], subs[j], reviewer, rev3));
 										break;
+									case "FinalSubmission.pdf":
+										records.add(new EditorRecord(res[i], subs[j], reviewer, rev3));
+										break;
 									default:
 										break;
 									}
-									
+
 								}
 							} else {
 								/* If there are no deadlines then most of the data will be generic */
-								if (!subs[j].contains(".txt") && !subs[j].contains("Rev")) /* Only used to ignore any '.txt' files */
+								if (!subs[j].contains(".txt")
+										&& !subs[j].contains("Rev")) /* Only used to ignore any '.txt' files */
 									records.add(new EditorRecord(res[i], subs[j], reviewer, null));
 							}
 
@@ -288,6 +293,7 @@ public class EditorController implements Initializable {
 	 * @throws IOException
 	 */
 	public void AssignReviewer(ActionEvent event) throws IOException {
+		refreshIcon.setVisible(true);
 		Stage stage;
 		Parent root;
 

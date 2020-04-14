@@ -66,7 +66,7 @@ public class RegistrationController implements Initializable {
 	}
 
 	/**
-	 * Goes back to the Login window. 
+	 * Goes back to the Login window.
 	 *
 	 * @param click: Action taken by user.
 	 * @throws IOException
@@ -99,7 +99,7 @@ public class RegistrationController implements Initializable {
 	}
 
 	/**
-	 * Gets the type of user. 
+	 * Gets the type of user.
 	 *
 	 * @param event: Event component that does a desired action when pressed.
 	 */
@@ -127,7 +127,7 @@ public class RegistrationController implements Initializable {
 	}
 
 	/**
-	 * User has the option to view their password as it is being typed. 
+	 * User has the option to view their password as it is being typed.
 	 *
 	 * @param event: Event component that does a desired action when pressed.
 	 */
