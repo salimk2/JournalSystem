@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
@@ -114,16 +115,42 @@ class UtilitiesTest {
 	@Test
 	void testReadJournalList() {
 		// PLease update if new journals are added before testing
-		String JournalsAvailable = "Seng Math Science ";
+		File listJournals = new File(System.getProperty("user.dir") + File.separator + "projectDB" + File.separator
+				+ "editor" + File.separator + "journals" + File.separator);
+
+		// This two string arrays are only used for initialization of the test
+		String[] filesInJournalsDir = testingUtil.listFilesInDir(listJournals);
+		String[] storeJournalListResult = null;
+		Arrays.sort(filesInJournalsDir);
+		String JournalsAvailable = "";
+		// Store the individual journal names as a string
+		for (String string : filesInJournalsDir) {
+			JournalsAvailable += string + " ";
+		}
+		// This two files are omitted
+		JournalsAvailable = JournalsAvailable.replaceAll("journalList.txt ", "");
+		JournalsAvailable = JournalsAvailable.replaceAll("OnlyForTesting ", "");
+
+		// initialize the needed variables
 		String readJournals = "";
+		String result = "";
 		try {
+
 			readJournals = testingUtil.readJournalList();
+			// store the journals a string array
+			storeJournalListResult = readJournals.split(" ");
+			Arrays.sort(storeJournalListResult);
+			// after sort them alphabetically, store them into the final string
+			for (String s : storeJournalListResult) {
+				result += s + " ";
+			}
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		assertEquals(JournalsAvailable, readJournals);
+		assertEquals(JournalsAvailable, result);
 	}
 
 }
