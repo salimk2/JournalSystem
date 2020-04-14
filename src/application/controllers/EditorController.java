@@ -48,11 +48,7 @@ public class EditorController implements Initializable {
 	@FXML
 	private TableColumn<EditorRecord, String> researcherColumn;
 	@FXML
-	private TableColumn<EditorRecord, LocalDate> minorRevisionColumn;
-	@FXML
-	private TableColumn<EditorRecord, LocalDate> revision1Column;
-	@FXML
-	private TableColumn<EditorRecord, LocalDate> revision2Column;
+	private TableColumn<EditorRecord, LocalDate> deadlineColumn;
 	@FXML
 	private Button btnAddJournal, btnReviewSubmissions, btnAssignReviewer;
 	@FXML
@@ -84,9 +80,7 @@ public class EditorController implements Initializable {
 																											// to look
 																											// for: submission */
 		reviewerColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, String>("reviewer"));
-		minorRevisionColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("minorRevision"));
-		revision1Column.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("revision1"));
-		revision2Column.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("revision2"));
+		deadlineColumn.setCellValueFactory(new PropertyValueFactory<EditorRecord, LocalDate>("deadline"));
 
 		/* set table selection */
 		tableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -191,13 +185,27 @@ public class EditorController implements Initializable {
 									}
 								}
 								/* If all conditions passe then store relevant values here */
-								if (!subs[j].contains(".txt")) /* Only used to ignore any '.txt' files */
-									records.add(new EditorRecord(res[i], subs[j], reviewer, rev1, rev2, rev3));
-
+								if (!subs[j].contains(".txt") && !subs[j].contains("Rev")) { /* Only used to ignore any '.txt' files */
+									
+									switch(subs[j]) {
+									case "FirstSubmission.pdf":
+										records.add(new EditorRecord(res[i], subs[j], reviewer, rev1));
+										break;
+									case "SecondSubmission.pdf":
+										records.add(new EditorRecord(res[i], subs[j], reviewer, rev2));
+										break;
+									case "ThirdSubmission.pdf":
+										records.add(new EditorRecord(res[i], subs[j], reviewer, rev3));
+										break;
+									default:
+										break;
+									}
+									
+								}
 							} else {
 								/* If there are no deadlines then most of the data will be generic */
-								if (!subs[j].contains(".txt")) /* Only used to ignore any '.txt' files */
-									records.add(new EditorRecord(res[i], subs[j], reviewer, null, null, null));
+								if (!subs[j].contains(".txt") && !subs[j].contains("Rev")) /* Only used to ignore any '.txt' files */
+									records.add(new EditorRecord(res[i], subs[j], reviewer, null));
 							}
 
 						}
