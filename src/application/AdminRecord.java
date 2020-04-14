@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 /**
  * AdminRecord
+ * 
  * Class for the table in the Admin window
  */
 public class AdminRecord {

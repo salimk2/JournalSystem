@@ -6,6 +6,7 @@ import javafx.beans.property.SimpleStringProperty;
 
 /**
  * EditorRecord
+ * 
  * Class for the table in the Editor window
  */
 public class EditorRecord {

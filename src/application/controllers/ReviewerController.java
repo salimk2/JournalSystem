@@ -34,7 +34,7 @@ import javafx.stage.Stage;
 /**
  * ReviewerController
  * 
- * Controller class for reviewer.fxml
+ * Controller class for Reviewer.fxml
  */
 public class ReviewerController implements Initializable {
 

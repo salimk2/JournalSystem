@@ -9,6 +9,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * AccountTest
+ * 
  * JUnit testing for the Account class 
  */
 public class AccountTest {
